@@ -1,0 +1,411 @@
+﻿<UserControl x:Class="PredoplModule.Views.ClosePredoplsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:CommonModule.Converters;assembly=CommonModule"
+             xmlns:cviews="clr-namespace:CommonModule.Views;assembly=CommonModule"             
+             xmlns:Views="clr-namespace:PredoplModule.Views"
+             xmlns:data="clr-namespace:DataObjects;assembly=DataObjects"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:beh="clr-namespace:CommonModule.Behaviours;assembly=CommonModule"
+    Language="ru-RU">
+    <UserControl.Resources>
+        <conv:Null2VisibilityConverter x:Key="Null2Visibility"/>
+        <conv:Null2BoolConverter x:Key="Null2Bool"/>
+        <Style x:Key="RightAlignStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="TextAlignment" Value="Right" />
+        </Style>
+        <Style x:Key="GridSplitterStyle" TargetType="GridSplitter">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Orange"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="300"/>
+        </Grid.RowDefinitions>
+        <DockPanel DockPanel.Dock="Top" LastChildFill="False" >
+            <!--<Button Content="Сформировать" Command="{Binding LoadNewCmd}" Margin="3"
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Принять выбранные, удалить остальные"/>-->
+            <Button Command="{Binding SubmitSinksCommand}" Margin="3"
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Подтвердить погашения">
+                <Image Source="/PredoplModule;component/Resources/apply.png" />
+            </Button>
+            <Button Command="{Binding SinkDebtCommand}" Margin="3"
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Погасить предоплату">
+                <Image Source="/PredoplModule;component/Resources/add.png" />
+            </Button>
+            <Button Command="{Binding CloseSfPayRemainsCommand}" Margin="3"
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Списать неоплаченные остатки со счетов">
+                <Image Source="/PredoplModule;component/Resources/newCancel.png" />
+            </Button>
+            <Button Command="{Binding СlosePredoplCommand}" Margin="3" 
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Списать остатки по выбранной предоплате">
+                <Grid>
+                    <Image Source="/PredoplModule;component/Resources/money.png" />
+                    <ContentControl Focusable="False" ContentTemplate="{DynamicResource ButtonOverCross}"/>
+                </Grid>
+            </Button>
+            <Button Margin="3" DockPanel.Dock="Right"
+                        Style="{DynamicResource CommandButton}"
+                        Command="{Binding RefreshCommand}"
+                        IsEnabled="{Binding RefreshCommand, Converter={StaticResource Null2Bool}}"
+                        CommandParameter="{Binding}"
+                        ToolTip="Обновить">
+                <Image Source="/PredoplModule;component/Resources/refresh.png" />
+            </Button>
+        </DockPanel>
+        <cviews:PoupAndDateRangeTitleView Grid.Row="1" Margin="3,5"/>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5">
+            <TextBlock Text="Плательщик:" HorizontalAlignment="Left" FontSize="10" Foreground="DarkSlateBlue"/>
+            <Button Command="{Binding ChangeKontrAgentCommand}"
+                    ToolTip="Выбрать другого плательщика" 
+                    Background="BlanchedAlmond"
+                    BorderBrush="Firebrick" BorderThickness="1"
+                    Foreground="DarkSlateBlue"
+                    Content="{Binding Platelschik}"
+                    x:Name="bt"
+                    Padding="3"
+                    Style="{DynamicResource SimpleTextButton}">
+                <!--<Button.Triggers>
+                    <EventTrigger RoutedEvent="MouseEnter">
+                        <BeginStoryboard x:Name="bsb_enter">
+                            <Storyboard >
+                                <ColorAnimation Duration="0:0:.2" To="Firebrick" Storyboard.TargetName="bt" Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"/>
+                                <ColorAnimation Duration="0:0:.2" To="Gold" Storyboard.TargetName="bt" Storyboard.TargetProperty="BorderBrush.(SolidColorBrush.Color)"/>
+                                <ColorAnimation Duration="0:0:.2" To="BlanchedAlmond" Storyboard.TargetName="bt" Storyboard.TargetProperty="Foreground.(SolidColorBrush.Color)"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="MouseLeave">
+                        <StopStoryboard BeginStoryboardName="bsb_enter"/>
+                    </EventTrigger>
+                </Button.Triggers>-->                
+                <Button.ContentTemplate>
+                    <DataTemplate DataType="data:KontrAgent">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="KgrText" Text="{Binding Kgr}" Margin="3,0" FontSize="14" FontWeight="Bold"/>
+                            <Rectangle Width="1" Stroke="{Binding ElementName=KgrText, Path=Foreground}"/>
+                            <TextBlock Text="{Binding Name}" Margin="3,0" FontSize="14" FontWeight="Bold"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+        </StackPanel>
+        <TextBlock Text="Предоплаты" FontSize="14" Background="SteelBlue" Foreground="White" Grid.Row="2" Padding="3"/>
+        <DataGrid DataContext="{Binding PredoplsList}"
+                         ItemsSource="{Binding Predopls}" AutoGenerateColumns="False" Grid.Row="3"
+                         CanUserAddRows="False" CanUserDeleteRows="False" ColumnHeaderHeight="30" 
+                         IsSynchronizedWithCurrentItem="False" CanUserSortColumns="True"
+                         SelectionMode="Single" SelectionUnit="FullRow"
+                         SelectedItem="{Binding SelectedPredopl}"
+                         RowDetailsVisibilityMode="Collapsed"
+                         Name="DgClosePredopls" 
+                         MouseDoubleClick="DgPredopls_MouseDoubleClick"
+                         Style="{DynamicResource DefaultDataGridStyle}">
+            <i:Interaction.Behaviors>
+                <beh:DataGridSaveOrderingsBehavior/>
+                <beh:DataGridSaveColumnsBehavior/>
+            </i:Interaction.Behaviors>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№ док." Binding="{Binding NomDok}" IsReadOnly="True" Width="70"/>
+                <DataGridTextColumn Header="Дата док." Binding="{Binding DatDok, StringFormat=dd.MM.yyyy}" IsReadOnly="True"/>
+                <DataGridTemplateColumn Header="Договор" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <cviews:AgreementView DataContext="{Binding Agreement}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!--<DataGridTextColumn Header="Сумма по банку" Binding="{Binding SumBank, StringFormat='#,##0.##', ConverterCulture=ru-RU}" 
+                                       ElementStyle="{StaticResource RightAlignStyle}"
+                                       IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding ValBank}" IsReadOnly="True">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="$" TextWrapping="Wrap" TextAlignment="Center"/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>-->
+                <!--<DataGridTextColumn Header="Дата пост." Binding="{Binding DatPost, StringFormat=dd.MM.yyyy}" IsReadOnly="True"/>-->
+                <!--<DataGridTemplateColumn IsReadOnly="True" SortMemberPath="DatPost" Header="Дата пост.">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding DatPost, StringFormat=dd.MM.yyyy}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>-->
+                <!--<DataGridTextColumn Header="Сумма поcтуплений" Binding="{Binding SumPropl, StringFormat='#,##0.##', ConverterCulture=ru-RU}" 
+                                       ElementStyle="{StaticResource RightAlignStyle}"
+                                       IsReadOnly="True"/>-->
+                <DataGridTemplateColumn IsReadOnly="True" SortMemberPath="SumPropl" Header="Сумма поступлений">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding SumPropl, StringFormat='#,##0.00', ConverterCulture=ru-RU}" HorizontalAlignment="Right"/>
+                                <TextBlock HorizontalAlignment="Right" FontSize="10" Margin="0,5,0,0"
+                                           Foreground="Gray" x:Name="kurstxt" ToolTip="Курс валюты предоплаты на дату поступления">
+                                        <Run Text="Курс: "/>
+                                        <Run Text="{Binding PredoplRef.KursVal, Mode=OneWay, StringFormat='#,##0.0000##', ConverterCulture=ru-RU}"/>
+                                </TextBlock>
+                            </StackPanel>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding ValPropl.Kodval}" Value="RB">
+                                    <Setter TargetName="kurstxt" Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsKursChanged}" Value="true">
+                                    <Setter TargetName="kurstxt" Property="Foreground" Value="Red"/>
+                                    <Setter TargetName="kurstxt" Property="ToolTip">
+                                        <Setter.Value>
+                                            <ToolTip Content="{Binding PredoplRef.DatKurs}">
+                                                <ToolTip.ContentTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Text="Курс валюты на дату "/>
+                                                            <TextBlock Text="{Binding ., StringFormat='dd.MM.yyyy'}"/>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </ToolTip.ContentTemplate>
+                                            </ToolTip>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding ValPropl.Kodval}" IsReadOnly="True">
+                    <DataGridTextColumn.Header>
+                        <TextBlock Text="$" TextWrapping="Wrap" TextAlignment="Center"/>
+                    </DataGridTextColumn.Header>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Сумма погашено" Binding="{Binding SumOtgr, StringFormat='#,##0.00', ConverterCulture=ru-RU}" 
+                                       ElementStyle="{StaticResource RightAlignStyle}"
+                                       IsReadOnly="True"/>
+                <DataGridTextColumn Header="Остаток" Binding="{Binding Ostatok, StringFormat='#,##0.00', ConverterCulture=ru-RU}" 
+                                       ElementStyle="{StaticResource RightAlignStyle}"
+                                       IsReadOnly="True"/>
+                <DataGridTextColumn Header="Назначение" Binding="{Binding Whatfor}" Width="250" IsReadOnly="True">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontSize" Value="11"/>
+                            <Setter Property="TextWrapping" Value="Wrap"/>
+                            <Setter Property="Margin" Value="3,0"/>
+                            <Setter Property="VerticalAlignment" Value="Top"/>
+                            <!--<Setter Property="MaxHeight" Value="50"/>                                
+                                <Setter Property="ToolTip" Value="{Binding Whatfor}"/>-->
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <Grid Background="White">
+                        <Border BorderBrush="Lavender" BorderThickness="1,0,1,1"
+                                CornerRadius="0,0,5,5" Margin="0,0,0,5" Background="#EAEAFE">
+                            <TextBlock Text="{Binding Prim}" TextWrapping="Wrap" Margin="5,2,5,5" Foreground="DarkBlue"/>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+        <GridSplitter Grid.Row="4" Height="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Style="{StaticResource GridSplitterStyle}"/>
+        <TabControl Grid.Row="5" SelectedIndex="{Binding CloseMode}">
+            <TabItem Header="Счета - фактуры">
+                <TabItem.Style>
+                    <Style TargetType="TabItem">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding OutstSfs}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TabItem.Style>
+                <DataGrid ItemsSource="{Binding OutstSfs}" AutoGenerateColumns="False" Grid.Row="3" 
+                         IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"  
+                         ColumnHeaderHeight="30" CanUserSortColumns="True"
+                         IsSynchronizedWithCurrentItem="True"
+                         SelectionMode="Single" SelectedItem="{Binding CurSf}"
+                         Name="DgCloseSfs"
+                         RowDetailsVisibilityMode="Collapsed"
+                         MouseDoubleClick="SfsGrid_MouseDoubleClick"
+                         Style="{DynamicResource DefaultDataGridStyle}">
+                    <i:Interaction.Behaviors>
+                        <beh:DataGridSaveOrderingsBehavior/>
+                        <beh:DataGridSaveColumnsBehavior/>
+                    </i:Interaction.Behaviors>
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="+" CanUserSort="False" CanUserReorder="False" CanUserResize="False">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="№" SortMemberPath="Value.NumSf">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Value.NumSf}"/>
+                                        <TextBlock DataContext="{Binding Value.SfType}" Text="{Binding SfTypeLabel}" Foreground="Red" Background="Transparent" ToolTip="{Binding SfTypeDescription}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!--<DataGridTextColumn Header="№" Binding="{Binding Value.NumSf}"/>-->
+                        <DataGridTextColumn Header="Договор" Binding="{Binding Value.Osntxt}"/>
+                        <DataGridTextColumn Header="Доп." Binding="{Binding Value.DopOsntxt}"/>
+                        <DataGridTextColumn Header="Дата счёта" Binding="{Binding Value.DatPltr, StringFormat=dd.MM.yyyy}"/>
+                        <DataGridTextColumn Header="Дата отгр." Binding="{Binding Value.DatGr, StringFormat=dd.MM.yyyy}"/>
+                        <DataGridTextColumn Header="Оплатить по" Binding="{Binding Value.LastDatOpl, StringFormat=dd.MM.yyyy}"/>
+                        <DataGridTextColumn Header="Валюта" Binding="{Binding Value.SfVal.ShortName}"/>
+                        <DataGridTextColumn Header="Сумма счёта" Binding="{Binding Value.SumPltr, StringFormat='# ### ### ### ##0.00'}" ElementStyle="{StaticResource RightAlignStyle}"/>
+                        <DataGridTextColumn Header="Оплачено" Binding="{Binding Value.SumOpl, StringFormat='# ### ### ### ##0.00'}" ElementStyle="{StaticResource RightAlignStyle}"/>
+                        <DataGridTextColumn Header="Остаток" Binding="{Binding Value.SumOst, StringFormat='#,##0.00'}" ElementStyle="{StaticResource RightAlignStyle}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.RowDetailsTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Border Margin="2" BorderBrush="LightGray" BorderThickness="1" Padding="1">
+                                    <ItemsControl ItemsSource="{Binding Value.SfProducts}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding Value.Name}" Background="LightGray" Margin="1" FontWeight="Bold" Foreground="Black"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGrid.RowDetailsTemplate>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="Возвраты предоплат">
+                <TabItem.Style>
+                    <Style TargetType="TabItem">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding VozvratsList.Predopls.Count}" Value="0">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TabItem.Style>
+                <DataGrid Grid.Row="2" DataContext="{Binding VozvratsList}"
+                          ItemsSource="{Binding Predopls}" AutoGenerateColumns="False" 
+                          CanUserAddRows="False" CanUserDeleteRows="False" ColumnHeaderHeight="25" 
+                          IsSynchronizedWithCurrentItem="False" CanUserSortColumns="True"
+                          SelectionMode="Single" SelectionUnit="FullRow"
+                          SelectedItem="{Binding SelectedPredopl}"
+                          RowDetailsVisibilityMode="Collapsed"
+                          Name="DgCloseVozvrats"
+                          Style="{DynamicResource DefaultDataGridStyle}">
+                    <i:Interaction.Behaviors>
+                        <beh:DataGridSaveOrderingsBehavior/>
+                        <beh:DataGridSaveColumnsBehavior/>
+                    </i:Interaction.Behaviors>
+                    <DataGrid.Columns>                                             
+                        <DataGridTemplateColumn Header="Плательщик" IsReadOnly="True" SortMemberPath="Platelschik.Kgr">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Platelschik.Kgr}" FontWeight="Bold" HorizontalAlignment="Left"/>
+                                        <TextBlock Text="{Binding Platelschik.Name}" FontStyle="Italic" HorizontalAlignment="Left"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="№ док." Binding="{Binding NomDok}" IsReadOnly="True" Width="70"/>
+                        <DataGridTextColumn Header="Дата пост." Binding="{Binding DatPost, StringFormat=dd.MM.yyyy}" IsReadOnly="True"/>
+                        <DataGridTemplateColumn Header="Договор" IsReadOnly="True" MaxWidth="200" SortMemberPath="PredoplRef.IdAgree">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <cviews:AgreementView DataContext="{Binding Agreement}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn IsReadOnly="True" SortMemberPath="SumPropl" Header="Сумма поступлений">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding SumPropl, StringFormat='#,##0.##', ConverterCulture=ru-RU}" HorizontalAlignment="Right"/>
+                                        <TextBlock HorizontalAlignment="Right" FontStyle="Italic" FontSize="10" Margin="0,5,0,0"
+                                           Foreground="Gray" x:Name="kurstxt" ToolTip="Курс валюты предоплаты на дату поступления">
+                                    <Run Text="Курс: "/>
+                                    <Run Text="{Binding PredoplRef.KursVal, Mode=OneWay, StringFormat='#,##0.######', ConverterCulture=ru-RU}"/>
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding ValPropl.Kodval}" Value="RB">
+                                            <Setter TargetName="kurstxt" Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>                        
+                        <DataGridTextColumn Binding="{Binding ValPropl.Kodval}" IsReadOnly="True">
+                            <DataGridTextColumn.Header>
+                                <TextBlock Text="$" TextWrapping="Wrap" TextAlignment="Center"/>
+                            </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Сумма погашено" Binding="{Binding SumOtgr, StringFormat='#,##0.##', ConverterCulture=ru-RU}" 
+                                       ElementStyle="{StaticResource RightAlignStyle}"
+                                       IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Остаток" Binding="{Binding Ostatok, StringFormat='#,##0.##', ConverterCulture=ru-RU}" 
+                                       ElementStyle="{StaticResource RightAlignStyle}"
+                                       IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <!--<Views:PredoplsView Grid.Row="2" DataContext="{Binding VozvratsList}"/>-->
+            </TabItem>
+            <TabItem Header="Штрафные санкции">
+                <TabItem.Style>
+                    <Style TargetType="TabItem">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Penalties.Count}" Value="0">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TabItem.Style>
+                <DataGrid ItemsSource="{Binding Penalties}" AutoGenerateColumns="False"
+                                 IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False" 
+                                 ColumnHeaderHeight="30" CanUserSortColumns="True"
+                                 IsSynchronizedWithCurrentItem="True"
+                                 SelectionMode="Single" SelectedItem="{Binding CurPen}"
+                                 Name="PenGrid"
+                                 RowDetailsVisibilityMode="Collapsed"
+                                 Style="{DynamicResource DefaultDataGridStyle}">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="+" CanUserSort="False" CanUserReorder="False" CanUserResize="False">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="№ КРО" Binding="{Binding Value.NomKRO}"/>
+                        <DataGridTextColumn Header="Дата в КРО" Binding="{Binding Value.Datkro, StringFormat=dd.MM.yyyy}"/>
+                        <DataGridTextColumn Header="№ исх." Binding="{Binding Value.Nomish}"/>
+                        <DataGridTextColumn Header="Сумма претензии" Binding="{Binding Value.Sumpenalty, StringFormat='# ### ### ### ###.##'}" ElementStyle="{StaticResource RightAlignStyle}"/>
+                        <DataGridTextColumn Header="Оплачено" Binding="{Binding Value.SumOpl, StringFormat='# ### ### ### ###.##'}" ElementStyle="{StaticResource RightAlignStyle}"/>
+                        <DataGridTextColumn Header="Остаток" Binding="{Binding Value.SumOst, StringFormat='#,###.##'}" ElementStyle="{StaticResource RightAlignStyle}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>        
+    </Grid>        
+</UserControl>

@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="PredoplModule.Views.dlg_SelKaWithDebts"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Resources>
+        <Style x:Key="RightAlignStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="TextAlignment" Value="Right" />
+        </Style>
+    </UserControl.Resources>
+    <DockPanel>
+        <DataGrid ItemsSource="{Binding Outstandings}" AutoGenerateColumns="False" Grid.Row="1" 
+                     IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False" 
+                     ColumnHeaderHeight="30" CanUserSortColumns="True"
+                     SelectedItem="{Binding SelectedVm}" IsSynchronizedWithCurrentItem="True"
+                     MouseDoubleClick="DataGrid_MouseDoubleClick"
+                     Style="{DynamicResource DefaultDataGridStyle}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Код" Binding="{Binding Platelschik.Kgr}"/>
+                <DataGridTextColumn Header="Плательщик" Binding="{Binding Platelschik.Name}"/>
+                <DataGridTextColumn Header="Неоплачено" Binding="{Binding SumNeopl, StringFormat='#,###.##'}"
+                                       ElementStyle="{StaticResource RightAlignStyle}"/>
+                <DataGridTextColumn Header="Предоплата" Binding="{Binding SumPredopl, StringFormat='#,###.##'}"
+                                       ElementStyle="{StaticResource RightAlignStyle}"/>
+                <DataGridTextColumn Header="Возврат" Binding="{Binding SumVozvrat, StringFormat='#,###.##'}"
+                                       ElementStyle="{StaticResource RightAlignStyle}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</UserControl>

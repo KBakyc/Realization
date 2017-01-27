@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="CommonModule.Views.HtmlPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:rep="clr-namespace:Microsoft.Reporting.WinForms;assembly=Microsoft.ReportViewer.WinForms"
+             xmlns:syswin="clr-namespace:System.Windows;assembly=PresentationCore"
+             xmlns:cnv="clr-namespace:CommonModule.Converters"
+             mc:Ignorable="d"
+             >
+    <UserControl.Resources>
+        <cnv:Null2VisibilityConverter x:Key="Null2Visibility"/>
+    </UserControl.Resources>
+    <Grid Visibility="{Binding Parent.ShellModel.Dialog, Converter={StaticResource Null2Visibility}, ConverterParameter={x:Static syswin:Visibility.Visible}}">
+        <Border Background="AliceBlue" Padding="2">
+            <Frame Source="{Binding HtmlPathUri}" NavigationUIVisibility="Automatic"
+                   Visibility="{Binding Parent.Dialog[0], Converter={StaticResource Null2Visibility}, ConverterParameter={x:Static syswin:Visibility.Visible}}"
+                   Navigating="Frame_Navigating"
+                   LoadCompleted="Frame_LoadCompleted"
+                   NavigationFailed="Frame_NavigationFailed"
+                   NavigationStopped="Frame_NavigationStopped"/>
+        </Border>
+    </Grid>
+</UserControl>

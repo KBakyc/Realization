@@ -1,0 +1,2570 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="real_test" Class="RealizationDCDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=db2.lan.naftan.by;Initial Catalog=real_test;Integrated Security=True" SettingsObjectName="DAL.Properties.Settings" SettingsPropertyName="RealConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.SfHeader" Member="SfHeaders">
+    <Type Name="SfHeader">
+      <Column Name="IdSf" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="numsf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="poup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="iddog" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="datpltr" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="datbuch" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="kotpr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="kgr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="kpok" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="stotpr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="stgr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TransportId" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="kodval" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="sumpltr" Type="System.Decimal" DbType="Decimal(16,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="SfTypeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Memo" Type="System.String" DbType="varchar(1024)" CanBeNull="true" />
+      <Column Name="SfStatus" Type="System.Byte" DbType="tinyint" CanBeNull="false" />
+      <Column Name="PayStatus" Type="System.Byte" DbType="tinyint" CanBeNull="false" />
+      <Column Name="PayDate" Type="System.DateTime" DbType="date" CanBeNull="true" />
+      <Association Name="SfHeader_SfProduct" Member="SfProducts" ThisKey="IdSf" OtherKey="IdSf" Type="SfProduct" />
+      <Association Name="SfHeader_SfKroInfo" Member="SfKroInfos" ThisKey="IdSf" OtherKey="idsf" Type="SfKroInfo" />
+      <Association Name="SfHeader_SfPayPeriod" Member="SfPayPeriods" ThisKey="IdSf" OtherKey="idsf" Type="SfPayPeriod" />
+      <Association Name="SfHeader_NdsInvoiceData" Member="NdsInvoiceDatas" ThisKey="IdSf" OtherKey="idsfprim" Type="NdsInvoiceData" />
+      <Association Name="SfHeader_NdsInvoiceData1" Member="NdsInvoiceDatas1" ThisKey="IdSf" OtherKey="idsf" Type="NdsInvoiceData" />
+      <Association Name="SfType_SfHeader" Member="SfType" ThisKey="SfTypeId" OtherKey="Id" Type="SfType" IsForeignKey="true" DeleteRule="SET NULL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.uv_Pkods" Member="uv_Pkods">
+    <Type Name="uv_Pkod">
+      <Column Name="poup" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="pkod" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="naipoup" Type="System.String" DbType="Char(50) NOT NULL" CanBeNull="false" />
+      <Column Name="sel" Type="System.Decimal" DbType="Decimal(1,0) NOT NULL" CanBeNull="false" />
+      <Column Name="inrealiz" Type="System.Decimal" DbType="Decimal(1,0) NOT NULL" CanBeNull="false" />
+      <Column Name="kpr" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="naishort" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SfProduct" Member="SfProducts">
+    <Type Name="SfProduct">
+      <Column Name="IdSf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idprilsf" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="kdog" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="kpr" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="kolf" Type="System.Decimal" DbType="Decimal(15,6)" CanBeNull="true" />
+      <Column Name="vidcen" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="bought" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="maker" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="period" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idspackage" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="vozvrat" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="datgr" Type="System.DateTime" DbType="Date" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="datkurs" Type="System.DateTime" DbType="Date" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="kursval" Type="System.Decimal" DbType="Decimal(13,6)" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="SfProduct_SfProductPay" Member="SfProductPays" ThisKey="idprilsf" OtherKey="idprilsf" Type="SfProductPay" />
+      <Association Name="SfHeader_SfProduct" Member="SfHeader" ThisKey="IdSf" OtherKey="IdSf" Type="SfHeader" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SfProductPays" Member="SfProductPays">
+    <Type Name="SfProductPay">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PayType" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="idprilsf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="stake" Type="System.Decimal" DbType="Decimal(15,5)" CanBeNull="true" />
+      <Column Name="kodval" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="kursval" Type="System.Decimal" DbType="Decimal(13,6)" CanBeNull="true" />
+      <Column Name="kolf" Type="System.Decimal" DbType="Decimal(15,6)" CanBeNull="true" />
+      <Column Name="summa" Type="System.Decimal" DbType="Decimal(16,2)" CanBeNull="true" />
+      <Column Name="isaddtosum" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="SfProduct_SfProductPay" Member="SfProduct" ThisKey="idprilsf" OtherKey="idprilsf" Type="SfProduct" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="SfPayType_SfProductPay" Member="SfPayType" ThisKey="PayType" OtherKey="PayType" Type="SfPayType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.uv_Skodf" Member="uv_Skodfs">
+    <Type Name="uv_Skodf">
+      <Column Name="kodf" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="naikodf" Type="System.String" DbType="Char(60) NOT NULL" CanBeNull="false" />
+      <Column Name="prim" Type="System.String" DbType="Char(60) NOT NULL" CanBeNull="false" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="needstgr" Type="System.Decimal" DbType="Decimal(1,0) NOT NULL" CanBeNull="false" />
+      <Column Name="needstotpr" Type="System.Decimal" DbType="Decimal(1,0) NOT NULL" CanBeNull="false" />
+      <Column Name="neednv" Type="System.Decimal" DbType="Decimal(1,0) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SfPayTypes" Member="SfPayTypes">
+    <Type Name="SfPayType">
+      <Column Name="PayType" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PayName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="PayGroupId" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="SfLine" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="SfLinePos" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="KolProdPrec" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Association Name="SfPayType_SfProductPay" Member="SfProductPays" ThisKey="PayType" OtherKey="PayType" Type="SfProductPay" />
+      <Association Name="SfPayGroup_SfPayType" Member="SfPayGroup" ThisKey="PayGroupId" OtherKey="PayGroupId" Type="SfPayGroup" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.uv_Agreements" Member="uv_Agreements">
+    <Type Name="uv_Agreement">
+      <Column Name="idAgreement" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idPrimaryAgreement" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idAgreeDBF" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NumberOfDocument" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DateOfDocument" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DateOfBegin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DateOfEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="idCounteragent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Contents" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="idStateType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SfPayGroups" Member="SfPayGroups">
+    <Type Name="SfPayGroup">
+      <Column Name="PayGroupId" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PayGroupName" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="PrintString" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Association Name="SfPayGroup_SfPayType" Member="SfPayTypes" ThisKey="PayGroupId" OtherKey="PayGroupId" Type="SfPayType" />
+    </Type>
+  </Table>
+  <Table Name="dbo.uv_Valuta" Member="uv_Valutas">
+    <Type Name="uv_Valuta">
+      <Column Name="Kodval" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="NameVal" Type="System.String" DbType="VarChar(24)" CanBeNull="true" />
+      <Column Name="ShortName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Decimal" DbType="Decimal(1,0) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.uv_SfsHistory" Member="uv_SfsHistories">
+    <Type Name="uv_SfsHistory">
+      <Column Name="logId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="IdSf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SfStatusDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Changes" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="UserName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IsUserEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="SfStatusId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SfStatusName" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="IsStatusActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sBankGroups" Member="sBankGroups">
+    <Type Name="sBankGroup">
+      <Column Name="id" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.uv_Svidcen" Member="uv_Svidcens">
+    <Type Name="uv_Svidcen">
+      <Column Name="vidcen" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" CanBeNull="false" />
+      <Column Name="kodval" Type="System.String" DbType="VarChar(3) NOT NULL" CanBeNull="false" />
+      <Column Name="naim" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="insprav" Type="System.Decimal" DbType="Decimal(1,0) NOT NULL" CanBeNull="false" />
+      <Column Name="indog" Type="System.Decimal" DbType="Decimal(1,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dopvidcen" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="[percent]" Member="percent" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" CanBeNull="false" />
+      <Column Name="discount" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dopnaim" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="byorder" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="pres" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="intnp" Type="System.Decimal" DbType="Decimal(1,0) NOT NULL" CanBeNull="false" />
+      <Column Name="frankir" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="salestake" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" CanBeNull="false" />
+      <Column Name="nei" Type="System.String" DbType="VarChar(6) NOT NULL" CanBeNull="false" />
+      <Column Name="incfueltax" Type="System.Decimal" DbType="Decimal(1,0) NOT NULL" CanBeNull="false" />
+      <Column Name="incndstax" Type="System.Decimal" DbType="Decimal(1,0) NOT NULL" CanBeNull="false" />
+      <Column Name="incbuytax" Type="System.Decimal" DbType="Decimal(1,0) NOT NULL" CanBeNull="false" />
+      <Column Name="incselltax" Type="System.Decimal" DbType="Decimal(1,0) NOT NULL" CanBeNull="false" />
+      <Column Name="inctradebi" Type="System.Decimal" DbType="Decimal(1,0) NOT NULL" CanBeNull="false" />
+      <Column Name="incbasicpr" Type="System.Decimal" DbType="Decimal(1,0) NOT NULL" CanBeNull="false" />
+      <Column Name="trdbidrate" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" CanBeNull="false" />
+      <Column Name="inctranchg" Type="System.Decimal" DbType="Decimal(1,0) NOT NULL" CanBeNull="false" />
+      <Column Name="tranchrate" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" CanBeNull="false" />
+      <Column Name="id_sql" Type="System.Decimal" DbType="Decimal(4,0) NOT NULL" CanBeNull="false" />
+      <Column Name="p_cen_konc" Type="System.Decimal" DbType="Decimal(1,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vidakc" Type="System.Decimal" DbType="Decimal(1,0) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sTransportTypes" Member="sTransportTypes">
+    <Type Name="sTransportType">
+      <Column Name="Id" Type="System.Int16" DbType="SmallInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="ShortName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SfKroInfo" Member="SfKroInfos">
+    <Type Name="SfKroInfo">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idsf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="krodate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="actionTime" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="userid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="SfHeader_SfKroInfo" Member="SfHeader" ThisKey="idsf" OtherKey="IdSf" Type="SfHeader" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Penalty" Member="Penalties">
+    <Type Name="Penalty">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="poup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="kpok" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="kdog" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nomish" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="nomkro" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="rnpl" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="datgr" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="datkro" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="sumpenalty" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="kodval" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="sumopl" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="datopl" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="kursval" Type="System.Decimal" DbType="Decimal(13,6) NOT NULL" CanBeNull="false" />
+      <Column Name="useradd" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dateadd" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="userkor" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="datekor" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Settings" Member="Settings">
+    <Type Name="Setting">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="lastnumsf" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="lastidprilsf" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="lastidsf" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OurKodGrPol" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="OurKodStan" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NumsYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.uv_Svidakc" Member="uv_Svidakcs">
+    <Type Name="uv_Svidakc">
+      <Column Name="VIDAKC" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NAIM" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sSchetRecTypes" Member="sSchetRecTypes">
+    <Type Name="sSchetRecType">
+      <Column Name="recType" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="recTypeName" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ARM_Users" Member="ARM_Users">
+    <Type Name="ARM_User">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="IsEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="TabNum" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="Cex" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="IsSystem" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="SecurityContext" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EmailAddress" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ClientInfo" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="ARM_User_UserReport" Member="UserReports" ThisKey="id" OtherKey="iduser" Type="UserReport" />
+    </Type>
+  </Table>
+  <Table Name="dbo.JourBuyTypes" Member="JourBuyTypes">
+    <Type Name="JourBuyType">
+      <Column Name="jbuytype" Type="System.Byte" DbType="TinyInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vid" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="podvid" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="bs" Type="System.String" DbType="Char(6) NOT NULL" CanBeNull="false" />
+      <Column Name="poup" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="pkod" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="kodval" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="pouplist" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="zex" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="tab_isp" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="tab_nach" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="buytypename" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="podvidname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="sourcetype" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="s_p" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="JFileName" Type="System.String" DbType="Char(8) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.uv_Product" Member="uv_Products">
+    <Type Name="uv_Product">
+      <Column Name="kpres" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
+      <Column Name="kpr" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="kodgrup" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
+      <Column Name="gost" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="pres" Type="System.String" DbType="VarChar(35)" CanBeNull="true" />
+      <Column Name="cenf" Type="System.Decimal" DbType="Decimal(11,2)" CanBeNull="true" />
+      <Column Name="cens" Type="System.Decimal" DbType="Decimal(11,2)" CanBeNull="true" />
+      <Column Name="cenobl" Type="System.Decimal" DbType="Decimal(11,2)" CanBeNull="true" />
+      <Column Name="cenukr" Type="System.Decimal" DbType="Decimal(11,2)" CanBeNull="true" />
+      <Column Name="procent" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="nei" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="neistat" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="grup" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="pos" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="kontr" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+      <Column Name="ngruz1" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="ngruz2" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="kgrupgruz" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="kvag" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="statnagr" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="shem" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="shems" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="kuo1" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="kuo2" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="kuo3" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="byte" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="w_es" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+      <Column Name="mnt" Type="System.Decimal" DbType="Decimal(8,5)" CanBeNull="true" />
+      <Column Name="prtar" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+      <Column Name="formula" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+      <Column Name="pik" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+      <Column Name="prksp" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+      <Column Name="prvyb" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+      <Column Name="sort" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+      <Column Name="kodstat" Type="System.String" DbType="VarChar(9)" CanBeNull="true" />
+      <Column Name="pr_eko" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="iscena" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="iskol" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="kodvtf" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
+      <Column Name="kodgru8" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
+      <Column Name="kodgrstat" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
+      <Column Name="pkod" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="knp" Type="System.Decimal" DbType="Decimal(5,0)" CanBeNull="true" />
+      <Column Name="isfuel" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="isdelivery" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="gng" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
+      <Column Name="idspackage" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="certificat" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="density" Type="System.Decimal" DbType="Decimal(6,5)" CanBeNull="true" />
+      <Column Name="isgood" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="idplatform" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="kodtnved" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="inrealiz" Type="System.Decimal" DbType="Decimal(1,0) NOT NULL" CanBeNull="false" />
+      <Column Name="kod_oon" Type="System.Decimal" DbType="Decimal(5,0)" CanBeNull="true" />
+      <Column Name="tank_nb" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="class" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="n_hyg_cert" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="dend_hyg_c" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="npass" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
+      <Column Name="oilptype" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="idakcgroup" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GTIN" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="isService" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="measureUnitId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SfTypes" Member="SfTypes">
+    <Type Name="SfType">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SfTypeName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="SfType_SfHeader" Member="SfHeaders" ThisKey="Id" OtherKey="SfTypeId" Type="SfHeader" />
+    </Type>
+  </Table>
+  <Table Name="dbo.uv_OtgrHistory" Member="uv_OtgrHistories">
+    <Type Name="uv_OtgrHistory">
+      <Column Name="logId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="Idp623" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StatusDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Changes" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="UserName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IsUserEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="StatusId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StatusDescription" Type="System.String" DbType="VarChar(512)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.uv_PredoplHistory" Member="uv_PredoplHistories">
+    <Type Name="uv_PredoplHistory">
+      <Column Name="logId" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="IdPo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StatusDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Changes" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="UserName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IsUserEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="StatusId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StatusDescription" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PaysVozv" Member="PaysVozvs">
+    <Type Name="PaysVozv">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idpo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idvozv" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="datopl" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="sumopl" Type="System.Decimal" DbType="Decimal(15,2) NOT NULL" CanBeNull="false" />
+      <Column Name="kodval" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="sumbel" Type="System.Decimal" DbType="Decimal(15,2) NOT NULL" CanBeNull="false" />
+      <Column Name="userid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="vozvtime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PaysArc" Member="PaysArcs">
+    <Type Name="PaysArc">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="datopl" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="sum" Type="System.Decimal" DbType="Decimal(16,2) NOT NULL" CanBeNull="false" />
+      <Column Name="idpay" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="kodval" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="sumbel" Type="System.Decimal" DbType="Decimal(14,2) NOT NULL" CanBeNull="false" />
+      <Column Name="idpo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="userid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="paytime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PaysPen" Member="PaysPens">
+    <Type Name="PaysPen">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idpo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idpen" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="datopl" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="sumopl" Type="System.Decimal" DbType="Decimal(15,2) NOT NULL" CanBeNull="false" />
+      <Column Name="kodval" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="sumbel" Type="System.Decimal" DbType="Decimal(15,2) NOT NULL" CanBeNull="false" />
+      <Column Name="userid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="paytime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.uv_UnAcceptedIdSf" Member="uv_UnAcceptedIdSfs">
+    <Type Name="uv_UnAcceptedIdSf">
+      <Column Name="idsf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.dbActionsResults" Member="dbActionsResults">
+    <Type Name="dbActionsResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="aName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="aTime" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="aUser" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="aMessage" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="aData" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="seen" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.uv_Vbank_FIN" Member="uv_Vbank_FINs">
+    <Type Name="uv_Vbank_FIN">
+      <Column Name="idRegistrPayDocument" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DebetAcc" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="CreditAcc" Type="System.String" DbType="Char(8)" CanBeNull="true" />
+      <Column Name="SumPostes" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="SumPay" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Comment" Type="System.String" DbType="VarChar(300)" CanBeNull="true" />
+      <Column Name="idPostesPayDetail" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DateBank" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DaTDocument" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="NumDocument" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="idvbank" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idval" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="npach" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="kc" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="tabn" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="KodVal" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="kpok" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="kpayer" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idAgreeDBF" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idAgreementAdd" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Whatfor" Type="System.String" DbType="VarChar(1024)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Predopls" Member="Predopls">
+    <Type Name="Predopl">
+      <Column Name="idpo" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="poup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pkod" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="kgr" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="kpokreal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ndok" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="datpropl" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="datvvod" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="nop" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="prpropl" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="kodval" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="kursval" Type="System.Decimal" DbType="Decimal(13,6)" CanBeNull="true" />
+      <Column Name="datkurs" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="kodval_b" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="idRegDoc" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idagree" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="sumpropl" Type="System.Decimal" DbType="Decimal(15,2) NOT NULL" CanBeNull="false" />
+      <Column Name="sum_bank" Type="System.Decimal" DbType="Decimal(15,2)" CanBeNull="true" />
+      <Column Name="sumotgr" Type="System.Decimal" DbType="Decimal(15,2)" CanBeNull="true" />
+      <Column Name="datzakr" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="datsys" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="userid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="whatfor" Type="System.String" DbType="NVarChar(1024)" CanBeNull="true" />
+      <Column Name="Direction" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="Prim" Type="System.String" DbType="NVarChar(1024)" CanBeNull="true" />
+      <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Column Name="IdSourcePO" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idtypedoc" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Association Name="sTypePlatDoc_Predopl" Member="sTypePlatDoc" ThisKey="idtypedoc" OtherKey="id" Type="sTypePlatDoc" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sTypePlatDoc" Member="sTypePlatDocs">
+    <Type Name="sTypePlatDoc">
+      <Column Name="id" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="isdoocdeb" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="sTypePlatDoc_Predopl" Member="Predopls" ThisKey="id" OtherKey="idtypedoc" Type="Predopl" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sSchet" Member="sSchets">
+    <Type Name="sSchet">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="poup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pkod" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="deb" Type="System.String" DbType="Char(8) NOT NULL" CanBeNull="false" />
+      <Column Name="kre" Type="System.String" DbType="Char(8) NOT NULL" CanBeNull="false" />
+      <Column Name="kodval" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="kodvaln" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="realsch" Type="System.String" DbType="Char(6) NOT NULL" CanBeNull="false" />
+      <Column Name="idbankgroup" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="rectype" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="isActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="kodnap" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="kodvozv" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserNapr" Member="UserNaprs">
+    <Type Name="UserNapr">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="poup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pkod" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="kodf" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="userid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sJournalUnionRecTypes" Member="sJournalUnionRecTypes">
+    <Type Name="sJournalUnionRecType">
+      <Column Name="recType" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="recTypeName" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.JournalsArc" Member="JournalsArcs">
+    <Type Name="JournalsArc">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="JFileName" Type="System.String" DbType="Char(8) NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreationTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="id_jyr" Type="System.Decimal" DbType="Decimal(9,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dat_j" Type="System.String" DbType="Char(6) NOT NULL" CanBeNull="false" />
+      <Column Name="date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="dated" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="ndok" Type="System.String" DbType="Char(9) NOT NULL" CanBeNull="false" />
+      <Column Name="nstr" Type="System.String" DbType="Char(30) NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="Char(30) NOT NULL" CanBeNull="false" />
+      <Column Name="inf" Type="System.String" DbType="Char(15) NOT NULL" CanBeNull="false" />
+      <Column Name="kgr" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="naim" Type="System.String" DbType="Char(30) NOT NULL" CanBeNull="false" />
+      <Column Name="ed" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="kol" Type="System.Decimal" DbType="Decimal(10,3) NOT NULL" CanBeNull="false" />
+      <Column Name="cena" Type="System.Decimal" DbType="Decimal(19,2) NOT NULL" CanBeNull="false" />
+      <Column Name="stav" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
+      <Column Name="symn" Type="System.Decimal" DbType="Decimal(19,2) NOT NULL" CanBeNull="false" />
+      <Column Name="sym" Type="System.Decimal" DbType="Decimal(19,2) NOT NULL" CanBeNull="false" />
+      <Column Name="com" Type="System.String" DbType="Char(30) NOT NULL" CanBeNull="false" />
+      <Column Name="zex" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="tab" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="vid" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="npdok" Type="System.String" DbType="Char(8) NOT NULL" CanBeNull="false" />
+      <Column Name="dat_ofpd" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="sym1" Type="System.Decimal" DbType="Decimal(15,2) NOT NULL" CanBeNull="false" />
+      <Column Name="sym2" Type="System.Decimal" DbType="Decimal(15,2) NOT NULL" CanBeNull="false" />
+      <Column Name="symn1" Type="System.Decimal" DbType="Decimal(15,2) NOT NULL" CanBeNull="false" />
+      <Column Name="symn2" Type="System.Decimal" DbType="Decimal(15,2) NOT NULL" CanBeNull="false" />
+      <Column Name="kodf" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="ndocs" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.uv_Moup" Member="uv_Moups">
+    <Type Name="uv_Moup">
+      <Column Name="kodpoup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="naipoup" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="plat" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="npoup" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="isakciz" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isdav" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="kgr" Type="System.Decimal" DbType="Decimal(5,0)" CanBeNull="true" />
+      <Column Name="idbtt" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="paydoc" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="isdogexp" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.uv_Str" Member="uv_Strs">
+    <Type Name="uv_Str">
+      <Column Name="kstr" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" CanBeNull="false" />
+      <Column Name="nstr" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="snstr" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="kodlet" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="kodstat" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="nstreng" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="prsng" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+      <Column Name="pr_eu" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+      <Column Name="pr_cu" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Dates" Member="Dates">
+    <Type Name="Date">
+      <Column Name="Date" Member="Date1" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Year" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="Quarter" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Month" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Year_Day" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="Week" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Monthly_week" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Week_day" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Month_Day" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="First_Month_date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Last_Month_date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="First_Year_date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Last_Year_date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Next_date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Prev_date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Holiday" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Flow_day" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserReports" Member="UserReports">
+    <Type Name="UserReport">
+      <Column Name="iduser" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idreport" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="ARM_User_UserReport" Member="ARM_User" ThisKey="iduser" OtherKey="id" Type="ARM_User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.uv_MeasureUnits" Member="uv_MeasureUnits">
+    <Type Name="uv_MeasureUnit">
+      <Column Name="measureUnitId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="acronim" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
+      <Column Name="neistat" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="density2tons" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.uv_InvoiceType" Member="uv_InvoiceTypes">
+    <Type Name="uv_InvoiceType">
+      <Column Name="idInvoiceType" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NameOfInvoiceType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Notation" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="MNSCode" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SfPayPeriod" Member="SfPayPeriods">
+    <Type Name="SfPayPeriod">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idsf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="datstart" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="lastdatopl" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" IsVersion="true" />
+      <Association Name="SfHeader_SfPayPeriod" Member="SfHeader" ThisKey="idsf" OtherKey="IdSf" Type="SfHeader" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.uv_SfsListView" Member="uv_SfsListViews">
+    <Type Name="uv_SfsListView">
+      <Column Name="IdSf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="numsf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="poup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pkod" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="datpltr" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="datbuch" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="kgr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="kpok" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TrShortName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="kodval" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="sumpltr" Type="System.Decimal" DbType="Decimal(16,2) NOT NULL" CanBeNull="false" />
+      <Column Name="sumopl" Type="System.Decimal" DbType="Decimal(16,2)" CanBeNull="true" />
+      <Column Name="SfStatus" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PayStatus" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PayDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="SfTypeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsESFN" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tmp_Predopl" Member="tmp_Predopls">
+    <Type Name="tmp_Predopl">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idpo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="poup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pkod" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="kgr" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="kpokreal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ndok" Type="System.Decimal" DbType="Decimal(8,0)" CanBeNull="true" />
+      <Column Name="datpropl" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="datvvod" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="nop" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="prpropl" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="kodval" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="kursval" Type="System.Decimal" DbType="Decimal(13,6)" CanBeNull="true" />
+      <Column Name="kodval_b" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="idRegDoc" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idagree" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="sumpropl" Type="System.Decimal" DbType="Decimal(15,2)" CanBeNull="true" />
+      <Column Name="sum_bank" Type="System.Decimal" DbType="Decimal(15,2)" CanBeNull="true" />
+      <Column Name="datsys" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="userid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="whatfor" Type="System.String" DbType="NVarChar(1024)" CanBeNull="true" />
+      <Column Name="priem" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="whattodo" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="msgs" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="Direction" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="AcceptedStatus" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.NdsInvoiceData" Member="NdsInvoiceDatas">
+    <Type Name="NdsInvoiceData">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idsf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idsfprim" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="VatInvoiceId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VatInvoiceNumber" Type="System.String" DbType="NChar(25)" CanBeNull="true" />
+      <Column Name="BalSchet" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="InVatInvoiceId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="SfHeader_NdsInvoiceData" Member="SfHeader" ThisKey="idsfprim" OtherKey="IdSf" Type="SfHeader" IsForeignKey="true" />
+      <Association Name="SfHeader_NdsInvoiceData1" Member="SfHeader1" ThisKey="idsf" OtherKey="IdSf" Type="SfHeader" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SalesJournalTypes" Member="SalesJournalTypes">
+    <Type Name="SalesJournalType">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="vid" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="nm_1" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="bs" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="poup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pkod" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="kodval" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="nds" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="zex" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="tab_isp" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="tab_nach" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="prsng" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="kstr" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="is_vozm" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="jr_name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.temp_p623" Member="temp_p623s">
+    <Type Name="temp_p623">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idInvoiceType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DocumentNumber" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="RwBillNumber" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="POUP" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PKOD" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="PRVZAIM" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="PROVOZ" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="KPOK" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KGR" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KODF" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="DATGR" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="NDS" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="IDRNN" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SPER" Type="System.Decimal" DbType="Decimal(15,2)" CanBeNull="true" />
+      <Column Name="NDSSPER" Type="System.Decimal" DbType="Decimal(14,2)" CanBeNull="true" />
+      <Column Name="PRSV" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="NOMAVT" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="KSTR" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="IDSPACKAGE" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="MNT" Type="System.Decimal" DbType="Decimal(9,5)" CanBeNull="true" />
+      <Column Name="IDSPURPOSE" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="STGR" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="STOTPR" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NV" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IDVOZV" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IDACT" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VOZVRAT" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CENA" Type="System.Decimal" DbType="Decimal(17,6)" CanBeNull="true" />
+      <Column Name="VIDCEN" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KODCEN" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="DATNAKL" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="IDPRODCEN" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DOPUSL" Type="System.Decimal" DbType="Decimal(14,2)" CanBeNull="true" />
+      <Column Name="NDSDOPUSL" Type="System.Decimal" DbType="Decimal(14,2)" CanBeNull="true" />
+      <Column Name="NDST_DOP" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="BOUGHT" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="MAKER" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="WL_S" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="KODDAV" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="KDOG" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VIDAKC" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AkcStake" Type="System.Decimal" DbType="Decimal(12,2)" CanBeNull="true" />
+      <Column Name="AkcKodVal" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="KPR" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PRODNDS" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="KOLF" Type="System.Decimal" DbType="Decimal(15,6)" CanBeNull="true" />
+      <Column Name="GNPRC" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="MARSHRUT" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="PERIOD" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IDPRILSF" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CHECKED" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="USERTOKEN" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TransportId" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="IsAkt" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="ErrorMsg" Type="System.String" DbType="VarChar(1024)" CanBeNull="true" />
+      <Column Name="ErrorType" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="OldIdP623" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OldNumSf" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KodRaznar" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="sumnds" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.uv_RealOtgrArc" Member="uv_RealOtgrArcs">
+    <Type Name="uv_RealOtgrArc">
+      <Column Name="idp623" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="idInvoiceType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DocumentNumber" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="RwBillNumber" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="POUP" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PKOD" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="PRVZAIM" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="PROVOZ" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="KPOK" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KGR" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KODF" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="DATGR" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="NDS" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="IDRNN" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="SPER" Type="System.Decimal" DbType="Decimal(15,2)" CanBeNull="true" />
+      <Column Name="NDSSPER" Type="System.Decimal" DbType="Decimal(14,2)" CanBeNull="true" />
+      <Column Name="PRSV" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="NOMAVT" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="KSTR" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="IDSPACKAGE" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="MNT" Type="System.Decimal" DbType="Decimal(9,5)" CanBeNull="true" />
+      <Column Name="IDSPURPOSE" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="STGR" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="STOTPR" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NDOV" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="FDOV" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="DATDOV" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="NV" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IDVOZV" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IDACT" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VOZVRAT" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CENA" Type="System.Decimal" DbType="Decimal(17,6)" CanBeNull="true" />
+      <Column Name="VIDCEN" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KODCEN" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="DATKURS" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="DATNAKL" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="IDPRODCEN" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DOPUSL" Type="System.Decimal" DbType="Decimal(14,2)" CanBeNull="true" />
+      <Column Name="NDSDOPUSL" Type="System.Decimal" DbType="Decimal(14,2)" CanBeNull="true" />
+      <Column Name="NDST_DOP" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="BOUGHT" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="MAKER" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="WL_S" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="KODDAV" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="KDOG" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VIDAKC" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AkcStake" Type="System.Decimal" DbType="Decimal(12,2)" CanBeNull="true" />
+      <Column Name="AkcKodVal" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="KPR" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PRODNDS" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="KOLF" Type="System.Decimal" DbType="Decimal(15,6)" CanBeNull="true" />
+      <Column Name="GNPRC" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="MARSHRUT" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="PERIOD" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OldNumSf" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TransportId" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="IsAkt" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DateTimeAccepted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="SourceId" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="KodRaznar" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dataccept" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="datarrival" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="datdrain" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="series" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="measureUnitId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KodFormLong" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="density" Type="System.Decimal" DbType="Decimal(6,5)" CanBeNull="true" />
+      <Column Name="sumnds" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="DeliveryDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.arc_p623" Member="arc_p623s">
+    <Type Name="arc_p623">
+      <Column Name="idp623" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="idInvoiceType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DocumentNumber" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="RwBillNumber" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="POUP" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PKOD" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="PRVZAIM" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="PROVOZ" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="KPOK" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KGR" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KODF" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="DATGR" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="NDS" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="IDRNN" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="SPER" Type="System.Decimal" DbType="Decimal(15,2)" CanBeNull="true" />
+      <Column Name="NDSSPER" Type="System.Decimal" DbType="Decimal(14,2)" CanBeNull="true" />
+      <Column Name="PRSV" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="NOMAVT" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="KSTR" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="IDSPACKAGE" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="MNT" Type="System.Decimal" DbType="Decimal(9,5)" CanBeNull="true" />
+      <Column Name="IDSPURPOSE" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="STGR" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="STOTPR" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NV" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IDVOZV" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IDACT" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VOZVRAT" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CENA" Type="System.Decimal" DbType="Decimal(17,6)" CanBeNull="true" />
+      <Column Name="VIDCEN" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KODCEN" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="DATKURS" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="DATNAKL" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="IDPRODCEN" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DOPUSL" Type="System.Decimal" DbType="Decimal(14,2)" CanBeNull="true" />
+      <Column Name="NDSDOPUSL" Type="System.Decimal" DbType="Decimal(14,2)" CanBeNull="true" />
+      <Column Name="NDST_DOP" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="BOUGHT" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="MAKER" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="WL_S" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="KODDAV" Type="System.String" DbType="NVarChar(2)" CanBeNull="true" />
+      <Column Name="KDOG" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VIDAKC" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AkcStake" Type="System.Decimal" DbType="Decimal(12,2)" CanBeNull="true" />
+      <Column Name="AkcKodVal" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="KPR" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PRODNDS" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="KOLF" Type="System.Decimal" DbType="Decimal(15,6)" CanBeNull="true" />
+      <Column Name="GNPRC" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="MARSHRUT" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="PERIOD" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="OldNumSf" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TransportId" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="IsAkt" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DateTimeAccepted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="SourceId" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="KodRaznar" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="sumnds" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.temp_Corrsf_Otgr" Member="temp_Corrsf_Otgrs">
+    <Type Name="temp_Corrsf_Otgr">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IdInvoiceType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DocumentNumber" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Datgr" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Kpr" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Kdog" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Kolf" Type="System.Decimal" DbType="Decimal(15,6) NOT NULL" CanBeNull="false" />
+      <Column Name="Cenprod" Type="System.Decimal" DbType="Decimal(16,6) NOT NULL" CanBeNull="false" />
+      <Column Name="KodCenprod" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="KursCenprod" Type="System.Decimal" DbType="Decimal(13,6) NOT NULL" CanBeNull="false" />
+      <Column Name="NdsStake" Type="System.Decimal" DbType="Decimal(5,2) NOT NULL" CanBeNull="false" />
+      <Column Name="KodValNds" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="KursValNds" Type="System.Decimal" DbType="Decimal(13,6)" CanBeNull="true" />
+      <Column Name="CenProdDelta" Type="System.Decimal" DbType="Decimal(16,6) NOT NULL" CanBeNull="false" />
+      <Column Name="IdPrilSf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdCorrSf" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.temp_Corrsf2_Otgr" Member="temp_Corrsf2_Otgrs">
+    <Type Name="temp_Corrsf2_Otgr">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RwBillNumber" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
+      <Column Name="Datgr" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="SumSper" Type="System.Decimal" DbType="Decimal(15,2) NOT NULL" CanBeNull="false" />
+      <Column Name="KodValSper" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="KursValSper" Type="System.Decimal" DbType="Decimal(13,6) NOT NULL" CanBeNull="false" />
+      <Column Name="NdsStakeSper" Type="System.Decimal" DbType="Decimal(5,2) NOT NULL" CanBeNull="false" />
+      <Column Name="KodValNdsSper" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="KursValNdsSper" Type="System.Decimal" DbType="Decimal(13,6) NOT NULL" CanBeNull="false" />
+      <Column Name="SumNdsSper" Type="System.Decimal" DbType="Decimal(15,2) NOT NULL" CanBeNull="false" />
+      <Column Name="IdPrilSf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Function Name="dbo.uf_GetTransportName" Method="uf_GetTransportName" IsComposable="true">
+    <Parameter Name="transportid" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="fs" Type="System.Int16" DbType="SmallInt" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.uf_GetPackageByCode" Method="uf_GetPackageByCode" IsComposable="true">
+    <Parameter Name="idspackage" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_GetPackageByCodeResult">
+      <Column Name="idspackage" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="namevolume" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_GetValName" Method="uf_GetValName" IsComposable="true">
+    <Parameter Name="kodval" Type="System.String" DbType="Char(2)" />
+    <Parameter Name="mode" Type="System.Int16" DbType="SmallInt" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.uf_GetVidOtgrStr" Method="uf_GetVidOtgrStr" IsComposable="true">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.uf_SfLineDopInfoMaker" Method="uf_SfLineDopInfoMaker" IsComposable="true">
+    <Parameter Name="idprilsf" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_SfLineDopInfoMakerResult">
+      <Column Name="id" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="LineText" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_GetSfTn2" Method="uf_GetSfTn2" IsComposable="true">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_GetSfTn2Result">
+      <Column Name="tn2" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_GetSfNakl" Method="uf_GetSfNakl" IsComposable="true">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_GetSfNaklResult">
+      <Column Name="rnn" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_GetSfDovStr" Method="uf_GetSfDovStr" IsComposable="true">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_GetSfDovStrResult">
+      <Column Name="item" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_GetDocsName" Method="uf_GetDocsName" IsComposable="true">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.uf_GetCurrentUserToken" Method="uf_GetCurrentUserToken" IsComposable="true">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_AcceptPredopls" Method="usp_AcceptPredopls">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uf_GetOurBankInfo" Method="uf_GetOurBankInfo" IsComposable="true">
+    <Parameter Name="iddog" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_GetOurBankInfoResult">
+      <Column Name="rsh" Type="System.String" DbType="Char(20)" CanBeNull="true" />
+      <Column Name="bank" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="mfo" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_InsertSfPayPeriod" Method="usp_InsertSfPayPeriod">
+    <Parameter Name="IdSf" Parameter="idSf" Type="System.Int32" DbType="Int" />
+    <Parameter Name="datstart" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="lastdatopl" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="Result" Parameter="result" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <ElementType Name="usp_InsertSfPayPeriodResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idsf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="datstart" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="lastdatopl" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_DeleteUnacceptedSfs" Method="usp_DeleteUnacceptedSfs">
+    <Parameter Name="userid" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_GetUserComponents" Method="usp_GetUserComponents">
+    <Parameter Name="userid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_GetUserComponentsResult">
+      <Column Name="ComponentTypeName" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="AccessLevel" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_SfMarkDeleted" Method="usp_SfMarkDeleted">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <Parameter Name="result" Type="System.Boolean" DbType="Bit" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_OtgrPurge" Method="usp_OtgrPurge">
+    <Parameter Name="idp623" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="result" Type="System.Boolean" DbType="Bit" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uf_TunePayName" Method="uf_TunePayName" IsComposable="true">
+    <Parameter Name="idprilsf" Type="System.Int32" DbType="Int" />
+    <Parameter Name="paytype" Type="System.Int32" DbType="Int" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.usp_UpdateSfPayPeriod" Method="usp_UpdateSfPayPeriod">
+    <Parameter Name="Id" Parameter="id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="datstart" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="lastdatopl" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="Version" Parameter="version" Type="System.Data.Linq.Binary" DbType="rowversion" />
+    <Parameter Name="Result" Parameter="result" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <ElementType Name="usp_UpdateSfPayPeriodResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idsf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="datstart" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="lastdatopl" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateSigns" Method="usp_UpdateSigns">
+    <Parameter Name="poup" Type="System.Int32" DbType="Int" />
+    <Parameter Name="id_boss" Type="System.Int32" DbType="Int" />
+    <Parameter Name="id_glbuh" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uf_GetSigns" Method="uf_GetSigns" IsComposable="true">
+    <Parameter Name="poup" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_GetSignsResult">
+      <Column Name="BossId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BossPosition" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="BossFIO" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="GlBuhId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="GlBuhPosition" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="GlBuhFIO" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_AcceptOtgruz" Method="usp_AcceptOtgruz">
+    <ElementType Name="usp_AcceptOtgruzResult">
+      <Column Name="idrnn" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_GetSfWeight" Method="uf_GetSfWeight" IsComposable="true">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_GetSfWeightResult">
+      <Column Name="weight" Type="System.Decimal" DbType="Decimal(15,5)" CanBeNull="true" />
+      <Column Name="nei" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="precision" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_PredoplPurge" Method="usp_PredoplPurge">
+    <Parameter Name="idpo" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uf_SfGetAnyLastStatusLog" Method="uf_SfGetAnyLastStatusLog" IsComposable="true">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <Parameter Name="status" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_SfGetAnyLastStatusLogResult">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="IdSf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SfStatusId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SfStatusDateTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_GetActualSfPeriod" Method="uf_GetActualSfPeriod" IsComposable="true">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_GetActualSfPeriodResult">
+      <Column Name="idsf" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="datstart" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="lastdatopl" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_GetPlatBankInfo" Method="uf_GetPlatBankInfo" IsComposable="true">
+    <Parameter Name="iddog" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_GetPlatBankInfoResult">
+      <Column Name="rsh" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="bank" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="mfo" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_GetSyncFromDbfStatus" Method="usp_GetSyncFromDbfStatus">
+    <ElementType Name="usp_GetSyncFromDbfStatusResult">
+      <Column Name="TaskName" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="TableName" Type="System.String" DbType="NChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="dtStart" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="dtEnd" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TableDescr" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_GetPredoplsInfo" Method="uf_GetPredoplsInfo" IsComposable="true">
+    <Parameter Name="idpo" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_GetPredoplsInfoResult">
+      <Column Name="idpo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="osntxt" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_SfCalcSumPril" Method="uf_SfCalcSumPril" IsComposable="true">
+    <Parameter Name="idprilsf" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Decimal" />
+  </Function>
+  <Function Name="dbo.uf_SfItogPaysAgr" Method="uf_SfItogPaysAgr" IsComposable="true">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_SfItogPaysAgrResult">
+      <Column Name="rnum" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="l_name" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="l_edizm" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="l_kolprod" Type="System.Decimal" DbType="Decimal(14,6)" CanBeNull="true" />
+      <Column Name="l_cenprod" Type="System.Decimal" DbType="Decimal(11,2)" CanBeNull="true" />
+      <Column Name="l_valname" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="l_sumprod" Type="System.Decimal" DbType="Decimal(14,2)" CanBeNull="true" />
+      <Column Name="l_sumakc" Type="System.Decimal" DbType="Decimal(14,2)" CanBeNull="true" />
+      <Column Name="l_ndsst" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="l_ndssum" Type="System.Decimal" DbType="Decimal(14,2)" CanBeNull="true" />
+      <Column Name="l_sumitog" Type="System.Decimal" DbType="Decimal(14,2)" CanBeNull="true" />
+      <Column Name="l_formatstrings" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_SfLinePaysAgr" Method="uf_SfLinePaysAgr" IsComposable="true">
+    <Parameter Name="idprilsf" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_SfLinePaysAgrResult">
+      <Column Name="rnum" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="l_kod" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="l_name" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="l_edizm" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="l_kolprod" Type="System.Decimal" DbType="Decimal(14,6)" CanBeNull="true" />
+      <Column Name="l_cenprod" Type="System.Decimal" DbType="Decimal(11,2)" CanBeNull="true" />
+      <Column Name="l_valname" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="l_sumprod" Type="System.Decimal" DbType="Decimal(14,2)" CanBeNull="true" />
+      <Column Name="l_suminfo" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="l_sumakc" Type="System.Decimal" DbType="Decimal(14,2)" CanBeNull="true" />
+      <Column Name="l_ndsst" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="l_ndssum" Type="System.Decimal" DbType="Decimal(14,2)" CanBeNull="true" />
+      <Column Name="l_sumitog" Type="System.Decimal" DbType="Decimal(14,2)" CanBeNull="true" />
+      <Column Name="l_formatstrings" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" UpdateCheck="Never" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_AcceptSf" Method="usp_AcceptSf">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <Parameter Name="dtaccept" Type="System.DateTime" DbType="DateTime" Direction="InOut" />
+    <Parameter Name="result" Type="System.Boolean" DbType="Bit" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uf_GetSfDateGrRange" Method="uf_GetSfDateGrRange" IsComposable="true">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_GetSfDateGrRangeResult">
+      <Column Name="datefrom" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="dateto" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_DoPredoplVozvrat" Method="usp_DoPredoplVozvrat">
+    <Parameter Name="idpo" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idvozv" Type="System.Int32" DbType="Int" />
+    <Parameter Name="datzakr" Type="System.DateTime" DbType="Date" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_ClosePredopl" Method="usp_ClosePredopl">
+    <Parameter Name="idpo" Type="System.Int32" DbType="Int" />
+    <Parameter Name="datzakr" Type="System.DateTime" DbType="Date" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_PredoplChangeStatus" Method="usp_PredoplChangeStatus">
+    <Parameter Name="idpo" Type="System.Int32" DbType="Int" />
+    <Parameter Name="newStatusId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="dtstatus" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="userid" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uf_GetPayDocInfo" Method="uf_GetPayDocInfo" IsComposable="true">
+    <Parameter Name="idRegistrPayDoc" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_GetPayDocInfoResult">
+      <Column Name="rsh" Type="System.String" DbType="Char(20)" CanBeNull="true" />
+      <Column Name="BankName" Type="System.String" DbType="VarChar(120) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_GetProductByCode" Method="usp_GetProductByCode">
+    <Parameter Name="kpr" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_GetProductByCodeResult">
+      <Column Name="kpr" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(36)" CanBeNull="true" />
+      <Column Name="edizm" Type="System.String" DbType="VarChar(6)" CanBeNull="true" />
+      <Column Name="pkod" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="idspackage" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateSfKroInfo" Method="usp_UpdateSfKroInfo">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <Parameter Name="krodate" Type="System.DateTime" DbType="Date" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_SetSfCurPayStatus" Method="usp_SetSfCurPayStatus">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <Parameter Name="actionId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="acttime" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_SfPayByPredopl" Method="usp_SfPayByPredopl">
+    <Parameter Name="idpo" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idprilsf" Type="System.Int32" DbType="Int" />
+    <Parameter Name="paygroup" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="paytype" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="datzakr" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="sumopl" Type="System.Decimal" DbType="Decimal(18,2)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uf_SfGetPaysOst" Method="uf_SfGetPaysOst" IsComposable="true">
+    <Parameter Name="idprilsf" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ondate" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="uf_SfGetPaysOstResult">
+      <Column Name="idpay" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="paytype" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="SumOst" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
+      <Column Name="PayGroupId" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_GetOldSfs" Method="uf_GetOldSfs" IsComposable="true">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_GetOldSfsResult">
+      <Column Name="idsf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="numsf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="datpltr" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_MakeF744" Method="usp_MakeF744">
+    <Parameter Name="todate" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="usp_MakeF744Result">
+      <Column Name="name" Type="System.String" DbType="Char(60) NOT NULL" CanBeNull="false" />
+      <Column Name="nom_stroki" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
+      <Column Name="totdeb" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="totdebout" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_GetSfDopDogs" Method="uf_GetSfDopDogs" IsComposable="true">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_GetSfDopDogsResult">
+      <Column Name="iddog" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="osn" Type="System.String" DbType="Char(35) NOT NULL" CanBeNull="false" />
+      <Column Name="datd" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="dopdog" Type="System.String" DbType="Char(50)" CanBeNull="true" />
+      <Column Name="dat_dopdog" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="alterdog" Type="System.String" DbType="Char(50)" CanBeNull="true" />
+      <Column Name="dat_alter" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UnDoPredoplVozvrat" Method="usp_UnDoPredoplVozvrat">
+    <Parameter Name="idvozv" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idpo" Type="System.Int32" DbType="Int" />
+    <Parameter Name="acttime" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_CheckOtgruz" Method="usp_CheckOtgruz">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_PenaltyUndoPaysByPredopl" Method="usp_PenaltyUndoPaysByPredopl">
+    <Parameter Name="idpen" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idpo" Type="System.Int32" DbType="Int" />
+    <Parameter Name="acttime" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_PenaltyPayByPredopl" Method="usp_PenaltyPayByPredopl">
+    <Parameter Name="idpo" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idpen" Type="System.Int32" DbType="Int" />
+    <Parameter Name="datzakr" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="sumopl" Type="System.Decimal" DbType="Decimal(18,2)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uf_GetSfSumOpl" Method="uf_GetSfSumOpl" IsComposable="true">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ondate" Type="System.DateTime" DbType="Date" />
+    <Return Type="System.Decimal" />
+  </Function>
+  <Function Name="dbo.uf_GetRailStation" Method="uf_GetRailStation" IsComposable="true">
+    <Parameter Name="stkod" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_GetRailStationResult">
+      <Column Name="kodst" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="StationName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="RailwaysName" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="kstr" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_GetIfOtgrCanBeEdited" Method="uf_GetIfOtgrCanBeEdited" IsComposable="true">
+    <Parameter Name="idp623" Type="System.Int64" DbType="BigInt" />
+    <Return Type="System.Boolean" />
+  </Function>
+  <Function Name="dbo.usp_UpdateOtgruzByAktSliv" Method="usp_UpdateOtgruzByAktSliv">
+    <Parameter Name="IdRnn" Parameter="idRnn" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Kolf" Parameter="kolf" Type="System.Decimal" DbType="Decimal(15,6)" />
+    <Parameter Name="DatDrain" Parameter="datDrain" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_UpdateOtgruzByRwList" Method="usp_UpdateOtgruzByRwList">
+    <Parameter Name="IdRnn" Parameter="idRnn" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="IdRwList" Parameter="idRwList" Type="System.Int32" DbType="Int" />
+    <Parameter Name="NumRwList" Parameter="numRwList" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Sper" Parameter="sper" Type="System.Decimal" DbType="Decimal(16,2)" />
+    <Parameter Name="NdsSper" Parameter="ndsSper" Type="System.Decimal" DbType="Decimal(16,2)" />
+    <Parameter Name="NdsStSper" Parameter="ndsStSper" Type="System.Decimal" DbType="Decimal(5,2)" />
+    <Parameter Name="DopUsl" Parameter="dopUsl" Type="System.Decimal" DbType="Decimal(16,2)" />
+    <Parameter Name="NdsDop" Parameter="ndsDop" Type="System.Decimal" DbType="Decimal(16,2)" />
+    <Parameter Name="NdsStDop" Parameter="ndsStDop" Type="System.Decimal" DbType="Decimal(5,2)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_GetSfPrintFormatData" Method="usp_GetSfPrintFormatData">
+    <Parameter Name="idsf" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="usp_GetSfPrintFormatDataResult">
+      <Column Name="sfformatdata" Type="System.Xml.Linq.XElement" DbType="Xml" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_SfPurge" Method="usp_SfPurge">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <Parameter Name="result" Type="System.Boolean" DbType="Bit" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uf_AkcStakeValAgr" Method="uf_AkcStakeValAgr" IsComposable="true">
+    <Parameter Name="MyKpr" Parameter="myKpr" Type="System.Int32" DbType="Int" />
+    <Parameter Name="MyDate" Parameter="myDate" Type="System.DateTime" DbType="SmallDateTime" />
+    <ElementType Name="uf_AkcStakeValAgrResult">
+      <Column Name="kpr" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="stake" Type="System.Decimal" DbType="Decimal(11,2) NOT NULL" CanBeNull="false" />
+      <Column Name="stakepref" Type="System.Decimal" DbType="Decimal(11,2) NOT NULL" CanBeNull="false" />
+      <Column Name="kodval" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_ChangeAkcData" Method="usp_ChangeAkcData">
+    <Parameter Name="idrnn" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="id_otgakc" Type="System.Int32" DbType="Int" />
+    <Parameter Name="bought" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="vidakc" Type="System.Int32" DbType="Int" />
+    <Parameter Name="kdog" Type="System.Int32" DbType="Int" />
+    <Parameter Name="kprakc" Type="System.Int32" DbType="Int" />
+    <Parameter Name="isAllNakl" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uf_GetVagonInfo" Method="uf_GetVagonInfo" IsComposable="true">
+    <Parameter Name="nv" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_GetVagonInfoResult">
+      <Column Name="prsv" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_MakeSalesJournal" Method="usp_MakeSalesJournal">
+    <Parameter Name="vid" Type="System.String" DbType="Char(2)" />
+    <Parameter Name="dFrom" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="dto" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="isinterval" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="podvid" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="isperev" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="perevFrom" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="perevTo" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="iswcorrsfs" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="jfullname" Type="System.String" DbType="Char(8)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_MakeRWBuyingJournal" Method="usp_MakeRWBuyingJournal">
+    <Parameter Name="jbuytype" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="datfrom" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="datto" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="jfullname" Type="System.String" DbType="Char(8)" />
+    <Parameter Name="dat_j" Type="System.String" DbType="Char(6)" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uf_ConvertSumToValByKurs" Method="uf_ConvertSumToValByKurs" IsComposable="true">
+    <Parameter Name="summa" Type="System.Decimal" DbType="Decimal(18,2)" />
+    <Parameter Name="kursfrom" Type="System.Decimal" DbType="Decimal(10,3)" />
+    <Parameter Name="kursto" Type="System.Decimal" DbType="Decimal(10,3)" />
+    <Parameter Name="kodto" Type="System.String" DbType="Char(2)" />
+    <Return Type="System.Decimal" />
+  </Function>
+  <Function Name="dbo.uf_GetKontragentsByRwStation" Method="uf_GetKontragentsByRwStation" IsComposable="true">
+    <Parameter Name="stan" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_GetKontragentsByRwStationResult">
+      <Column Name="kgr" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="inn" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="okpo" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="kpp" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="gor" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="VarChar(102)" CanBeNull="true" />
+      <Column Name="FullName" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="kstr" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="nstr" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_GetWlsInfo" Method="uf_GetWlsInfo" IsComposable="true">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_GetWlsInfoResult">
+      <Column Name="kgr" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="inn" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="okpo" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="kpp" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="VarChar(102)" CanBeNull="true" />
+      <Column Name="fullname" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="kstr" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="nstr" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="gor" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_GetKontragentByCode" Method="usp_GetKontragentByCode">
+    <Parameter Name="kgr" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_GetKontragentByCodeResult">
+      <Column Name="kgr" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="inn" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="okpo" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="kpp" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="VarChar(102)" CanBeNull="true" />
+      <Column Name="fullname" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="kstr" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="nstr" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="gor" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_GetKontragentByCodeA" Method="usp_GetKontragentByCodeA">
+    <Parameter Name="kgrpat" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_GetKontragentByCodeAResult">
+      <Column Name="kgr" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="inn" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="okpo" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="kpp" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="VarChar(102)" CanBeNull="true" />
+      <Column Name="fullname" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="kstr" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="nstr" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="gor" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_GetKontragentByNameA" Method="usp_GetKontragentByNameA">
+    <Parameter Name="kgrpat" Type="System.String" DbType="VarChar(150)" />
+    <ElementType Name="usp_GetKontragentByNameAResult">
+      <Column Name="kgr" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="inn" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="okpo" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="kpp" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="VarChar(102)" CanBeNull="true" />
+      <Column Name="fullname" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="kstr" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="nstr" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="gor" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_GetPayActions" Method="usp_GetPayActions">
+    <Parameter Name="idpo" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_GetPayActionsResult">
+      <Column Name="PayActionTYpe" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdPo" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Ndoc" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DatDoc" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Idsf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Numsf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DatPltr" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="IdPrilsf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PayGroupId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Whatfor" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="SumOpl" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
+      <Column Name="KodVal" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="DatOpl" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="PayTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_SfUndoPaysByPredopl" Method="usp_SfUndoPaysByPredopl">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idpo" Type="System.Int32" DbType="Int" />
+    <Parameter Name="paytime" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="acttime" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="isStrict" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_GetMeasureUnits" Method="usp_GetMeasureUnits">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_GetMeasureUnitsResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="shortname" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="fullname" Type="System.String" DbType="NVarChar(40)" CanBeNull="true" />
+      <Column Name="neistat" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="density2tons" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_GetCen" Method="uf_GetCen" IsComposable="true">
+    <Parameter Name="mykpr" Type="System.Int32" DbType="Int" />
+    <Parameter Name="myvidcen" Type="System.Int32" DbType="Int" />
+    <Parameter Name="myidspackage" Type="System.Int32" DbType="Int" />
+    <Parameter Name="mydate" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="uf_GetCenResult">
+      <Column Name="date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="kpr" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="vidcen" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" CanBeNull="false" />
+      <Column Name="idspackage" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="cena" Type="System.Decimal" DbType="Decimal(11,2) NOT NULL" CanBeNull="false" />
+      <Column Name="kodval" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="idprodcen" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="cena2" Type="System.Decimal" DbType="Decimal(11,2) NOT NULL" CanBeNull="false" />
+      <Column Name="nds" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" CanBeNull="false" />
+      <Column Name="ndstax" Type="System.Decimal" DbType="Decimal(11,2) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_Srok_opl" Method="uf_Srok_opl" IsComposable="true">
+    <Parameter Name="FstDat" Parameter="fstDat" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="NDays" Parameter="nDays" Type="System.Int32" DbType="Int" />
+    <Parameter Name="T_Respite" Parameter="t_Respite" Type="System.Int16" DbType="SmallInt" />
+    <Return Type="System.DateTime" />
+  </Function>
+  <Function Name="dbo.uf_GetDogInfos" Method="uf_GetDogInfos" IsComposable="true">
+    <Parameter Name="idARM" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_GetDogInfosResult">
+      <Column Name="OsnTxt" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="NaiOsn" Type="System.String" DbType="VarChar(35)" CanBeNull="true" />
+      <Column Name="DatOsn" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="DopOsn" Type="System.String" DbType="VarChar(206)" CanBeNull="true" />
+      <Column Name="idporsh" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="idagree" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="iddog" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="srok" Type="System.Decimal" DbType="Decimal(4,0)" CanBeNull="true" />
+      <Column Name="typrespite" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_GetDogInfo" Method="uf_GetDogInfo" IsComposable="true">
+    <Parameter Name="iddog" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_GetDogInfoResult">
+      <Column Name="OsnTxt" Type="System.String" DbType="Char(15) NOT NULL" CanBeNull="false" />
+      <Column Name="NaiOsn" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DatOsn" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="DopOsn" Type="System.String" DbType="VarChar(206)" CanBeNull="true" />
+      <Column Name="idporsh" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="idagree" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
+      <Column Name="iddog" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="srok" Type="System.Decimal" DbType="Decimal(4,0)" CanBeNull="true" />
+      <Column Name="typrespite" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_GetDogInfoByKdog" Method="uf_GetDogInfoByKdog" IsComposable="true">
+    <Parameter Name="kdog" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_GetDogInfoByKdogResult">
+      <Column Name="OsnTxt" Type="System.String" DbType="Char(15) NOT NULL" CanBeNull="false" />
+      <Column Name="NaiOsn" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DatOsn" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="DopOsn" Type="System.String" DbType="VarChar(206)" CanBeNull="true" />
+      <Column Name="idporsh" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="idagree" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
+      <Column Name="iddog" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="srok" Type="System.Decimal" DbType="Decimal(4,0)" CanBeNull="true" />
+      <Column Name="typrespite" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_GetSfOtgruz" Method="usp_GetSfOtgruz">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_GetSfOtgruzResult1">
+      <Column Name="idp623" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_make_BonusSf" Method="usp_make_BonusSf">
+    <Parameter Name="datpltr" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="useoldnumsf" Type="System.Boolean" DbType="Bit" />
+    <ElementType Name="usp_make_BonusSfResult">
+      <Column Name="idsf" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_make_CorrSf" Method="usp_make_CorrSf">
+    <Parameter Name="selpoup" Type="System.Int32" DbType="Int" />
+    <Parameter Name="kdog" Type="System.Int32" DbType="Int" />
+    <Parameter Name="datpltr" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="useoldnumsf" Type="System.Boolean" DbType="Bit" />
+    <ElementType Name="usp_make_CorrSfResult">
+      <Column Name="idsf" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_make_CorrSf2" Method="usp_make_CorrSf2">
+    <Parameter Name="selpoup" Type="System.Int32" DbType="Int" />
+    <Parameter Name="datpltr" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="useoldnumsf" Type="System.Boolean" DbType="Bit" />
+    <ElementType Name="usp_make_CorrSf2Result">
+      <Column Name="idsf" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_GetSchetaByPoup" Method="uf_GetSchetaByPoup" IsComposable="true">
+    <Parameter Name="poup" Type="System.Int32" DbType="Int" />
+    <Parameter Name="pkod" Type="System.Int16" DbType="SmallInt" />
+    <ElementType Name="uf_GetSchetaByPoupResult">
+      <Column Name="poup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pkod" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="deb" Type="System.String" DbType="Char(8) NOT NULL" CanBeNull="false" />
+      <Column Name="kre" Type="System.String" DbType="Char(8) NOT NULL" CanBeNull="false" />
+      <Column Name="kodval" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="kodvaln" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="realsch" Type="System.String" DbType="Char(6) NOT NULL" CanBeNull="false" />
+      <Column Name="idbank" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="rectype" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="NaimBank" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_GetSfsOstsByKpokOnDate" Method="usp_GetSfsOstsByKpokOnDate">
+    <Parameter Name="kpok" Type="System.Int32" DbType="Int" />
+    <Parameter Name="poup" Type="System.Int32" DbType="Int" />
+    <Parameter Name="pkods" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ondate" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="usp_GetSfsOstsByKpokOnDateResult">
+      <Column Name="kpok" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="kodval" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="sumost" Type="System.Decimal" DbType="Decimal(38,12)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_GetTotalOutstandingsByKpok" Method="usp_GetTotalOutstandingsByKpok">
+    <Parameter Name="myval" Type="System.String" DbType="Char(2)" />
+    <Parameter Name="mypoup" Type="System.Int32" DbType="Int" />
+    <Parameter Name="mypkod" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="zakrdate" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="usp_GetTotalOutstandingsByKpokResult">
+      <Column Name="kpok" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="kodval" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="poup" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="datzakr" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="sumneopl" Type="System.Decimal" DbType="Decimal(19,2)" CanBeNull="true" />
+      <Column Name="sumpredopl" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+      <Column Name="sumvozvrat" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_GetKaOutstandingSfs" Method="uf_GetKaOutstandingSfs" IsComposable="true">
+    <Parameter Name="kpok" Type="System.Int32" DbType="Int" />
+    <Parameter Name="myval" Type="System.String" DbType="Char(2)" />
+    <Parameter Name="mypoup" Type="System.Int32" DbType="Int" />
+    <Parameter Name="mypkod" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="zakrdate" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="uf_GetKaOutstandingSfsResult">
+      <Column Name="idsf" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="kpok" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="sumpltr" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="sumopl" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="osntxt" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="doposntxt" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="datstart" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="lastdatopl" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="datuch" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_GetPredoplFromBank" Method="usp_GetPredoplFromBank">
+    <Parameter Name="mydate1" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="mydate2" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="valbank" Type="System.String" DbType="Char(2)" />
+    <Parameter Name="valreal" Type="System.String" DbType="Char(2)" />
+    <Parameter Name="poup" Type="System.Int32" DbType="Int" />
+    <Parameter Name="pkods" Type="System.String" DbType="VarChar(150)" />
+    <Parameter Name="idbank" Type="System.Int16" DbType="SmallInt" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_make_Sfs" Method="usp_make_Sfs">
+    <Parameter Name="selpoup" Type="System.Int32" DbType="Int" />
+    <Parameter Name="selpkod" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="date1" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="date2" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="userid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="dtacceptedmode" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="useoldnumsf" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="datesf" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="usp_make_SfsResult">
+      <Column Name="idsf" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_GetPredoplsOstsByKpokOnDate" Method="usp_GetPredoplsOstsByKpokOnDate">
+    <Parameter Name="kpok" Type="System.Int32" DbType="Int" />
+    <Parameter Name="poup" Type="System.Int32" DbType="Int" />
+    <Parameter Name="pkod" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="date" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="usp_GetPredoplsOstsByKpokOnDateResult">
+      <Column Name="kgr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="kodval" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="isvozv" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="sumost" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_GetTransportId" Method="uf_GetTransportId" IsComposable="true">
+    <Parameter Name="kodf" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="poup" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int16" />
+  </Function>
+  <Function Name="dbo.uf_GetOtgrDirection" Method="uf_GetOtgrDirection" IsComposable="true">
+    <Parameter Name="poup" Type="System.Int32" DbType="Int" />
+    <Parameter Name="kodf" Type="System.Int16" DbType="SmallInt" />
+    <Return Type="System.Int16" />
+  </Function>
+  <Function Name="dbo.uf_GetDavsByPoup" Method="uf_GetDavsByPoup" IsComposable="true">
+    <Parameter Name="poup" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_GetDavsByPoupResult">
+      <Column Name="kgr" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(120)" CanBeNull="true" />
+      <Column Name="inn" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="okpo" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="kpp" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="gor" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="address" Type="System.String" DbType="VarChar(102)" CanBeNull="true" />
+      <Column Name="FullName" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="kstr" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="nstr" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="kd" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateSfHeader" Method="usp_UpdateSfHeader">
+    <Parameter Name="IdSf" Parameter="idSf" Type="System.Int32" DbType="Int" />
+    <Parameter Name="numsf" Type="System.Int32" DbType="Int" />
+    <Parameter Name="datpltr" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="datbuch" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="memo" Type="System.String" DbType="VarChar(1024)" />
+    <Parameter Name="Version" Parameter="version" Type="System.Data.Linq.Binary" DbType="rowversion" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uf_GetOtgrAkcData" Method="uf_GetOtgrAkcData" IsComposable="true">
+    <Parameter Name="idotgr" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="uf_GetOtgrAkcDataResult">
+      <Column Name="vidakc" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="akcstake" Type="System.Decimal" DbType="Decimal(11,2)" CanBeNull="true" />
+      <Column Name="akckodval" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_CollectOtgruz" Method="usp_CollectOtgruz">
+    <Parameter Name="selpoup" Type="System.Int32" DbType="Int" />
+    <Parameter Name="selpkod" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="date1" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="date2" Type="System.DateTime" DbType="Date" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_GetSfReports" Method="usp_GetSfReports">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <Parameter Name="rtype" Type="System.Byte" DbType="TinyInt" />
+    <ElementType Name="usp_GetSfReportsResult">
+      <Column Name="Name" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="Path" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="ParamsGetter" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="ParamsGetterOptions" Type="System.String" DbType="VarChar(1024)" CanBeNull="true" />
+      <Column Name="IsFavorite" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_GetReports" Method="usp_GetReports">
+    <Parameter Name="component" Type="System.String" DbType="VarChar(150)" />
+    <ElementType Name="usp_GetReportsResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ComponentTypeName" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="CategoryName" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="Path" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="ParamsGetter" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="ParamsGetterOptions" Type="System.String" DbType="VarChar(2048)" CanBeNull="true" />
+      <Column Name="IsA3Enabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsFavorite" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_GetNdsRates" Method="uf_GetNdsRates" IsComposable="true">
+    <Parameter Name="ondate" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="uf_GetNdsRatesResult">
+      <Column Name="typends" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="nds" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_ESFN_Create" Method="usp_ESFN_Create">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <Parameter Name="res" Type="System.Boolean" DbType="Bit" Direction="InOut" />
+    <ElementType Name="usp_ESFN_CreateResult">
+      <Column Name="IsException" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Message" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_GetSfsInfoByKpokPoupDates" Method="uf_GetSfsInfoByKpokPoupDates" IsComposable="true">
+    <Parameter Name="kpok" Type="System.Int32" DbType="Int" />
+    <Parameter Name="poup" Type="System.Int32" DbType="Int" />
+    <Parameter Name="pkods" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="date1" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="date2" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="uf_GetSfsInfoByKpokPoupDatesResult">
+      <Column Name="Idsf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="numsf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="poup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pkod" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="datpltr" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="datbuch" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="kgr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="kpok" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TrShortName" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="kodval" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="SumPltr" Type="System.Decimal" DbType="Decimal(16,2) NOT NULL" CanBeNull="false" />
+      <Column Name="SfStatus" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PayStatus" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PayDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="SfTypeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SumOpl" Type="System.Decimal" DbType="Decimal(15,2)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_ESFN_Delete" Method="usp_ESFN_Delete">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_ESFN_Approve" Method="usp_ESFN_Approve">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_ESFN_CancelApprove" Method="usp_ESFN_CancelApprove">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_ESFN_Get_Status" Method="usp_ESFN_Get_Status">
+    <Parameter Name="VatInvoiceId" Parameter="vatInvoiceId" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_ESFN_Get_StatusResult">
+      <Column Name="InvoiceId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="VatInvoiceNumber" Type="System.String" DbType="NChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="StatusId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="StatusName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="StatusMessage" Type="System.String" DbType="NVarChar(600)" CanBeNull="true" />
+      <Column Name="ApproveUser" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="RosterTotalCostVat" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_GetOtgruzSfs" Method="usp_GetOtgruzSfs">
+    <Parameter Name="idp623" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="usp_GetOtgruzSfsResult">
+      <Column Name="IdSf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="numsf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="poup" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="pkod" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="datpltr" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="datbuch" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="kgr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="kpok" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TrShortName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="kodval" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="sumpltr" Type="System.Decimal" DbType="Decimal(16,2) NOT NULL" CanBeNull="false" />
+      <Column Name="sumopl" Type="System.Decimal" DbType="Decimal(16,2)" CanBeNull="true" />
+      <Column Name="SfStatus" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PayStatus" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PayDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="SfTypeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsESFN" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_GetKurses" Method="usp_GetKurses">
+    <Parameter Name="mykodval" Type="System.String" DbType="Char(2)" />
+    <Parameter Name="mydate" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="usp_GetKursesResult">
+      <Column Name="RateDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Rate" Type="System.Decimal" DbType="Decimal(18,4)" CanBeNull="true" />
+      <Column Name="Currency_Scale" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KodVal" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_ESFN_Get_Primaries" Method="usp_ESFN_Get_Primaries">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_ESFN_Get_PrimariesResult">
+      <Column Name="IdSf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="numsf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="poup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="iddog" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="datpltr" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="datbuch" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="kotpr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="kgr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="kpok" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="stotpr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="stgr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TransportId" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="kodval" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="sumpltr" Type="System.Decimal" DbType="Decimal(16,2) NOT NULL" CanBeNull="false" />
+      <Column Name="SfTypeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Memo" Type="System.String" DbType="VarChar(1024)" CanBeNull="true" />
+      <Column Name="SfStatus" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PayStatus" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="PayDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Version" Type="System.Data.Linq.Binary" DbType="rowversion NOT NULL" CanBeNull="false" />
+      <Column Name="Documents" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_ConvertSumToValByKod" Method="uf_ConvertSumToValByKod" IsComposable="true">
+    <Parameter Name="summa" Type="System.Decimal" DbType="Decimal(20,4)" />
+    <Parameter Name="kodfrom" Type="System.String" DbType="Char(2)" />
+    <Parameter Name="kodto" Type="System.String" DbType="Char(2)" />
+    <Parameter Name="datkurs" Type="System.DateTime" DbType="DateTime" />
+    <Return Type="System.Decimal" />
+  </Function>
+  <Function Name="dbo.usp_InsertPredopl" Method="usp_InsertPredopl">
+    <Parameter Name="poup" Type="System.Int32" DbType="Int" />
+    <Parameter Name="pkod" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="kgr" Type="System.Int32" DbType="Int" />
+    <Parameter Name="kpokreal" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ndok" Type="System.Int32" DbType="Int" />
+    <Parameter Name="datpropl" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="datvvod" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="nop" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="prpropl" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="kodval" Type="System.String" DbType="Char(2)" />
+    <Parameter Name="kursval" Type="System.Decimal" DbType="Decimal(13,6)" />
+    <Parameter Name="datkurs" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="kodval_b" Type="System.String" DbType="Char(2)" />
+    <Parameter Name="idRegDoc" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idagree" Type="System.Int32" DbType="Int" />
+    <Parameter Name="sumpropl" Type="System.Decimal" DbType="Decimal(15,2)" />
+    <Parameter Name="sum_bank" Type="System.Decimal" DbType="Decimal(15,2)" />
+    <Parameter Name="whatfor" Type="System.String" DbType="NVarChar(250)" />
+    <Parameter Name="idtypedoc" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="direction" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="prim" Type="System.String" DbType="NVarChar(1024)" />
+    <Parameter Name="idsourcepo" Type="System.Int32" DbType="Int" />
+    <Parameter Name="createstatus" Type="System.Int32" DbType="Int" />
+    <Parameter Name="issuccess" Type="System.Boolean" DbType="Bit" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_UpdatePredopl" Method="usp_UpdatePredopl">
+    <Parameter Name="idpo" Type="System.Int32" DbType="Int" />
+    <Parameter Name="poup" Type="System.Int32" DbType="Int" />
+    <Parameter Name="pkod" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="kgr" Type="System.Int32" DbType="Int" />
+    <Parameter Name="kpokreal" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ndok" Type="System.Int32" DbType="Int" />
+    <Parameter Name="datpropl" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="datvvod" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="datzakr" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="nop" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="prpropl" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="kodval" Type="System.String" DbType="Char(2)" />
+    <Parameter Name="kursval" Type="System.Decimal" DbType="Decimal(13,6)" />
+    <Parameter Name="datkurs" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="kodval_b" Type="System.String" DbType="Char(2)" />
+    <Parameter Name="idRegDoc" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idagree" Type="System.Int32" DbType="Int" />
+    <Parameter Name="sumpropl" Type="System.Decimal" DbType="Decimal(15,2)" />
+    <Parameter Name="sum_bank" Type="System.Decimal" DbType="Decimal(15,2)" />
+    <Parameter Name="whatfor" Type="System.String" DbType="NVarChar(250)" />
+    <Parameter Name="Prim" Parameter="prim" Type="System.String" DbType="NVarChar(1024)" />
+    <Parameter Name="idtypedoc" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="Version" Parameter="version" Type="System.Data.Linq.Binary" DbType="rowversion" />
+    <Parameter Name="Result" Parameter="result" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_GetIncomeFromKpokInRange" Method="usp_GetIncomeFromKpokInRange">
+    <Parameter Name="kpok" Type="System.Int32" DbType="Int" />
+    <Parameter Name="poup" Type="System.Int32" DbType="Int" />
+    <Parameter Name="pkods" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="date1" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="date2" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="usp_GetIncomeFromKpokInRangeResult">
+      <Column Name="idpo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="poup" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="pkod" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="kgr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="kpokreal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ndok" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="datpropl" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="datvvod" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="prpropl" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="kodval" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="kursval" Type="System.Decimal" DbType="Decimal(13,6)" CanBeNull="true" />
+      <Column Name="kodvalb" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="idRegDoc" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idagree" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="sumbank" Type="System.Decimal" DbType="Decimal(15,2)" CanBeNull="true" />
+      <Column Name="sumpropl" Type="System.Decimal" DbType="Decimal(15,2)" CanBeNull="true" />
+      <Column Name="sumotgr" Type="System.Decimal" DbType="Decimal(15,2)" CanBeNull="true" />
+      <Column Name="datzakr" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="whatfor" Type="System.String" DbType="VarChar(1024)" CanBeNull="true" />
+      <Column Name="idtypedoc" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="direction" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_GetPredoplsFromFinance" Method="usp_GetPredoplsFromFinance">
+    <Parameter Name="poup" Type="System.Int32" DbType="Int" />
+    <Parameter Name="kpok" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ndok" Type="System.Int32" DbType="Int" />
+    <Parameter Name="datvvod" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="kodval" Type="System.String" DbType="Char(2)" />
+    <Parameter Name="direction" Type="System.Byte" DbType="TinyInt" />
+    <ElementType Name="usp_GetPredoplsFromFinanceResult">
+      <Column Name="idpo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="poup" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="pkod" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="kgr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="kpokreal" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ndok" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="datpropl" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="datvvod" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="nop" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="prpropl" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="kodval" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="kursval" Type="System.Decimal" DbType="Decimal(18,6)" CanBeNull="true" />
+      <Column Name="kodval_b" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="idRegDoc" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idagree" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="sumpropl" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="sumotgr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="datzakr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="sum_bank" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="datsys" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="whatfor" Type="System.String" DbType="VarChar(1024)" CanBeNull="true" />
+      <Column Name="Direction" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_UpdateSfProductPay" Method="usp_UpdateSfProductPay">
+    <Parameter Name="Id" Parameter="id" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Summa" Parameter="summa" Type="System.Decimal" DbType="Decimal(15,5)" />
+    <Parameter Name="IsAddToSum" Parameter="isAddToSum" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Result" Parameter="result" Type="System.Boolean" DbType="Bit" Direction="InOut" />
+    <ElementType Name="usp_UpdateSfProductPayResult">
+      <Column Name="id" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="PayType" Type="System.Int16" DbType="SmallInt NOT NULL" CanBeNull="false" />
+      <Column Name="idprilsf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="stake" Type="System.Decimal" DbType="Decimal(15,5)" CanBeNull="true" />
+      <Column Name="kodval" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="kursval" Type="System.Decimal" DbType="Decimal(13,6)" CanBeNull="true" />
+      <Column Name="kolf" Type="System.Decimal" DbType="Decimal(15,6)" CanBeNull="true" />
+      <Column Name="summa" Type="System.Decimal" DbType="Decimal(16,2)" CanBeNull="true" />
+      <Column Name="isaddtosum" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_ESFN_Get" Method="usp_ESFN_Get">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_ESFN_GetResult">
+      <Column Name="idsf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="VatInvoiceId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VatInvoiceNumber" Type="System.String" DbType="NChar(25)" CanBeNull="true" />
+      <Column Name="BalSchet" Type="System.String" DbType="VarChar(8)" CanBeNull="true" />
+      <Column Name="InVatInvoiceId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="idsfprim" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="InVatInvoiceNumber" Type="System.String" DbType="NChar(25)" CanBeNull="true" />
+      <Column Name="ApproveUser" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="RosterTotalCostVat" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="InvoiceTypeId" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_ESFN_Link" Method="usp_ESFN_Link">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idsfprim" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idVatInvoice" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uf_GetPDogInfoByKDog" Method="uf_GetPDogInfoByKDog" IsComposable="true">
+    <Parameter Name="kdog" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_GetPDogInfoByKDogResult">
+      <Column Name="poup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="kpok" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" CanBeNull="false" />
+      <Column Name="kgr" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" CanBeNull="false" />
+      <Column Name="kfond" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" CanBeNull="false" />
+      <Column Name="iddog" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="kodval" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="datd" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="osn" Type="System.String" DbType="VarChar(35) NOT NULL" CanBeNull="false" />
+      <Column Name="osntxt" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="srok" Type="System.Decimal" DbType="Decimal(4,0) NOT NULL" CanBeNull="false" />
+      <Column Name="prvzaim" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="provoz" Type="System.Decimal" DbType="Decimal(1,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dopdog" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="dat_dopdog" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="alterdog" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="dat_alter" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="specdog" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="dat_spec" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="kodoid" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="fiooid" Type="System.String" DbType="Char(7)" CanBeNull="true" />
+      <Column Name="kdog" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="kprod" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="idspackage" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="cenaprod" Type="System.Decimal" DbType="Decimal(11,2) NOT NULL" CanBeNull="false" />
+      <Column Name="vidcen" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" CanBeNull="false" />
+      <Column Name="kodvalcen" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="koddav" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_GetDogInfoByKaPoup" Method="uf_GetDogInfoByKaPoup" IsComposable="true">
+    <Parameter Name="kodka" Type="System.Int32" DbType="Int" />
+    <Parameter Name="selpoup" Type="System.Int32" DbType="Int" />
+    <Parameter Name="gpos" Type="System.Int16" DbType="SmallInt" />
+    <ElementType Name="uf_GetDogInfoByKaPoupResult">
+      <Column Name="poup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="kpok" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" CanBeNull="false" />
+      <Column Name="kgr" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" CanBeNull="false" />
+      <Column Name="kfond" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" CanBeNull="false" />
+      <Column Name="iddog" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="kodval" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="datd" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="osn" Type="System.String" DbType="VarChar(35) NOT NULL" CanBeNull="false" />
+      <Column Name="osntxt" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="srok" Type="System.Decimal" DbType="Decimal(4,0) NOT NULL" CanBeNull="false" />
+      <Column Name="prvzaim" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="provoz" Type="System.Decimal" DbType="Decimal(1,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dopdog" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="dat_dopdog" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="alterdog" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="dat_alter" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="specdog" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="dat_spec" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="kodoid" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="fiooid" Type="System.String" DbType="Char(7)" CanBeNull="true" />
+      <Column Name="kdog" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="kprod" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="idspackage" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="cenaprod" Type="System.Decimal" DbType="Decimal(11,2) NOT NULL" CanBeNull="false" />
+      <Column Name="vidcen" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" CanBeNull="false" />
+      <Column Name="kodvalcen" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="koddav" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_GetOtgrByAktSliv" Method="usp_GetOtgrByAktSliv">
+    <Parameter Name="nakt" Type="System.String" DbType="Char(10)" />
+    <Parameter Name="dakt" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="usp_GetOtgrByAktSlivResult">
+      <Column Name="IDRNN" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="RwBillNumber" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="DATGR" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="NV" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KOLF" Type="System.Decimal" DbType="Decimal(15,6)" CanBeNull="true" />
+      <Column Name="ves_akt" Type="System.Decimal" DbType="Decimal(15,3)" CanBeNull="true" />
+      <Column Name="datdrain" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_CollectCorrSfOtgr" Method="usp_CollectCorrSfOtgr">
+    <Parameter Name="kdog" Type="System.Int32" DbType="Int" />
+    <Parameter Name="date1" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="date2" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="usp_CollectCorrSfOtgrResult">
+      <Column Name="IdInvoiceType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DocumentNumber" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Datgr" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Kdog" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Kpr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Kolf" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
+      <Column Name="CENPROD" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
+      <Column Name="KODCENPROD" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="KURSCENPROD" Type="System.Decimal" DbType="Decimal(13,6)" CanBeNull="true" />
+      <Column Name="ProdNdsStake" Type="System.Decimal" DbType="Decimal(15,5) NOT NULL" CanBeNull="false" />
+      <Column Name="KODVALNDS" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="KURSVALNDS" Type="System.Decimal" DbType="Decimal(13,6)" CanBeNull="true" />
+      <Column Name="idprilsf" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdCorrSf" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_CollectBonusSfOtgr" Method="usp_CollectBonusSfOtgr">
+    <Parameter Name="oldiddog" Type="System.Int32" DbType="Int" />
+    <Parameter Name="newiddog" Type="System.Int32" DbType="Int" />
+    <Parameter Name="date1" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="date2" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="usp_CollectBonusSfOtgrResult">
+      <Column Name="IdInvoiceType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DocumentNumber" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Datgr" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Kdog" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
+      <Column Name="Kpr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Kolf" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
+      <Column Name="CENPROD" Type="System.Decimal" DbType="Decimal(15,5)" CanBeNull="true" />
+      <Column Name="DISCOUNT" Type="System.Decimal" DbType="Decimal(7,5) NOT NULL" CanBeNull="false" />
+      <Column Name="KODCENPROD" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="KURSCENPROD" Type="System.Decimal" DbType="Decimal(13,6)" CanBeNull="true" />
+      <Column Name="ProdNdsStake" Type="System.Decimal" DbType="Decimal(15,5) NOT NULL" CanBeNull="false" />
+      <Column Name="KODVALNDS" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="KURSVALNDS" Type="System.Decimal" DbType="Decimal(13,6)" CanBeNull="true" />
+      <Column Name="idprilsf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdCorrSf" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_CollectCorrSfSperOtgrByPerech" Method="usp_CollectCorrSfSperOtgrByPerech">
+    <Parameter Name="numrwlist" Type="System.Int32" DbType="Int" />
+    <Parameter Name="year" Type="System.Int32" DbType="Int" />
+    <Parameter Name="poup" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_CollectCorrSfSperOtgrByPerechResult">
+      <Column Name="RwBillNumber" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Datgr" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="kolf" Type="System.Decimal" DbType="Decimal(38,6)" CanBeNull="true" />
+      <Column Name="sumsper" Type="System.Decimal" DbType="Decimal(11,2)" CanBeNull="true" />
+      <Column Name="kodvalsper" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="kursvalsper" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ndsstakesper" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="kodvalndssper" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="kursvalndssper" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="sumnds" Type="System.Decimal" DbType="Decimal(11,2)" CanBeNull="true" />
+      <Column Name="idprilsf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IdCorrSf" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.uf_GetSfPrilDocs" Method="uf_GetSfPrilDocs" IsComposable="true">
+    <Parameter Name="idprilsf" Type="System.Int64" DbType="BigInt" />
+    <ElementType Name="uf_GetSfPrilDocsResult">
+      <Column Name="idInvoiceType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DocumentNumber" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="DatDoc" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_AddOtgruz" Method="usp_AddOtgruz">
+    <Parameter Name="IdInvoiceType" Parameter="idInvoiceType" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DocumentNumber" Parameter="documentNumber" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="RwBillNumber" Parameter="rwBillNumber" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="Poup" Parameter="poup" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Pkod" Parameter="pkod" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="Prvzaim" Parameter="prvzaim" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="Provoz" Parameter="provoz" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="Kpok" Parameter="kpok" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Kgr" Parameter="kgr" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Kodf" Parameter="kodf" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="Datgr" Parameter="datgr" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="Nds" Parameter="nds" Type="System.Decimal" DbType="Decimal(5,2)" />
+    <Parameter Name="IdRnn" Parameter="idRnn" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Sper" Parameter="sper" Type="System.Decimal" DbType="Decimal(15,2)" />
+    <Parameter Name="NdsSper" Parameter="ndsSper" Type="System.Decimal" DbType="Decimal(14,2)" />
+    <Parameter Name="PrSv" Parameter="prSv" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="NomAvt" Parameter="nomAvt" Type="System.String" DbType="NVarChar(10)" />
+    <Parameter Name="Kstr" Parameter="kstr" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="IdSpackage" Parameter="idSpackage" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="Mnt" Parameter="mnt" Type="System.Decimal" DbType="Decimal(9,5)" />
+    <Parameter Name="IdSpurpose" Parameter="idSpurpose" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="StGr" Parameter="stGr" Type="System.Int32" DbType="Int" />
+    <Parameter Name="StOtpr" Parameter="stOtpr" Type="System.Int32" DbType="Int" />
+    <Parameter Name="StPer" Parameter="stPer" Type="System.Int32" DbType="Int" />
+    <Parameter Name="NDov" Parameter="nDov" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="FDov" Parameter="fDov" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="DatDov" Parameter="datDov" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="Nv" Parameter="nv" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdVozv" Parameter="idVozv" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="IdAct" Parameter="idAct" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Cena" Parameter="cena" Type="System.Decimal" DbType="Decimal(17,6)" />
+    <Parameter Name="VidCen" Parameter="vidCen" Type="System.Int32" DbType="Int" />
+    <Parameter Name="KodCen" Parameter="kodCen" Type="System.String" DbType="NVarChar(2)" />
+    <Parameter Name="DatKurs" Parameter="datKurs" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="DatNakl" Parameter="datNakl" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="Series" Parameter="series" Type="System.String" DbType="NVarChar(2)" />
+    <Parameter Name="IdProdcen" Parameter="idProdcen" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DopUsl" Parameter="dopUsl" Type="System.Decimal" DbType="Decimal(14,2)" />
+    <Parameter Name="NdsDopUsl" Parameter="ndsDopUsl" Type="System.Decimal" DbType="Decimal(14,2)" />
+    <Parameter Name="NdsSt_Dop" Parameter="ndsSt_Dop" Type="System.Decimal" DbType="Decimal(5,2)" />
+    <Parameter Name="Bought" Parameter="bought" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Maker" Parameter="maker" Type="System.Int32" DbType="Int" />
+    <Parameter Name="WL_S" Parameter="wL_S" Type="System.String" DbType="NVarChar(2)" />
+    <Parameter Name="KodDav" Parameter="kodDav" Type="System.String" DbType="NVarChar(2)" />
+    <Parameter Name="Kdog" Parameter="kdog" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Kpr" Parameter="kpr" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ProdNds" Parameter="prodNds" Type="System.Decimal" DbType="Decimal(5,2)" />
+    <Parameter Name="SumNds" Parameter="sumNds" Type="System.Decimal" DbType="Decimal(18,2)" />
+    <Parameter Name="Kolf" Parameter="kolf" Type="System.Decimal" DbType="Decimal(15,6)" />
+    <Parameter Name="GnPrc" Parameter="gnPrc" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="Marshrut" Parameter="marshrut" Type="System.String" DbType="NVarChar(500)" />
+    <Parameter Name="Period" Parameter="period" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TransportId" Parameter="transportId" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="DatAccept" Parameter="datAccept" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="DatArrival" Parameter="datArrival" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="DatDrain" Parameter="datDrain" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="SourceId" Parameter="sourceId" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="VidAkc" Parameter="vidAkc" Type="System.Int32" DbType="Int" />
+    <Parameter Name="AkcStake" Parameter="akcStake" Type="System.Decimal" DbType="Decimal(12,2)" />
+    <Parameter Name="AkcKodVal" Parameter="akcKodVal" Type="System.String" DbType="Char(2)" />
+    <Parameter Name="KodRaznar" Parameter="kodRaznar" Type="System.Int32" DbType="Int" />
+    <Parameter Name="MeasureUnitId" Parameter="measureUnitId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Density" Parameter="density" Type="System.Decimal" DbType="Decimal(10,5)" />
+    <Parameter Name="logDescr" Type="System.String" DbType="VarChar(512)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_GetOtgruzFromXChange" Method="usp_GetOtgruzFromXChange">
+    <Parameter Name="dfrom" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="dto" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="otype" Type="System.Byte" DbType="TinyInt" />
+    <ElementType Name="usp_GetOtgruzFromXChangeResult">
+      <Column Name="idinvoicetype" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DocumentNumber" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="poup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="kodf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RwBillNumber" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="nv" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="datgr" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="kpok" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="kdog" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="kpr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="measureunit" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="dataccept" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="datarrival" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="stotpr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="stn_per" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="kstr" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="stgr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="kgr" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="kolf" Type="System.Decimal" DbType="Decimal(15,6)" CanBeNull="true" />
+      <Column Name="sper" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="ndssper" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="nds" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="dopusl" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="nds_dopusl" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="ndst_dop" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="provoz" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="datdrain" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="prsv" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="koddav" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="ErrorMsg" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="ErrorType" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="wl_s" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_GetRwListData" Method="usp_GetRwListData">
+    <Parameter Name="numrwlist" Type="System.Int32" DbType="Int" />
+    <Parameter Name="year" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_GetRwListDataResult">
+      <Column Name="id_rwlist" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="num_rwlist" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RwBillNumber" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="datgr" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="sper" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
+      <Column Name="spernds" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
+      <Column Name="sperndsst" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="dopusl" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
+      <Column Name="dopnds" Type="System.Decimal" DbType="Decimal(38,2)" CanBeNull="true" />
+      <Column Name="dopndsst" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="StatusType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StatusMsgs" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_GetUserInfoExt" Method="usp_GetUserInfoExt">
+    <Parameter Name="userid" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_GetUserInfoExtResult">
+      <Column Name="fullname" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="position" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_GetOtgruzNotInRealiz" Method="usp_GetOtgruzNotInRealiz">
+    <Parameter Name="id" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="DocumentNumber" Parameter="documentNumber" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="RwBillNumber" Parameter="rwBillNumber" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="nv" Type="System.Int32" DbType="Int" />
+    <Parameter Name="dfrom" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="dto" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="poup" Type="System.Int32" DbType="Int" />
+    <Parameter Name="pkod" Type="System.Int32" DbType="Int" />
+    <Parameter Name="kdog" Type="System.Int32" DbType="Int" />
+    <Parameter Name="kpok" Type="System.Int32" DbType="Int" />
+    <Parameter Name="kgr" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_GetOtgruzNotInRealizResult">
+      <Column Name="IdInvoiceType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DocumentNumber" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="RwBillNumber" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Idrnn" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Series" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="Nv" Type="System.Decimal" DbType="Decimal(8,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Kpok" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Kgr" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Kdog" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Datgr" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Datnakl" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Dataccept" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Datarrival" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Datdrain" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Kodf" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Poup" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Pkod" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Kolf" Type="System.Decimal" DbType="Decimal(14,6) NOT NULL" CanBeNull="false" />
+      <Column Name="Vidcen" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Cena" Type="System.Decimal" DbType="Decimal(17,6) NOT NULL" CanBeNull="false" />
+      <Column Name="Prodnds" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" CanBeNull="false" />
+      <Column Name="SumNds" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Kodcen" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="Kpr" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Sper" Type="System.Decimal" DbType="Decimal(14,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Nds" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Ndssper" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Dopusl" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Ndst_dop" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Ndsdopusl" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Provoz" Type="System.Decimal" DbType="Decimal(1,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Stgr" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Stotpr" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="TransportId" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="WL_S" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="KodDav" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="Kstr" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" CanBeNull="false" />
+      <Column Name="IdSpackage" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="IdSpurpose" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="Maker" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" CanBeNull="false" />
+      <Column Name="KodRaznar" Type="System.Decimal" DbType="Decimal(7,0)" CanBeNull="true" />
+      <Column Name="IdProdcen" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="IdAct" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdVozv" Type="System.Decimal" DbType="Decimal(7,0) NOT NULL" CanBeNull="false" />
+      <Column Name="PrVzaim" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="SourceId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Period" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Nomavt" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Gnprc" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="Marshrut" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="Ndov" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Fdov" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DatDov" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Bought" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="VidAkc" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AkcStake" Type="System.Decimal" DbType="Decimal(11,2) NOT NULL" CanBeNull="false" />
+      <Column Name="AkcKodVal" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="MeasureUnitId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Density" Type="System.Decimal" DbType="Decimal(6,5) NOT NULL" CanBeNull="false" />
+      <Column Name="DeliveryDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_ESFN_Get_Income" Method="usp_ESFN_Get_Income">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_ESFN_Get_IncomeResult">
+      <Column Name="InvoiceId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NumberString" Type="System.String" DbType="NChar(25)" CanBeNull="true" />
+      <Column Name="DateIssuance" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ProviderName" Type="System.String" DbType="NVarChar(512)" CanBeNull="true" />
+      <Column Name="ProviderUnp" Type="System.String" DbType="NChar(9)" CanBeNull="true" />
+      <Column Name="RosterTotalCostVat" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="Documents" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_ESFN_Get_ToLink" Method="usp_ESFN_Get_ToLink">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_ESFN_Get_ToLinkResult">
+      <Column Name="InvoiceId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NumberString" Type="System.String" DbType="NChar(25)" CanBeNull="true" />
+      <Column Name="DateIssuance" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ProviderName" Type="System.String" DbType="NVarChar(512)" CanBeNull="true" />
+      <Column Name="ProviderUnp" Type="System.String" DbType="NChar(9)" CanBeNull="true" />
+      <Column Name="RosterTotalCostVat" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="Documents" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.usp_ESFN_Set_Income" Method="usp_ESFN_Set_Income">
+    <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
+    <Parameter Name="invoiceid" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_UpdateOtgruz" Method="usp_UpdateOtgruz">
+    <Parameter Name="IdInvoiceType" Parameter="idInvoiceType" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DocumentNumber" Parameter="documentNumber" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="RwBillNumber" Parameter="rwBillNumber" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="IdP623" Parameter="idP623" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Poup" Parameter="poup" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Pkod" Parameter="pkod" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="Prvzaim" Parameter="prvzaim" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="Provoz" Parameter="provoz" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="Kpok" Parameter="kpok" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Kgr" Parameter="kgr" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Kodf" Parameter="kodf" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="Datgr" Parameter="datgr" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="Dataccept" Parameter="dataccept" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="Datarrival" Parameter="datarrival" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="Nds" Parameter="nds" Type="System.Decimal" DbType="Decimal(5,2)" />
+    <Parameter Name="IdRnn" Parameter="idRnn" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Sper" Parameter="sper" Type="System.Decimal" DbType="Decimal(15,2)" />
+    <Parameter Name="NdsSper" Parameter="ndsSper" Type="System.Decimal" DbType="Decimal(14,2)" />
+    <Parameter Name="PrSv" Parameter="prSv" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="NomAvt" Parameter="nomAvt" Type="System.String" DbType="NVarChar(10)" />
+    <Parameter Name="Kstr" Parameter="kstr" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="IdSpackage" Parameter="idSpackage" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="Mnt" Parameter="mnt" Type="System.Decimal" DbType="Decimal(9,5)" />
+    <Parameter Name="IdSpurpose" Parameter="idSpurpose" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="StGr" Parameter="stGr" Type="System.Int32" DbType="Int" />
+    <Parameter Name="StOtpr" Parameter="stOtpr" Type="System.Int32" DbType="Int" />
+    <Parameter Name="NDov" Parameter="nDov" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="FDov" Parameter="fDov" Type="System.String" DbType="NVarChar(100)" />
+    <Parameter Name="DatDov" Parameter="datDov" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="Nv" Parameter="nv" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IdVozv" Parameter="idVozv" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="IdAct" Parameter="idAct" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="Cena" Parameter="cena" Type="System.Decimal" DbType="Decimal(17,6)" />
+    <Parameter Name="VidCen" Parameter="vidCen" Type="System.Int32" DbType="Int" />
+    <Parameter Name="KodCen" Parameter="kodCen" Type="System.String" DbType="NVarChar(2)" />
+    <Parameter Name="DatKurs" Parameter="datKurs" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="DatNakl" Parameter="datNakl" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="IdProdcen" Parameter="idProdcen" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DopUsl" Parameter="dopUsl" Type="System.Decimal" DbType="Decimal(14,2)" />
+    <Parameter Name="NdsDopUsl" Parameter="ndsDopUsl" Type="System.Decimal" DbType="Decimal(14,2)" />
+    <Parameter Name="NdsSt_Dop" Parameter="ndsSt_Dop" Type="System.Decimal" DbType="Decimal(5,2)" />
+    <Parameter Name="Bought" Parameter="bought" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Maker" Parameter="maker" Type="System.Int32" DbType="Int" />
+    <Parameter Name="WL_S" Parameter="wL_S" Type="System.String" DbType="NVarChar(2)" />
+    <Parameter Name="KodDav" Parameter="kodDav" Type="System.String" DbType="NVarChar(2)" />
+    <Parameter Name="Kdog" Parameter="kdog" Type="System.Int32" DbType="Int" />
+    <Parameter Name="VidAkc" Parameter="vidAkc" Type="System.Int32" DbType="Int" />
+    <Parameter Name="AkcStake" Parameter="akcStake" Type="System.Decimal" DbType="Decimal(12,2)" />
+    <Parameter Name="AkcKodVal" Parameter="akcKodVal" Type="System.String" DbType="Char(2)" />
+    <Parameter Name="Kpr" Parameter="kpr" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ProdNds" Parameter="prodNds" Type="System.Decimal" DbType="Decimal(5,2)" />
+    <Parameter Name="SumNds" Parameter="sumNds" Type="System.Decimal" DbType="Decimal(18,2)" />
+    <Parameter Name="Kolf" Parameter="kolf" Type="System.Decimal" DbType="Decimal(15,6)" />
+    <Parameter Name="GnPrc" Parameter="gnPrc" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="Marshrut" Parameter="marshrut" Type="System.String" DbType="NVarChar(500)" />
+    <Parameter Name="Period" Parameter="period" Type="System.Int32" DbType="Int" />
+    <Parameter Name="TransportId" Parameter="transportId" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="SourceId" Parameter="sourceId" Type="System.Int16" DbType="SmallInt" />
+    <Parameter Name="MeasureUnitId" Parameter="measureUnitId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Density" Parameter="density" Type="System.Decimal" DbType="Decimal(10,5)" />
+    <Parameter Name="logDescr" Type="System.String" DbType="VarChar(512)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_MakeFDebKred" Method="usp_MakeFDebKred">
+    <Parameter Name="poupstr" Type="System.String" DbType="VarChar(1024)" />
+    <Parameter Name="pkodstr" Type="System.String" DbType="VarChar(1024)" />
+    <Parameter Name="ondate" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="debkred" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="isupload" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

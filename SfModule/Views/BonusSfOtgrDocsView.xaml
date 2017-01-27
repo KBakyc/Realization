@@ -1,0 +1,94 @@
+﻿<UserControl x:Class="SfModule.Views.BonusSfOtgrDocsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:conv="clr-namespace:CommonModule.Converters;assembly=CommonModule"
+             xmlns:glob="clr-namespace:System.Globalization;assembly=mscorlib"
+             xmlns:cctrl="clr-namespace:CommonModule.Controls;assembly=CommonModule"
+             mc:Ignorable="d"
+             KeyUp="dlgRoot_KeyUp">
+    <UserControl.Resources>
+        <conv:BoolNotConverter x:Key="BoolNot"/>
+        <conv:Bool2VisibilityConverter x:Key="Bool2Visibility"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <DockPanel>
+            <Border  BorderBrush="RoyalBlue" BorderThickness="1" DockPanel.Dock="Top" CornerRadius="5" Background="AliceBlue">
+                <StackPanel Margin="5">
+                    <TextBlock Text="Отгружено по договору:" FontWeight="Bold" Foreground="RoyalBlue"/>
+                    <StackPanel Orientation="Horizontal" TextElement.Foreground="Navy">
+                        <TextBlock Text="Номер:"/>
+                        <TextBlock Text="{Binding InDogInfo.NaiOsn}" FontWeight="Bold" Margin="10,0"/>
+                        <TextBlock Text="от:" Margin="10,0"/>
+                        <TextBlock Text="{Binding InDogInfo.DatOsn, StringFormat='dd.MM.yyyy'}" FontWeight="Bold"/>
+                        <TextBlock Text="Доп:" Margin="10,0"/>
+                        <TextBlock Text="{Binding InDogInfo.DopOsn}" FontWeight="Bold"/>
+                        <TextBlock Text="от:" Margin="10,0"/>
+                        <TextBlock Text="{Binding InDogInfo.DatDop, StringFormat='dd.MM.yyyy'}" FontWeight="Bold"/>
+                    </StackPanel>                    
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="RoyalBlue" BorderThickness="1" DockPanel.Dock="Bottom" CornerRadius="5" Background="AliceBlue">
+                <StackPanel Margin="5">
+                    <TextBlock Text="Основание для применения скидок:" FontWeight="Bold" Foreground="RoyalBlue"/>
+                    <StackPanel Orientation="Horizontal" TextElement.Foreground="Navy">
+                        <TextBlock Text="Номер:"/>
+                        <TextBlock Text="{Binding OutDogInfo.NaiOsn}" FontWeight="Bold" Margin="10,0"/>
+                        <TextBlock Text="от:" Margin="10,0"/>
+                        <TextBlock Text="{Binding OutDogInfo.DatOsn, StringFormat='dd.MM.yyyy'}" FontWeight="Bold"/>
+                        <TextBlock Text="Доп:" Margin="10,0"/>
+                        <TextBlock Text="{Binding OutDogInfo.DopOsn}" FontWeight="Bold"/>
+                        <TextBlock Text="от:" Margin="10,0"/>
+                        <TextBlock Text="{Binding OutDogInfo.DatDop, StringFormat='dd.MM.yyyy'}" FontWeight="Bold"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="RoyalBlue" BorderThickness="1" DockPanel.Dock="Bottom" CornerRadius="5" Background="AliceBlue">
+                <StackPanel Margin="5,2" Orientation="Horizontal">
+                    <TextBlock Text="ИТОГО выбрано:" FontWeight="Bold" Foreground="RoyalBlue"/>
+                    <TextBlock Text="Документов:" Margin="5,0"/>
+                    <TextBlock Text="{Binding Count}" FontWeight="Bold" Foreground="Navy" Margin="5,0"/>
+                    <TextBlock Text="Количество:" Margin="5,0"/>
+                    <TextBlock Text="{Binding Kolf}" FontWeight="Bold" Foreground="Navy" Margin="5,0"/>
+                </StackPanel>
+            </Border>
+            <DataGrid ItemsSource="{Binding OtgrDocs}" AutoGenerateColumns="False" CanUserAddRows="False" 
+                              Name="DgOtgrRows"
+                              CanUserDeleteRows="False"
+                              Style="{DynamicResource DefaultDataGridStyle}"
+                              RowDetailsVisibilityMode="Collapsed"
+                              SelectedItem="{Binding SelectedOtgr}"
+                              MouseDoubleClick="DataGrid_MouseDoubleClick"
+                              KeyUp="DataGrid_KeyUp">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Value.DocName}" Header="Документ" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Value.ModelRef.DocumentNumber}" Header="Номер" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Value.ModelRef.Datgr, StringFormat=dd.MM.yyyy}" Header="Дата" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Value.Product.Name}" Header="Продукт" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Value.ModelRef.Kolf, StringFormat='# ### ###.###'}" Header="Количество" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Value.ModelRef.Cenprod, StringFormat='# ### ###.###'}" Header="Цена" IsReadOnly="True"/>
+                    <!--<DataGridTextColumn Binding="{Binding Value.ModelRef.Sumprod, UpdateSourceTrigger=PropertyChanged}" Header="Выставить"/>-->
+                    <DataGridTextColumn Binding="{Binding Value.ModelRef.KodCenprod}" Header="$" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Value.ModelRef.NdsStake, StringFormat='##'}" Header="НДС" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Value.ModelRef.Discount, StringFormat='##.##'}" Header="Скидка" IsReadOnly="True"/>
+                    <DataGridTemplateColumn Header="">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                              IsEnabled="{Binding Value.HasDiscount}"/>
+                                    <Ellipse Width="10" Height="10" Fill="Red" Margin="2,1"
+                                             ToolTip="Не указана скидка в договоре"
+                                             Visibility="{Binding Value.HasDiscount, Converter={conv:Bool2VisibilityConverter HiddenState=True}}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+        
+    </Grid>
+</UserControl>

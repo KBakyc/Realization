@@ -1,0 +1,248 @@
+﻿<UserControl x:Class="OtgrModule.Views.OtgrDetailsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:CommonModule.Converters;assembly=CommonModule"
+             xmlns:sysw="clr-namespace:System.Windows;assembly=PresentationCore"
+             Background="AliceBlue" Language="ru-RU">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="DarkSlateGray"/>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="FieldStyle">
+            <Setter Property="Foreground" Value="MidnightBlue"/>
+            <Setter Property="Padding" Value="2"/>
+            <Setter Property="MinWidth" Value="10"/>
+            <Setter Property="Background" Value="Snow"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="FieldTitleStyle">
+            <Setter Property="Foreground" Value="MidnightBlue"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <conv:Int2VisibilityConverter x:Key="Int2Visibility" CheckedValue="0" EqualVisibility="Collapsed"/>
+        <conv:Bool2VisibilityConverter x:Key="Bool2Visibility" HiddenState="False"/>
+        <conv:Null2VisibilityConverter x:Key="Null2Visibility"/>
+    </UserControl.Resources>    
+    
+    <Grid>
+        <GroupBox Margin="1" Padding="1" BorderBrush="RoyalBlue" BorderThickness="2" Background="AliceBlue">
+            <GroupBox.Effect>
+                <DropShadowEffect/>
+            </GroupBox.Effect>
+            <GroupBox.Header>
+                <Border BorderBrush="RoyalBlue" BorderThickness="2" Background="AliceBlue" CornerRadius="8">
+                    <DockPanel Margin="3" Background="AliceBlue">
+                        <StackPanel Orientation="Horizontal" Visibility="{Binding DocInvoiceType, Converter={StaticResource Null2Visibility}, ConverterParameter=Collapsed}">
+                            <TextBlock Text="Документ" Margin="0,0,5,0" Foreground="#FF335EA8"/>
+                            <TextBlock Text="{Binding DocInvoiceType.Notation}" ToolTip="{Binding DocInvoiceType.NameOfInvoiceType}"
+                                       Style="{StaticResource FieldStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5,0,0,0">
+                            <TextBlock Text="№" Margin="0,0,5,0" Foreground="#FF335EA8"/>
+                            <TextBlock Text="{Binding DocumentNumber}" Style="{StaticResource FieldStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5,0,0,0" Visibility="{Binding Nv, Converter={StaticResource Int2Visibility}}">
+                            <TextBlock Text="ЖД накл. №" Margin="0,0,5,0" Foreground="#FF335EA8"/>
+                            <TextBlock Text="{Binding RwBillNumber}" Style="{StaticResource FieldStyle}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Visibility="{Binding Nv, Converter={StaticResource Int2Visibility}}" Margin="5,0,0,0">
+                            <TextBlock Text="Вагон №" Margin="0,0,5,0" Foreground="#FF335EA8"/>
+                            <TextBlock Text="{Binding Nv}" Style="{StaticResource FieldStyle}"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Border>
+            </GroupBox.Header>
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <DockPanel Visibility="{Binding Converter={StaticResource Null2Visibility}}">
+                    <GroupBox Header="Даты" DockPanel.Dock="Top" Margin="3">
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Отгрузки/услуги:" Margin="0,0,5,0"/>
+                                <TextBlock Text="{Binding Datgr, StringFormat='dd.MM.yyyy'}" 
+                               Style="{StaticResource FieldStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Бухучёта:" Margin="5,0,5,0"/>
+                                <TextBlock Text="{Binding DatBuch, StringFormat='dd.MM.yyyy'}" 
+                               Style="{StaticResource FieldStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" 
+                                    Visibility="{Binding Datarrival, Converter={StaticResource Null2Visibility}, ConverterParameter='Collapsed'}">
+                                <TextBlock Text="Прибытия:" Margin="5,0,5,0"/>
+                                <TextBlock Text="{Binding Datarrival, StringFormat='dd.MM.yyyy'}" 
+                               Style="{StaticResource FieldStyle}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Станция" DockPanel.Dock="Top" Margin="3"
+                          Visibility="{Binding IsShowStations, Converter={StaticResource Bool2Visibility}, ConverterParameter='Collapse'}">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" DataContext="{Binding StFrom}">
+                                    <TextBlock Text="Отпр: "/>
+                                    <TextBlock Text="{Binding StationName}" Style="{StaticResource FieldStyle}"/>
+                                    <TextBlock Text="{Binding RailwaysName}" Style="{StaticResource FieldStyle}" Margin="5,0,0,0"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" DataContext="{Binding StTo}">
+                                    <TextBlock Text=" Назн: "/>
+                                    <TextBlock Text="{Binding StationName}" Style="{StaticResource FieldStyle}"/>
+                                    <TextBlock Text="{Binding RailwaysName}" Style="{StaticResource FieldStyle}" Margin="5,0,0,0"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Дата доставки: "/>
+                                <TextBlock Text="{Binding DeliveryDate, StringFormat=dd.MM.yy}" Style="{StaticResource FieldStyle}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Получатель / отправитель" DockPanel.Dock="Top" Margin="3" DataContext="{Binding Poluchatel}">
+                        <StackPanel>
+                            <DockPanel>
+                                <TextBlock Text="{Binding Kgr}" Margin="2,0" Width="50" Style="{StaticResource FieldStyle}"/>
+                                <Rectangle Width="1" Stroke="Gray"/>
+                                <TextBlock Text="{Binding Name}" Margin="2,0" Style="{StaticResource FieldStyle}" TextWrapping="Wrap"/>
+                            </DockPanel>
+                            <TextBlock TextWrapping="Wrap" FontStyle="Italic" FontSize="11">
+                            <Run Text="{Binding Country}"/>, <Run Text="{Binding City}"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Договор" DockPanel.Dock="Top" Margin="3">
+                        <WrapPanel Orientation="Horizontal">
+                            <TextBlock Text="№ " Style="{StaticResource FieldTitleStyle}"/>
+                            <TextBlock Text="{Binding Dogovor.NaiOsn}" Margin="5,0" Style="{StaticResource FieldStyle}"/>
+                            <TextBlock Text="от " Style="{StaticResource FieldTitleStyle}" Margin="5,0"/>
+                            <TextBlock Text="{Binding Dogovor.DatOsn, StringFormat=dd.MM.yyyy}" Margin="5,0" Style="{StaticResource FieldStyle}"/>
+                            <TextBlock Text="{Binding Dogovor.DopOsn}" Margin="10,0" Style="{StaticResource FieldStyle}"/>
+                        </WrapPanel>
+                    </GroupBox>
+                    <GroupBox Header="Продукт / услуга"  DockPanel.Dock="Top" Margin="3">
+                        <StackPanel>
+                            <DockPanel DataContext="{Binding Product}">
+                                <TextBlock Text="{Binding Kpr}" Margin="2,0" Width="50" Style="{StaticResource FieldStyle}"/>
+                                <Rectangle Width="1" Stroke="Gray"/>
+                                <TextBlock Text="{Binding Name}" Margin="2,0" Style="{StaticResource FieldStyle}" TextWrapping="Wrap"/>
+                            </DockPanel>
+                            <TextBlock Text="{Binding ProductInfo}" Margin="0,3,0,0" FontStyle="Italic" 
+                                   Visibility="{Binding ProductInfo, Converter={StaticResource Null2Visibility}, ConverterParameter={x:Static sysw:Visibility.Collapsed}}"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="По продукту / услуге" DockPanel.Dock="Top" Margin="3">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Margin="0,0,5,0">
+                                <TextBlock.Style>                                    
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Text" Value="Цена:"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Product.IsCena}" Value="false">
+                                                <Setter Property="Text" Value="Сумма:"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                                    </TextBlock>
+                                    <TextBlock Text="{Binding Otgr.Cena, StringFormat='#,0.#####'}" Style="{StaticResource FieldStyle}"/>
+                                    <TextBlock Text="{Binding Otgr.Kodcen}" Margin="1,0,0,0" FontSize="10" VerticalAlignment="Top"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="5,0,0,0" Visibility="{Binding Otgr.Prodnds, Converter={StaticResource Int2Visibility}}">
+                                    <TextBlock Text="НДС:" Margin="0,0,5,0"/>
+                                    <TextBlock Text="{Binding Otgr.Prodnds, StringFormat='#;---;'}" Style="{StaticResource FieldStyle}"/>
+                                    <TextBlock Text=" %"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="5,0,0,0">
+                                    <TextBlock Text="Кол-во:" Margin="0,0,5,0"/>
+                                    <TextBlock Text="{Binding Kolf, StringFormat='# ### ### ###.000'}" 
+                               Style="{StaticResource FieldStyle}"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal"
+                                    Visibility="{Binding Otgr.DatKurs, Converter={StaticResource Null2Visibility}, ConverterParameter={x:Static sysw:Visibility.Collapsed}}">
+                                <TextBlock Text="Дата курса:"/>
+                                <TextBlock Text="{Binding Otgr.DatKurs, StringFormat=dd.MM.yyyy}" Margin="5,0,0,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Транспортные услуги" DockPanel.Dock="Top" Margin="3"
+                          Visibility="{Binding IsSperExists, Converter={StaticResource Bool2Visibility}, ConverterParameter='Collapse'}">
+                        <WrapPanel DataContext="{Binding Otgr}">
+                            <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                                <TextBlock Text="Провоз: "/>
+                                <TextBlock Text="{Binding Sper, StringFormat='#,0.00'}" 
+                               Style="{StaticResource FieldStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                                <TextBlock Text="НДС за провоз: "/>
+                                <TextBlock Text="{Binding Nds, StringFormat='##'}"
+                               Style="{StaticResource FieldStyle}"/>
+                                <TextBlock Text=" % "/>
+                                <TextBlock Text="{Binding Ndssper, StringFormat='#,0.00'}" 
+                               Style="{StaticResource FieldStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,5,0" Visibility="{Binding Dopusl, Converter={StaticResource Int2Visibility}}">
+                                <TextBlock Text="Доп.усл.ЖД: "/>
+                                <TextBlock Text="{Binding Dopusl, StringFormat='#,0.00'}" 
+                               Style="{StaticResource FieldStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,5,0" Visibility="{Binding Ndst_dop, Converter={StaticResource Int2Visibility}}">
+                                <TextBlock Text="НДС за доп.усл: "/>
+                                <TextBlock Text="{Binding Ndst_dop, StringFormat=##}" 
+                                       Style="{StaticResource FieldStyle}"/>
+                                <TextBlock Text="% "/>
+                                <TextBlock Text="{Binding Ndsdopusl, StringFormat='#,0.00'}" 
+                                       Style="{StaticResource FieldStyle}"/>
+                            </StackPanel>
+                            <TextBlock Text="Провоз списать!" Foreground="Firebrick" FontWeight="Bold" Margin="5,0,0,0"
+                                   Visibility="{Binding Provoz, Converter={StaticResource Int2Visibility}}"/>
+                        </WrapPanel>
+                    </GroupBox>
+                    <GroupBox Header="Акциз" DockPanel.Dock="Top" Margin="3"
+                          Visibility="{Binding IsAkcizExists, Converter={StaticResource Bool2Visibility}, ConverterParameter='Collapse'}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Ставка:" Margin="0,0,5,0"/>
+                            <TextBlock Text="{Binding AkcStake, StringFormat='#,0.00'}" 
+                               Style="{StaticResource FieldStyle}"/>
+                            <TextBlock Text="{Binding AkcVal.ShortName}" Margin="1,0,0,0" FontSize="10" VerticalAlignment="Top"/>
+                            <TextBlock Text="Вид:" Margin="5,0"/>
+                            <TextBlock Text="{Binding VidAkc.Name}" Style="{StaticResource FieldStyle}"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Счета-фактуры" DockPanel.Dock="Top" Margin="3"
+                          Visibility="{Binding IsSfsExists, Converter={StaticResource Bool2Visibility}, ConverterParameter='Collapse'}">
+                        <ItemsControl ItemsSource="{Binding OtgrSfs}" Focusable="False">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" Margin="2">
+                                        <TextBlock Text="№" Foreground="DarkSlateGray"/>
+                                        <TextBlock Text="{Binding NumSf}" Style="{StaticResource FieldStyle}" Margin="5,0,0,0"/>
+                                        <TextBlock Text="от" Margin="5,0,0,0" Foreground="DarkSlateGray"/>
+                                        <TextBlock Text="{Binding DatPltr, StringFormat='dd.MM.yyyy'}" Style="{StaticResource FieldStyle}" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </GroupBox>
+                    <GroupBox Header="Итого" DockPanel.Dock="Top" Margin="3"
+                          Visibility="{Binding IsTotalsExists, Converter={StaticResource Bool2Visibility}, ConverterParameter='Collapse'}">
+                        <ItemsControl ItemsSource="{Binding Totals}" Focusable="False">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" Margin="2">
+                                        <TextBlock Text="{Binding Key}" Foreground="DarkSlateGray"/>
+                                        <TextBlock Text="{Binding Value.Value, StringFormat='#,0.###'}" Style="{StaticResource FieldStyle}" Margin="5,0,0,0"/>
+                                        <TextBlock Text="{Binding Value.Key}" Foreground="DarkSlateGray" Margin="5,0,0,0"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </GroupBox>
+                </DockPanel>
+            </ScrollViewer>
+        </GroupBox>
+    </Grid>
+
+</UserControl>

@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SfModule.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Name" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">SfModule</Value>
+    </Setting>
+    <Setting Name="Version" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="Description" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Модуль обработки счетов-фактур</Value>
+    </Setting>
+    <Setting Name="Header" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Счета-фактуры</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

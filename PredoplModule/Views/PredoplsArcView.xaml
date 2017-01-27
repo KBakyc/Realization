@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="PredoplModule.Views.PredoplsArcView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Views="clr-namespace:PredoplModule.Views"
+    xmlns:cviews="clr-namespace:CommonModule.Views;assembly=CommonModule"
+    xmlns:dto="clr-namespace:DataObjects;assembly=DataObjects"
+    xmlns:conv="clr-namespace:CommonModule.Converters;assembly=CommonModule"
+    >
+    <UserControl.Resources>
+        <conv:Null2VisibilityConverter x:Key="Null2Visibility"/>
+        <conv:Bool2VisibilityConverter x:Key="Bool2Visibility"/>
+        <conv:Null2BoolConverter x:Key="Null2Bool"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <cviews:PoupAndDateRangeTitleView />
+        <DockPanel LastChildFill="False" Grid.Row="1">
+            <Button Command="{Binding EditPredoplCommand}" Margin="3"
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Изменить выбранную предоплату">
+                <Image Source="/PredoplModule;component/Resources/edit.png" />
+            </Button>
+            <Button Command="{Binding CopyPredoplCommand}" Margin="3"
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Добавить предоплату на основе выбранной">
+                <Image Source="/PredoplModule;component/Resources/copy.png" />
+            </Button>
+            <Button Command="{Binding SplitPredoplCommand}" Margin="3"
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Разделить выбранную предоплату">
+                <Image Source="/PredoplModule;component/Resources/cut.png" />
+            </Button>
+            <Button Command="{Binding DeletePredoplCommand}" Margin="3"
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Удалить предоплату">
+                <Image Source="/PredoplModule;component/Resources/delete.png" />
+            </Button>
+            <Button Command="{Binding ShowSfsCommand}" Margin="3" 
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Просмотреть оплаченые счета">
+                <Image Source="/PredoplModule;component/Resources/folder%20find.png" />
+            </Button>
+            <Button Command="{Binding UndoPaysCommand}" Margin="3" 
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Отменить оплаты по выбранной предоплате">
+                <Grid>
+                    <Image Source="/PredoplModule;component/Resources/money.png" />
+                    <ContentControl Focusable="False" ContentTemplate="{DynamicResource ButtonOverCross}"/>
+                </Grid>
+            </Button>
+            <Button Margin="3" 
+                    Command="{Binding ShowHistoryCommand}" 
+                    Style="{DynamicResource CommandButton}"
+                    ToolTip="Посмотреть историю">
+                <Image Source="/PredoplModule;component/Resources/file_temp.png" />
+            </Button>
+            <Button Margin="3" DockPanel.Dock="Right"
+                        Style="{DynamicResource CommandButton}"
+                        Command="{Binding RefreshCommand}"
+                        IsEnabled="{Binding RefreshCommand, Converter={StaticResource Null2Bool}}"
+                        CommandParameter="{Binding}"
+                        ToolTip="Обновить">
+                <Image Source="/PredoplModule;component/Resources/refresh.png" />
+            </Button>
+        </DockPanel>
+        <Views:PredoplsView DataContext="{Binding PredoplsList}" Grid.Row="2"/>
+    </Grid>
+</UserControl>

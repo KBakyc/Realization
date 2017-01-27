@@ -1,0 +1,120 @@
+﻿<UserControl x:Class="RwModule.Views.SelectDocsForPayDlgView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:CommonModule.Converters;assembly=CommonModule"
+             xmlns:sysglb="clr-namespace:System.Globalization;assembly=mscorlib">
+    <UserControl.Resources>
+        <conv:Bool2VisibilityConverter x:Key="False2Collapse"/>
+    </UserControl.Resources>
+    <Grid x:Name="root">
+        <DockPanel>
+            <GroupBox DockPanel.Dock="Top" Margin="3,0,3,0">
+                <GroupBox.Header>
+                    <TextBlock TextElement.Foreground="RoyalBlue">
+                        <Run Text="Платёжное поручение № "/><Run Text="{Binding Rwplat.Numplat, Mode=OneWay}" FontWeight="Bold"/><Run Text=" от "/><Run Text="{Binding Rwplat.Datplat, StringFormat=dd.MM.yyyy, Mode=OneWay}" FontWeight="Bold"/>
+                    </TextBlock>
+                </GroupBox.Header>
+                <StackPanel Orientation="Horizontal" Margin="2,5" TextElement.Foreground="RoyalBlue">
+                    <TextBlock Text="На сумму:"/>
+                    <TextBlock Text="{Binding Rwplat.Sumplat, StringFormat=n, Mode=OneWay, ConverterCulture={x:Static sysglb:CultureInfo.CurrentUICulture}}" FontWeight="Bold" Margin="5,0"/>
+                    <TextBlock Text="Остаток:"/>
+                    <TextBlock Text="{Binding Rwplat.Ostatok, StringFormat=n, Mode=OneWay, ConverterCulture={x:Static sysglb:CultureInfo.CurrentUICulture}}" FontWeight="Bold" Margin="5,0"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox DockPanel.Dock="Bottom" Margin="3,0,3,0">
+                <GroupBox.Header>
+                    <TextBlock Text="Итого" Foreground="RoyalBlue"/>
+                </GroupBox.Header>
+                <StackPanel Orientation="Horizontal" TextElement.Foreground="RoyalBlue" Margin="2,5" >
+                    <TextBlock Text="Сумма к погашению: "/>
+                    <TextBlock Text="{Binding SumToPay, Mode=OneWay, StringFormat=n, ConverterCulture={x:Static sysglb:CultureInfo.CurrentUICulture}}" Width="150" HorizontalAlignment="Right" FontWeight="Bold"/>
+                </StackPanel>                
+            </GroupBox>
+            <GroupBox Margin="3,0,3,0">
+                <GroupBox.Header>
+                    <TextBlock Text="ЖД перечни к погашению" Foreground="RoyalBlue"/>
+                </GroupBox.Header>
+                <ScrollViewer Margin="2,5" >
+                    <ItemsControl ItemsSource="{Binding RwListsWithDocs}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Border Background="#BADD62" Padding="3,2" Margin="0,2">
+                                        <DockPanel>
+                                            <CheckBox DockPanel.Dock="Left" VerticalAlignment="Center" 
+                                                  Foreground="DarkOliveGreen" BorderBrush="DarkOliveGreen" Background="WhiteSmoke"
+                                                  IsChecked="{Binding Key.IsSelected, Mode=OneWay}" Command="{Binding ElementName=root, Path=DataContext.SelectDeselectRwList}" CommandParameter="{Binding Key}"/>
+                                            <ToggleButton DockPanel.Dock="Right" Width="13" Height="13" VerticalAlignment="Center" x:Name="tDocs" IsChecked="False"
+                                                      Background="Olive" Cursor="Hand" Foreground="DarkGreen">
+                                                <ToggleButton.Style>
+                                                    <Style TargetType="ToggleButton">
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="ToggleButton">
+                                                                    <Grid x:Name="root">
+                                                                        <Rectangle Fill="{TemplateBinding Background}"/>
+                                                                        <Rectangle Fill="White" Opacity=".5" x:Name="rOpa" Stroke="{TemplateBinding Foreground}"/>
+                                                                        <Line x:Name="hLine"
+                                                                          Stroke="{TemplateBinding Foreground}" StrokeThickness="1"
+                                                                          Margin="3" Stretch="Fill" X1="0" Y1="0" X2="1" Y2="0"
+                                                                          HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+                                                                        <Line x:Name="vLine"
+                                                                          Stroke="{TemplateBinding Foreground}" StrokeThickness="1"
+                                                                          Margin="3" Stretch="Fill" X1="0" Y1="0" X2="0" Y2="1"
+                                                                          HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+                                                                    </Grid>
+                                                                    <ControlTemplate.Triggers>
+                                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                                            <Setter TargetName="rOpa" Property="Fill" Value="Transparent"/>
+                                                                            <Setter TargetName="hLine" Property="Stroke" Value="WhiteSmoke"/>
+                                                                            <Setter TargetName="vLine" Property="Stroke" Value="WhiteSmoke"/>
+                                                                        </Trigger>
+                                                                        <Trigger Property="IsChecked" Value="True">
+                                                                            <Setter TargetName="vLine" Property="Visibility" Value="Hidden"/>
+                                                                        </Trigger>
+                                                                    </ControlTemplate.Triggers>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Style>
+                                                </ToggleButton.Style>
+                                            </ToggleButton>
+                                            <StackPanel Orientation="Horizontal" TextElement.Foreground="#336B1F" Margin="5,0,0,0">
+                                                <TextBlock Text="Перечень № "/>
+                                                <TextBlock Text="{Binding Key.Value.Num_rwlist, Mode=OneWay}" FontWeight="Bold" Width="60"/>
+                                                <TextBlock Text=" На сумму: "/>
+                                                <TextBlock Text="{Binding Key.Value.Sum_itog, Mode=OneWay, StringFormat=n, ConverterCulture={x:Static sysglb:CultureInfo.CurrentUICulture}}" FontWeight="Bold" Width="130"/>
+                                                <TextBlock Text=" Остаток: "/>
+                                                <TextBlock Text="{Binding Key.Value.Ostatok, Mode=OneWay, StringFormat=n, ConverterCulture={x:Static sysglb:CultureInfo.CurrentUICulture}}" FontWeight="Bold" Width="130"/>
+                                            </StackPanel>
+                                        </DockPanel>
+                                    </Border>
+                                    <Border x:Name="bDocs" Margin="20,0,0,0"
+                                        Visibility="{Binding ElementName=tDocs, Path=IsChecked, Mode=OneWay, Converter={StaticResource False2Collapse}, ConverterParameter=Collapse}">
+                                        <ItemsControl ItemsSource="{Binding Value}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal" TextElement.Foreground="DarkOliveGreen">
+                                                        <CheckBox VerticalAlignment="Center" IsChecked="{Binding IsSelected, Mode=OneWay}" 
+                                                              Command="{Binding ElementName=root, Path=DataContext.SelectDeselectRwDoc}" CommandParameter="{Binding}"
+                                                              BorderBrush="DarkOliveGreen"/>
+                                                        <TextBlock Text=" Док. № "/>
+                                                        <TextBlock Text="{Binding Value.Num_doc, Mode=OneWay}" Width="80"/>
+                                                        <TextBlock Text=" На сумму: "/>
+                                                        <TextBlock Text="{Binding Value.Sum_itog, Mode=OneWay, StringFormat=n, ConverterCulture={x:Static sysglb:CultureInfo.CurrentUICulture}}" FontStyle="Italic" Width="120"/>
+                                                        <TextBlock Text=" Остаток: "/>
+                                                        <TextBlock Text="{Binding Value.Ostatok, Mode=OneWay, StringFormat=n, ConverterCulture={x:Static sysglb:CultureInfo.CurrentUICulture}}" FontStyle="Italic" Width="120"/>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </Border>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </GroupBox>
+        </DockPanel>
+    </Grid>
+</UserControl>

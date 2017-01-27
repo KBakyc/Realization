@@ -1,0 +1,10 @@
+﻿<UserControl x:Class="CommonModule.Views.dlg_SelectDate"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid SnapsToDevicePixels="True">
+        <DockPanel LastChildFill="False" HorizontalAlignment="Center">
+            <TextBlock Text="{Binding DateLabel}" VerticalAlignment="Center" Margin="0,0,3,0"/>
+            <DatePicker SelectedDate="{Binding SelDate}" SelectedDateFormat="Short"/>
+        </DockPanel>
+    </Grid>
+ </UserControl>

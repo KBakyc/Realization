@@ -1,0 +1,294 @@
+﻿<UserControl x:Class="CommonModule.Views.dlg_MultiPoupSelect"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:CommonModule.Converters"
+             x:Name="Root">
+    <UserControl.Resources>
+        <conv:Bool2VisibilityConverter x:Key="Bool2Visibility"/>
+        <conv:Null2VisibilityConverter x:Key="Null2Visibility"/>
+        
+        <!--SelectedItemBorderBrush-->
+        <LinearGradientBrush x:Key="SelectedItemBorderBrush" StartPoint="0,1" EndPoint="0,0">
+            <GradientStop Offset="0" Color="#FF87CEFA"/>
+            <GradientStop Offset="0.2" Color="#2A87CEFA"/>
+            <GradientStop Offset="0.8" Color="#2A87CEFA"/>
+            <GradientStop Offset="1" Color="#0087CEFA"/>
+        </LinearGradientBrush>
+
+        <!--<Style TargetType="ComboBox" x:Key="SingleSelPkod">-->
+        <Style TargetType="ComboBox" x:Key="SingleSelPkod">
+            <Setter Property="SelectedItem" Value="{Binding SingleSelectedPkodItem}"/>
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ComboBoxItem">
+                        <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Value.Pkod, StringFormat=#}" Margin="3,0" MinWidth="25"/>
+                            <Rectangle Width="1" Stroke="Black"/>
+                            <TextBlock Text="{Binding Value.Name}" Margin="3,0"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--<Style TargetType="ComboBox" x:Key="MultiSelPkod">-->
+        <Style TargetType="ComboBox" x:Key="MultiSelPkod">
+            <Setter Property="Text" Value="{Binding ElementName=Root, Path=DataContext.SelectedPkodsLabel, Mode=OneWay}"/>
+            <Setter Property="IsEditable" Value="True"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ComboBoxItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ComboBoxItem">
+                                    <ContentPresenter/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Grid SnapsToDevicePixels="True">
+                            <CheckBox IsChecked="{Binding IsSelected}" Margin="3,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Value.Pkod, StringFormat=#}" Margin="2,3" MinWidth="25"/>
+                                    <Rectangle Width="1" Stroke="Black"/>
+                                    <TextBlock Text="{Binding Value.Name}" Margin="2,3"/>
+                                </StackPanel>
+                            </CheckBox>
+                            <Border  x:Name="Item" BorderBrush="RoyalBlue" Margin="1" CornerRadius="2" IsHitTestVisible="False"/>
+                        </Grid>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                <Setter TargetName="Item" Property="Background" Value="{StaticResource SelectedItemBorderBrush}"/>
+                                <Setter TargetName="Item" Property="BorderThickness" Value="1"/>
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--<DataTemplate x:Key="PoupItemTemplate">-->
+        <DataTemplate x:Key="PoupItemTemplate">
+            <StackPanel>
+                <DockPanel x:Name="Panel" DataContext="{Binding Key}">
+                    <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" Margin="2"/>
+                    <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0,3:#} - {1}">
+                                            <Binding Path="Value.Kod"/>
+                                            <Binding Path="Value.Name"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                    </TextBlock>
+                </DockPanel>
+                <Grid>
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Setter Property="Visibility" Value="Visible"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=IsSelected}" Value="False">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding Value}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Подвид:" />
+                    <ContentControl Grid.Column="1" Content="{Binding}">
+                        <ContentControl.ContentTemplate>
+                            <DataTemplate>
+                                <ComboBox x:Name="PkodsCombo" 
+                                          SelectedItem="{Binding ElementName=Root, Path=DataContext.SingleSelectedPkodItem}"
+                                          ItemsSource="{Binding Value}" 
+                                          Style="{StaticResource SingleSelPkod}"/>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding ElementName=Root, Path=DataContext.IsMultiPkod}" Value="True">
+                                        <Setter TargetName="PkodsCombo" Property="Style" Value="{StaticResource MultiSelPkod}"/>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ContentControl.ContentTemplate>
+                    </ContentControl>
+                </Grid>
+            </StackPanel>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Key.IsSelected}" Value="True">
+                    <Setter TargetName="Panel" Property="Background" Value="Lavender"/>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+
+        <!--<DataTemplate x:Key="PoupTitleTemplate">-->
+        <DataTemplate x:Key="PoupTitleTemplate">
+            <TextBlock Text="{Binding}" Width="150" x:Name="title"/>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                    <Setter TargetName="title" Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+
+        <!--<DataTemplate x:Key="SingleSelPoup">-->
+        <DataTemplate x:Key="SingleSelPoup">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <DockPanel Margin="0,2">
+                    <ContentControl Content="{Binding PoupTitle}" ContentTemplate="{StaticResource PoupTitleTemplate}"/>
+                    <ComboBox Name="cbPoup" 
+                              SelectedItem="{Binding CurPoupSelection}"
+                              ItemsSource="{Binding AllPoupData}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" DataContext="{Binding Key.Value}">
+                                    <TextBlock Text="{Binding Kod, StringFormat=#}" Margin="3,0" Padding="1" Width="25"/>
+                                    <Rectangle Width="1" Stroke="Black"/>
+                                    <TextBlock Text="{Binding Name}" Margin="3,0" Padding="1"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </DockPanel>
+                <Grid Grid.Row="1" Margin="0,2">
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Setter Property="Visibility" Value="Visible"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=cbPoup, Path=SelectedItem.Value}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Подвид:" />
+                    <ContentControl Grid.Column="1" Content="{Binding}">
+                        <ContentControl.ContentTemplate>
+                            <DataTemplate>
+                                <ComboBox x:Name="PkodsCombo" ItemsSource="{Binding ElementName=cbPoup, Path=SelectedItem.Value}" 
+                                          Style="{StaticResource SingleSelPkod}"/>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding IsMultiPkod}" Value="True">
+                                        <Setter TargetName="PkodsCombo" Property="Style" Value="{StaticResource MultiSelPkod}"/>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </ContentControl.ContentTemplate>
+                    </ContentControl>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+
+        <!--<DataTemplate x:Key="MultiSelPoup">-->
+        <DataTemplate x:Key="MultiSelPoup">
+            <StackPanel Margin="0,2">
+                <ContentControl Content="{Binding PoupTitle}" ContentTemplate="{StaticResource PoupTitleTemplate}"
+                                HorizontalAlignment="Left"/>
+                <ItemsControl ItemsSource="{Binding SelectedData}" Margin="0,3" Focusable="False">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" IsItemsHost="True"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ToggleButton Content="{Binding Key.Value.Kod}" IsChecked="{Binding Key.IsSelected}" 
+                                          Padding="1" Width="30" Focusable="False"
+                                          Background="Honeydew" BorderBrush="DarkOliveGreen" BorderThickness="2.5"
+                                          Foreground="DarkGreen" Cursor="Hand"
+                                          ToolTip="{Binding Key.Value.Name}">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Grid TextBlock.Foreground="{TemplateBinding Foreground}"
+                                              x:Name="root">
+                                            <Path Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness}"
+                                                  Focusable="False" Stretch="Fill"
+                                                  Data="M0,0L2,0L2.5,1L2,2L0,2Z"
+                                                  x:Name="brd"/>
+                                            <ContentPresenter Focusable="False" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                                            <Path x:Name="crossPath" Stroke="Red" StrokeThickness="2" Data="M0,0L1,1M1,0L0,1" Stretch="Fill" Visibility="Hidden" Opacity=".6" Margin="0,0,5,0"
+                                                  Width="8" Height="8"
+                                                  HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="crossPath" Property="Visibility" Value="Visible"/>
+                                                <Setter TargetName ="brd" Property="Stroke" Value="Red"/>
+                                                <Setter TargetName ="root" Property="TextBlock.Foreground" Value="Red"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <ListBox ItemsSource="{Binding AllPoupData}"
+                     SelectedItem="{Binding CurPoupSelection}"
+                     MaxHeight="300"
+                     x:Name="PoupList"                     
+                     ItemTemplate="{StaticResource PoupItemTemplate}">       
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <Border x:Name="ItemBorder">
+                                            <ContentPresenter Margin="2"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsSelected" Value="true">
+                                                <Setter TargetName="ItemBorder" Property="Background" Value="LightSkyBlue"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+            </StackPanel>
+        </DataTemplate>
+
+    </UserControl.Resources>
+
+    <Grid>
+        <ContentControl Content="{Binding}">
+            <ContentControl.Style>
+                <Style TargetType="ContentControl">
+                    <Setter Property="ContentTemplate" Value="{StaticResource SingleSelPoup}"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsMultiPoup}" Value="True">
+                            <Setter Property="ContentTemplate" Value="{StaticResource MultiSelPoup}"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentControl.Style>
+        </ContentControl>
+    </Grid>
+</UserControl>

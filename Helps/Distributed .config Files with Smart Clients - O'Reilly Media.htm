@@ -1,0 +1,664 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- saved from url=(0052)http://ondotnet.com/pub/a/dotnet/2003/01/27/ztd.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+	<title>Distributed .config Files with Smart Clients - O'Reilly Media</title>
+	<meta name="keywords" content="Smart Clients,Windows Forms,.config,O&#39;Reilly Media">
+	<meta name="description" content="Deploying configuration files with Smart Client .NET projects.">
+	<meta name="date" content="Jan. 27, 2003">
+	<meta name="search_date" content="2003-01-27">
+	<meta name="pagename" content="Distributed .config Files with Smart Clients">
+	<meta name="site" content="ONDotnet.com">
+	<meta name="subtitle" content="">
+	<meta name="author" content="Chris Sells">
+<meta name="target" content="">
+
+
+<!-- feed autodiscovery links -->
+<link rel="alternate" type="application/atom+xml" title="Windows DevCenter Articles and Weblogs" href="http://www.oreillynet.com/pub/feed/4">
+<link rel="alternate" type="application/rdf+xml" title="Windows DevCenter Articles and Weblogs" href="http://www.oreillynet.com/pub/feed/4?format=rss1">
+<link rel="alternate" type="application/rss+xml" title="Windows DevCenter Articles and Weblogs" href="http://www.oreillynet.com/pub/feed/4?format=rss2">
+
+
+
+<!-- sc/388 Common JavaScript -->
+<script language="JavaScript" type="text/javascript" src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/common.js"></script>
+
+<script language="JavaScript" type="text/javascript" src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/common(1).js"></script>
+
+<link rel="STYLESHEET" type="text/css" href="./Distributed .config Files with Smart Clients - O'Reilly Media_files/main.css">
+<!-- path_info: /a/dotnet/2003/01/27/ztd.html -->
+<!-- table: a - ref_id: /dotnet/2003/01/27/ztd.html -->
+<!-- table: a - ref_id: /dotnet/2003/01/27/ztd.html -->
+<!-- table: a - ref_id: /dotnet/2003/01/27/ztd.html - cs_rid: 3154 -->
+<!-- 0 domain: www.ondotnet.com - path_info: a/dotnet/2003/01/27/ztd.html -->
+<!-- 1 domain: www.ondotnet.com - path_info: a/dotnet/2003/01/27/ztd.html -->
+<!-- 2 domain: www.windowsdevcenter.com - path_info: a/dotnet/2003/01/27/ztd.html -->
+<!-- 3 domain: www.windowsdevcenter.com - path_info: a/dotnet/2003/01/27/ztd.html -->
+<!-- 4 domain: windowsdevcenter.com - path_info: a/dotnet/2003/01/27/ztd.html -->
+<!-- 5 domain: windowsdevcenter - path_info: a/dotnet/2003/01/27/ztd.html -->
+<!-- 6 domain: windowsdevcenter - path_info: a/dotnet/2003/01/27/ztd.html s_channel: network -->
+<!-- 7 domain: windowsdevcenter - path_info: a/dotnet/2003/01/27/ztd.html -->
+<!-- 8 domain: www.ondotnet.com - path_info: a/dotnet/2003/01/27/ztd.html -->
+
+<script language="JavaScript" type="text/javascript"><!--
+var s_account="ornetwork,orglobal"
+//--></script>
+<!-- SiteCatalyst code version: H.20.2. Copyright 1997-2009 Omniture, Inc. More info available at http://www.omniture.com  -->
+<script language="JavaScript" type="text/javascript" src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/s_code.js"></script>
+<script language="JavaScript" type="text/javascript"><!--
+s.pageName="network:windowsdev:distributed .config files with smart clients"
+s.channel="network"
+s.prop1="network:windowsdev"
+s.prop2="network:windowsdev"
+s.prop3="network:windowsdev"
+s.prop4="article"
+s.prop5="distributed .config files with smart clients"
+s.prop6="n/a/3154"
+s.prop24="01/27/2003"
+s.prop21="chris sells"
+s.hier1="network,windowsdev"
+/************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+var s_code=s.t();if(s_code)document.write(s_code)//--></script>
+<!-- End SiteCatalyst code version: H.20.2. -->
+<!-- analytics.pl: 2010/9/21 2:14:55 -->
+
+
+
+
+
+<script type="text/javascript" src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/tabber.js"></script>
+
+<!-- additional css -->
+<link rel="stylesheet" type="text/css" href="./Distributed .config Files with Smart Clients - O'Reilly Media_files/articles.css">
+<!-- MyBuys libraries and style sheet -->
+<link href="./Distributed .config Files with Smart Clients - O'Reilly Media_files/mbstyles.css" type="text/css" rel="stylesheet" id="mybuysstyles">
+<script type="text/javascript" src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/mybuys3.js"></script><style type="text/css">.mblistrowleft{ cssFloat:;text-align:;} .mblistrowright{ cssFloat:;text-align:;} .mbsalerowleft{ cssFloat:;text-align:;} .mbsalerowright{ cssFloat:;text-align:;} .mbpricerowleft{ cssFloat:;text-align:;} .mbpricerowright{ cssFloat:;text-align:;} .mbdiscrowleft{ cssFloat:;text-align:;} .mbdiscrowright{ cssFloat:;text-align:;} </style>
+<script type="text/javascript" src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/setup.js"></script><style type="text/css">.mbpricerowleft{ cssFloat:;} .mbpricerowright{ cssFloat:;} .mbzone{ width:100%;padding:0 10px;} .mbitem{ width:100%;padding-right:0px;padding-left:0px;padding-top:5px;} .mbnamelink:link{ color:#0000ff;font-size:11px;font-weight:bold;text-decoration:none;font-family:verdana, arial, helvetica;} .mbnamelink:visited{ font-family:verdana, arial, helvetica;color:#551A8B;font-size:11px;font-weight:bold;text-decoration:none;} .mbnamelink:hover{ font-family:verdana, arial, helvetica;color:#0000ff;font-size:11px;font-weight:bold;text-decoration:none;} .mbnamerowspan{ margin-top:5px;} .mbpricelink:link{ font-family:verdana, arial, helvetica;color:#222222;font-size:11px;font-weight:normal;text-decoration:none;} .mbpricelink:visited{ font-family:verdana, arial, helvetica;color:#222222;font-size:11px;font-weight:normal;text-decoration:none;} .mbpricelink:hover{ font-family:verdana, arial, helvetica;color:#222222;font-size:11px;font-weight:normal;text-decoration:none;} .mbpricerowspan{ text-align:center;} .mbpricelinklabel:link{ font-family:verdana, arial, helvetica;color:#222222;font-size:11px;font-weight:normal;text-decoration:none;} .mbpricelinklabel:visited{ font-family:verdana, arial, helvetica;color:#222222;font-size:11px;font-weight:normal;text-decoration:none;} .mbpricelinklabel:hover{ font-family:verdana, arial, helvetica;color:#222222;font-size:11px;font-weight:normal;text-decoration:none;} } .mbpricerowleft_content1{ cssFloat:none;text-align:right;height:12px;} .mbpricerowright_content1{ cssFloat:none;text-align:center;height:12px;} .mbitem_content1{ font-size:11px;width:100%;padding-bottom:26px;text-align:left;} .mbnamerowspan_content1{ text-align:left;cssFloat:left;width:100%;display:block;} .mbpricerowspan_content1{ text-align:left;cssFloat:left;width:100%;display:block;height:16px;} .mbpricelink_content1:link{ font-family:verdana, arial, helvetica, sans-serif;color:#000000;font-size:11px;font-weight:normal;text-decoration:none;} .mbpricelink_content1:visited{ font-family:verdana, arial, helvetica, sans-serif;color:#000000;font-size:11px;font-weight:normal;text-decoration:none;} .mbpricelink_content1:hover{ font-family:verdana, arial, helvetica, sans-serif;color:#000000;font-size:11px;font-weight:normal;text-decoration:none;} </style>
+<!-- End MyBuys libraries and style sheet -->
+</head>
+<body id="windows">
+<div id="page">
+<div id="header" class="noindex">
+
+<h1><a href="http://www.windowsdevcenter.com/"><img src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/windevcenter_logo.gif" alt="WindowsDevCenter.com" width="240" height="88" border="0"></a></h1>
+
+<!-- tabs -->
+<div id="tabs">
+<div class="noindex" style="white-space:nowrap;float:left;width:435px;"><a href="http://www.oreilly.com/"><img src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/ora_gray.gif" alt="oreilly.com" width="82" height="16" hspace="0" vspace="0" border="0"></a><a href="http://safari.oreilly.com/"><img src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/safaribooksonline_gray.gif" alt="Safari Books Online." width="114" height="16" hspace="0" vspace="0" border="0"></a><a href="http://conferences.oreilly.com/"><img src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/conf_gray.gif" alt="Conferences." width="88" height="16" hspace="0" vspace="0" border="0"></a></div>
+
+<!-- div class="noindex tiny" style="white-space: nowrap;float:right;width:195px;"><a href="/cs/user/login?x-redirect=/cs/user/home">Sign In/My Account</a> | <a href="http://epoch.oreilly.com/shop/cart.orm">View Cart</a>&nbsp;&nbsp;&nbsp;</div>
+</div -->
+
+<!--
+<csinclude record="sc/1301" field="html">-->
+</div>
+
+<!-- menubar -->
+<div class="noindex">
+<table border="0" cellpadding="0" cellspacing="1" width="100%" bgcolor="#ffffff"><tbody><tr bgcolor="#ffffff">
+<td align="center" bgcolor="#000000" style="padding:5px 8px;"><a href="http://www.oreillynet.com/pub/q/articles" class="nolinewhite">Articles</a></td>
+<td align="center" bgcolor="#000000" style="padding:5px 8px;"><a href="http://weblogs.oreillynet.com/" class="nolinewhite">Weblogs</a></td>
+<td align="center" bgcolor="#000000" style="padding:5px 8px;"><a class="nolinewhite" href="http://www.oreilly.com/catalog/">Books</a></td>
+<td align="center" bgcolor="#000000" style="padding:5px 8px;"><a class="nolinewhite" href="http://www.oreillylearning.com/">School</a></td>
+<td align="center" bgcolor="#000000" style="padding:5px 8px;"><a class="nolinewhite" href="http://www.oreilly.com/store/series/sc.csp">Short&nbsp;Cuts</a></td>
+<td align="center" bgcolor="#000000" style="padding:5px 8px;"><a class="nolinewhite" href="http://www.oreillynet.com/podcasts/">Podcasts</a></td>
+<td width="100%" nowrap="nowrap" bgcolor="#000000" style="padding:5px 8px;">&nbsp;<!-- right-most cell (empty)--></td>
+</tr></tbody></table>
+</div>
+
+<div id="leaderboard">
+<img src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/ad-tag-vertical.gif" width="11" height="90" border="0" alt="advertisement" style="float:right;">
+
+<div style="width:728px;margin:0 auto;">
+<!-- Network Leaderboard Ad -->
+
+<!--JavaScript Tag // Tag for network 5159: TechVertical // Website: O'ReillyNet // Page: O'ReillyNet // Placement: ros_728x90 (425845) // created at: Oct 9, 2008 6:10:32 PM-->
+<script language="javascript"><!--
+document.write('<scr'+'ipt language="javascript1.1" src="http://adserver.adtechus.com/addyn/3.0/5159/425845/0/225/ADTECH;loc=100;target=_blank;key=key1+key2+key3+key4;grp=[group];misc='+new Date().getTime()+'"></scri'+'pt>');
+//-->
+</script><script language="javascript1.1" src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/ADTECH;loc=100;target=_blank;key=key1+key2+key3+key4;grp=[group]"></script><noscript></noscript>
+
+<!-- End of JavaScript Tag -->
+<!-- end ad -->
+
+</div>
+</div> <!-- end leaderboard -->
+
+<div id="colored-bar-ad" class="tinywhite" align="center" style="background-color:#0000CC;">
+<div class="tinywhite" style="vertical-align:middle;padding-top:3px;">
+<!-- Network Text Link -->
+
+
+<!-- End ad -->
+</div></div>
+</div> <!-- end header -->
+
+<div id="page-content">
+<div id="article">
+<!-- feature bar ad : layout component 1894 -->
+
+<div align="center" style="visibility: hidden">
+<!-- begin ad tag -->
+
+<!--JavaScript Tag // Tag for network 5159: TechVertical // Website: O'ReillyNet // Page: O'ReillyNet // Placement: text (425846) // created at: Oct 9, 2008 6:10:33 PM-->
+<script language="javascript"><!--
+document.write('<scr'+'ipt language="javascript1.1" src="http://adserver.adtechus.com/addyn/3.0/5159/425846/0/16/ADTECH;loc=100;target=_blank;key=key1+key2+key3+key4;grp=[group];misc='+new Date().getTime()+'"></scri'+'pt>');
+//-->
+</script><script language="javascript1.1" src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/ADTECH;loc=100;target=_blank;key=key1+key2+key3+key4;grp=[group](1)"></script><noscript></noscript>
+<!-- End of JavaScript Tag -->
+
+
+<!-- End ad tag -->
+</div>
+
+<!-- end feature bar ad -->
+<br>
+
+
+
+<a href="http://www.addthis.com/bookmark.php" onclick="addthis_url   = location.href; addthis_title = document.title; return addthis_click(this);" target="_blank"><img src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/button1-bm.gif" width="125" height="16" border="0" alt="AddThis Social Bookmark Button"></a> <script type="text/javascript">var addthis_pub = 'odewahn';</script><script type="text/javascript" src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/widget.php"></script>  
+
+<p>
+
+<!-- begin content-->
+
+
+
+
+
+
+
+
+
+<!-- begin  print-discuss-del.icio.us options -->
+</p><div style="margin: 0px 10px 0px 6px;">
+<div style="float: right; width: 170px;">
+
+
+
+<a target="_new" class="listen2" title="Listen to this page." href="http://asp2.readspeaker.net/cgi-bin/oreillyrsone?lang=us&voice=Paul&customerid=171&url=http://www.oreillynet.com/lpt/a/3154">Listen</a> 
+
+
+
+<a class="print" title="Go to a print-friendly version of this page." href="http://ondotnet.com/lpt/a/3154">Print</a>
+<!--csif cond="">
+<a class="discuss" title="Join the talkback discussion about this article" href="/pub/a/dotnet/2003/01/27/ztd.html?page=last#thread">Discuss</a>
+</csif-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<a class="subscribe" title="Subscribe" href="http://www.oreillynet.com/pub/feed/4">Subscribe to Windows</a>
+
+
+
+
+
+
+<a class="newsletter" href="http://www.oreillynet.com/cs/nl/home">Subscribe to Newsletters</a>
+
+<div id="share-options" style="text-align:right;">
+<script type="text/javascript" src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/sharethis.js"></script>
+</div>
+
+</div>
+</div>
+<!-- end  print-discuss-del.icio.us options -->
+
+
+
+
+
+<!-- content here -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--CS_PAGE_BREAK-->
+<h2>
+Distributed .config Files with Smart Clients</h2>
+by <a href="http://ondotnet.com/pub/au/956">Chris Sells</a><br>
+01/27/2003
+<!-- sidebar begins -->
+<!-- don't move sidebars -->
+<!-- sidebar ends -->
+
+
+<p>The new model provided by .NET smart clients has really taken hold in the imaginations and the business plans of .NET developers. The idea of getting the best of both the richness of real Windows applications and the zero-touch installation of Web-based applications is turning the heads of many an IT professional. Of course, as soon as a brand new model starts being put to real use, problems show themselves.</p>
+<h3>.config Files</h3>
+<p>One common problem that happens fairly quickly is the need to distribute a 
+.config file along with a smart client. The .config file is a handy way to 
+re-configure an application without re-compiling. Imagine a .config file as 
+simple as this:</p>
+
+<pre><code>
+&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;configuration&gt;
+  &lt;appSettings&gt;
+    &lt;add key="teststring" value="My Test String" /&gt;
+  &lt;/appSettings&gt;
+&lt;/configuration&gt;
+</code></pre>
+
+<p>Associating a .config file with an application requires that it be properly 
+named; i.e., <i>VbSmartClient.exe</i> would have a .config file named <i>VbSmartClient.exe.config</i>, placed in the same directory as the application, as shown in Figure 1.</p>
+
+<table border="0" cellpadding="2" cellspacing="2" align="center">
+<tbody><tr>
+<td width="450" align="center">
+<img src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/figure1.jpg" width="400" height="220" alt="An application and its .config file"></td>
+</tr>
+<tr>
+<td align="center"><span class="secondary"><strong>Figure 1: An application and its .config file</strong></span></td>
+
+</tr>
+</tbody></table>
+
+
+<p>Given an associated .config file, one way for an application to access it is 
+using the <code>AppSettingsReader</code> from the <code>System.Configuration</code> class:</p>
+<pre><code>
+<strong>Dim settings As New System.Configuration.AppSettingsReader()
+Dim o As Object = settings.GetValue("teststring", GetType(String))</strong>
+MessageBox.Show(o.ToString())
+</code></pre>
+<p>Assuming the .config file in the right place, formatted in the right way, 
+running this code yields the message box shown in Figure 2.</p>
+
+
+<table border="0" cellpadding="2" cellspacing="2" align="center">
+<tbody><tr>
+<td width="450" align="center">
+	<img src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/figure2.jpg" width="115" height="118" alt="A string from the appSettings section of the .config file"></td>
+</tr>
+<tr>
+<td align="center"><span class="secondary"><strong>Figure 2: A string from the <code>appSettings</code> section of the .config file</strong></span></td>
+
+</tr>
+</tbody></table>
+
+
+<p>  The <code>AppSettingsReader</code> class reaches into the application's .config file and 
+  parses the <code>&lt;appSettings&gt;</code> element to provide name/value pairs made available 
+  with the <code>GetValue</code> method. It gets the name of the file to read from the application 
+  domain data, specifically the <code>APP_CONFIG_FILE</code> data returned from the <code>GetData</code> 
+  method of the current <code>AppDomain</code>:</p>
+
+<pre><code>MessageBox.Show(<strong>System.AppDomain.CurrentDomain.GetData("APP_CONFIG_FILE")</strong>)</code></pre>
+
+<p>The <code>APP_CONFIG_FILE</code> data will contain a path to the .config file relative to 
+  the application base (available by passing <code>“APPBASE”</code> to <code>GetData</code>) 
+  and based on the name of the .exe itself, e.g., <i>VbSmartClient.exe.config</i>.</p>
+
+<h3>Enabling .config Download for Smart Clients</h3>
+<p>While the .config file will always be based on the name of the application, 
+  the actual path to the .config file won't always be to a file on your 
+  hard drive. In the case of a smart client, i.e. a WinForms application launched 
+  via an URL, the .config file will be accessed via an URL, because the <code>APPBASE</code> 
+  will be the URL from which the application was downloaded. To test this, I right-clicked 
+  on the <i>bin</i> directory created by VB.NET that contained the .exe and the .config 
+  files for my smart client and chose Properties and then the Web Sharing tab. 
+  I named the web share "ConfigFun," and tested smart client launching with the following 
+  URL:</p>
+<pre><code>http://localhost/ConfigFun/VbSmartClient.exe</code></pre>
+<p>Unfortunately, this caused my application to fail, as shown in Figure 3.</p>
+
+<table border="0" cellpadding="2" cellspacing="2" align="center">
+<tbody><tr>
+<td width="450" align="center">
+<img src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/figure3.jpg" width="400" height="151" alt=".config not available by default for smart clients"></td>
+</tr>
+<tr>
+<td align="center"><span class="secondary"><strong>Figure 3:  .config not available by default for smart clients</strong></span></td>
+
+</tr>
+</tbody></table>
+
+
+<p>This happened because, by default, ASP.NET disables download of any kind of 
+  source file from your web site, including any .config files. This is good, because 
+  it protects your web.config file, but bad because it disables your application's 
+  .config file from being downloaded. To enable this, you need the following minimal 
+  <i>web.config</i> file at the root of your web share folder:</p>
+
+<pre><code>
+&lt;configuration&gt;
+  &lt;system.web&gt;
+    &lt;!--
+    Remove the *.config handler so that we_can serve up
+    *.exe.config files, but make it forbidden to serve up the
+    web.config file itself.
+    --&gt;
+    &lt;httpHandlers&gt;
+      &lt;remove verb="*" path="*.config" /&gt;
+      &lt;add verb="*" path="web.config"
+              type="System.Web.HttpForbiddenHandler"/&gt;
+    &lt;/httpHandlers&gt;
+  &lt;/system.web&gt;
+&lt;/configuration&gt;
+</code></pre>
+
+<p>This <i>web.config</i> configures your ASP.NET web application to remove the restriction 
+  on downloading .config files, but to enable the restriction for <i>web.config</i> files 
+  specifically. This lets your application's .config file through, but stops 
+  your <i>web.config</i> file from being available to any casual observer.</p>
+<p>Unfortunately, that darn message box still hasn't gone away. One more 
+  step is needed. Out of the box, IIS doesn't allow .config files to be 
+  downloaded unless anonymous access is enabled. So to enable anonymous access 
+  for the ConfigFun web share, choose Start-&gt;Programs-&gt;Administration Tools-&gt;Internet 
+  Information Services, find the ConfigFun web share, right-click and choose Properties, 
+  choose the Directory Security tab and enable Anonymous access, as shown in Figure 
+  4.</p>
+  
+
+<table border="0" cellpadding="2" cellspacing="2" align="center">
+<tbody><tr>
+<td width="450" align="center">
+<img src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/figure4.jpg" width="370" height="430" alt="Enabling anonymous access for a web share"></td>
+</tr>
+<tr>
+<td align="center"><span class="secondary"><strong>Figure 4:  Enabling anonymous access for a web share</strong></span></td>
+
+</tr>
+</tbody></table>
+
+
+
+<p>Once you've done this last tweak, you'll all set. The .config file 
+  will be downloaded along with your application and your <code>AppSettingsReader</code> will 
+  be happy.</p>
+  <h3>Where Are We?</h3>
+  <p>Three things are needed to download the .config file with the application:</p>
+<ol>
+<li>The .config file needs to be in the same <code>APPBASE</code>, aka folder, as the .exe it's 
+  meant to configure.</li>
+<li>The minimal <i>web.config</i> settings need to be in place to enable ASP.NET to 
+  serve up <i>web.config</i> files.</li>
+<li>The IIS web share needs to be configured to allow .config files.</li>
+</ol>
+<p>Once this is done, as the .config file changes, the updated .config file will 
+  be downloaded and cached automatically, letting you use the .config file as 
+  a way to configure applications on user's machines without manually deploying 
+  configuration information, just as a smart client itself is automatically deployed.</p>
+<h3>References</h3>
+<ul>
+  <li><a href="http://www.sellsbrothers.com/wahoo">The smart client Wahoo! sample</a>, Chris Sells</li>
+  <li>"<a href="http://msdn.microsoft.com/msdnmag/issues/02/07/NetSmartClients/default.asp">.NET Zero Deployment: Security and Versioning Models in the Windows Forms Engine Help You Create and Deploy Smart Clients</a>," Chris Sells, MSDN Magazine, 7/02</li>
+  <li>"<a href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dnforms/html/winforms11122002.asp">Increasing Permissions for Web-Deployed WinForms Applications</a>," Chris Sells, MSDN Online, 11/5/02</li>
+</ul>
+
+<p><i>
+<a href="http://ondotnet.com/pub/au/956">Chris Sells</a> 
+is a Microsoft Software Legend and a Program Manager  with the Distributed Systems Group at Microsoft. His weblog at <a href="http://www.sellsbrothers.com/">http://www.sellsbrothers.com</a>
+ is popular with .NET developers for its zany and independent commentary on technology and geek culture.
+
+</i></p>
+
+<hr size="1" noshade="noshade">
+
+<p>Return to <a href="http://www.ondotnet.com/">ONDotnet.com</a></p>
+
+
+
+<!-- end article content -->
+
+<!-- OST promo -->
+
+<!-- end O'Reilly Learning box -->
+
+
+
+<!-- end content -->
+
+
+<img src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/trans.gif" alt=" " width="400" height="1"><br>
+
+
+
+<br><br>
+
+
+<!-- end content -->
+
+
+
+</div><!-- #article -->
+
+<div id="related">
+
+<!-- MyBuys Zone and Parameters -->
+<div class="sidebar-item">
+<h3>Recommended for You</h3>
+<div class="sidebar-item-content" style="text-align: center; padding: 0px;">
+
+<!-- MyBuys Web Recommendation Zone -->
+<div mybuyszone="5" id="mybuyspagezone5"><table cellpadding="0" cellspacing="0" border="0" class="mbzone"> <tbody><tr>            <td valign="top"><div class="mbitem"> <span class="mbrowspan"><span class="mbimgspan"> <a rel="nofollow" class="mbimglink" href="http://oreilly.com/catalog/9780596155940?green=14573468852&cmp=af-mybuy-9780596155940.IP"><img class="mbimg" height="112" width="85" alt="CSS Cookbook" onmousedown="mybuys.track(&#39;http://t.p.mybuys.com/webrec/wrClick.do?client=OREILLY&amp;consumerId=14573468852&amp;pid=8933868088&amp;wrid=2638409980643&#39;)" src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/bkt.gif"></a></span></span> <span class="mbnamerowspan"> <a rel="nofollow" class="mbnamelink" href="http://oreilly.com/catalog/9780596155940?green=14573468852&cmp=af-mybuy-9780596155940.IP" onmousedown="mybuys.track(&#39;http://t.p.mybuys.com/webrec/wrClick.do?client=OREILLY&amp;consumerId=14573468852&amp;pid=8933868088&amp;wrid=2638409980643&#39;)">CSS Cookbook</a></span> <span>      <div align="center">          <a rel="nofollow" href="http://oreilly.com/catalog/9780596155940?green=14573468852&cmp=af-mybuy-9780596155940.IP" onmousedown="mybuys.track(&#39;http://t.p.mybuys.com/webrec/wrClick.do?client=OREILLY&amp;consumerId=14573468852&amp;pid=8933868088&amp;wrid=2638409980643&#39;)" style="text-decoration: none; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; color: #000000; font-weight: normal; font-style:plain; text-align:center;">          <img border="0" src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/STARS-4-0.gif" alt="4.0 out of 5" title="4.0 out of 5" style="padding-top:5px">           </a></div>  </span>         <span class="mbpricerowspan">      <span class="mbpricerowleft"><a rel="nofollow" class="mbpricelinklabel" href="http://oreilly.com/catalog/9780596155940?green=14573468852&cmp=af-mybuy-9780596155940.IP" onmousedown="mybuys.track(&#39;http://t.p.mybuys.com/webrec/wrClick.do?client=OREILLY&amp;consumerId=14573468852&amp;pid=8933868088&amp;wrid=2638409980643&#39;)">Print:</a>&nbsp;</span>      <span class="mbpricerowright"><a rel="nofollow" class="mbpricelink" href="http://oreilly.com/catalog/9780596155940?green=14573468852&cmp=af-mybuy-9780596155940.IP" onmousedown="mybuys.track(&#39;http://t.p.mybuys.com/webrec/wrClick.do?client=OREILLY&amp;consumerId=14573468852&amp;pid=8933868088&amp;wrid=2638409980643&#39;)">$49.99</a></span>    </span>        <span class="mbpricerowspan">      <span class="mbpricerowleft"><a rel="nofollow" class="mbpricelinklabel" href="http://oreilly.com/catalog/9780596155940?green=14573468852&cmp=af-mybuy-9780596155940.IP" onmousedown="mybuys.track(&#39;http://t.p.mybuys.com/webrec/wrClick.do?client=OREILLY&amp;consumerId=14573468852&amp;pid=8933868088&amp;wrid=2638409980643&#39;)">Ebook:</a>&nbsp;</span>      <span class="mbpricerowright"><a rel="nofollow" class="mbpricelink" href="http://oreilly.com/catalog/9780596155940?green=14573468852&cmp=af-mybuy-9780596155940.IP" onmousedown="mybuys.track(&#39;http://t.p.mybuys.com/webrec/wrClick.do?client=OREILLY&amp;consumerId=14573468852&amp;pid=8933868088&amp;wrid=2638409980643&#39;)">$39.99</a></span>    </span>               	  		<span name="mbdbgspan" cl="OREILLY" cp="" cc="" pr="9780596155940.IP" re="5225108" po="5225085" cr="4942348" style="display:none;"></span>	 </div></td>            </tr> <tr>            <td valign="top"><div class="mbitem"> <span class="mbrowspan"><span class="mbimgspan"> <a rel="nofollow" class="mbimglink" href="http://oreilly.com/catalog/9780596806149?green=14573468852&cmp=af-mybuy-9780596806149.IP"><img class="mbimg" height="112" width="85" alt="JavaScript Cookbook" onmousedown="mybuys.track(&#39;http://t.p.mybuys.com/webrec/wrClick.do?client=OREILLY&amp;consumerId=14573468852&amp;pid=8934150360&amp;wrid=2638409980643&#39;)" src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/bkt(1).gif"></a></span></span> <span class="mbnamerowspan"> <a rel="nofollow" class="mbnamelink" href="http://oreilly.com/catalog/9780596806149?green=14573468852&cmp=af-mybuy-9780596806149.IP" onmousedown="mybuys.track(&#39;http://t.p.mybuys.com/webrec/wrClick.do?client=OREILLY&amp;consumerId=14573468852&amp;pid=8934150360&amp;wrid=2638409980643&#39;)">JavaScript Cookbook</a></span> <span>  </span>         <span class="mbpricerowspan">      <span class="mbpricerowleft"><a rel="nofollow" class="mbpricelinklabel" href="http://oreilly.com/catalog/9780596806149?green=14573468852&cmp=af-mybuy-9780596806149.IP" onmousedown="mybuys.track(&#39;http://t.p.mybuys.com/webrec/wrClick.do?client=OREILLY&amp;consumerId=14573468852&amp;pid=8934150360&amp;wrid=2638409980643&#39;)">Print:</a>&nbsp;</span>      <span class="mbpricerowright"><a rel="nofollow" class="mbpricelink" href="http://oreilly.com/catalog/9780596806149?green=14573468852&cmp=af-mybuy-9780596806149.IP" onmousedown="mybuys.track(&#39;http://t.p.mybuys.com/webrec/wrClick.do?client=OREILLY&amp;consumerId=14573468852&amp;pid=8934150360&amp;wrid=2638409980643&#39;)">$49.99</a></span>    </span>        <span class="mbpricerowspan">      <span class="mbpricerowleft"><a rel="nofollow" class="mbpricelinklabel" href="http://oreilly.com/catalog/9780596806149?green=14573468852&cmp=af-mybuy-9780596806149.IP" onmousedown="mybuys.track(&#39;http://t.p.mybuys.com/webrec/wrClick.do?client=OREILLY&amp;consumerId=14573468852&amp;pid=8934150360&amp;wrid=2638409980643&#39;)">Ebook:</a>&nbsp;</span>      <span class="mbpricerowright"><a rel="nofollow" class="mbpricelink" href="http://oreilly.com/catalog/9780596806149?green=14573468852&cmp=af-mybuy-9780596806149.IP" onmousedown="mybuys.track(&#39;http://t.p.mybuys.com/webrec/wrClick.do?client=OREILLY&amp;consumerId=14573468852&amp;pid=8934150360&amp;wrid=2638409980643&#39;)">$39.99</a></span>    </span>               	  		<span name="mbdbgspan" cl="OREILLY" cp="" cc="" pr="9780596806149.IP" re="5225108" po="5225085" cr="4942348" style="display:none;"></span>	 </div></td>            </tr> <tr>            <td valign="top"><div class="mbitem"> <span class="mbrowspan"><span class="mbimgspan"> <a rel="nofollow" class="mbimglink" href="http://oreilly.com/catalog/9780596801519?green=14573468852&cmp=af-mybuy-9780596801519.IP"><img class="mbimg" height="112" width="85" alt="Windows PowerShell Cookbook" onmousedown="mybuys.track(&#39;http://t.p.mybuys.com/webrec/wrClick.do?client=OREILLY&amp;consumerId=14573468852&amp;pid=8934150159&amp;wrid=2638409980643&#39;)" src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/bkt(2).gif"></a></span></span> <span class="mbnamerowspan"> <a rel="nofollow" class="mbnamelink" href="http://oreilly.com/catalog/9780596801519?green=14573468852&cmp=af-mybuy-9780596801519.IP" onmousedown="mybuys.track(&#39;http://t.p.mybuys.com/webrec/wrClick.do?client=OREILLY&amp;consumerId=14573468852&amp;pid=8934150159&amp;wrid=2638409980643&#39;)">Windows PowerShell Cookbook</a></span> <span>  </span>         <span class="mbpricerowspan">      <span class="mbpricerowleft"><a rel="nofollow" class="mbpricelinklabel" href="http://oreilly.com/catalog/9780596801519?green=14573468852&cmp=af-mybuy-9780596801519.IP" onmousedown="mybuys.track(&#39;http://t.p.mybuys.com/webrec/wrClick.do?client=OREILLY&amp;consumerId=14573468852&amp;pid=8934150159&amp;wrid=2638409980643&#39;)">Print:</a>&nbsp;</span>      <span class="mbpricerowright"><a rel="nofollow" class="mbpricelink" href="http://oreilly.com/catalog/9780596801519?green=14573468852&cmp=af-mybuy-9780596801519.IP" onmousedown="mybuys.track(&#39;http://t.p.mybuys.com/webrec/wrClick.do?client=OREILLY&amp;consumerId=14573468852&amp;pid=8934150159&amp;wrid=2638409980643&#39;)">$54.99</a></span>    </span>        <span class="mbpricerowspan">      <span class="mbpricerowleft"><a rel="nofollow" class="mbpricelinklabel" href="http://oreilly.com/catalog/9780596801519?green=14573468852&cmp=af-mybuy-9780596801519.IP" onmousedown="mybuys.track(&#39;http://t.p.mybuys.com/webrec/wrClick.do?client=OREILLY&amp;consumerId=14573468852&amp;pid=8934150159&amp;wrid=2638409980643&#39;)">Ebook:</a>&nbsp;</span>      <span class="mbpricerowright"><a rel="nofollow" class="mbpricelink" href="http://oreilly.com/catalog/9780596801519?green=14573468852&cmp=af-mybuy-9780596801519.IP" onmousedown="mybuys.track(&#39;http://t.p.mybuys.com/webrec/wrClick.do?client=OREILLY&amp;consumerId=14573468852&amp;pid=8934150159&amp;wrid=2638409980643&#39;)">$43.99</a></span>    </span>               	  		<span name="mbdbgspan" cl="OREILLY" cp="" cc="" pr="9780596801519.IP" re="5225108" po="5225085" cr="4942350" style="display:none;"></span>	 </div></td>            </tr></tbody></table></div>
+<!-- End MyBuys Web Recommendation Zone -->
+
+
+<!-- debug: type: content_item, cs cat: pt-windows, deli cat: windows -->
+<!-- MyBuys Page Parameters -->
+<script type="text/javascript">
+mybuys.setPageType("CONTENT_ITEM");
+mybuys.set("categoryid","http://purl.oreilly.com/resource-center/windows");
+</script>
+<!-- End MyBuys Page Parameters -->
+		
+</div>
+</div>
+
+
+<div class="sidebar-item">
+<h3>Tagged Articles</h3>
+<div class="sidebar-item-content tags">
+<p style="padding:10px 10px 6px 10px;margin:0;"><a class="delicious" title="Post to del.icio.us." href="http://del.icio.us/post" onclick="window.open(&#39;http://del.icio.us/post?v=4&amp;partner=orn&amp;noui&amp;jump=close&amp;url=&#39;+encodeURIComponent(location.href)+&#39;&amp;title=&#39;+encodeURIComponent(document.title),&#39;delicious&#39;,&#39;toolbar=no,width=700,height=400&#39;); return false;">Be the first to post this article to del.icio.us</a></p>
+</div></div>
+
+<!-- sponsored developer resources -->
+<div class="sidebar-item">
+<h3>Sponsored Resources</h3>
+<div class="sidebar-item-content">
+
+<ul style="margin: 0 0 0 1.2em;padding: 0;">
+<li><a href="http://digitalmedia.oreilly.com/lightroom/">Inside Lightroom</a></li>
+</ul>
+
+</div>
+</div>
+
+
+<div class="sidebar-item">
+<h3>Related to this Article</h3>
+<div class="sidebar-item-content">
+<p style="font-size:10px;padding:0 0 10px 0;margin:0;">
+<a href="http://www.oreilly.com/catalog/9780596558154/?CMP=ILL-4GV796923290&ATT=/dotnet/2003/01/27/ztd.html/"><img src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/bkt(3).gif" class="aleft" style="padding-bottom:10px;" border="0" alt="Introducing Silverlight 1.1"></a>
+
+<a href="http://www.oreilly.com/catalog/9780596558154/?CMP=ILL-4GV796923290&ATT=/dotnet/2003/01/27/ztd.html"><b>
+Introducing Silverlight 1.1
+</b></a><br>
+by <a href="http://www.oreillynet.com/pub/au/3231">Todd Anglin</a>
+<br>
+October 2007<br>
+<span class="price">
+$9.99 USD
+</span></p>
+<div class="clear"></div>
+<p style="font-size:10px;padding:0 0 10px 0;margin:0;">
+<a href="http://www.oreilly.com/catalog/9780596558017/?CMP=ILL-4GV796923290&ATT=/dotnet/2003/01/27/ztd.html/"><img src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/bkt(4).gif" class="aleft" style="padding-bottom:10px;" border="0" alt="AutoIt v3: Your Quick Guide"></a>
+
+<a href="http://www.oreilly.com/catalog/9780596558017/?CMP=ILL-4GV796923290&ATT=/dotnet/2003/01/27/ztd.html"><b>
+AutoIt v3: Your Quick Guide
+</b></a><br>
+by <a href="http://www.oreillynet.com/pub/au/3243">Andy Flesner</a>
+<br>
+September 2007<br>
+<span class="price">
+$7.99 USD
+</span></p>
+<div class="clear"></div>
+</div>
+</div>
+
+
+
+
+<div style="text-align:center;background-color:#eee;padding-top:10px;padding-bottom:10px;">
+<img src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/advertisement.gif" alt="Advertisement" style="padding-bottom:10px;"><br>
+
+<div align="center">
+<!-- Network Skyscraper Ad -->
+
+<!--JavaScript Tag // Tag for network 5159: TechVertical // Website: O'ReillyNet // Page: O'ReillyNet // Placement: ros_160x600 (425844) // created at: Oct 9, 2008 6:10:29 PM-->
+<script language="javascript"><!--
+document.write('<scr'+'ipt language="javascript1.1" src="http://adserver.adtechus.com/addyn/3.0/5159/425844/0/154/ADTECH;loc=100;target=_blank;key=key1+key2+key3+key4;grp=[group];misc='+new Date().getTime()+'"></scri'+'pt>');
+//-->
+</script><script language="javascript1.1" src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/ADTECH;loc=100;target=_blank;key=key1+key2+key3+key4;grp=[group](2)"></script><noscript></noscript>
+
+<!-- End of JavaScript Tag -->
+
+<!-- End ad -->
+</div>
+</div>
+
+</div><!-- #related -->
+
+</div><!-- #page-content -->
+
+<!-- footer -->
+<div id="footer" class="noindex">
+
+<table border="0" style="padding-top:20px; padding-bottom:20px;">
+
+<tbody>
+
+
+<tr><td align="left" width="25%" valign="top" style="padding-left: 20px; padding-right: 20px;">
+<a href="http://oreilly.com/"><img height="35" border="0" width="155" src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/oreilly-logo-footer.gif" alt="O&#39;Reilly Media"></a>
+<br><br>
+©2010, O'Reilly Media, Inc.<br>(707) 827-7000 / (800) 998-9938<br> All trademarks and registered trademarks appearing on oreilly.com are the property of their respective owners. </td>
+
+<td valign="top" class="footercol1">
+<ul>
+<li><a href="http://oreilly.com/about/"><strong>About O'Reilly</strong></a></li>
+<li><a href="http://oreilly.com/academic/">Academic Solutions</a></li>
+<li><a href="http://oreilly.com/contact.html">Contacts</a></li>
+<li><a href="http://oreilly.com/oreilly/cs/">Customer Service</a></li>
+<li><a href="http://oreilly.com/jobs/">Careers</a></li>
+<li><a href="http://press.oreilly.com/">Press Room</a></li>
+<li><a href="http://oreilly.com/oreilly/privacy.csp">Privacy Policy</a></li>
+<li><a href="http://oreilly.com/terms/">Terms of Service</a></li>
+<li><a href="http://oreilly.com/oreilly/author/intro.csp">Writing for O'Reilly</a></li>
+</ul>
+</td>
+
+<td valign="top" class="footercol2">
+<ul>
+<li><a href="http://oreilly.com/community/"><strong>Community</strong></a></li>
+<li><a href="http://oreilly.com/authors/">Authors</a></li>
+<li><a href="http://forums.oreilly.com/">Forums</a></li>
+<li><a href="https://members.oreilly.com/">Membership</a></li>
+<li><a href="http://elists.oreilly.com/">Newsletters</a></li>
+<li><a href="http://oreilly.com/feeds/">RSS Feeds</a></li>
+<li><a href="http://ug.oreilly.com/">User Groups</a></li>
+</ul>
+</td>
+
+<td valign="top" class="footercol3">
+<ul>
+<li><strong>More O'Reilly Sites</strong></li>
+<li><a href="http://igniteshow.com/">igniteshow.com</a></li>
+<li><a href="http://makerfaire.com/">makerfaire.com</a></li>
+<li><a href="http://makezine.com/">makezine.com</a></li>
+<li><a href="http://craftzine.com/">craftzine.com</a></li>
+<li><a href="http://labs.oreilly.com/">labs.oreilly.com</a></li>
+</ul>
+
+<ul>
+<li><strong>Partner Sites</strong></li>
+<li><a href="http://insideria.com/?CMP=ILC-orm_sponsor_footer_links&ATT=ria">InsideRIA</a></li>
+<li><a href="http://www.forbes.com/oreillyinsights/">O'Reilly Insights on Forbes.com</a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+
+<!-- autocomplete scripts -->
+<script type="text/javascript" src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/utilities.js"></script>
+<script type="text/javascript" src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/datasource-min.js"></script>
+<script type="text/javascript" src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/autocomplete-min.js"></script>
+<script type="text/javascript" src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/autocomplete_data.js"></script>
+
+<!-- MyBuys Page Initialization -->
+<script type="text/javascript">
+mybuys.initPage();
+</script><span id="mybuyscontainer" style="display:none"><script type="text/javascript" id="mbTransportScript" src="./Distributed .config Files with Smart Clients - O'Reilly Media_files/wr.do"></script></span>
+<!-- End MyBuys Page Initialization -->
+
+<!-- #footer -->
+</div><!-- #page -->
+
+
+
+
+
+
+</body></html>

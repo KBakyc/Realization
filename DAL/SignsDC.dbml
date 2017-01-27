@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="real_test" Class="SignsDCDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=db2;Initial Catalog=real_test;Integrated Security=True" SettingsObjectName="DAL.Properties.Settings" SettingsPropertyName="RealConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.SignFio" Member="SignFios">
+    <Type Name="SignFio">
+      <Column Name="id_sign" AutoSync="Never" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="fio_sign" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="position" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="short" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="idSignType" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Association Name="SignFio_SignerPoup" Member="SignerPoups" ThisKey="id_sign" OtherKey="idsign" Type="SignerPoup" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SignerPoups" Member="SignerPoups">
+    <Type Name="SignerPoup">
+      <Column Name="idsign" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="poup" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="SignFio_SignerPoup" Member="SignFio" ThisKey="idsign" OtherKey="id_sign" Type="SignFio" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SignType" Member="SignTypes">
+    <Type Name="SignType">
+      <Column Name="id" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(150) NOT NULL" CanBeNull="false" />
+      <Column Name="ShortName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Signs" Member="Signs">
+    <Type Name="Sign">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="poup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_boss" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_glbuh" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="CommonModule.Views.NumDlgView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:beh="clr-namespace:CommonModule.Behaviours"
+             xmlns:conv="clr-namespace:CommonModule.Converters"
+             Height="{Binding Height, TargetNullValue={x:Static DependencyProperty.UnsetValue}}" Width="{Binding Width, TargetNullValue={x:Static DependencyProperty.UnsetValue}}"
+             MinWidth="100"
+             Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <conv:Null2VisibilityConverter x:Key="Null2Visibility"/>
+    </UserControl.Resources>
+        <Grid>
+            <DockPanel VerticalAlignment="Center">
+                <TextBlock Text="{Binding Label, FallbackValue='По номеру'}" VerticalAlignment="Center" Margin="0,10,0,0" 
+                           Visibility="{Binding RelativeSource={RelativeSource Self}, Path=Text, Converter={StaticResource Null2Visibility}, ConverterParameter=Collapsed}"/>
+                <TextBox Name="tbNum" Text="{Binding Number, UpdateSourceTrigger=PropertyChanged, StringFormat='#.######;#.######;#', Converter={conv:EmptyStringConverter}, ConverterParameter=0}"
+                         Style="{DynamicResource FocusableTextBox}">
+                    <i:Interaction.Behaviors>
+                        <beh:TextBoxRegExpValidatorBehavior RegExp="^[1-9]{1}[0-9]*\.{0,1}[0-9]*$"/>
+                    </i:Interaction.Behaviors>
+                </TextBox>
+            </DockPanel>
+        </Grid>
+</UserControl>

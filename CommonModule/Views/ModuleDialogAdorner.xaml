@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="CommonModule.Views.ModuleDialogAdorner"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.Style>
+            <Style TargetType="Grid">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Dialog.Count}" Value="0">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Style>
+        <ItemsControl ItemsSource="{Binding Dialog}" Focusable="False">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Rectangle Fill="DarkGray" Opacity="0" IsHitTestVisible="True">
+                            <Rectangle.Resources>
+                                <Storyboard x:Key="shadowRecOn">
+                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0.3" Duration="0:0:1" FillBehavior="HoldEnd" BeginTime="0:0:.5"/>
+                                </Storyboard>
+                            </Rectangle.Resources>
+                            <Rectangle.Triggers>
+                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                    <BeginStoryboard Storyboard="{StaticResource shadowRecOn}" x:Name="BeginShadowRecOn"/>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="FrameworkElement.Unloaded">
+                                    <StopStoryboard BeginStoryboardName="BeginShadowRecOn"/>
+                                </EventTrigger>
+                            </Rectangle.Triggers>
+                        </Rectangle>
+                        <!--Диалоговое окно-->
+                        <Canvas Background="Transparent">
+                            <ContentControl Content="{Binding .}" SnapsToDevicePixels="True" Focusable="False"
+                                            KeyboardNavigation.TabNavigation="Cycle" KeyboardNavigation.DirectionalNavigation="Cycle" KeyboardNavigation.ControlTabNavigation="Cycle"
+                                            Name="dialogContainer"
+                                            Canvas.Top="0" Canvas.Left="0"
+                                            />
+                        </Canvas>
+                    </Grid>                    
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</UserControl>

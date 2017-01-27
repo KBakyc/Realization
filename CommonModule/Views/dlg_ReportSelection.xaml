@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="CommonModule.Views.dlg_ReportSelection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"             
+             xmlns:cmd="clr-namespace:CommonModule.Commands"
+             HorizontalAlignment="Left" HorizontalContentAlignment="Left">
+    <Grid>
+        <Border BorderBrush="LightGray" BorderThickness="1" Padding="5" Background="Azure" HorizontalAlignment="Stretch">
+            <ListBox ItemsSource="{Binding Reports}" SelectedItem="{Binding SelectedReport}" 
+                     HorizontalAlignment="Stretch"
+                     HorizontalContentAlignment="Stretch"
+                     BorderThickness="0"
+                     cmd:AttachedCommand.OnDoubleClick="{Binding SubmitCommand}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                        <Grid Width="550" >
+                            <Grid Margin="0,-4,0,0" x:Name="txtId" 
+                                  HorizontalAlignment="Right" VerticalAlignment="Top"
+                                  Background="{Binding ElementName=ItemBorder, Path=Background}">
+                                <TextBlock Text="{Binding Id, Mode=OneTime}" 
+                                           FontSize="8" FontFamily="Arial"                                       
+                                           Margin="3,-3,3,0"                                          
+                                           Foreground="Gray"/>
+                            </Grid>
+                            <DockPanel Margin="2">
+                                <ToggleButton DockPanel.Dock="Right" VerticalAlignment="Center" Margin="5,0,0,0" Cursor="Hand"
+                                              x:Name="bStar"
+                                              BorderThickness="1"
+                                              IsChecked="{Binding IsFavorite, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <ToggleButton.Style>
+                                        <Style TargetType="ToggleButton">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="BorderBrush" Value="DarkGray"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="ToggleButton">
+                                                        <Grid>
+                                                            <Path Width="14.7239" Height="14.1912" 
+                                                              Stretch="Fill" StrokeLineJoin="Round" 
+                                                              Stroke="{TemplateBinding BorderBrush}"
+                                                              StrokeThickness="{TemplateBinding BorderThickness}"
+                                                              Fill="{TemplateBinding Background}"
+                                                              Data="F1 M 0.224929,5.79371L 3.18524,8.32009L 2.26454,12.1064C 2.08551,12.82 2.85916,13.3986 3.49214,13L 6.79132,10.9493L 10.0969,13C 10.7107,13.3793 11.4843,12.82 11.3181,12.1064L 10.4038,8.32009L 13.3577,5.79371C 13.9204,5.32443 13.6326,4.39873 12.891,4.34731L 9.00996,4.0516L 7.55218,0.445236C 7.27725,-0.229752 6.32458,-0.229752 6.03686,0.445236L 4.57269,4.0516L 0.691674,4.34731C -0.050002,4.41802 -0.337721,5.32443 0.224929,5.79371 Z "/>
+                                                        </Grid>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsChecked" Value="True">
+                                                    <Setter Property="Background" Value="Gold"/>
+                                                    <Setter Property="BorderBrush" Value="Orange"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ToggleButton.Style>
+                                </ToggleButton>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Title, Mode=OneTime}" FontSize="12" FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding Description, Mode=OneTime}" FontSize="10" Foreground="DarkGray" TextWrapping="Wrap"
+                                               x:Name="tDescr"/>
+                                </StackPanel>
+                            </DockPanel>
+                        </Grid>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=IsSelected}" Value="True">
+                                <Setter TargetName="txtId" Property="Visibility" Value="Hidden"/>
+                                <Setter TargetName="tDescr" Property="Foreground" Value="Lavender"/>
+                                <Setter TargetName="bStar" Property="BorderBrush" Value="White"/>
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                        <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <Border x:Name="ItemBorder" BorderBrush="LightGray" 
+                                        BorderThickness="1" CornerRadius="3" Margin="2"
+                                        TextElement.Foreground="DarkSlateGray"
+                                        Background="White">
+                                    <ContentPresenter Margin="3"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="ItemBorder" Property="Background" Value="Lavender"/>                                        
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="ItemBorder" Property="Background" Value="MediumSlateBlue"/>
+                                        <Setter TargetName="ItemBorder" Property="TextElement.Foreground" Value="White"/>
+                                    </Trigger>                                    
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+        </Border>    
+    </Grid>
+</UserControl>

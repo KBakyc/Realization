@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FB68FC9A-94E3-4CCC-8115-17C350112E9A}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ServiceModule</RootNamespace>
+    <AssemblyName>ServiceModule</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\Entity Framework\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\Libraries\Entity Framework\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.ReportViewer.11.0.3366.16\lib\Microsoft.ReportViewer.WinForms.DLL</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Discovery" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppServices\DumbAppService.cs" />
+    <Compile Include="AppServices\DumbAppService2.cs" />
+    <Compile Include="Commands\UsersModuleCommand.cs" />
+    <Compile Include="Commands\DumbModuleCommand2.cs" />
+    <Compile Include="Commands\DumbModuleCommand.cs" />
+    <Compile Include="Commands\ReportsModuleCommand.cs" />
+    <Compile Include="DAL\Models\ARM_User.cs" />
+    <Compile Include="DAL\Models\ComponentUserRight.cs" />
+    <Compile Include="DAL\Models\ComponentUserRightMap.cs" />
+    <Compile Include="DAL\Models\ReportInfoMap.cs" />
+    <Compile Include="DAL\Models\ReportInfo.cs" />
+    <Compile Include="DAL\Models\ARM_UserMap.cs" />
+    <Compile Include="DAL\Models\UserReportStat.cs" />
+    <Compile Include="DAL\ServiceContext.cs" />
+    <Compile Include="ExportedModuleViews.xaml.cs">
+      <DependentUpon>ExportedModuleViews.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\ServicePinger.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\DataGridOrdinalComparer.cs" />
+    <Compile Include="ViewModels\DataGridSortBehavior.cs" />
+    <Compile Include="ViewModels\EditedUserInfoViewModel.cs" />
+    <Compile Include="ViewModels\EditedReportInfoViewModel.cs" />
+    <Compile Include="ViewModels\IDataGridItemComparer.cs" />
+    <Compile Include="ViewModels\DumbDlgViewModel.cs" />
+    <Compile Include="ViewModels\ParameterSettingsViewModel.cs" />
+    <Compile Include="ViewModels\ReportParametersAdminViewModel.cs" />
+    <Compile Include="ViewModels\ReportStatAdminViewModel.cs" />
+    <Compile Include="ViewModels\ServiceModuleViewModel.cs" />
+    <Compile Include="ViewModels\UserInfoViewModel.cs" />
+    <Compile Include="ViewModels\ReportInfoViewModel.cs" />
+    <Compile Include="ViewModels\UserReportStatViewModel.cs" />
+    <Compile Include="ViewModels\UsersAdminSupportClasses.cs" />
+    <Compile Include="ViewModels\UsersAdminViewModel.cs" />
+    <Compile Include="ViewModels\ReportsAdminViewModel.cs" />
+    <Compile Include="Views\DataGridEx.cs" />
+    <Compile Include="Views\DumbView.xaml.cs">
+      <DependentUpon>DumbView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportsAdminView.xaml.cs">
+      <DependentUpon>ReportsAdminView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ServiceModuleView.xaml.cs">
+      <DependentUpon>ServiceModuleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserAdminView.xaml.cs">
+      <DependentUpon>UserAdminView.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="ExportedModuleViews.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\ModuleMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DumbView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReportsAdminView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ServiceModuleView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserAdminView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonModule\CommonModule.csproj">
+      <Project>{061430C9-595F-4E30-8CF3-009E0C4E7E98}</Project>
+      <Name>CommonModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{262D9D78-C88E-4B1C-BA14-01B07547FC81}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataObjects\DataObjects.csproj">
+      <Project>{7E6E6835-306F-4046-8FBD-1F9512BDC920}</Project>
+      <Name>DataObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DotNetHelper\DotNetHelper.csproj">
+      <Project>{9D1C618F-9844-45DB-87DF-F624A8A5D275}</Project>
+      <Name>DotNetHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MAPIHelper\MAPIHelper.csproj">
+      <Project>{6FC5635D-E6E3-4571-A8D1-9A1607A84BD6}</Project>
+      <Name>MAPIHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OtgrModule\OtgrModule.csproj">
+      <Project>{9550CA11-824F-4969-A1EF-FF71A8D5A21F}</Project>
+      <Name>OtgrModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PredoplModule\PredoplModule.csproj">
+      <Project>{8CE6F6CF-2BE3-4AA6-81AF-E6985813E991}</Project>
+      <Name>PredoplModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SfModule\SfModule.csproj">
+      <Project>{1D6AAB3F-F954-418A-B994-27A0564CF999}</Project>
+      <Name>SfModule</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\service.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\apply.png" />
+    <Resource Include="Resources\delete.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>Copy /y $(TargetDir)$(TargetFileName) $(SolutionDir)Realization\$(OutDir)</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

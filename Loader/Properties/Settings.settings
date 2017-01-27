@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Loader.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="AppFolderName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="AppExeName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Realization.exe</Value>
+    </Setting>
+    <Setting Name="AppUpdatesPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://ivc-project/sharedinstallations/naftan/Real/Last/NewReal</Value>
+    </Setting>
+    <Setting Name="ReqTranslate" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="StartAfterUpdate" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

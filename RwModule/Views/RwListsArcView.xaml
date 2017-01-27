@@ -1,0 +1,510 @@
+﻿<UserControl x:Class="RwModule.Views.RwListsArcView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ac="clr-namespace:CommonModule.Commands;assembly=CommonModule"
+             xmlns:cviews="clr-namespace:CommonModule.Views;assembly=CommonModule"
+             xmlns:cdv="clr-namespace:CommonModule.DataViews;assembly=CommonModule"
+             xmlns:conv="clr-namespace:CommonModule.Converters;assembly=CommonModule"
+             xmlns:dto="clr-namespace:DataObjects;assembly=DataObjects"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:beh="clr-namespace:CommonModule.Behaviours;assembly=CommonModule"
+             Language="ru-RU">
+    <UserControl.Resources>        
+        <Style TargetType="GridSplitter" x:Key="GSplitter">
+            <Setter Property="Background" Value="LightGoldenrodYellow"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Orange"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <conv:Null2BoolConverter x:Key="Null2Bool"/>
+        <!--<conv:BoolNotConverter x:Key="BoolNot"/>-->
+        <conv:EnumToDescriptionConverter x:Key="Enum2Descr"/>
+        <Style x:Key="SRightAlignStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="TextAlignment" Value="Right" />
+        </Style>
+        <Style x:Key="SWrapStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>              
+    </UserControl.Resources>
+    <Grid IsEnabled="{Binding IsEnabled}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0">
+            <DockPanel DockPanel.Dock="Top" LastChildFill="False">
+                <Menu Padding="0" Margin="3" Background="Transparent" Width="35" Height="35"
+                      IsEnabled="{Binding SelectedRwList, Converter={StaticResource Null2Bool}}">                 
+                    <MenuItem ToolTip="Изменить данные перечня" Padding="0" Style="{StaticResource RibbonMenuHeader}">
+                        <MenuItem.Header>
+                            <Image Source="/RwModule;component/Resources/edit.png"/>
+                        </MenuItem.Header>                        
+                        <MenuItem Command="{Binding EditRwListCommand}"                                  
+                                  ToolTip="Изменить выбранный перечень" Style="{StaticResource RibbonMenuItem}">
+                            <MenuItem.HeaderTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/RwModule;component/Resources/edit.png" Width="35" Height="35"/>
+                                        <TextBlock Text="Изменить выбранный перечень" Margin="10,0,0,0"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </MenuItem.HeaderTemplate>
+                        </MenuItem>
+                        <MenuItem Command="{Binding EditRwDocCommand}"                                  
+                                  ToolTip="Изменить выбранные документы" Style="{StaticResource RibbonMenuItem}">
+                            <MenuItem.HeaderTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Image Source="/RwModule;component/Resources/edit.png" Width="35" Height="35"/>
+                                        <TextBlock Text="Изменить выбранные документы" Margin="10,0,0,0"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </MenuItem.HeaderTemplate>
+                        </MenuItem>
+                    </MenuItem>
+                </Menu>
+                <Button Command="{Binding ShowOtgrCommand}" Margin="3" 
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Просмотреть отгрузку">
+                    <Image Source="/RwModule;component/Resources/delivery.png" />
+                </Button>
+                <Button Margin="3"
+                        Command="{Binding DeleteRwListCommand}"
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Удалить перечень">
+                    <Image Source="/RwModule;component/Resources/delete.png" />
+                </Button>                              
+                <!--Комманды запуска серверных отчётов по выбранному перечню-->
+                <Menu Padding="0" Margin="3" Background="Transparent" Height="35" Width="35">
+                    <MenuItem ToolTip="Отчёты перечня" Padding="0" Style="{StaticResource RibbonMenuHeader}"
+                              ItemsSource="{Binding SelectedRwListReportsMenuItems}"
+                              ItemContainerStyle="{StaticResource BindableRibbonMenuItem}">
+                        <MenuItem.Header>
+                            <Image Source="/RwModule;component/Resources/print preview.png"/>
+                        </MenuItem.Header>
+                    </MenuItem>
+                </Menu>                                                
+                <Button Margin="3" 
+                    Command="{Binding ShowHistoryCommand}" 
+                    Style="{DynamicResource CommandButton}"
+                    ToolTip="Посмотреть историю">
+                    <Image Source="/RwModule;component/Resources/file_temp.png" />
+                </Button>
+                <Button Margin="3" 
+                        Command="{Binding LinkESFNCommand}" 
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Привязать входящие ЭСФН">
+                    <Image Source="/RwModule;component/Resources/network_links.png" />
+                </Button>
+                <Button Margin="3" 
+                        Command="{Binding UndoPaysCommand}" 
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Просмотр / отмена оплат по перечню.">
+                    <Image Source="/RwModule;component/Resources/moneyX.png" />
+                </Button>                
+                <Button Margin="3" DockPanel.Dock="Right"
+                        Style="{DynamicResource CommandButton}"
+                        Command="{Binding RefreshCommand}"
+                        IsEnabled="{Binding RefreshCommand, Converter={StaticResource Null2Bool}}"
+                        CommandParameter="{Binding}"
+                        ToolTip="Обновить">
+                    <Image Source="/RwModule;component/Resources/refresh.png" />
+                </Button>
+                <ItemsControl Margin="15,3" ItemsSource="{Binding Reports}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" IsItemsHost="True"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Margin="3,0,0,0"
+                                    Style="{DynamicResource CommandButton}"
+                                    Command="{Binding Command}">
+                                <Image Source="/RwModule;component/Resources/report.png" />
+                                <Button.ToolTip>
+                                    <ToolTip Content="{Binding}">
+                                        <ToolTip.ContentTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <TextBlock FontWeight="Bold" Text="{Binding Title}"/>
+                                                    <TextBlock Text="{Binding Description}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ToolTip.ContentTemplate>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>                
+            </DockPanel>
+            <cviews:PoupAndDateRangeTitleView DockPanel.Dock="Top"/>
+        </DockPanel>
+        <Border Grid.Row="1" Background="Bisque" Padding="5,3,0,3" BorderBrush="Brown" BorderThickness="1" CornerRadius="1">
+            <DockPanel LastChildFill="True">
+                <TextBlock Text="Список перечней" FontSize="14" Foreground="Brown" DockPanel.Dock="Top" Margin="0,0,0,3"/>
+                <DataGrid Name="dgRwLists"
+                           ItemsSource="{Binding RwListCollection}" AutoGenerateColumns="False" 
+                           CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"                                  
+                           IsSynchronizedWithCurrentItem="False" SelectionUnit="FullRow"
+                           VirtualizingStackPanel.IsVirtualizing="True"
+                           SelectionMode="Extended" SelectedItem="{Binding SelectedRwList}"
+                           Style="{DynamicResource DefaultDataGridStyle}">
+                    <i:Interaction.Behaviors>
+                        <beh:DataGridSaveOrderingsBehavior/>
+                        <beh:DataGridSaveColumnsBehavior/>
+                    </i:Interaction.Behaviors>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Num_rwlist}" Header="№ пер." Width="70"/>
+                        <DataGridTextColumn Binding="{Binding Bgn_date, StringFormat=dd.MM.yyyy}" Header="Док. с"/>
+                        <DataGridTextColumn Binding="{Binding End_date, StringFormat=dd.MM.yyyy}" Header="Док. по"/>
+                        <DataGridTextColumn Binding="{Binding Num_inv}" Header="№ счёта" Width="70"/>
+                        <DataGridTextColumn Binding="{Binding Dat_inv, StringFormat=dd.MM.yyyy}" Header="Дата сч."/>
+                        <DataGridTextColumn Binding="{Binding Dat_orc, StringFormat=dd.MM.yyyy}" Header="Дата ОРЦ"/>
+                        <DataGridTextColumn Binding="{Binding Sum_inv, StringFormat='#,0.##'}" 
+                                            ElementStyle="{StaticResource SRightAlignStyle}" 
+                                            Header="Сумма без НДС" Width="120"/>
+                        <DataGridTextColumn Binding="{Binding Sum_invnds, StringFormat='#,0.##'}" 
+                                            ElementStyle="{StaticResource SRightAlignStyle}" 
+                                            Header="Сумма НДС" Width="100"/>
+                        <DataGridTextColumn Binding="{Binding Sum_itog, StringFormat='#,0.##'}" 
+                                            ElementStyle="{StaticResource SRightAlignStyle}" 
+                                            Header="Сумма с НДС" Width="120"/>
+                        <DataGridTextColumn Binding="{Binding Sum_excl, StringFormat='#,0.##'}" 
+                                    ElementStyle="{StaticResource SRightAlignStyle}" 
+                                    Header="Исключено" Width="110"/>
+                        <DataGridTextColumn Binding="{Binding RwlType, Converter={StaticResource Enum2Descr}}" Header="Тип перечня"/>
+                        <DataGridTemplateColumn SortMemberPath="Transition" Header=">">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Canvas UseLayoutRounding="True" x:Name="icontrans" Visibility="Collapsed" Background="Transparent" ToolTip="Переходный перечень">
+                                        <Path Width="15.2222" Height="11.6667" Canvas.Left="1.27778" Canvas.Top="-0.5" Stretch="Fill" StrokeLineJoin="Round" Stroke="#FFFF0000" Data="M 1.77778,5.33333L 16,5.33333L 12.4444,0M 12.4444,10.6667L 16,5.33333"/>
+                                        <Path Width="9.88889" Height="11.6667" Canvas.Left="-0.5" Canvas.Top="3.05555" Stretch="Fill" StrokeLineJoin="Round" Stroke="#FF006432" Data="M 7.94729e-008,8.88888L 8.88889,8.88888L 5.33333,3.55555M 5.33333,14.2222L 8.88889,8.88889"/>
+                                    </Canvas>
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding Transition}" Value="True">
+                                            <Setter TargetName="icontrans" Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Binding="{Binding Dat_accept, StringFormat=dd.MM.yyyy}" Header="Получен"/>
+                        <DataGridTextColumn Binding="{Binding Dat_oplto, StringFormat=dd.MM.yyyy}" Header="Оплатить"/>
+                        <DataGridTemplateColumn SortMemberPath="PayStatus">
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="$" ToolTip="Индикатор оплаты"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Rectangle Margin="1">
+                                        <Rectangle.Style>
+                                            <Style TargetType="Rectangle">
+                                                <Setter Property="Fill" Value="Yellow"/>
+                                                <Setter Property="Stroke" Value="Green"/>
+                                                <Setter Property="ToolTip">
+                                                    <Setter.Value>
+                                                        <ToolTip Content="{Binding .}">
+                                                            <ToolTip.ContentTemplate>
+                                                                <DataTemplate>
+                                                                    <StackPanel Orientation="Horizontal">
+                                                                        <TextBlock Text="Оплачено: "/>
+                                                                        <TextBlock Text="{Binding Sum_opl, StringFormat='0,0.00'}"/>
+                                                                        <TextBlock Text=" на "/>
+                                                                        <TextBlock Text="{Binding PayDate, StringFormat='dd.MM.yy'}"/>
+                                                                    </StackPanel>
+                                                                </DataTemplate>
+                                                            </ToolTip.ContentTemplate>
+                                                        </ToolTip>
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding PayStatus}" Value="{x:Static dto:PayStatuses.Unpayed}">
+                                                        <Setter Property="Fill" Value="White"/>
+                                                        <Setter Property="Stroke" Value="Gray"/>
+                                                        <Setter Property="ToolTip" Value="{x:Null}"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding PayStatus}" Value="{x:Static dto:PayStatuses.TotallyPayed}">
+                                                        <Setter Property="Fill" Value="Lime"/>
+                                                        <Setter Property="Stroke" Value="DarkGreen"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Rectangle.Style>                                        
+                                    </Rectangle>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </Border>
+        <GridSplitter Grid.Row="2" Height="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Style="{StaticResource GSplitter}"/>
+        <Border Grid.Row="3" Background="Honeydew" Padding="5,3,0,3" BorderBrush="DarkOliveGreen" BorderThickness="1" CornerRadius="1"
+                xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                xmlns:int="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
+                >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2"/>
+                    <RowDefinition Height="Auto" MaxHeight="400"/>
+                </Grid.RowDefinitions>
+                <DockPanel LastChildFill="True" Grid.Row="0">
+                    <DockPanel LastChildFill="True" DockPanel.Dock="Top">
+                        <ItemsControl ItemsSource="{Binding RwDocFilters}" DockPanel.Dock="Right">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" IsItemsHost="True"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border BorderBrush="DarkSlateGray" BorderThickness="2" Margin="3,1" Padding="2" Background="DarkOliveGreen" Opacity=".5"
+                                            ToolTip="{Binding Value.Description}">
+                                        <CheckBox IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" BorderBrush="White" Foreground="White" 
+                                                  Content="{Binding Value.Label}" Style="{DynamicResource SimpleXCheckBoxStyle}"
+                                                  VerticalContentAlignment="Center"
+                                                  Cursor="Hand"
+                                                  Height="15" BorderThickness="2"/>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <TextBlock Text="Список документов по выбранному перечню" FontSize="14" Foreground="DarkOliveGreen" Margin="0,0,0,3"/>
+                    </DockPanel>
+                    <DataGrid ItemsSource="{Binding RwDocsCollection}" DockPanel.Dock="Bottom" Name="dgRwDocs"
+                          AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"                                  
+                          IsSynchronizedWithCurrentItem="False" SelectionUnit="FullRow"
+                          SelectionMode="Extended" SelectedItem="{Binding SelectedRwDoc}"
+                          VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"
+                          Style="{DynamicResource DefaultDataGridStyle}">
+                        <i:Interaction.Behaviors>
+                            <beh:DataGridFixSelectionBehavior/>
+                            <!--<beh:DataGridSaveOrderingsBehavior/>-->
+                            <beh:DataGridSaveColumnsBehavior/>
+                        </i:Interaction.Behaviors>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Loaded">
+                                <i:EventTrigger.Actions>
+                                    <int:CallMethodAction MethodName="SetFilter" TargetObject="{Binding}"/>
+                                </i:EventTrigger.Actions>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="FontSize" Value="12"/>
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="IsSelected" Value="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"/>
+                                <!--<EventSetter Event="PreviewMouseDown" Handler="PreviewMouseDownHandler"></EventSetter>-->
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Value.IsTransition}" Value="True">
+                                        <Setter Property="Background" Value="PeachPuff" />
+                                    </DataTrigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <!--<Setter Property="Margin" Value="0,0,0,5"/>-->
+                                        <Setter Property="BorderBrush" Value="RoyalBlue"/>
+                                        <Setter Property="Background" Value="{StaticResource DataGridSelectedRowBackgroundBrush}" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.RowStyle>
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.Header>
+                                    <StackPanel DataContext="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext, Mode=OneWay}">
+                                        <CheckBox Content="Все" 
+                                                  Command="{Binding SelectAllDocsCommand, Mode=OneWay}"
+                                                  CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=IsChecked, Mode=OneWay}" IsThreeState="False"
+                                                  Style="{DynamicResource SimpleXCheckBoxStyle}"
+                                                  Height="13" BorderBrush="White" Foreground="White" BorderThickness="1" x:Name="chk"/>
+                                        <!--<TextBlock Text="{Binding ElementName=chk, Path=IsChecked}"/>
+                                        <TextBlock Text="{Binding ElementName=chk, Path=IsChecked, Converter={StaticResource BoolNot}}"/>-->
+                                    </StackPanel>
+                                </DataGridTemplateColumn.Header>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Path Data="M 0,0 L 1,1 M 1,0 L 0,1" Width="15" Height="15" Stroke="Red" StrokeThickness="2" Stretch="Fill"
+                                          x:Name="pCross" Visibility="Hidden"/>
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding Value.Exclude}" Value="true">
+                                                <Setter TargetName="pCross" Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Binding="{Binding Value.Nkrt}" Header="№ карт." Width="70"/>
+                            <DataGridTextColumn Binding="{Binding Value.Dzkrt, StringFormat=dd.MM.yyyy}" Header="Дата карт."/>
+                            <DataGridTextColumn Binding="{Binding Value.Num_doc}" Header="№ док." Width="70"/>
+                            <DataGridTextColumn Binding="{Binding Value.Dat_doc, StringFormat=dd.MM.yyyy}" Header="Дата док."/>
+                            <DataGridTextColumn Binding="{Binding Value.Rep_date, StringFormat=dd.MM.yyyy}" Header="Дата уч."/>
+                            <DataGridTextColumn Binding="{Binding Value.Esfn.VatInvoiceNumber}" 
+                                                Header="ЭСФН" 
+                                                IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding Value.RwPay.Paycode}" Header="Код"/>
+                            <DataGridTextColumn Binding="{Binding Value.RwPay.Payname}" Header="Услуга"/>
+                            <DataGridTextColumn Binding="{Binding Value.Note}" Header="Инфо"
+                                    ElementStyle="{StaticResource SWrapStyle}"/>
+                            <DataGridTextColumn Binding="{Binding Value.Sum_doc, StringFormat='#,0.##'}" 
+                                    ElementStyle="{StaticResource SRightAlignStyle}" 
+                                    Header="Сумма без НДС" Width="110"/>
+                            <DataGridTextColumn Binding="{Binding Value.Ndsrate}" Header="НДС, %"/>
+                            <DataGridTextColumn Binding="{Binding Value.Sum_nds, StringFormat='#,0.##'}" 
+                                    ElementStyle="{StaticResource SRightAlignStyle}" 
+                                    Header="Сумма НДС" Width="100"/>
+                            <DataGridTextColumn Binding="{Binding Value.Sum_itog, StringFormat='#,0.##'}" 
+                                    ElementStyle="{StaticResource SRightAlignStyle}" 
+                                    Header="Сумма с НДС" Width="110"/>
+                            <DataGridTextColumn Binding="{Binding Value.Sum_excl, StringFormat='#,0.##'}" 
+                                    ElementStyle="{StaticResource SRightAlignStyle}" 
+                                    Header="Исключено" Width="110"/>
+                            <DataGridTextColumn Binding="{Binding Value.Excl_info}" Header="Причина исключения"
+                                    ElementStyle="{StaticResource SWrapStyle}" Width="200"/>
+                            <DataGridTextColumn Binding="{Binding Value.Comments}" Header="Доп.инфо"
+                                    ElementStyle="{StaticResource SWrapStyle}" Width="200"/>                            
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+                <GridSplitter Grid.Row="1" Height="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Style="{StaticResource GSplitter}"/>
+                <Expander IsExpanded="{Binding IsNeedTotals}" Header="Итоги" Grid.Row="2" 
+                          Background="MistyRose" Style="{DynamicResource SimpleExpanderStyle}"
+                          ExpandDirection="Down" Foreground="Firebrick" TextElement.FontWeight="Bold"
+                          MaxHeight="400">                    
+                    <Expander.Resources>
+                        <Style x:Key="LvItemStyle" TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="Foreground" Value="DarkOliveGreen"/>
+                            <Setter Property="Height" Value="19"/>
+                            <Setter Property="Margin" Value="0,0,0,1"/>
+                            <Setter Property="Focusable" Value="False"/>
+                            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                            <Setter Property="FontWeight" Value="Normal"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListViewItem">
+                                        <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" 
+                                                Margin="{TemplateBinding Margin}" Height="{TemplateBinding Height}">
+                                            <GridViewRowPresenter Content="{TemplateBinding Content}"
+                                                                  Columns="{TemplateBinding GridView.ColumnCollection}" 
+                                                                  Focusable="False" FocusVisualStyle="{x:Null}" 
+                                                                  />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding RwPay.Paycode}" Value="0">
+                                    <Setter Property="Background" Value="Beige"/>
+                                    <Setter Property="Foreground" Value="Brown"/>
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Expander.Resources>
+                    <ListView ItemsSource="{Binding RwDocsTotals}" BorderThickness="0"
+                              ItemContainerStyle="{StaticResource LvItemStyle}"                              
+                              Background="Beige">
+                        <ListView.View>
+                            <GridView AllowsColumnReorder="False">
+                                <GridView.ColumnHeaderContainerStyle>
+                                    <Style TargetType="GridViewColumnHeader">
+                                        <Setter Property="BorderThickness" Value="2,2,0,2"/>
+                                        <Setter Property="Height" Value="25"/>
+                                        <Setter Property="BorderBrush" Value="LightGray"/>
+                                        <Setter Property="Background" Value="White"/>
+                                        <Setter Property="Foreground" Value="DarkOliveGreen"/>
+                                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                        <Setter Property="Padding" Value="1"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                                                    <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                                            Background="{TemplateBinding Background}"
+                                                            Padding="{TemplateBinding Padding}"
+                                                            Height="{TemplateBinding Height}"
+                                                            >
+                                                        <ContentPresenter Content="{TemplateBinding Content}" TextElement.FontWeight="Normal" TextBlock.Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                                                        <!--<TextBlock Text="{TemplateBinding Content}" FontWeight="Normal"
+                                                                   Foreground="{TemplateBinding Foreground}"
+                                                                   VerticalAlignment="Center" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                   />-->
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </GridView.ColumnHeaderContainerStyle>
+                                <GridViewColumn DisplayMemberBinding="{Binding Nkrt}" Header="№ карт." Width="70"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding RwPay.Paycode, StringFormat=#}" Width="60">
+                                    <GridViewColumn.Header>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="Код " FontWeight="Normal" VerticalAlignment="Center"/>
+                                            <ToggleButton Focusable="False" IsChecked="{Binding IsAdvTotals}" VerticalAlignment="Center"
+                                                              Foreground="Olive" Cursor="Hand" Height="20" Width="20"
+                                                              DockPanel.Dock="Right" ToolTip="Показать / скрыть итоги по сборам">
+                                                <ToggleButton.Template>
+                                                    <ControlTemplate TargetType="ToggleButton">
+                                                        <Grid x:Name="root" Opacity=".5" Background="Transparent" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
+                                                            <Grid.LayoutTransform>
+                                                                <RotateTransform Angle="180"/>
+                                                            </Grid.LayoutTransform>
+                                                            <Ellipse Stroke="{TemplateBinding Foreground}" StrokeThickness="1.5"/>
+                                                            <Path Data="M1,4L3,1L5,4" Stroke="{TemplateBinding Foreground}" Stretch="Uniform" Margin="5" StrokeThickness="1.5"/>
+                                                        </Grid>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsChecked" Value="True">
+                                                                <Setter TargetName="root" Property="LayoutTransform" Value="{x:Null}"/>
+                                                            </Trigger>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter TargetName="root" Property="Opacity" Value="1"/>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </ToggleButton.Template>
+                                            </ToggleButton>
+                                        </StackPanel>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding RwPay.Payname}" Header="Услуга" Width="300"/>
+                                <GridViewColumn Header="Сумма без НДС" Width="110">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Sum_doc, StringFormat='#,0.##'}" TextAlignment="Right"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Сумма НДС" Width="100">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Sum_nds, StringFormat='#,0.##'}" TextAlignment="Right"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Сумма с НДС" Width="110">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Sum_itog, StringFormat='#,0.##'}" TextAlignment="Right"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Expander>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

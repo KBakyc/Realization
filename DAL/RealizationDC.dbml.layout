@@ -1,0 +1,395 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 22.25, 31" name="RealizationDC">
+  <DataContextMoniker Name="/RealizationDCDataContext" />
+  <nestedChildShapes>
+    <classShape Id="467feafb-ff00-4df4-bedd-f061c53055ca" absoluteBounds="4.75, 0.5, 2, 4.6554182942708326">
+      <DataClassMoniker Name="/RealizationDCDataContext/SfHeader" />
+      <nestedChildShapes>
+        <elementListCompartment Id="9aa9f943-f52a-4440-bc5e-c2f739ea960e" absoluteBounds="4.765, 0.96, 1.9700000000000002, 4.095418294270833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c15d4b51-c534-44b6-9ba0-cf50a8548713" absoluteBounds="2.625, 4.375, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/RealizationDCDataContext/uv_Pkod" />
+      <nestedChildShapes>
+        <elementListCompartment Id="503f6f48-a097-4cd7-99c0-cb25a82117a7" absoluteBounds="2.64, 4.835, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4a750c9e-6385-4913-9dab-31f0e30abf24" absoluteBounds="7, 0.5, 2, 3.5016097005208326">
+      <DataClassMoniker Name="/RealizationDCDataContext/SfProduct" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f6345af6-5a43-46fb-8ed7-bcc6796308e4" absoluteBounds="7.0150000000000006, 0.96, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.75 : 2.03416056315104); (7 : 2.03416056315104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/RealizationDCDataContext/SfHeader/SfHeader_SfProduct" />
+      <nodes>
+        <classShapeMoniker Id="467feafb-ff00-4df4-bedd-f061c53055ca" />
+        <classShapeMoniker Id="4a750c9e-6385-4913-9dab-31f0e30abf24" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="54701506-38a5-4636-a81f-260812ff69df" absoluteBounds="9.25, 0.5, 2, 2.5401025390625">
+      <DataClassMoniker Name="/RealizationDCDataContext/SfProductPay" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a8e048f6-823b-4b2c-8a79-1b1317a1f663" absoluteBounds="9.265, 0.96, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(9 : 1.62329223632813); (9.25 : 1.62329223632813)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/RealizationDCDataContext/SfProduct/SfProduct_SfProductPay" />
+      <nodes>
+        <classShapeMoniker Id="4a750c9e-6385-4913-9dab-31f0e30abf24" />
+        <classShapeMoniker Id="54701506-38a5-4636-a81f-260812ff69df" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="d29e080e-02a3-4828-8bea-69dd13d219a4" absoluteBounds="2.625, 0.5, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/RealizationDCDataContext/uv_Skodf" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f733b102-df78-40b9-a1c3-20468f5cefd6" absoluteBounds="2.64, 0.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4619caf0-99c0-41f7-b10e-49ea54ebd48e" absoluteBounds="11.5, 0.5, 2, 1.9631982421875">
+      <DataClassMoniker Name="/RealizationDCDataContext/SfPayType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5b55e59a-3678-4703-b308-d18ac7ac46f7" absoluteBounds="11.515, 0.96, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(11.5 : 1.37677124023438); (11.25 : 1.37677124023438)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/RealizationDCDataContext/SfPayType/SfPayType_SfProductPay" />
+      <nodes>
+        <classShapeMoniker Id="4619caf0-99c0-41f7-b10e-49ea54ebd48e" />
+        <classShapeMoniker Id="54701506-38a5-4636-a81f-260812ff69df" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="32c3266d-311f-4639-8f3d-8ff80ebab7f3" absoluteBounds="0.5, 13.125, 2, 2.73240397135417">
+      <DataClassMoniker Name="/RealizationDCDataContext/uv_Agreement" />
+      <nestedChildShapes>
+        <elementListCompartment Id="de825be0-c61f-4bf3-9d10-ab13801b5e94" absoluteBounds="0.51499999999999968, 13.585, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8d0f66e1-4882-40ad-ab0a-adb7cfadb44d" absoluteBounds="11.5, 2.75, 2, 1.3862939453125">
+      <DataClassMoniker Name="/RealizationDCDataContext/SfPayGroup" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3605de22-b5e2-4334-9b91-144d82057c56" absoluteBounds="11.515, 3.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(12.5 : 2.75); (12.5 : 2.4631982421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/RealizationDCDataContext/SfPayGroup/SfPayGroup_SfPayType" />
+      <nodes>
+        <classShapeMoniker Id="8d0f66e1-4882-40ad-ab0a-adb7cfadb44d" />
+        <classShapeMoniker Id="4619caf0-99c0-41f7-b10e-49ea54ebd48e" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="7c998a78-950e-48f0-b86f-b1b09b31d307" absoluteBounds="2.625, 2.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/RealizationDCDataContext/uv_Valuta" />
+      <nestedChildShapes>
+        <elementListCompartment Id="851f8950-0355-49bd-8fc8-c4ed7a7e3cc1" absoluteBounds="2.64, 3.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5cecf80f-a7f5-44f3-8b82-d55b6fd751ca" absoluteBounds="7, 6, 2, 2.9247054036458326">
+      <DataClassMoniker Name="/RealizationDCDataContext/uv_SfsHistory" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d53a3ea6-0b3e-4a1f-a3d3-e3c385d751cd" absoluteBounds="7.015, 6.4600000000000009, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="450a671d-851c-4ea3-955b-33eb7440ec28" absoluteBounds="2.625, 19.5, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/RealizationDCDataContext/sBankGroup" />
+      <nestedChildShapes>
+        <elementListCompartment Id="13e11eda-3b9f-462e-bf04-4c409c6a178b" absoluteBounds="2.6399999999999997, 19.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2b7122d9-2082-4a15-856b-cb169471f8c3" absoluteBounds="7, 17, 2, 6.0015283203125023">
+      <DataClassMoniker Name="/RealizationDCDataContext/uv_Svidcen" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c1ea9c6b-addc-46fd-9e09-00b7c509f324" absoluteBounds="7.0150000000000006, 17.46, 1.9700000000000002, 5.4415283203125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3050ee06-5e66-46c8-bc22-f0ec6fe4f9b3" absoluteBounds="2.625, 20.75, 2, 1.3862939453125023">
+      <DataClassMoniker Name="/RealizationDCDataContext/sTransportType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4dea5c6c-d83d-41c6-b768-d5bac589a5fb" absoluteBounds="2.6399999999999997, 21.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8360cfe6-b6f7-4247-a2d8-76736ebd443d" absoluteBounds="4.75, 5.5, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/RealizationDCDataContext/SfKroInfo" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e42b7084-f798-4ca1-a6b1-c1819b1869b3" absoluteBounds="4.765, 5.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.75 : 5.15541829427083); (5.75 : 5.5)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/RealizationDCDataContext/SfHeader/SfHeader_SfKroInfo" />
+      <nodes>
+        <classShapeMoniker Id="467feafb-ff00-4df4-bedd-f061c53055ca" />
+        <classShapeMoniker Id="8360cfe6-b6f7-4247-a2d8-76736ebd443d" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="9b749f21-4c23-43d1-984b-7b40f8088c3b" absoluteBounds="15.75, 0.5, 2, 4.2708154296875">
+      <DataClassMoniker Name="/RealizationDCDataContext/Penalty" />
+      <nestedChildShapes>
+        <elementListCompartment Id="df619759-a005-4d1c-b934-e13d1fb2406c" absoluteBounds="15.765, 0.96, 1.9700000000000002, 3.7108154296875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7c6995d4-e2f2-4b6c-add7-dec43101cbb3" absoluteBounds="9.25, 3.125, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/RealizationDCDataContext/Setting" />
+      <nestedChildShapes>
+        <elementListCompartment Id="33cd63a1-b8bd-4485-845f-6997171e89d2" absoluteBounds="9.265, 3.585, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fcdef346-cb4f-47cb-9917-abbf0df343dd" absoluteBounds="9.25, 11.25, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/RealizationDCDataContext/uv_Svidakc" />
+      <nestedChildShapes>
+        <elementListCompartment Id="aa502b1c-1490-48c6-93a0-643ee3e83c8b" absoluteBounds="9.265, 11.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5f20b5eb-201f-4150-8dc1-216ce92e19ed" absoluteBounds="2.625, 16.375, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/RealizationDCDataContext/sSchetRecType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="54249939-2f2d-4d87-9fa5-5890ba035b04" absoluteBounds="2.64, 16.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0fdf449f-8203-4c54-962f-679f9e1269ba" absoluteBounds="4.75, 13.25, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/RealizationDCDataContext/ARM_User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="01cccac5-cc4b-4818-80d8-5df69c576263" absoluteBounds="4.765, 13.71, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="35e9727e-41d2-4dab-97c4-bb214e9bb9ed" absoluteBounds="0.5, 19.75, 2, 3.88621256510417">
+      <DataClassMoniker Name="/RealizationDCDataContext/JourBuyType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8f5ff33f-ed1e-428c-ab3d-b98fce2d3427" absoluteBounds="0.51500000000000012, 20.21, 1.9700000000000002, 3.3262125651041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f534603c-dc8e-4e73-9a45-d967a6bade6b" absoluteBounds="4.75, 16.25, 2, 13.501284179687502">
+      <DataClassMoniker Name="/RealizationDCDataContext/uv_Product" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c70bd387-c980-4db4-ba4d-6e2aa591c407" absoluteBounds="4.765, 16.71, 1.9700000000000002, 12.9412841796875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="b71429c1-4115-46b9-afb8-ae09bd529026" absoluteBounds="7, 23.125, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/RealizationDCDataContext/SfType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2fbe85d9-3299-4220-b41f-bc65e55a0674" absoluteBounds="7.015, 23.585, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(7 : 23.7219962565104); (6.8125 : 23.7219962565104); (6.8125 : 5.24916829427083); (6.281252 : 5.24916829427083); (6.281252 : 5.15541829427083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/RealizationDCDataContext/SfType/SfType_SfHeader" />
+      <nodes>
+        <classShapeMoniker Id="b71429c1-4115-46b9-afb8-ae09bd529026" />
+        <classShapeMoniker Id="467feafb-ff00-4df4-bedd-f061c53055ca" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="9abbdb21-2bb0-4218-8b8a-7ed319479383" absoluteBounds="9.25, 8.375, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/RealizationDCDataContext/uv_OtgrHistory" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c452e67a-518c-4871-a896-165ef0f57aff" absoluteBounds="9.265, 8.835, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="c87d28f7-08bf-40ff-af12-67401b34cc6e" absoluteBounds="11.5, 8.5, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/RealizationDCDataContext/uv_PredoplHistory" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a4668685-eeef-48a9-8457-357f13c44b7e" absoluteBounds="11.515, 8.96, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="8a7b31b9-18a4-461d-9ed2-9e43c81d1964" absoluteBounds="11.5, 11.375, 2, 2.5401025390625005">
+      <DataClassMoniker Name="/RealizationDCDataContext/PaysVozv" />
+      <nestedChildShapes>
+        <elementListCompartment Id="508363c2-fc47-44ec-ac08-ce93b9781cbd" absoluteBounds="11.515, 11.835, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="5814c97d-a15f-4347-a5c1-34f55439d9a0" absoluteBounds="11.5, 14, 2, 2.5401025390625023">
+      <DataClassMoniker Name="/RealizationDCDataContext/PaysArc" />
+      <nestedChildShapes>
+        <elementListCompartment Id="414ad9d4-4c71-4427-bb9b-17730220ba44" absoluteBounds="11.515, 14.46, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="11e15dbb-ed61-4435-89fa-c78246b5347b" absoluteBounds="15.75, 4.875, 2, 2.5401025390624996">
+      <DataClassMoniker Name="/RealizationDCDataContext/PaysPen" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2ab1f944-a97d-4526-bac5-5f8326532531" absoluteBounds="15.765, 5.335, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9624eb1b-2e5f-4b33-baff-8062a8d638b8" absoluteBounds="20, 0.5, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/RealizationDCDataContext/uv_UnAcceptedIdSf" />
+      <nestedChildShapes>
+        <elementListCompartment Id="aa349964-0619-4eb8-87cc-28c9398e9169" absoluteBounds="20.015, 0.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0c8b8787-a41b-4201-a53c-ae61a7444dfa" absoluteBounds="2.625, 6.625, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/RealizationDCDataContext/dbActionsResult" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1f24c79d-8954-4730-99f5-e496031f8685" absoluteBounds="2.64, 7.085, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="aedaa8cd-5495-4bae-bdc8-0cec51bd1c4b" absoluteBounds="9.25, 12.5, 2, 4.8477197265625023">
+      <DataClassMoniker Name="/RealizationDCDataContext/uv_Vbank_FIN" />
+      <nestedChildShapes>
+        <elementListCompartment Id="27f6ada7-6a8e-427c-bcfa-54574b6eca90" absoluteBounds="9.265, 12.96, 1.9700000000000002, 4.2877197265625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a41c1273-c2d5-4803-835a-a8cd075d64ed" absoluteBounds="7, 9, 2, 6.1938297526041666">
+      <DataClassMoniker Name="/RealizationDCDataContext/Predopl" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1a988e56-b444-4df2-850f-07f44eecf90b" absoluteBounds="7.015, 9.46, 1.9700000000000002, 5.6338297526041661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="94912ccd-a522-4c4d-811f-60f75de6ad88" absoluteBounds="7, 15.5, 2, 1.3862939453125005">
+      <DataClassMoniker Name="/RealizationDCDataContext/sTypePlatDoc" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ca2a5e6d-47f8-4791-8548-7a48470649a4" absoluteBounds="7.015, 15.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(8 : 15.5); (8 : 15.1938297526042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/RealizationDCDataContext/sTypePlatDoc/sTypePlatDoc_Predopl" />
+      <nodes>
+        <classShapeMoniker Id="94912ccd-a522-4c4d-811f-60f75de6ad88" />
+        <classShapeMoniker Id="a41c1273-c2d5-4803-835a-a8cd075d64ed" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="b424334f-7e57-4bdb-b5c5-a08d486781a4" absoluteBounds="2.625, 14.875, 2, 3.30930826822917">
+      <DataClassMoniker Name="/RealizationDCDataContext/sSchet" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0cf5e09b-25d3-4d2e-96f7-4dbc8a385fdb" absoluteBounds="2.64, 15.335, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d31fc26f-0f20-470e-905b-17b077178065" absoluteBounds="2.625, 13, 2, 1.7708968098958344">
+      <DataClassMoniker Name="/RealizationDCDataContext/UserNapr" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6488667c-14e8-43c3-9289-9fad490a7517" absoluteBounds="2.64, 13.46, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f530a21b-c790-4e0a-a703-fa23fe6811c0" absoluteBounds="2.625, 18.25, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/RealizationDCDataContext/sJournalUnionRecType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="245e4be4-d977-4826-b978-d81a17738ed5" absoluteBounds="2.6400000000000006, 18.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9227df54-c4dd-4e79-9b29-fbfa6f404382" absoluteBounds="0.5, 23.75, 2, 6.9630354817708344">
+      <DataClassMoniker Name="/RealizationDCDataContext/JournalsArc" />
+      <nestedChildShapes>
+        <elementListCompartment Id="dace2df1-ae40-4553-ade2-2e9dec3659e9" absoluteBounds="0.51500000000000012, 24.21, 1.9700000000000002, 6.403035481770833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="9d2416be-0d3c-4c27-a583-6665928c9ff1" absoluteBounds="9.25, 5.375, 2, 2.9247054036458326">
+      <DataClassMoniker Name="/RealizationDCDataContext/uv_Moup" />
+      <nestedChildShapes>
+        <elementListCompartment Id="3f27b23b-3af1-41fb-8cb2-dada4e154e75" absoluteBounds="9.265, 5.8350000000000009, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="978b2dfc-e6d7-4723-8844-b4f1c38a7b45" absoluteBounds="2.625, 22.25, 2, 2.5401025390625023">
+      <DataClassMoniker Name="/RealizationDCDataContext/uv_Str" />
+      <nestedChildShapes>
+        <elementListCompartment Id="acc8edc0-d1d5-4e68-959c-28c97e3233e7" absoluteBounds="2.64, 22.71, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="55778e36-4d28-4c05-9380-fcbd0828b300" absoluteBounds="9.25, 17.5, 2, 4.0785139973958344">
+      <DataClassMoniker Name="/RealizationDCDataContext/Date" />
+      <nestedChildShapes>
+        <elementListCompartment Id="281ac910-0c7a-430b-8d9f-021f4c564608" absoluteBounds="9.265, 17.96, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="361b3caf-3fb3-4d91-bd88-4cf80547cc09" absoluteBounds="7, 24.375, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/RealizationDCDataContext/UserReport" />
+      <nestedChildShapes>
+        <elementListCompartment Id="26140036-39a1-4865-8de4-c487a08c69de" absoluteBounds="7.015, 24.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.75 : 15.9824039713542); (5.75 : 16.1875); (6.875 : 16.1875); (6.875 : 24.9719962565104); (7 : 24.9719962565104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/RealizationDCDataContext/ARM_User/ARM_User_UserReport" />
+      <nodes>
+        <classShapeMoniker Id="0fdf449f-8203-4c54-962f-679f9e1269ba" />
+        <classShapeMoniker Id="361b3caf-3fb3-4d91-bd88-4cf80547cc09" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="346ee142-2db0-4b24-a067-23f40fd64ad0" absoluteBounds="9.25, 21.75, 2, 1.7708968098958344">
+      <DataClassMoniker Name="/RealizationDCDataContext/uv_MeasureUnit" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0b11dbeb-35ca-4e47-90dd-1c3174db5b99" absoluteBounds="9.265, 22.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="1099463d-9261-4abb-a345-f8c6ba1c442f" absoluteBounds="7, 25.625, 2, 1.5785953776041701">
+      <DataClassMoniker Name="/RealizationDCDataContext/uv_InvoiceType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6004877d-fb6e-497c-b853-6cd15039e04c" absoluteBounds="7.015, 26.085, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="163a2dad-0c77-4f09-b707-1e1df320ea13" absoluteBounds="7, 4.125, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/RealizationDCDataContext/SfPayPeriod" />
+      <nestedChildShapes>
+        <elementListCompartment Id="96c1e89e-8a1e-4844-93c9-9f4dee0eb0d0" absoluteBounds="7.015, 4.585, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(6.75 : 4.64020914713542); (7 : 4.64020914713542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/RealizationDCDataContext/SfHeader/SfHeader_SfPayPeriod" />
+      <nodes>
+        <classShapeMoniker Id="467feafb-ff00-4df4-bedd-f061c53055ca" />
+        <classShapeMoniker Id="163a2dad-0c77-4f09-b707-1e1df320ea13" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="cfeed50d-bcd0-426e-a2fb-1a184b32665a" absoluteBounds="2.625, 8.875, 2, 4.0785139973958326">
+      <DataClassMoniker Name="/RealizationDCDataContext/uv_SfsListView" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c6935efa-4897-43e5-bc52-5544788540c2" absoluteBounds="2.64, 9.335, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="85df97c0-8f17-40aa-aa1c-85373e72daab" absoluteBounds="4.75, 7.375, 2, 5.8092268880208326">
+      <DataClassMoniker Name="/RealizationDCDataContext/tmp_Predopl" />
+      <nestedChildShapes>
+        <elementListCompartment Id="43750e29-ff02-4f02-860c-4164f559835b" absoluteBounds="4.765, 7.835, 1.9700000000000002, 5.249226888020833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="525a4021-0f0d-495c-9505-1fa81e2c6507" absoluteBounds="2.625, 25, 2, 2.15549967447917">
+      <DataClassMoniker Name="/RealizationDCDataContext/NdsInvoiceData" />
+      <nestedChildShapes>
+        <elementListCompartment Id="99d3dcf0-53f2-4611-98e8-5ee5decaf85c" absoluteBounds="2.64, 25.46, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.218748 : 5.15541829427083); (5.218748 : 5.4375); (4.6875 : 5.4375); (4.6875 : 26.0777498372396); (4.625 : 26.0777498372396)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/RealizationDCDataContext/SfHeader/SfHeader_NdsInvoiceData" />
+      <nodes>
+        <classShapeMoniker Id="467feafb-ff00-4df4-bedd-f061c53055ca" />
+        <classShapeMoniker Id="525a4021-0f0d-495c-9505-1fa81e2c6507" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.953122 : 5.15541829427083); (4.953122 : 5.4375); (4.71875 : 5.4375); (4.71875 : 25.5076229186198); (4.625 : 25.5076229186198)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/RealizationDCDataContext/SfHeader/SfHeader_NdsInvoiceData1" />
+      <nodes>
+        <classShapeMoniker Id="467feafb-ff00-4df4-bedd-f061c53055ca" />
+        <classShapeMoniker Id="525a4021-0f0d-495c-9505-1fa81e2c6507" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="568e6800-5c7e-420f-a7e9-62d63a1d9cc2" absoluteBounds="0.5, 16, 2, 3.6939111328125023">
+      <DataClassMoniker Name="/RealizationDCDataContext/SalesJournalType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f4e7f7e3-84fd-47b2-bf8b-d977e8ddf150" absoluteBounds="0.51500000000000057, 16.46, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a4162943-9a67-4444-92e8-f161d71e6737" absoluteBounds="0.5, 0.5, 2, 12.539777018229165">
+      <DataClassMoniker Name="/RealizationDCDataContext/temp_p623" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b13b6d8e-8d79-428f-99ff-38f0daf0bcc1" absoluteBounds="0.51500000000000012, 0.96, 1.9700000000000002, 11.979777018229166" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="18ec0e43-2070-4326-904f-bef3c545fc2d" absoluteBounds="17.875, 0.5, 2, 14.270489908854165">
+      <DataClassMoniker Name="/RealizationDCDataContext/uv_RealOtgrArc" />
+      <nestedChildShapes>
+        <elementListCompartment Id="47397e8a-8f75-46aa-b750-006ea64e535d" absoluteBounds="17.89, 0.96, 1.9700000000000002, 13.710489908854166" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3c601829-3dcb-457a-ab8d-45a2a291d312" absoluteBounds="13.625, 0.5, 2, 12.155174153645833">
+      <DataClassMoniker Name="/RealizationDCDataContext/arc_p623" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7cc5e86a-5fe2-432e-b484-ab83a716eb37" absoluteBounds="13.64, 0.96, 1.9700000000000002, 11.595174153645832" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="2c633899-9b6f-46b3-83e0-a8183d7ed979" absoluteBounds="11.5, 4.25, 2, 4.0785139973958326">
+      <DataClassMoniker Name="/RealizationDCDataContext/temp_Corrsf_Otgr" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4efd11a8-f978-4818-9943-1cf027562506" absoluteBounds="11.515, 4.71, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7217f725-0b86-42fc-9e39-f505f2504e65" absoluteBounds="15.75, 7.5, 2, 3.1170068359375005">
+      <DataClassMoniker Name="/RealizationDCDataContext/temp_Corrsf2_Otgr" />
+      <nestedChildShapes>
+        <elementListCompartment Id="defdb941-3ae3-46b0-9326-2acb249e63a2" absoluteBounds="15.765, 7.9600000000000009, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

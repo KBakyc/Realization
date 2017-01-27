@@ -1,0 +1,105 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:win="clr-namespace:System.Windows;assembly=PresentationFramework"
+    xmlns:DataObjects="clr-namespace:DataObjects;assembly=DataObjects"
+    xmlns:Views="clr-namespace:SfModule.Views"
+    xmlns:ViewModels="clr-namespace:SfModule.ViewModels"
+    xmlns:MCommands="clr-namespace:SfModule.Commands"
+    xmlns:CommonCommands="clr-namespace:CommonModule.Commands;assembly=CommonModule">
+
+    <Style x:Key="DeletableStyle" TargetType="{x:Type TextBlock}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding SfStatus}" Value="{x:Static DataObjects:LifetimeStatuses.Deleted}">
+                <Setter Property="TextDecorations" Value="Strikethrough"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style x:Key="RightAlignStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource DeletableStyle}">
+        <Setter Property="TextAlignment" Value="Right" />
+    </Style>
+
+    <!--DataGridSelectedRowBackgroundBrush-->
+    <!--<LinearGradientBrush x:Key="DataGridSelectedRowBackgroundBrush" StartPoint="0,1" EndPoint="0,0">
+        <GradientStop Color="CornflowerBlue" Offset="0"/>
+        <GradientStop Color="Lavender" Offset="1"/>
+    </LinearGradientBrush>-->
+    <SolidColorBrush x:Key="DataGridSelectedRowBackgroundBrush" Color="Lavender"/>
+
+    <!--AcceptSfDataGridRowStyle-->
+    <Style TargetType="DataGridRow" x:Key="AcceptSfDataGridRowStyle">
+        <!--<Setter Property="IsSelected" Value="{Binding IsSelected}"/>-->
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="BorderBrush" Value="RoyalBlue"/>
+                <Setter Property="Background" Value="{StaticResource DataGridSelectedRowBackgroundBrush}" />                
+                <Setter Property="Foreground" Value="Black" />
+            </Trigger>
+            <DataTrigger Binding="{Binding IsSelected}" Value="False">
+                <Setter Property="Background" Value="Pink"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--R635DataGridRowStyle-->
+    <Style TargetType="DataGridRow" x:Key="R635DataGridRowStyle">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="IsSelected" Value="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="BorderBrush" Value="RoyalBlue"/>
+                <Setter Property="Background" Value="{StaticResource DataGridSelectedRowBackgroundBrush}" />
+                <Setter Property="Foreground" Value="Black" />
+            </Trigger>
+            <DataTrigger Binding="{Binding SfStatus}" Value="{x:Static DataObjects:LifetimeStatuses.Deleted}">
+                <Setter Property="Foreground" Value="Red"/>
+            </DataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="True"/>
+                    <Condition Binding="{Binding SfStatus}" Value="{x:Static DataObjects:LifetimeStatuses.Deleted}" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Foreground" Value="Red"/>
+                <Setter Property="Background" Value="LightPink" />
+                <Setter Property="BorderBrush" Value="Red"/>
+            </MultiDataTrigger>
+        </Style.Triggers>
+
+    </Style>
+
+    <Style x:Key="R635DataGridStyle" TargetType="DataGrid">
+        <!-- Make the border and grid lines a little less imposing -->
+        <Setter Property="BorderBrush" Value="#DDDDDD" />
+        <Setter Property="HorizontalGridLinesBrush" Value="#DDDDDD" />
+        <Setter Property="VerticalGridLinesBrush" Value="#DDDDDD" />
+        <Setter Property="ColumnHeaderStyle" Value="{DynamicResource DatagridColumnHeaderCustomTemplateStyle}"/>
+        <Setter Property="CellStyle" Value="{DynamicResource DefaultDataGridCellStyle}"/>
+        <Setter Property="RowStyle" Value="{StaticResource R635DataGridRowStyle}"/>
+    </Style>
+
+    <Style x:Key="AcceptSfDataGridStyle" TargetType="DataGrid" BasedOn="{StaticResource R635DataGridStyle}">
+        <Setter Property="RowStyle" Value="{StaticResource AcceptSfDataGridRowStyle}"/>
+    </Style>
+
+    <!--SelectableDataGridRowStyle-->
+    <Style TargetType="DataGridRow" x:Key="SelectableDataGridRowStyle">
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="BorderBrush" Value="RoyalBlue"/>
+                <Setter Property="Background" Value="{StaticResource DataGridSelectedRowBackgroundBrush}" />
+                <Setter Property="Foreground" Value="Black" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style x:Key="PenaltyDataGridStyle" TargetType="DataGrid" BasedOn="{StaticResource R635DataGridStyle}">
+        <Setter Property="RowStyle" Value="{StaticResource SelectableDataGridRowStyle}"/>
+    </Style>
+    
+</ResourceDictionary>

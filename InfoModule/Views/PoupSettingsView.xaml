@@ -1,0 +1,132 @@
+﻿<UserControl x:Class="InfoModule.Views.PoupSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:CommonModule.Controls;assembly=CommonModule"
+             MaxHeight="600"
+             Width="500">
+    <UserControl.Resources>
+    </UserControl.Resources>
+    <Grid>
+        <Border BorderBrush="RoyalBlue" CornerRadius="5" Margin="5" Background="AliceBlue" BorderThickness="1">
+            <DockPanel Margin="5">
+                <DockPanel DockPanel.Dock="Top">
+                    <CheckBox IsChecked="{Binding IsAllPoups}"
+                              HorizontalAlignment="Right" VerticalAlignment="Top"
+                              BorderBrush="RoyalBlue"
+                              DockPanel.Dock="Right"/>
+                    <TextBlock Text="Все " DockPanel.Dock="Right" Foreground="RoyalBlue"/>
+                    <TextBlock DockPanel.Dock="Left" Text="Мои виды реализации:" 
+                           Foreground="RoyalBlue" FontWeight="Bold" Margin="0,0,0,3"/>
+                    <TextBlock Text="{Binding MySelectedPoupsString}" DockPanel.Dock="Left" Foreground="RoyalBlue" Margin="5,0"/>
+                </DockPanel>
+                <controls:ComboBoxEx ItemsSource="{Binding Poups}" SelectedItem="{Binding SelectedPoup}"
+                          BorderThickness="0,1" BorderBrush="RoyalBlue" Margin="0,2,0,5"
+                          IsEnabled="{Binding IsCanSelectPoups}"
+                          Focusable="False"
+                          DockPanel.Dock="Top">
+                    <controls:ComboBoxEx.Background>
+                        <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                            <GradientStop Color="White" Offset="0"/>
+                            <GradientStop Color="Transparent" Offset=".5"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </controls:ComboBoxEx.Background>
+                    <controls:ComboBoxEx.ItemContainerStyle>
+                        <Style TargetType="ComboBoxItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ComboBoxItem">
+                                        <Border x:Name="ItemBorder">
+                                            <ContentPresenter Margin="2"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <!--<Trigger Property="IsSelected" Value="True">
+                                                <Setter TargetName="ItemBorder" Property="Background" Value="LightSkyBlue"/>
+                                            </Trigger>-->
+                                            <Trigger Property="IsHighlighted" Value="true">
+                                                <Setter TargetName="ItemBorder" Property="Background" Value="LightSkyBlue"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </controls:ComboBoxEx.ItemContainerStyle>
+                    <controls:ComboBoxEx.SelectionBoxTemplate>
+                        <DataTemplate>
+                            <DockPanel Margin="3">
+                                <TextBlock Text="{Binding Value.Kod, StringFormat='{}{0,3:#} - '}"/>
+                                <TextBlock Text="{Binding Value.Name}"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </controls:ComboBoxEx.SelectionBoxTemplate>
+                    <controls:ComboBoxEx.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel x:Name="Panel">
+                                <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" Margin="2"/>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0,3:#} - {1}">
+                                            <Binding Path="Value.Kod"/>
+                                            <Binding Path="Value.Name"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DockPanel>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                    <Setter TargetName="Panel" Property="Background" Value="Lavender"/>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </controls:ComboBoxEx.ItemTemplate>
+                </controls:ComboBoxEx>
+                <DockPanel DockPanel.Dock="Top">
+                    <CheckBox IsChecked="{Binding IsAllKodfs}"
+                              IsEnabled="{Binding IsValidPoupSelection}"
+                              HorizontalAlignment="Right" VerticalAlignment="Top"
+                              BorderBrush="RoyalBlue"
+                              DockPanel.Dock="Right"/>
+                    <TextBlock Text="Все " DockPanel.Dock="Right" Foreground="RoyalBlue"/>
+                    <TextBlock Text="Мои коды форм:" Foreground="RoyalBlue" FontWeight="Bold" Margin="0,0,0,3" DockPanel.Dock="Top"/>
+                </DockPanel>
+                <ListBox ItemsSource="{Binding Kodfs}" BorderThickness="0,1" BorderBrush="RoyalBlue" Margin="0,2"
+                         IsEnabled="{Binding IsCanSelectKodfs}">
+                    <ListBox.Background>
+                        <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                            <GradientStop Color="White" Offset="0"/>
+                            <GradientStop Color="Transparent" Offset=".5"/>
+                            <GradientStop Color="White" Offset="1"/>
+                        </LinearGradientBrush>
+                    </ListBox.Background>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <ContentPresenter Margin="2"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}">
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0,3} - {1}">
+                                            <Binding Path="Value.Kodf"/>
+                                            <Binding Path="Value.Name"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </CheckBox>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="SignsDC">
+  <DataContextMoniker Name="/SignsDCDataContext" />
+  <nestedChildShapes>
+    <classShape Id="56434316-a123-49e0-ae1e-339c646e7fb0" absoluteBounds="1.125, 0.5, 2, 1.5891951497395831">
+      <DataClassMoniker Name="/SignsDCDataContext/SignFio" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c3f20ce8-ad84-4483-98d1-88411dbdc9e0" absoluteBounds="1.1399999999999997, 0.96, 1.9700000000000002, 1.0291951497395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="34c6089e-8235-449f-b801-c0b84c671c02" absoluteBounds="3.625, 0.5, 2, 1.0961531575520833">
+      <DataClassMoniker Name="/SignsDCDataContext/SignerPoup" />
+      <nestedChildShapes>
+        <elementListCompartment Id="d813cad4-46da-414c-a8cc-3570fc927721" absoluteBounds="3.6399999999999997, 0.96, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(3.125 : 1.04807657877604); (3.625 : 1.04807657877604)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/SignsDCDataContext/SignFio/SignFio_SignerPoup" />
+      <nodes>
+        <classShapeMoniker Id="56434316-a123-49e0-ae1e-339c646e7fb0" />
+        <classShapeMoniker Id="34c6089e-8235-449f-b801-c0b84c671c02" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="38047433-21de-40ac-8f28-08fa3233627f" absoluteBounds="3.625, 2.75, 2, 1.26050048828125">
+      <DataClassMoniker Name="/SignsDCDataContext/SignType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1ffc6433-531b-48ef-b54d-269203865564" absoluteBounds="3.6400000000000006, 3.21, 1.9700000000000002, 0.70050048828125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="98fff3b8-859e-48b4-9750-ea932982d599" absoluteBounds="1.125, 2.75, 2, 1.5891951497395831">
+      <DataClassMoniker Name="/SignsDCDataContext/Sign" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f64a15ec-77bb-4b76-84ef-e1d0153b7011" absoluteBounds="1.1399999999999997, 3.21, 1.9700000000000002, 1.0291951497395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

@@ -1,0 +1,135 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Conv="clr-namespace:CommonModule.Converters;assembly=CommonModule"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             mc:Ignorable="d" x:Class="Realization.Views.StartView"
+             >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Conv:Int2BoolConverter x:Key="Int2Bool"/>
+            <Conv:Null2BoolConverter x:Key="Null2Bool"/>
+            <Conv:Null2VisibilityConverter x:Key="Null2Visibility"/>
+            <!--<Conv:DebugConverter x:Key="Debug"/>-->
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="{DynamicResource StartViewBackground}">
+        <Image Source="/Realization;component/Resources/start.png" Stretch="UniformToFill" HorizontalAlignment="Left" VerticalAlignment="Top" Opacity=".2">
+            <!--<Image.OpacityMask>
+                <RadialGradientBrush Center=".3,.7" RadiusX=".7" RadiusY="1">
+                    <GradientStop Offset="0" Color="#00FFFFFF"/>
+                    <GradientStop Offset="0.6" Color="#5AFFFFFF"/>
+                    <GradientStop Offset="1" Color="#00FFFFFF"/>
+                </RadialGradientBrush>
+            </Image.OpacityMask>-->
+        </Image>
+        <Expander Header="Информация" ExpandDirection="Down" IsExpanded="False"
+                  HorizontalAlignment="Left" VerticalAlignment="Top"
+                  Foreground="MidnightBlue" Background="Transparent" Style="{DynamicResource SimpleExpanderStyle}">
+            <Expander.Resources>
+                <ResourceDictionary>
+                    <LinearGradientBrush x:Key="ContentBorderBrush" StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Offset="0" Color="#FF4169E1"/>
+                        <GradientStop Offset="1" Color="#004169E1"/>
+                    </LinearGradientBrush>
+                    <LinearGradientBrush x:Key="ContentBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Offset="0" Color="#AAFFFFFF"/>
+                        <GradientStop Offset="0.8" Color="#AAFFFFFF"/>
+                        <GradientStop Offset="1" Color="Transparent"/>
+                    </LinearGradientBrush>
+                </ResourceDictionary>
+            </Expander.Resources>
+            <Border BorderBrush="{StaticResource ContentBorderBrush}" Background="{StaticResource ContentBackgroundBrush}"
+                    BorderThickness="1" CornerRadius="0,0,5,5">
+                <StackPanel Margin="3,3,3,10">
+                    <StackPanel Orientation="Horizontal" Margin="0,3">
+                        <TextBlock Text="Сервер:" Width="80" TextAlignment="Right" Foreground="Gray"/>
+                        <TextBlock Text="{Binding SysInfo.Server}" Foreground="DarkSlateGray" Margin="5,0,0,0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,3">
+                        <TextBlock Text="База данных:" Width="80" TextAlignment="Right" Foreground="Gray"/>
+                        <TextBlock Text="{Binding SysInfo.DataBase}" Foreground="DarkSlateGray" Margin="5,0,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Expander>
+        <StackPanel TextElement.Foreground="MidnightBlue" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <TextBlock Text="{Binding UserName}" HorizontalAlignment="Right" FontSize="14"/>
+            <TextBlock DataContext="{Binding UiExt}" Text="{Binding Position}" HorizontalAlignment="Right"
+                       Visibility="{Binding ., Converter={StaticResource Null2Visibility}, ConverterParameter={x:Static Visibility.Collapsed}}"/>
+        </StackPanel>
+        <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid DockPanel.Dock="Top" >
+                <Grid.Effect>
+                    <DropShadowEffect BlurRadius="8" ShadowDepth="3.77953" Opacity="1" Color="DarkGray" Direction="315"/>
+                </Grid.Effect>
+                <TextBlock FontSize="26"
+                       Text="{Binding Title}" 
+                       TextAlignment="Center"
+                       Foreground="MidnightBlue">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="White" ShadowDepth="0" BlurRadius="5" Direction="0" Opacity="1"/>
+                </TextBlock.Effect>
+                </TextBlock>
+            </Grid>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center" 
+                        TextBlock.FontSize="10" TextBlock.Foreground="DarkSlateGray">
+                <TextBlock Text="Версия: "/>
+                <TextBlock Text="{Binding Version}"/>
+            </StackPanel>
+            <ItemsControl ItemsSource="{Binding Modules}" DockPanel.Dock="Top" Focusable="False"
+                          IsEnabled="{Binding IsOnline}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <DataTemplate.Resources>
+                            <DrawingBrush Stretch="Fill" x:Key="NoIconBrush">
+                                    <DrawingBrush.Drawing>
+                                        <GeometryDrawing Brush="Green">
+                                            <GeometryDrawing.Geometry>
+                                                <GeometryGroup>
+                                                    <RectangleGeometry RadiusX=".1" RadiusY=".1" Rect="0,0,1,1" />
+                                                    <EllipseGeometry RadiusX="0.1" RadiusY="0.5" Center="0.5,0.5" />
+                                                    <EllipseGeometry RadiusX="0.5" RadiusY="0.1" Center="0.5,0.5" />
+                                                </GeometryGroup>
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                    </DrawingBrush.Drawing>
+                            </DrawingBrush>
+                        </DataTemplate.Resources>
+                        <Button Command="{Binding StartModule}"
+                                Style="{DynamicResource StartModuleButton}"
+                                IsEnabled="{Binding AccessLevel, Converter={StaticResource Int2Bool}}"
+                                x:Name="btn" 
+                                Focusable="False"
+                                Background="{Binding Info.IconBrush}">
+                            <!--<Button.Background>
+                                <ImageBrush Stretch="Uniform" ImageSource="{Binding Info.IconUri}"/>
+                            </Button.Background>-->
+                            <TextBlock Text="{Binding Info.Header}" Style="{DynamicResource StartModuleCommandText}"/>
+                        </Button>
+                        <DataTemplate.Triggers>
+                            <!--<DataTrigger Binding="{Binding Info.IconUri, Converter={StaticResource Null2Bool}}" Value="True">
+                                <Setter TargetName="btn" Property="Background">
+                                    <Setter.Value>
+                                        <ImageBrush Stretch="Uniform" ImageSource="{Binding Info.IconUri}"/>
+                                    </Setter.Value>
+                                </Setter>                                
+                            </DataTrigger>-->
+                            <DataTrigger Binding="{Binding Info.IconBrush}" Value="{x:Null}">
+                                <Setter TargetName="btn" Property="Background" Value="{StaticResource NoIconBrush}"/>
+                            </DataTrigger>
+                            <!--<ImageBrush Stretch="Uniform" ImageSource="{Binding Info.IconUri, PresentationTraceSources.TraceLevel=High}"/>-->
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </DockPanel>
+    </Grid>
+</UserControl>
+

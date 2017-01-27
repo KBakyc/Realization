@@ -1,0 +1,137 @@
+﻿<UserControl x:Class="SfModule.Views.PenaltyArcView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:cviews="clr-namespace:CommonModule.Views;assembly=CommonModule"
+             xmlns:conv="clr-namespace:CommonModule.Converters;assembly=CommonModule"
+             xmlns:sviews="clr-namespace:SfModule.Views"
+             Language="ru-RU">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ViewsDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="SRightAlignStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="TextAlignment" Value="Right" />
+            </Style>
+            
+            <conv:Null2VisibilityConverter x:Key="Null2Visibility"/>
+            <conv:Null2BoolConverter x:Key="Null2Bool"/>
+            <conv:Bool2VisibilityConverter x:Key="Bool2Visibility" HiddenState="False"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid IsEnabled="{Binding IsEnabled}">
+        <DockPanel>
+            <DockPanel DockPanel.Dock="Top" LastChildFill="False" >
+                <Button Command="{Binding AddPenaltyCommand}" Margin="3"
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Добавить">
+                    <Image Source="/SfModule;component/Resources/add.png" />
+                </Button>
+                <Button Command="{Binding EditPenaltyCommand}" Margin="3"
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Изменить">
+                    <Image Source="/SfModule;component/Resources/edit.png" />
+                </Button>
+                <Button Command="{Binding DeletePenaltyCommand}" Margin="3"
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Удалить">
+                    <Image Source="/SfModule;component/Resources/delete.png" />
+                </Button>
+                <Button Command="{Binding ShowPredoplsCommand}" Margin="3" 
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Показать предоплаты">
+                    <Image Source="/SfModule;component/Resources/money.png" />
+                </Button>
+                <Button Command="{Binding UndoPaysCommand}" Margin="3" 
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Аннулировать оплату">
+                    <Image Source="/SfModule;component/Resources/moneyX.png" />
+                </Button>                
+
+                <Button Margin="3" DockPanel.Dock="Right"
+                        Style="{DynamicResource CommandButton}"
+                        Command="{Binding RefreshCommand}"
+                        IsEnabled="{Binding RefreshCommand, Converter={StaticResource Null2Bool}}"
+                        CommandParameter="{Binding}"
+                        ToolTip="Обновить">
+                    <Image Source="/SfModule;component/Resources/refresh.png" />
+                </Button>
+            </DockPanel>
+            <Grid DockPanel.Dock="Top">
+                <cviews:PoupAndDateRangeTitleView />                
+            </Grid>
+            <DockPanel>
+                <!--<sviews:SfDetailsView DockPanel.Dock="Right" 
+                                      DataContext="{Binding ElementName=SfListGrid, Path=SelectedItem.View}"
+                                      Visibility="{Binding ElementName=chkBoxShowDescription,
+                                                           Path=IsChecked, Converter={StaticResource Bool2Visibility}, ConverterParameter=Collapse}"/>-->
+                <DataGrid ItemsSource="{Binding PenaltyList}" AutoGenerateColumns="False" 
+                              CanUserAddRows="False" 
+                              Name="PenListGrid"
+                              CanUserDeleteRows="False" IsReadOnly="True"
+                              IsSynchronizedWithCurrentItem="False" SelectionUnit="FullRow"
+                              SelectionMode="Extended" 
+                              SelectedItem="{Binding SelectedPenalty}"
+                              Style="{DynamicResource PenaltyDataGridStyle}"                              
+                              >
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Плательщик" SortMemberPath="Platelschik.Kgr">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Platelschik.Kgr}" MinWidth="30" Margin="0,0,5,0" Style="{StaticResource SRightAlignStyle}"/>
+                                        <TextBlock Text="{Binding Platelschik.Name}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Binding="{Binding Nomish}" Header="Номер исх."/>
+                        <DataGridTextColumn Binding="{Binding Nomkro}" Header="№ в КРО"  ElementStyle="{StaticResource SRightAlignStyle}"/>
+                        <DataGridTextColumn Binding="{Binding Datkro, StringFormat=dd/MM/yyyy}" Header="Дата КРО"/>
+                        <DataGridTextColumn Binding="{Binding Datgr, StringFormat=dd/MM/yyyy}" Header="Дата учёта"/>
+                        <DataGridTextColumn Binding="{Binding Sumpenalty, StringFormat='# ### ### ### ###.##'}" Header="Сумма пени" 
+                                                    ElementStyle="{StaticResource SRightAlignStyle}"/>
+                        <DataGridTextColumn Binding="{Binding Kodval}" Header="$"/>
+                        <DataGridTemplateColumn SortMemberPath="SumOpl">                           
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Rectangle Margin="1">
+                                        <Rectangle.Style>
+                                            <Style TargetType="Rectangle">
+                                                <Setter Property="Fill" Value="Yellow"/>
+                                                <Setter Property="Stroke" Value="Green"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding SumOpl}" Value="0">
+                                                        <Setter Property="Fill" Value="White"/>
+                                                        <Setter Property="Stroke" Value="Gray"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding IsClosed}" Value="True">
+                                                        <Setter Property="Fill" Value="Lime"/>
+                                                        <Setter Property="Stroke" Value="DarkGreen"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Rectangle.Style>
+                                        <Rectangle.ToolTip>
+                                            <ToolTip Content="{Binding SumOpl}">
+                                                <ToolTip.ContentTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Text="Оплачено: "/>
+                                                            <TextBlock Text="{Binding ., StringFormat='#,0.00'}"/>
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </ToolTip.ContentTemplate>
+                                            </ToolTip>
+                                        </Rectangle.ToolTip>                                       
+                                    </Rectangle>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</UserControl>

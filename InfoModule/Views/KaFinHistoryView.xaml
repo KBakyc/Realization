@@ -1,0 +1,660 @@
+﻿<UserControl x:Class="InfoModule.Views.KaFinHistoryView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sysw="clr-namespace:System.Windows;assembly=PresentationCore"
+    xmlns:System="clr-namespace:System;assembly=mscorlib"
+    xmlns:cdv="clr-namespace:CommonModule.DataViews;assembly=CommonModule"
+    xmlns:conv="clr-namespace:CommonModule.Converters;assembly=CommonModule"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:beh="clr-namespace:CommonModule.Behaviours;assembly=CommonModule"
+    >
+    <UserControl.Resources>
+        <Style x:Key="RightAlignStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="TextAlignment" Value="Right" />
+        </Style>
+        <RotateTransform Angle="180" x:Key="rTrans" CenterX="5" CenterY="5"/>
+        <Style x:Key="GridSplitterStyle" TargetType="GridSplitter">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Orange"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <conv:Bool2VisibilityConverter x:Key="Bool2Visibility"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <DockPanel LastChildFill="False">
+            <Button Command="{Binding GoToSfsCommand}" Margin="3"
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Перейти к выбранным счетам">
+                <Image Source="/InfoModule;component/Resources/paste.png" />
+            </Button>
+            <Button Command="{Binding GoToPredoplsCommand}" Margin="3"
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Перейти к выбранным предоплатам">
+                <Image Source="/InfoModule;component/Resources/money.png" />
+            </Button>
+        </DockPanel>
+        <Border BorderBrush="RoyalBlue" BorderThickness="1" Grid.Row="1"
+                    CornerRadius="5">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="AliceBlue" Offset="1"/>
+                    <GradientStop Color="White" Offset="0.1"/>
+                    <GradientStop Color="AliceBlue" Offset="0"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Grid TextElement.FontSize="12">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Название" Margin="5,2" Foreground="RoyalBlue"/>
+                    <StackPanel Orientation="Horizontal" Margin="2" Grid.Column="1">
+                        <TextBlock Text="{Binding KaRef.Kgr, StringFormat='[{0}]'}" FontWeight="Bold" Foreground="DarkSlateBlue"/>
+                        <TextBlock Text="{Binding KaRef.Name}" FontWeight="Bold" Foreground="DarkSlateBlue" Margin="10,0,0,0"/>
+                    </StackPanel>                    
+                    <TextBlock Text="Адрес" Margin="5,2" Grid.Row="1" Foreground="RoyalBlue"/>
+                    <TextBlock Text="{Binding KaRef.Address}" Margin="2" Grid.Column="1" Grid.Row="1" FontWeight="Bold" Foreground="DarkSlateBlue"/>
+                    <TextBlock Text="Направление" Margin="5,2" Grid.Row="2" Foreground="RoyalBlue"/>
+                    <TextBlock Text="{Binding PoupsLabel}" Margin="2" Grid.Column="1" Grid.Row="2" FontWeight="Bold" Foreground="DarkSlateBlue"/>
+                    <TextBlock Text="За период" Margin="5,2" Grid.Row="3" Foreground="RoyalBlue"/>
+                    <StackPanel Orientation="Horizontal" Margin="2" Grid.Column="1" Grid.Row="3">
+                        <TextBlock Text="С" Foreground="RoyalBlue"/>
+                        <TextBlock Text="{Binding Date1, StringFormat=dd/MM/yyyy}" FontWeight="Bold" Width="100" TextAlignment="Center" Foreground="DarkSlateBlue"/>
+                        <TextBlock Text="по" Foreground="RoyalBlue"/>
+                        <TextBlock Text="{Binding Date2, StringFormat=dd/MM/yyyy}" FontWeight="Bold" Width="100" TextAlignment="Center" Foreground="DarkSlateBlue"/>
+                    </StackPanel>
+                </Grid>
+                <GroupBox Header="Режим просмотра" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="3" Background="WhiteSmoke" BorderBrush="RoyalBlue">
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox Content="Доп. информация по счетам" Foreground="RoyalBlue" Margin="2" IsChecked="{Binding IsShowSfDetails}" x:Name="cbShowSfDetails"
+                                  Click="cbShowSfDetails_Checked"/>
+                        <CheckBox Content="по предоплатам" Foreground="RoyalBlue" Margin="2" IsChecked="{Binding IsShowPredoplDetails}" x:Name="cbShowPredoplDetails"/>
+                    </StackPanel>
+                </GroupBox>
+            </Grid>
+        </Border>
+        <Grid Grid.Row="2" x:Name="FinsostGrid">
+            <i:Interaction.Behaviors>
+                <beh:GridSaveLayoutBehavior/>
+            </i:Interaction.Behaviors>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <GridSplitter Grid.Column="1" Grid.RowSpan="5" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch"
+                          Style="{StaticResource GridSplitterStyle}"/>
+            <DockPanel Grid.Column="0" Grid.Row="0" TextElement.FontSize="12">
+                <TextBlock Text="Входящие остатки" DockPanel.Dock="Top" Margin="3,1" 
+                           FontWeight="Bold" Background="SteelBlue" Foreground="White"/>
+                <Line Stroke="Gray" DockPanel.Dock="Top" StrokeThickness="2" X1="0" X2="1" Stretch="Fill"/>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="3,1">
+                    <TextBlock Text="Неоплаченные счета:" VerticalAlignment="Top"/>
+                    <ItemsControl ItemsSource="{Binding InSfsNeoplOst}" Focusable="False">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel VerticalAlignment="Center"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Summa, StringFormat='### ### ### ### ##0.00'}" 
+                                               TextAlignment="Right" Background="White"/>
+                                    <TextBlock Text="{Binding KodVal}" Margin="5,0" FontWeight="Bold"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </DockPanel>
+            <Grid Grid.Column="0" Grid.Row="1" x:Name="FinsostSfsGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" MinHeight="80"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <DockPanel Grid.Row="0" TextElement.FontSize="12" LastChildFill="False">
+                    <TextBlock Background="SteelBlue" Foreground="White" FontWeight="Bold"
+                       Text="Счета-фактуры отчётного периода" DockPanel.Dock="Top" Padding="3"/>
+                    <DataGrid ItemsSource="{Binding KaSfsList}" AutoGenerateColumns="False"
+                               DockPanel.Dock="Top"
+                               IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False" 
+                               ColumnHeaderHeight="25" CanUserSortColumns="True"
+                               VerticalScrollBarVisibility="Visible"                               
+                               SelectedItem="{Binding SelectedSf}" IsSynchronizedWithCurrentItem="True" SelectionUnit="FullRow" SelectionMode="Extended"
+                               Style="{DynamicResource DefaultDataGridStyle}"
+                               Name="FinsostSfs">
+                        <i:Interaction.Behaviors>
+                            <beh:DataGridSaveOrderingsBehavior/>
+                        </i:Interaction.Behaviors>
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn IsReadOnly="True" SortMemberPath="Value.PoupVmRef.SortBy">
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="НР" ToolTip="Направление реализации"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Value.PoupVmRef.ShortTitle}" Background="Transparent"
+                                       ToolTip="{Binding Value.PoupVmRef.Title}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn SortMemberPath="Value.NumSf">
+                                <DataGridTemplateColumn.Header>
+                                    <TextBlock Text="№" ToolTip="Номер счёта-фактуры"/>
+                                </DataGridTemplateColumn.Header>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Value.NumSf}"/>
+                                            <TextBlock DataContext="{Binding Value.SfType}" Text="{Binding SfTypeLabel}" Foreground="Red" Background="Transparent" ToolTip="{Binding SfTypeDescription}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Binding="{Binding Value.DatePltr, StringFormat=dd/MM/yyyy}" Width="80">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="Дата вып." ToolTip="Дата выписки счёта-фактуры"/>
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Value.DatUch, StringFormat=dd/MM/yyyy}" Width="80">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="Дата учёта" ToolTip="Дата отгрузки/бухучёта счёта-фактуры"/>
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>                           
+                            <DataGridTextColumn Binding="{Binding Value.SumPltr, StringFormat='### ### ### ### ##0.00'}" 
+                                                ElementStyle="{StaticResource RightAlignStyle}">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="Сумма" ToolTip="Сумма по счёту-фактуре"/>
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Value.KodVal}" Width="35">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="$" ToolTip="Валюта суммы по счёту-фактуре"/>
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Value.SumOpl, StringFormat='### ### ### ### ##0.00'}" 
+                                                     ElementStyle="{StaticResource RightAlignStyle}">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="Оплачено" ToolTip="Оплачено за отчётный период"/>
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Value.SumOst, StringFormat='### ### ### ### ##0.00'}" 
+                                                     ElementStyle="{StaticResource RightAlignStyle}">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="Остаток" ToolTip="Остаток к оплате по счёту-фактуре на конец отчётного периода"/>
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                        <DataGrid.RowStyle>
+                            <!--SelectableDataGridRowStyle-->
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="FontSize" Value="12"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="IsSelected" Value="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="BorderBrush" Value="RoyalBlue"/>
+                                        <Setter Property="Background" Value="{StaticResource DataGridSelectedRowBackgroundBrush}" />
+                                        <Setter Property="Foreground" Value="Black" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.RowStyle>
+                    </DataGrid>
+                </DockPanel>
+                <GridSplitter Grid.Row="1" Height="3" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                              Visibility="{Binding ElementName=cbShowSfDetails, Path=IsChecked, Converter={StaticResource Bool2Visibility}, ConverterParameter=Collapse}"
+                              Style="{StaticResource GridSplitterStyle}"/>
+                <cdv:SfDetailsView DataContext="{Binding SelectedSf.Value.View}" x:Name="sfdetails"
+                               Visibility="{Binding ElementName=cbShowSfDetails, Path=IsChecked, Converter={StaticResource Bool2Visibility}, ConverterParameter=Collapse}"
+                               Grid.Row="2"
+                               />
+                <Grid xmlns:Progress="clr-namespace:Progress;assembly=CommonModule" Grid.Row="2" Margin="10">
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedSf.Value.View}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding SelectedSf}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=cbShowSfDetails, Path=IsChecked}" Value="false">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
+                    <Progress:CircularProgressBar VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.7" Focusable="False">
+                        <Progress:CircularProgressBar.LayoutTransform>
+                            <ScaleTransform ScaleX=".3" ScaleY=".3"/>
+                        </Progress:CircularProgressBar.LayoutTransform>
+                    </Progress:CircularProgressBar>
+                    <TextBlock Text="Загрузка данных..." Padding="10" VerticalAlignment="Center" TextAlignment="Center" FontSize="12" Foreground="RoyalBlue">
+                        <TextBlock.Background>
+                            <LinearGradientBrush ice:Freeze="True" xmlns:ice="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options" 
+                                                 StartPoint="0,1" EndPoint="0,0" >
+                                <GradientStop Color="Transparent" Offset="0.2"/>
+                                <GradientStop Color="White" Offset="0.5"/>
+                                <GradientStop Color="Transparent" Offset="0.8"/>
+                            </LinearGradientBrush>
+                        </TextBlock.Background>
+                    </TextBlock>
+                </Grid>
+            </Grid>
+            <DockPanel Grid.Column="0" Grid.Row="2" TextElement.FontSize="12" LastChildFill="False">
+                <StackPanel DockPanel.Dock="Bottom">
+                    <TextBlock Text="Изменение за отчётный период" DockPanel.Dock="Top" Margin="3,1" 
+                           FontWeight="Bold" Background="SteelBlue" Foreground="White"/>
+                    <Line Stroke="Gray" DockPanel.Dock="Top" StrokeThickness="2" X1="0" X2="1" Stretch="Fill"/>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="3,1">
+                        <TextBlock Text="Отгружено:" VerticalAlignment="Top"/>
+                        <ItemsControl ItemsSource="{Binding AllSfsSumOtgr}" Focusable="False">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel VerticalAlignment="Center"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Summa, StringFormat='### ### ### ### ##0.00'}" 
+                                               TextAlignment="Right" Background="White"/>
+                                        <TextBlock Text="{Binding KodVal}" Margin="5,0" FontWeight="Bold"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <!--<TextBlock Text="Оплачено:" VerticalAlignment="Top" Margin="20,0"/>
+                        <ItemsControl ItemsSource="{Binding AllSfsSumOpl}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Summa, StringFormat='0,###.##'}" 
+                                               TextAlignment="Right" Width="100" Background="White"/>
+                                        <TextBlock Text="{Binding KodVal}" Margin="5,0" FontWeight="Bold"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>-->
+                    </StackPanel>
+                </StackPanel>
+            </DockPanel>
+            <DockPanel Grid.Column="0" Grid.Row="3" TextElement.FontSize="12" LastChildFill="False">
+                <TextBlock Text="Исходящие остатки" DockPanel.Dock="Top" Margin="3,1" 
+                           FontWeight="Bold" Background="SteelBlue" Foreground="White"/>
+                <Line Stroke="Gray" DockPanel.Dock="Top" StrokeThickness="2" X1="0" X2="1" Stretch="Fill"/>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="3,1">
+                    <TextBlock Text="Неоплаченные счета:" VerticalAlignment="Top"/>
+                    <ItemsControl ItemsSource="{Binding OutSfsNeoplOst}" Focusable="False">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel VerticalAlignment="Center"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Summa, StringFormat='### ### ### ### ##0.00'}" 
+                                               TextAlignment="Right" Background="White"/>
+                                    <TextBlock Text="{Binding KodVal}" Margin="5,0" FontWeight="Bold"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </DockPanel>
+
+            <DockPanel Grid.Column="2" Grid.Row="0" TextElement.FontSize="12">
+                <TextBlock Text="Входящие остатки" DockPanel.Dock="Top" Margin="3,1" 
+                           FontWeight="Bold" Background="SteelBlue" Foreground="White"/>
+                <Line Stroke="Gray" DockPanel.Dock="Top" StrokeThickness="2" X1="0" X2="1" Stretch="Fill"/>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="3,1">
+                    <TextBlock Text="Предоплаты:" VerticalAlignment="Top"/>
+                    <ItemsControl ItemsSource="{Binding InPredoplsOst}" Focusable="False">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel VerticalAlignment="Center"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Summa, StringFormat='### ### ### ### ##0.00'}" 
+                                               TextAlignment="Right" Foreground="DarkGreen"/>
+                                    <TextBlock Text="{Binding KodVal}" Margin="5,0" FontWeight="Bold"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <TextBlock Text="Возвраты:" VerticalAlignment="Top" Margin="20,0"/>
+                    <ItemsControl ItemsSource="{Binding InVozvratOst}" Focusable="False">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel VerticalAlignment="Center"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Summa, StringFormat='### ### ### ### ##0.00'}" 
+                                               TextAlignment="Right" Foreground="Firebrick"/>
+                                    <TextBlock Text="{Binding KodVal}" Margin="5,0" FontWeight="Bold"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </DockPanel>
+            <Grid Grid.Column="2" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" MinHeight="100"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <DockPanel Grid.Column="0" Grid.Row="0"
+                       TextElement.FontSize="12"  LastChildFill="False">
+                    <TextBlock Background="SteelBlue" Foreground="White" FontWeight="Bold"
+                       Text="Предоплаты отчётного периода" DockPanel.Dock="Top" Padding="3"/>
+                    <DataGrid ItemsSource="{Binding KaPredoplsList}" AutoGenerateColumns="False"
+                               DockPanel.Dock="Top"
+                               IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"
+                               ColumnHeaderHeight="25" CanUserSortColumns="True"
+                               SelectionMode="Extended" SelectionUnit="FullRow"
+                               VerticalScrollBarVisibility="Visible"
+                               SelectedItem="{Binding SelectedPredopl}" IsSynchronizedWithCurrentItem="True"
+                               Style="{DynamicResource DefaultDataGridStyle}"
+                               Name="FinsostPreds">
+                        <i:Interaction.Behaviors>
+                            <beh:DataGridSaveOrderingsBehavior/>
+                        </i:Interaction.Behaviors>
+                        <DataGrid.Resources>
+                            <RadialGradientBrush x:Key="IndClosed">
+                                <GradientStop Offset="0" Color="Red"/>
+                                <GradientStop Offset="1" Color="White"/>
+                            </RadialGradientBrush>
+                            <RadialGradientBrush x:Key="IndWithOtgr">
+                                <GradientStop Offset="0" Color="Gold"/>
+                                <GradientStop Offset="1" Color="White"/>
+                            </RadialGradientBrush>
+                            <RadialGradientBrush x:Key="IndFromPredopl">
+                                <GradientStop Offset="0" Color="Green"/>
+                                <GradientStop Offset="1" Color="White"/>
+                            </RadialGradientBrush>
+                            <!--<SolidColorBrush x:Key="IndFromPredopl" Color="YellowGreen"/>-->
+                            <!--<SolidColorBrush x:Key="IndWithOtgr" Color="Yellow"/>-->
+                            <!--<SolidColorBrush x:Key="IndClosed" Color="Tomato"/>-->
+                            <SolidColorBrush x:Key="IndFromFinance" Color="Tomato"/>
+                            <ToolTip x:Key="PredoplLegend" ToolTipService.ShowDuration="5000">
+                                <ToolTip.ContentTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Margin="5">
+                                            <StackPanel Orientation="Horizontal" Margin="0,2">
+                                                <Ellipse Height="15" Width="15" Stroke="Gray" StrokeThickness="2" Fill="White"/>
+                                                <TextBlock Text="- В подсистеме Финансы" Margin="5,0"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="0,2">
+                                                <Ellipse Height="15" Width="15" Stroke="Gray" StrokeThickness="2" Fill="{StaticResource IndFromPredopl}"/>
+                                                <TextBlock Text="- Принята" Margin="5,0"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="0,2">
+                                                <Ellipse Height="15" Width="15" Stroke="Gray" StrokeThickness="2" Fill="{StaticResource IndWithOtgr}"/>
+                                                <TextBlock Text="- Частично погашена" Margin="5,0"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="0,2">
+                                                <Ellipse Height="15" Width="15" Stroke="Gray" StrokeThickness="2" Fill="{StaticResource IndClosed}"/>
+                                                <TextBlock Text="- Закрыта" Margin="5,0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ToolTip.ContentTemplate>
+                            </ToolTip>
+                            <ToolTip x:Key="DirLegend" ToolTipService.ShowDuration="5000">
+                                <ToolTip.ContentTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Margin="5">
+                                            <StackPanel Orientation="Horizontal" Margin="0,2">
+                                                <Path Data="M5,0L5,10M0,7L5,10L10,7" Stroke="Green" StrokeThickness="2" 
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                <TextBlock Text="- Поступление средств" Margin="5,0"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="0,2">
+                                                <Path Data="M5,0L5,10M0,7L5,10L10,7" Stroke="Red" StrokeThickness="2" 
+                                                      HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                      RenderTransform="{StaticResource rTrans}"/>
+                                                <TextBlock Text="- Возврат средств" Margin="5,0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ToolTip.ContentTemplate>
+                            </ToolTip>
+                        </DataGrid.Resources>
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="FontSize" Value="12"/>
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="IsSelected" Value="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="BorderBrush" Value="RoyalBlue"/>
+                                        <Setter Property="Background" Value="{StaticResource DataGridSelectedRowBackgroundBrush}" />
+                                        <Setter Property="Foreground" Value="Black" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.RowStyle>
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Width="20" SortMemberPath="Value.Direction">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid Background="Transparent" ToolTip="{StaticResource DirLegend}" Margin="-3,-1">
+                                            <Path x:Name="pDir" Data="M5,0L5,10M0,7L5,10L10,7" Stroke="Green" StrokeThickness="2" 
+                                              HorizontalAlignment="Center" VerticalAlignment="Center" Margin="2,1"
+                                              />
+                                        </Grid>
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding Value.Direction}" Value="1">
+                                                <Setter TargetName="pDir" Property="Stroke" Value="Red"/>
+                                                <Setter TargetName="pDir" Property="RenderTransform" Value="{StaticResource rTrans}"/>
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn IsReadOnly="True" SortMemberPath="Value.PoupVmRef.SortBy">
+                                <DataGridTemplateColumn.Header>
+                                    <TextBlock Text="НР" ToolTip="Направление реализации"/>                                    
+                                </DataGridTemplateColumn.Header>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Value.PoupVmRef.ShortTitle}" Background="Transparent"
+                                       ToolTip="{Binding Value.PoupVmRef.Title}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Binding="{Binding Value.NomDok}" Width="50">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="№" ToolTip="Номер платёжного документа"/>
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Value.DatDok, StringFormat=dd/MM/yyyy}" Width="80">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="Дата пост." ToolTip="Дата поступления/регистрации платежа"/>
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Value.SumPropl, StringFormat='### ### ### ### ##0.00'}" 
+                                                     ElementStyle="{StaticResource RightAlignStyle}">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="Сумма" ToolTip="Сумма платежа"/>
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Value.SumOtgr, StringFormat='### ### ### ### ##0.00'}" 
+                                                     ElementStyle="{StaticResource RightAlignStyle}">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="Отгружено" ToolTip="Отгружено продукции / оказано услуг по зарегистрированному платежу за отчётный период"/>
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Binding="{Binding Value.ValPropl.ShortName}" >
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="$" ToolTip="Валюта зарегистрированного платежа"/>
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                            <DataGridTemplateColumn Width="25">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Grid Background="Transparent" Margin="-3,-1" ToolTip="{StaticResource PredoplLegend}">
+                                            <Ellipse Height="15" Width="15" Stroke="Gray" StrokeThickness="2" 
+                                                     HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Ellipse.Style>
+                                                    <Style TargetType="{x:Type Ellipse}">
+                                                        <Setter Property="Fill" Value="{StaticResource IndClosed}"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Value.DatZakr}" Value="{x:Null}">
+                                                                <Setter Property="Fill" Value="{StaticResource IndWithOtgr}"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Value.SumOtgr}" Value="0">
+                                                                <Setter Property="Fill" Value="{StaticResource IndFromPredopl}"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Value.Idpo}" Value="0">
+                                                                <Setter Property="Fill" Value="White"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Ellipse.Style>
+                                            </Ellipse>
+                                        </Grid>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Binding="{Binding Value.Ostatok, StringFormat='### ### ### ### ##0.00'}" 
+                                                     ElementStyle="{StaticResource RightAlignStyle}">
+                                <DataGridTextColumn.Header>
+                                    <TextBlock Text="Остаток" ToolTip="Остаток суммы платежа на конец отчётного периода"/>
+                                </DataGridTextColumn.Header>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+                <cdv:PredoplDetailsView DataContext="{Binding SelectedPredopl.Value}" IsShowAgreement="True"
+                               Visibility="{Binding ElementName=cbShowPredoplDetails, Path=IsChecked, Converter={StaticResource Bool2Visibility}, ConverterParameter=Collapse}"
+                               Grid.Column="0" Grid.Row="1"
+                               />
+            </Grid>
+            <DockPanel Grid.Column="2" Grid.Row="2"
+                       TextElement.FontSize="12"  LastChildFill="False">
+                <StackPanel DockPanel.Dock="Bottom">
+                    <TextBlock Text="Изменение за отчётный период" DockPanel.Dock="Top" Margin="3,1" 
+                           FontWeight="Bold" Background="SteelBlue" Foreground="White"/>
+                    <Line Stroke="Gray" DockPanel.Dock="Top" StrokeThickness="2" X1="0" X2="1" Stretch="Fill"/>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="3,1">
+                        <TextBlock Text="Оплачено:" VerticalAlignment="Top"/>
+                        <ItemsControl ItemsSource="{Binding AllPredSumOpl}" Focusable="False">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel VerticalAlignment="Center"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Summa, StringFormat='### ### ### ### ##0.00'}" 
+                                               TextAlignment="Right" Background="White"/>
+                                        <TextBlock Text="{Binding KodVal}" Margin="5,0" FontWeight="Bold"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </StackPanel>
+            </DockPanel>
+            <DockPanel Grid.Column="2" Grid.Row="3" TextElement.FontSize="12"  LastChildFill="False">
+                <TextBlock Text="Исходящие остатки" DockPanel.Dock="Top" Margin="3,1" 
+                           FontWeight="Bold" Background="SteelBlue" Foreground="White"/>
+                <Line Stroke="Gray" DockPanel.Dock="Top" StrokeThickness="2" X1="0" X2="1" Stretch="Fill"/>
+                <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="3,1">
+                    <TextBlock Text="Предоплаты:" VerticalAlignment="Top"/>
+                    <ItemsControl ItemsSource="{Binding OutPredoplsOst}" Focusable="False">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel VerticalAlignment="Center"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Summa, StringFormat='### ### ### ### ##0.00'}" 
+                                               TextAlignment="Right" Foreground="DarkGreen"/>
+                                    <TextBlock Text="{Binding KodVal}" Margin="5,0" FontWeight="Bold"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <TextBlock Text="Возвраты:" VerticalAlignment="Top" Margin="20,0"/>
+                    <ItemsControl ItemsSource="{Binding OutVozvratOst}" Focusable="False">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel VerticalAlignment="Center"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Summa, StringFormat='### ### ### ### ##0.00'}" 
+                                               TextAlignment="Right" Foreground="Firebrick"/>
+                                    <TextBlock Text="{Binding KodVal}" Margin="5,0" FontWeight="Bold"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </DockPanel>
+            <DockPanel Grid.Row="4" Grid.ColumnSpan="3" LastChildFill="False">
+                <TextBlock Text="Сальдо:" Margin="3,1" Padding="3" 
+                           FontWeight="Bold" Background="OrangeRed" Foreground="White"/>
+                <ItemsControl ItemsSource="{Binding OutSaldos}" Focusable="False">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel VerticalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Summa, StringFormat='### ### ### ### ##0.00'}" 
+                                               TextAlignment="Right" Background="White" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding KodVal}" Margin="5,0" FontWeight="Bold" Foreground="DarkGray" FontStyle="Italic"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </DockPanel>
+
+        </Grid>
+    </Grid>
+</UserControl>

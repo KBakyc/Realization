@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A2DCA06B-6BB9-4C7F-9937-31B2BFCE8D3E}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>InfoModule</RootNamespace>
+    <AssemblyName>InfoModule</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.ReportViewer.11.0.3366.16\lib\Microsoft.ReportViewer.WinForms.DLL</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\FinSostModuleCommand.cs" />
+    <Compile Include="Commands\JournalsModuleCommand.cs" />
+    <Compile Include="Commands\KursesModuleCommand.cs" />
+    <Compile Include="Commands\HelpModuleCommand.cs" />
+    <Compile Include="Commands\FavoriteReportsModuleCommand.cs" />
+    <Compile Include="Commands\WorkCalendarModuleCommand.cs" />
+    <Compile Include="Commands\SalesJournalSettingsCommand.cs" />
+    <Compile Include="Commands\ReportsInfoModuleCommand.cs" />
+    <Compile Include="Commands\SignersModuleCommand.cs" />
+    <Compile Include="Commands\SyncStatusModuleCommand.cs" />
+    <Compile Include="Commands\PoupSettingsModuleCommand.cs" />
+    <Compile Include="Commands\SignSettingsModuleCommand.cs" />
+    <Compile Include="ExportedModuleViews.xaml.cs">
+      <DependentUpon>ExportedModuleViews.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\F744ParamsGetter.cs" />
+    <Compile Include="Helpers\FDebCredParamsGetter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\GetJournalParamsDlgViewModel.cs" />
+    <Compile Include="ViewModels\GetJournalBuyParamsDlgViewModel.cs" />
+    <Compile Include="ViewModels\KaFinHistoryViewModel.cs" />
+    <Compile Include="ViewModels\WorkCalendarViewModel.cs" />
+    <Compile Include="ViewModels\SalesJournalTypeDlgViewModel.cs" />
+    <Compile Include="ViewModels\SalesJournalTypeViewModel.cs" />
+    <Compile Include="ViewModels\SignersDlgViewModel.cs" />
+    <Compile Include="ViewModels\SignerViewModel.cs" />
+    <Compile Include="ViewModels\SyncStatusViewModel.cs" />
+    <Compile Include="ViewModels\InfoModuleViewModel.cs" />
+    <Compile Include="ViewModels\PoupSettingsViewModel.cs" />
+    <Compile Include="ViewModels\SignsSettingsViewModel.cs" />
+    <Compile Include="ViewModels\TableSyncStatusViewModel.cs" />
+    <Compile Include="Views\GetJournalBuyParamsDlgView.xaml.cs">
+      <DependentUpon>GetJournalBuyParamsDlgView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GetJournalParamsDlgView.xaml.cs">
+      <DependentUpon>GetJournalParamsDlgView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\KaFinHistoryView.xaml.cs">
+      <DependentUpon>KaFinHistoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PoupSettingsView.xaml.cs">
+      <DependentUpon>PoupSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SalesJournalTypeDlgView.xaml.cs">
+      <DependentUpon>SalesJournalTypeDlgView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SignersDlgView.xaml.cs">
+      <DependentUpon>SignersDlgView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SignsSettingsView.xaml.cs">
+      <DependentUpon>SignsSettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SyncStatusView.xaml.cs">
+      <DependentUpon>SyncStatusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WorkCalendarView.xaml.cs">
+      <DependentUpon>WorkCalendarView.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommonModule\CommonModule.csproj">
+      <Project>{061430C9-595F-4E30-8CF3-009E0C4E7E98}</Project>
+      <Name>CommonModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{262D9D78-C88E-4B1C-BA14-01B07547FC81}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataObjects\DataObjects.csproj">
+      <Project>{7E6E6835-306F-4046-8FBD-1F9512BDC920}</Project>
+      <Name>DataObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ReplicationService\ReplicationService.csproj">
+      <Project>{39C03E47-D49C-4806-9408-34A29BAFCC4F}</Project>
+      <Name>ReplicationService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="ExportedModuleViews.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\GetJournalBuyParamsDlgView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\GetJournalParamsDlgView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\KaFinHistoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PoupSettingsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SalesJournalTypeDlgView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SignersDlgView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SignsSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SyncStatusView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WorkCalendarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\paste.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\money.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\bt_play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\bt_ff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\bar_chart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\add.png" />
+    <Resource Include="Resources\apply.png" />
+    <Resource Include="Resources\delete.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>Copy /y $(TargetDir)$(TargetFileName) $(SolutionDir)Realization\$(OutDir)
+Copy /y $(TargetDir)$(TargetFileName).config $(SolutionDir)Realization\$(OutDir)</PostBuildEvent>
+  </PropertyGroup>
+</Project>

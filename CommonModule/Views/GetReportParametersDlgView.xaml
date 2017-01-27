@@ -1,0 +1,239 @@
+﻿<UserControl x:Class="CommonModule.Views.GetReportParametersDlgView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:c="clr-namespace:CommonModule.Controls"
+             xmlns:conv="clr-namespace:CommonModule.Converters"
+             mc:Ignorable="d" MaxWidth="800">
+    <UserControl.Resources>
+        <conv:Bool2VisibilityConverter HiddenState="True" x:Key="True2Hidden"/>
+        <conv:Bool2VisibilityConverter HiddenState="False" x:Key="False2Hidden"/>
+        <conv:BoolNotConverter x:Key="BoolNot"/>
+        <!--<conv:DebugConverter x:Key="Debug"/>-->
+        <DataTemplate x:Key="DefaultTemplate">
+            <TextBox Text="{Binding SelectedValue}" MaxWidth="500" MinWidth="50" TextWrapping="Wrap"
+                     Loaded="TextBox_Loaded" Style="{DynamicResource FocusableTextBox}"/>
+        </DataTemplate>
+
+        <Style x:Key="cbItemStyle" TargetType="ComboBoxItem">
+            <Setter Property="Focusable" Value="False"/>
+        </Style>
+
+        <DataTemplate x:Key="ValidValuesTemplate">
+            <ComboBox SelectedValue="{Binding SelectedValue, Mode=TwoWay}"
+                      DisplayMemberPath="Key.Value" SelectedValuePath="Value" 
+                      ItemsSource="{Binding AvailableValues}" 
+                      VerticalAlignment="Top" Focusable="False" ItemContainerStyle="{StaticResource cbItemStyle}"/>
+        </DataTemplate>
+        <DataTemplate x:Key="MultiValuesTemplate">
+            <c:ComboBoxEx ItemsSource="{Binding AvailableValuesWithOptions}" 
+                          IsEditable="False" IsReadOnly="True" Focusable="False"
+                          Text="{Binding SelectedLabel, Mode=OneWay}"
+                          VerticalAlignment="Top"
+                          IsDropDownOpen="{Binding IsEditing, Mode=TwoWay}">
+                <c:ComboBoxEx.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
+                    </ItemsPanelTemplate>
+                </c:ComboBoxEx.ItemsPanel>
+                <c:ComboBoxEx.ItemContainerStyle>
+                    <Style TargetType="ComboBoxItem" BasedOn="{StaticResource cbItemStyle}">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ComboBoxItem">
+                                    <ContentPresenter Focusable="False"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </c:ComboBoxEx.ItemContainerStyle>
+                <c:ComboBoxEx.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox IsChecked="{Binding Key.IsSelected, UpdateSourceTrigger=PropertyChanged}" Content="{Binding Key.Value}" Margin="2" Focusable="False"/>
+                    </DataTemplate>
+                </c:ComboBoxEx.ItemTemplate>
+                <c:ComboBoxEx.SelectionBoxTemplate>
+                    <DataTemplate>
+                        <TextBlock DataContext="{Binding RelativeSource={RelativeSource AncestorType=c:ComboBoxEx}, Path=DataContext}" 
+                                   Text="{Binding Path=SelectedLabel, Mode=OneWay}"/>
+                    </DataTemplate>
+                </c:ComboBoxEx.SelectionBoxTemplate>
+            </c:ComboBoxEx>
+        </DataTemplate>
+        <DataTemplate x:Key="DateTemplate">
+            <DatePicker SelectedDate="{Binding DateValue, UpdateSourceTrigger=LostFocus}" Width="125"
+                        FocusVisualStyle="{x:Null}"
+                        VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        </DataTemplate>
+        <DataTemplate x:Key="BoolTemplate">
+            <CheckBox IsChecked="{Binding BoolValue, UpdateSourceTrigger=PropertyChanged}" Focusable="False"/>
+        </DataTemplate>
+        <DataTemplate x:Key="SingleBoolTemplate">
+            <RadioButton IsChecked="{Binding BoolValue}" Focusable="False" GroupName="{Binding GroupTitle}"/>
+        </DataTemplate>        
+        <LinearGradientBrush x:Key="BorderBrush" StartPoint="0,1" EndPoint="0,0">
+            <GradientStop Color="White" Offset="0"/>
+            <GradientStop Color="RoyalBlue" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="Background" StartPoint="0,1" EndPoint="0,0">
+            <GradientStop Color="White" Offset="0"/>
+            <GradientStop Color="AliceBlue" Offset="1"/>
+        </LinearGradientBrush>
+
+        <DataTemplate x:Key="SingleParamInGroupTemplate">
+            <GroupBox x:Name="rootOfParam"
+                      DataContext="{Binding Parameters[0]}" Header="{Binding Title}" Focusable="False" Margin="5" MinHeight="30">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ContentControl Name="SvCC"
+                                    Content="{Binding}" Focusable="False"
+                                    Visibility="{Binding IsNull, Converter={StaticResource True2Hidden}, ConverterParameter='Collapse'}"
+                                    ContentTemplate="{StaticResource DefaultTemplate}"/>
+                    <CheckBox IsChecked="{Binding IsNull}" Margin="5,0,0,0" Grid.Column="1" Focusable="False"
+                                      Visibility="{Binding IsNullable, Converter={StaticResource False2Hidden}, ConverterParameter='Collapse'}"
+                                      Content="Нет"/>
+                </Grid>
+            </GroupBox>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Parameters[0].IsVisible}" Value="False">
+                    <Setter TargetName="rootOfParam" Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Parameters[0].IsEnabled}" Value="False">
+                    <Setter TargetName="rootOfParam" Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Parameters[0].ParamType}" Value="{x:Type sys:DateTime}">
+                    <Setter TargetName="SvCC" Property="ContentTemplate" Value="{StaticResource DateTemplate}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Parameters[0].ParamType}" Value="{x:Type sys:Boolean}">
+                    <Setter TargetName="SvCC" Property="ContentTemplate" Value="{StaticResource BoolTemplate}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Parameters[0].IsAvailableExists}" Value="True">
+                    <Setter TargetName="SvCC" Property="ContentTemplate" Value="{StaticResource ValidValuesTemplate}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Parameters[0].IsValidValuesQueryBased}" Value="True">
+                    <Setter TargetName="SvCC" Property="ContentTemplate" Value="{StaticResource ValidValuesTemplate}"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Parameters[0].IsMultiValued}" Value="True">
+                    <Setter TargetName="SvCC" Property="ContentTemplate" Value="{StaticResource MultiValuesTemplate}"/>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+
+    </UserControl.Resources>
+    <!--<Border BorderThickness="1" CornerRadius="5" Focusable="False"
+                BorderBrush="{StaticResource BorderBrush}" Background="{StaticResource Background}"
+                IsEnabled="{Binding IsBusy, Converter={StaticResource BoolNot}}" IsEnabledChanged="Border_IsEnabledChanged">-->
+    <Grid Name="dlgRoot" xmlns:Progress="clr-namespace:Progress">
+        <Border BorderThickness="1" CornerRadius="5" Focusable="False"
+                BorderBrush="{StaticResource BorderBrush}" Background="{StaticResource Background}">
+            <ItemsControl ItemsSource="{Binding ParameterGroups}" Margin="2" Focusable="False">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ContentControl x:Name="groupContent" Content="{Binding}" Focusable="False">
+                            <ContentControl.ContentTemplate>
+                                <DataTemplate>
+                                    <GroupBox Header="{Binding Title}" Focusable="False" Margin="5">
+                                        <ItemsControl ItemsSource="{Binding Parameters}" Focusable="False">
+                                            <ItemsControl.ItemsPanel>
+                                                <ItemsPanelTemplate>
+                                                    <WrapPanel Orientation="Horizontal" IsItemsHost="True"/>
+                                                </ItemsPanelTemplate>
+                                            </ItemsControl.ItemsPanel>
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border x:Name="rootOfParam" BorderThickness="1" BorderBrush="White" Background="AliceBlue" CornerRadius="2" 
+                                                            Padding="3" MinHeight="30" Margin="0,2,5,0" Focusable="False">
+                                                        <DockPanel >
+                                                            <TextBlock Text="{Binding Title}" TextAlignment="Right" Margin="0,0,10,0" VerticalAlignment="Top" Focusable="False"
+                                                                   Foreground="RoyalBlue"/>
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*"/>
+                                                                    <ColumnDefinition Width="Auto"/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <ContentControl Name="SvCC" Content="{Binding}" Focusable="False"
+                                                                            Visibility="{Binding IsNull, Converter={StaticResource True2Hidden}, ConverterParameter='Collapse'}"
+                                                                            ContentTemplate="{StaticResource DefaultTemplate}"/>
+                                                                <CheckBox IsChecked="{Binding IsNull}" Margin="5,0,0,0" Grid.Column="1" Focusable="False"
+                                                                      Visibility="{Binding IsNullable, Converter={StaticResource False2Hidden}, ConverterParameter='Collapse'}"
+                                                                      Content="Нет"/>
+                                                            </Grid>
+                                                        </DockPanel>
+                                                    </Border>
+                                                    <DataTemplate.Triggers>
+                                                        <DataTrigger Binding="{Binding IsVisible}" Value="False">
+                                                            <Setter TargetName="rootOfParam" Property="Visibility" Value="Collapsed"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding IsEnabled}" Value="False">
+                                                            <Setter TargetName="rootOfParam" Property="IsEnabled" Value="False"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding ParamType}" Value="{x:Type sys:DateTime}">
+                                                            <Setter TargetName="SvCC" Property="ContentTemplate" Value="{StaticResource DateTemplate}"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding ParamType}" Value="{x:Type sys:Boolean}">
+                                                            <Setter TargetName="SvCC" Property="ContentTemplate" Value="{StaticResource BoolTemplate}"/>
+                                                        </DataTrigger>
+                                                        <MultiDataTrigger>
+                                                            <MultiDataTrigger.Conditions>
+                                                                <Condition Binding="{Binding ParamType}" Value="{x:Type sys:Boolean}"/>
+                                                                <Condition Binding="{Binding IsSingleInGroup}" Value="true"/>
+                                                            </MultiDataTrigger.Conditions>
+                                                            <Setter TargetName="SvCC" Property="ContentTemplate" Value="{StaticResource SingleBoolTemplate}"/>
+                                                        </MultiDataTrigger>
+                                                        <DataTrigger Binding="{Binding IsAvailableExists}" Value="True">
+                                                            <Setter TargetName="SvCC" Property="ContentTemplate" Value="{StaticResource ValidValuesTemplate}"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding IsQueryBased}" Value="True">
+                                                            <Setter TargetName="SvCC" Property="ContentTemplate" Value="{StaticResource ValidValuesTemplate}"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding IsMultiValued}" Value="True">
+                                                            <Setter TargetName="SvCC" Property="ContentTemplate" Value="{StaticResource MultiValuesTemplate}"/>
+                                                        </DataTrigger>
+                                                    </DataTemplate.Triggers>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </GroupBox>
+                                </DataTemplate>
+                            </ContentControl.ContentTemplate>
+                        </ContentControl>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding Title}" Value="{x:Null}">
+                                <Setter TargetName="groupContent" Property="ContentTemplate" Value="{StaticResource SingleParamInGroupTemplate}"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsVisible}" Value="false">
+                                <Setter TargetName="groupContent" Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Border>
+        <Grid Background="#AAFFFFFF" Visibility="{Binding IsBusy, Converter={StaticResource False2Hidden}}">
+            <Progress:CircularProgressBar HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" Opacity="0.7" Focusable="False">
+                <Progress:CircularProgressBar.LayoutTransform>
+                    <ScaleTransform ScaleX=".3" ScaleY=".3"/>
+                </Progress:CircularProgressBar.LayoutTransform>
+            </Progress:CircularProgressBar>
+            <TextBlock Text="Обновление связанных параметров" Padding="10"
+                       VerticalAlignment="Center" 
+                       TextAlignment="Center"
+                       FontSize="14">
+                <TextBlock.Background>
+                    <LinearGradientBrush ice:Freeze="True" xmlns:ice="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options" 
+                        StartPoint="0,1" EndPoint="0,0" >
+                        <GradientStop Color="Transparent" Offset="0.2"/>
+                        <GradientStop Color="White" Offset="0.5"/>
+                        <GradientStop Color="Transparent" Offset="0.8"/>
+                    </LinearGradientBrush>
+                </TextBlock.Background>
+            </TextBlock>
+        </Grid>
+    </Grid>
+</UserControl>

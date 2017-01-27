@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="CommonModule.DataViews.PredoplDetailsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:CommonModule.Converters"
+             xmlns:cview="clr-namespace:CommonModule.Views"
+             xmlns:cdv="clr-namespace:CommonModule.DataViews">
+    <Grid>
+        <GroupBox Margin="1" Padding="1" BorderBrush="RoyalBlue" BorderThickness="2" Background="AliceBlue">
+            <GroupBox.Resources>
+                <conv:Null2VisibilityConverter x:Key="Null2Visibility"/>
+                <conv:Bool2VisibilityConverter x:Key="Bool2Visibility"/>
+                <Style TargetType="TextBlock" x:Key="FieldStyle">
+                    <Setter Property="Foreground" Value="MidnightBlue"/>
+                    <Setter Property="Padding" Value="2"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <!--<Setter Property="MinWidth" Value="10"/>-->
+                    <!--<Setter Property="Background" Value="Snow"/>-->
+                    <!--<Setter Property="FontWeight" Value="Bold"/>-->
+                    <Setter Property="FontSize" Value="12"/>
+                </Style>
+                <Style TargetType="TextBlock" x:Key="FieldTitleStyle">
+                    <Setter Property="Foreground" Value="MidnightBlue"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <!--<Setter Property="FontWeight" Value="Bold"/>-->
+                </Style>
+            </GroupBox.Resources>
+            <GroupBox.Effect>
+                <DropShadowEffect/>
+            </GroupBox.Effect>
+            <GroupBox.Header>
+                <Border BorderBrush="RoyalBlue" BorderThickness="2" Background="AliceBlue" CornerRadius="8">
+                    <StackPanel Orientation="Horizontal" Margin="5,2">
+                        <TextBlock Text="Платёжное поручение №" Margin="0,0,5,0" Foreground="#FF335EA8"/>
+                        <TextBlock Text="{Binding NomDok}" Style="{StaticResource FieldStyle}" FontWeight="Bold" Background="Snow"/>
+                        <TextBlock Text=" от " Margin="0,0,5,0" Foreground="#FF335EA8"/>
+                        <TextBlock Text="{Binding DatPost, StringFormat='dd.MM.yyyy'}" Style="{StaticResource FieldStyle}" FontWeight="Bold" Background="Snow"/>
+                    </StackPanel>
+                </Border>
+            </GroupBox.Header>
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <GroupBox Header="Договор" Padding="1" Visibility="{Binding RelativeSource={RelativeSource AncestorType=cdv:PredoplDetailsView}, Path=IsShowAgreement, Converter={StaticResource Bool2Visibility}, ConverterParameter=Collapse}">
+                        <cview:AgreementView Foreground="MidnightBlue" DataContext="{Binding Agreement}"/>
+                    </GroupBox>
+                    <GroupBox Header="Платёжный документ" Padding="1">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="На сумму " Style="{StaticResource FieldTitleStyle}"/>
+                                <TextBlock Text="{Binding SumBank, StringFormat='#,##0.##', ConverterCulture=ru-RU}" Margin="5,0,0,0" Style="{StaticResource FieldStyle}" FontWeight="Bold" Background="Snow"/>
+                                <TextBlock Text="{Binding ValBank}" Margin="3,0,0,0" FontStyle="Italic" Style="{StaticResource FieldStyle}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Visibility="{Binding DatZakr, Converter={StaticResource Null2Visibility}, ConverterParameter=Collapsed}">
+                                <TextBlock Text="Сумма " Style="{StaticResource FieldTitleStyle}" FontSize="10"/>
+                                <TextBlock Text="{Binding SumPropl, StringFormat='#,##0.##', ConverterCulture=ru-RU}" Margin="5,0,0,0" 
+                                       Style="{StaticResource FieldStyle}" FontSize="10"/>
+                                <TextBlock Text="{Binding PredoplRef.KodVal}" Margin="3,0,0,0" FontStyle="Italic" Style="{StaticResource FieldStyle}" FontSize="10"/>
+                                <TextBlock Text="Закрыта " Style="{StaticResource FieldTitleStyle}" Margin="5,0,0,0" FontSize="10"/>
+                                <TextBlock Text="{Binding DatZakr, StringFormat='dd.MM.yyyy', ConverterCulture=ru-RU}" Margin="3,0,0,0" Style="{StaticResource FieldStyle}"
+                                       Foreground="Firebrick" FontSize="10"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Поступление" Padding="1">
+                        <StackPanel DataContext="{Binding PredoplBankInfo}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="На р/с: " Style="{StaticResource FieldTitleStyle}"/>
+                                <TextBlock Text="{Binding Rsh}" Style="{StaticResource FieldStyle}" FontWeight="Bold" Background="Snow"/>
+                            </StackPanel>
+                            <DockPanel>
+                                <TextBlock Text="в " Style="{StaticResource FieldTitleStyle}" VerticalAlignment="Top"/>
+                                <TextBlock Text="{Binding BankName}" Style="{StaticResource FieldStyle}" VerticalAlignment="Top" TextWrapping="Wrap"/>
+                            </DockPanel>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="Назначение" Padding="1">
+                        <TextBlock Text="{Binding Whatfor}" TextWrapping="Wrap" Style="{StaticResource FieldStyle}"/>
+                    </GroupBox>
+                    <GroupBox Header="Примечание" Padding="1" 
+                          Visibility="{Binding Prim, Converter={StaticResource Null2Visibility}, ConverterParameter=Collapsed}">
+                        <TextBlock Text="{Binding Prim}" TextWrapping="Wrap" Style="{StaticResource FieldStyle}"/>
+                    </GroupBox>
+                </StackPanel>
+            </ScrollViewer>
+        </GroupBox>
+    </Grid>
+</UserControl>

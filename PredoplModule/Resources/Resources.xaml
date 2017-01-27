@@ -1,0 +1,43 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:DataObjects="clr-namespace:DataObjects;assembly=DataObjects"
+    xmlns:CommonCommands="clr-namespace:CommonModule.Commands;assembly=CommonModule">
+
+    <Style x:Key="RightAlignStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="TextAlignment" Value="Right" />
+    </Style>
+
+    <Style x:Key="GetPredoplDataGridStyle" TargetType="DataGrid">
+        <!-- Make the border and grid lines a little less imposing -->
+        <Setter Property="BorderBrush" Value="#DDDDDD" />
+        <Setter Property="HorizontalGridLinesBrush" Value="#DDDDDD" />
+        <Setter Property="VerticalGridLinesBrush" Value="#DDDDDD" />
+        <Setter Property="ColumnHeaderStyle" Value="{DynamicResource DatagridColumnHeaderCustomTemplateStyle}"/>
+        <Setter Property="CellStyle" Value="{DynamicResource DefaultDataGridCellStyle}"/>
+        <Setter Property="RowStyle">
+            <Setter.Value>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="FontSize" Value="12"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="BorderBrush" Value="RoyalBlue"/>
+                            <Setter Property="Background" Value="{StaticResource DataGridSelectedRowBackgroundBrush}" />
+                            <Setter Property="Foreground" Value="Black" />
+                        </Trigger>
+                        <DataTrigger Binding="{Binding HasInfo}" Value="True">
+                            <Setter Property="ToolTip" Value="{Binding InfoText}"/>                           
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding CanAccept}" Value="False">
+                            <Setter Property="Background" Value="{DynamicResource ItemErrorBackgroundBrush}"/>                            
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding CheckedStatus}" Value="1">
+                            <Setter Property="Background" Value="{DynamicResource ItemWarningBackgroundBrush}"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

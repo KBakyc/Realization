@@ -1,0 +1,37 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--SearchIcon-->
+    <DataTemplate x:Key="SearchIcon">
+        <Path Width="15" Height="15" Stretch="Fill" StrokeLineJoin="Round" 
+              Margin="1"
+              StrokeThickness="2"
+              Stroke="#AA000000" Fill="#FFFFFFFF" 
+              VerticalAlignment="Center"
+              Data="M 5.65686,0.585754C 6.43792,1.36688 6.43794,2.63312 5.65686,3.41425C 4.87581,4.19525 3.60948,4.19525 2.82843,3.41425C 2.04738,2.63312 2.04738,1.36688 2.82843,0.585754C 3.60951,-0.195313 4.87579,-0.195313 5.65686,0.585754 Z M 2.82843,3.41425L 3.88957e-006,6.24268"/>
+    </DataTemplate>
+
+    <!--ButtonOverCross-->
+    <DataTemplate x:Key="ButtonOverCross">
+        <Path Data="M0,0L1,1M1,0L0,1" 
+              Stroke="Red" StrokeThickness="3" StrokeEndLineCap="Triangle" StrokeStartLineCap="Triangle" Stretch="Fill" 
+              Opacity=".7" Margin="2"                          
+              HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+    </DataTemplate>
+
+    <!--ButtonOverCheckGreen-->
+    <DataTemplate x:Key="ButtonOverCheck">
+            <Path Data="M0,3L2,6L4,0" 
+                  Stroke="Green" StrokeThickness="3" StrokeEndLineCap="Flat" StrokeStartLineCap="Flat" Stretch="Fill" 
+                  Opacity=".8" Margin="2"                          
+                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+    </DataTemplate>            
+
+    <!--ButtonOverCheckRed-->
+    <DataTemplate x:Key="ButtonOverCheckRed">
+        <Path Data="M0,3L2,6L4,0" 
+              Stroke="Red" StrokeThickness="3" StrokeEndLineCap="Flat" StrokeStartLineCap="Flat" Stretch="Fill" 
+              Opacity=".8" Margin="2"                          
+              HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+    </DataTemplate>        
+    
+</ResourceDictionary>

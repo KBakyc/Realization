@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="CommonModule.Views.PDogListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Background="White">
+        <DockPanel>
+            <DataGrid DockPanel.Dock="Bottom" 
+                         AutoGenerateColumns="False" IsReadOnly="True"
+                         CanUserAddRows="False" CanUserDeleteRows="False" RowDetailsVisibilityMode="Collapsed"
+                         IsSynchronizedWithCurrentItem="False"
+                         SelectionMode="Single" 
+                         VerticalScrollBarVisibility="Visible"
+                         MaxHeight="500" MaxWidth="1000" 
+                         ItemsSource="{Binding PDogInfos}" SelectedItem="{Binding SelPDogInfo}"
+                         Style="{DynamicResource DefaultDataGridStyle}">
+                <DataGrid.Resources>
+                    <Style x:Key="RightAlignStyle" TargetType="{x:Type TextBlock}">
+                        <Setter Property="TextAlignment" Value="Right" />
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Product.Kpr}" Header="Код пр." ElementStyle="{StaticResource RightAlignStyle}"/>
+                    <DataGridTextColumn Binding="{Binding FullProductName}" Header="Название продукта" MaxWidth="400"/>
+                    <DataGridTextColumn Binding="{Binding TextOsn}" Header="Договор" MaxWidth="500"/>
+                    <DataGridTextColumn Binding="{Binding PDogDate, StringFormat='dd.MM.yyyy'}" Header="Дата документа"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Border DataContext="{Binding SelPDogInfo}" 
+                    BorderBrush="RoyalBlue" BorderThickness="1" DockPanel.Dock="Bottom" CornerRadius="5" Background="AliceBlue">
+                <StackPanel Margin="5">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Плательщик:" MinWidth="100"/>
+                        <TextBlock Text="{Binding Platelschik.Kgr}" Width="80" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Platelschik.Name}" MaxWidth="400" FontWeight="Bold"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Грузоолучатель:" MinWidth="100"/>
+                        <TextBlock Text="{Binding Poluchatel.Kgr}" Width="80" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Poluchatel.Name}" MaxWidth="400" FontWeight="Bold"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Валюта оплаты:" MinWidth="100"/>
+                        <TextBlock Text="{Binding ValutaOpl.Kodval}" Width="40" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding Poluchatel.NameVal}" MaxWidth="200" FontWeight="Bold"/>
+                        <TextBlock Text=" Срок оплаты: " Width="80"/>
+                        <TextBlock Text="{Binding ModelRef.Srok}" MaxWidth="50" FontWeight="Bold"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Вид цены:" MinWidth="100"/>
+                        <TextBlock Text="{Binding ModelRef.Vidcen}" Width="40" FontWeight="Bold"/>
+                        <TextBlock Text=" Цена: " Width="50"/>
+                        <TextBlock Text="{Binding ModelRef.Cenaprod, StringFormat='# ### ### ###.##'}" MaxWidth="200" FontWeight="Bold"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </DockPanel>
+    </Grid>
+</UserControl>

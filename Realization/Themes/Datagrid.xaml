@@ -1,0 +1,215 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:ice="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
+
+    <!--DataGridSelectedRowBackgroundBrush-->
+    <!--<LinearGradientBrush x:Key="DataGridSelectedRowBackgroundBrush" StartPoint="0,1" EndPoint="0,0">
+        <GradientStop Color="CornflowerBlue" Offset="0"/>
+        <GradientStop Color="Lavender" Offset="1"/>
+    </LinearGradientBrush>-->
+    <SolidColorBrush x:Key="DataGridSelectedRowBackgroundBrush" Color="Lavender" ice:Freeze="True" />
+
+    <!--DefaultDataGridRowStyle-->
+    <Style x:Key="DefaultDataGridRowStyle" TargetType="DataGridRow">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Background" Value="White"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <!--<Setter Property="Margin" Value="0,0,0,5"/>-->
+                <Setter Property="BorderBrush" Value="RoyalBlue"/>
+                <Setter Property="Background" Value="{StaticResource DataGridSelectedRowBackgroundBrush}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!--DefaultDataGridCellStyle-->
+    <Style x:Key="DefaultDataGridCellStyle" TargetType="DataGridCell">
+        <Style.Triggers>
+            <!-- Highlight selected rows -->
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="BorderBrush" Value="Lavender" />
+                <Setter Property="Foreground" Value="Black" />
+            </Trigger>
+        </Style.Triggers>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <!-- Add some padding around the contents of a cell -->
+        <Setter Property="Padding" Value="5,3" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridCell">
+                    <Border Padding="{TemplateBinding Padding}"
+                            Background="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=Background}"
+                            >
+                        <ContentPresenter />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--DataGridHeaderSortedBackgroundBrush-->
+    <LinearGradientBrush x:Key="DataGridHeaderSortedBackgroundBrush" StartPoint="0,0" EndPoint="0,1" ice:Freeze="True" >
+        <GradientStop Color="Chartreuse" Offset="0"/>
+        <GradientStop Color="LimeGreen" Offset="0.12"/>
+        <GradientStop Color="DarkSlateGray" Offset="1"/>
+    </LinearGradientBrush>
+
+    <!--DataGridHeaderSortedBorderBrush-->
+    <SolidColorBrush Color="LimeGreen" x:Key="DataGridHeaderSortedBorderBrush"/>
+    <!--<LinearGradientBrush x:Key="DataGridHeaderSortedBorderBrush" StartPoint="0,0" EndPoint="0,1" ice:Freeze="True" >
+        <GradientStop Color="Snow" Offset="0"/>
+        <GradientStop Color="Snow" Offset="0.1"/>
+        <GradientStop Color="LimeGreen" Offset="0.1"/>
+        <GradientStop Color="DarkSlateGray" Offset="1"/>
+    </LinearGradientBrush>-->
+
+    <!--DataGridHeaderBackgroundBrush-->
+    <SolidColorBrush Color="#FF5075CE" x:Key="DataGridHeaderBackgroundBrush" ice:Freeze="True" />
+    <!--<LinearGradientBrush x:Key="DataGridHeaderBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="Snow" Offset="0"/>
+        <GradientStop Color="#FF5580DD" Offset="0.1"/>
+        <GradientStop Color="#FF5580DD" Offset="0.9"/>
+        <GradientStop Color="DarkSlateGray" Offset="1"/>
+    </LinearGradientBrush>-->
+
+    <!--DataGridHeaderMouseOverBackgroundBrush-->
+    <LinearGradientBrush x:Key="DataGridHeaderMouseOverBackgroundBrush" StartPoint="0,0" EndPoint="0,1" ice:Freeze="True" >
+        <GradientStop Color="LightSkyBlue" Offset="0"/>
+        <GradientStop Color="#FF4570CD" Offset="0.12"/>
+        <GradientStop Color="DarkSlateGray" Offset="1"/>
+    </LinearGradientBrush>
+
+    <!--DataGridHeaderBorderBrush-->
+    <SolidColorBrush Color="Transparent" x:Key="DataGridHeaderBorderBrush" ice:Freeze="True" />
+    <!--<LinearGradientBrush x:Key="DataGridHeaderBorderBrush" StartPoint="0,1" EndPoint="0,0">
+        <GradientStop Color="Navy" Offset="0"/>
+        <GradientStop Color="SkyBlue" Offset="0.5"/>
+        <GradientStop Color="Navy" Offset="1"/>
+    </LinearGradientBrush>-->
+
+    <!--ColumnHeaderGripperStyle-->
+    <Style x:Key="ColumnHeaderGripperStyle"
+                   TargetType="{x:Type Thumb}">
+        <Setter Property="Width"
+                        Value="8" />
+        <Setter Property="Background"
+                        Value="Transparent" />
+        <Setter Property="Cursor"
+                        Value="SizeWE" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Border Padding="{TemplateBinding Padding}"
+                                    Background="{TemplateBinding Background}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--DatagridColumnHeaderCustomTemplateStyle-->
+    <Style x:Key="DatagridColumnHeaderCustomTemplateStyle" TargetType="{x:Type DataGridColumnHeader}">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="MinWidth" Value="0" />
+        <Setter Property="MinHeight" Value="30" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                    <Grid MinHeight="{TemplateBinding MinHeight}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="BackgroundBorder" BorderThickness="0,0,0,0" 
+                              Background="{StaticResource DataGridHeaderSortedBackgroundBrush}" 
+                              BorderBrush="{StaticResource DataGridHeaderSortedBorderBrush}" 
+                              Grid.ColumnSpan="2" />
+                        <ContentPresenter Margin="6,3,6,3" VerticalAlignment="Center" />
+                        <Path x:Name="SortArrow" Visibility="Hidden" Data="M0,0 L1,0 0.5,1 z" Stretch="Fill" 
+                            Grid.Column="1" Width="8" Height="6" Fill="White" Margin="0,0,8,0" 
+                            VerticalAlignment="Center" RenderTransformOrigin="0.5,0.4" />
+                        <Rectangle Width="1" Fill="#AAC377" HorizontalAlignment="Right" Grid.ColumnSpan="2" />
+                        <Rectangle Width="1" Margin="0,0,1,0" Fill="#425B10" 
+                                 HorizontalAlignment="Right" Grid.ColumnSpan="2" />
+                        <Thumb x:Name="PART_LeftHeaderGripper" HorizontalAlignment="Left" 
+                             Style="{StaticResource ColumnHeaderGripperStyle}"/>
+                        <Thumb x:Name="PART_RightHeaderGripper" HorizontalAlignment="Right" 
+                             Style="{StaticResource ColumnHeaderGripperStyle}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="SortDirection" Value="{x:Null}">
+                            <Setter TargetName="BackgroundBorder" Property="Background" 
+                                  Value="{StaticResource DataGridHeaderBackgroundBrush}" />
+                            <Setter TargetName="BackgroundBorder" Property="BorderBrush"  
+                                  Value="Transparent" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="SortDirection" Value="{x:Null}" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="BackgroundBorder" 
+                                  Value="{StaticResource DataGridHeaderMouseOverBackgroundBrush}" />
+                            <Setter Property="BorderBrush" TargetName="BackgroundBorder" 
+                                  Value="{StaticResource DataGridHeaderBorderBrush}" />
+                            <Setter TargetName="BackgroundBorder" Property="Background" 
+                                  Value="{StaticResource DataGridHeaderMouseOverBackgroundBrush}" />
+                            <Setter TargetName="BackgroundBorder" Property="BorderBrush" 
+                                  Value="{StaticResource DataGridHeaderBorderBrush}" />
+                        </MultiTrigger>
+                        <Trigger Property="SortDirection" Value="Ascending">
+                            <Setter TargetName="SortArrow" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="SortArrow" Property="RenderTransform">
+                                <Setter.Value>
+                                    <RotateTransform Angle="180" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="SortDirection" Value="Descending">
+                            <Setter TargetName="SortArrow" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="DisplayIndex" Value="0">
+                            <Setter Property="Visibility" Value="Collapsed" 
+                                  TargetName="PART_LeftHeaderGripper"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--DataGridColumnHeadersPresenter-->
+    <Style x:Key="{x:Type DataGridColumnHeadersPresenter}" TargetType="{x:Type DataGridColumnHeadersPresenter}">
+        <!--<Setter Property="Background" Value="{StaticResource DataGridHeaderBackgroundBrush}"/>-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridColumnHeadersPresenter}">
+                    <Grid>
+                        <DataGridColumnHeader IsHitTestVisible="False" Name="PART_FillerColumnHeader"
+                                                      Style="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=ColumnHeaderStyle}"/>
+                        <ItemsPresenter />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--DefaultDataGridColumnHeaderStyle-->
+    <Style TargetType="{x:Type DataGridColumnHeader}" x:Key="DefaultDataGridColumnHeaderStyle"
+                       BasedOn="{StaticResource {x:Type DataGridColumnHeader}}">
+        <Setter Property="MinHeight" Value="25" />
+    </Style>
+
+    <!--DefaultDataGridStyle-->
+    <Style x:Key="DefaultDataGridStyle" TargetType="DataGrid">
+        <!-- Make the border and grid lines a little less imposing -->
+        <Setter Property="BorderBrush" Value="#DDDDDD" />
+        <Setter Property="HorizontalGridLinesBrush" Value="#DDDDDD" />
+        <Setter Property="VerticalGridLinesBrush" Value="#DDDDDD" />
+        <Setter Property="RowStyle" Value="{StaticResource DefaultDataGridRowStyle}"/>
+        <Setter Property="CellStyle" Value="{StaticResource DefaultDataGridCellStyle}"/>
+        <Setter Property="ColumnHeaderStyle" Value="{StaticResource DatagridColumnHeaderCustomTemplateStyle}"/>
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,8 @@
+﻿<UserControl x:Class="CommonModule.Views.DialogContent"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:h="clr-namespace:CommonModule.Helpers">
+    
+    <ContentControl Focusable="False" Content="{Binding}" FocusManager.FocusedElement="{h:FirstFocusedElement}"/>
+
+</UserControl>

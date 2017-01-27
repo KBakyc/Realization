@@ -1,0 +1,6 @@
+Пример вызова процедуры
+
+VatInvoiceView.VatInvForm f1 = new VatInvoiceView.VatInvForm("300042199-2016-0000001528");
+f1.Show();
+
+В качестве параметра передается NumberString ЭСЧФ, строковый тип.

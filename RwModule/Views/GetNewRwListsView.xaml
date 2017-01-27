@@ -1,0 +1,195 @@
+﻿<UserControl x:Class="RwModule.Views.GetNewRwListsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ac="clr-namespace:CommonModule.Commands;assembly=CommonModule"
+             xmlns:cviews="clr-namespace:CommonModule.Views;assembly=CommonModule"
+             xmlns:cdv="clr-namespace:CommonModule.DataViews;assembly=CommonModule"
+             xmlns:conv="clr-namespace:CommonModule.Converters;assembly=CommonModule"
+             xmlns:dto="clr-namespace:DataObjects;assembly=DataObjects"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:beh="clr-namespace:CommonModule.Behaviours;assembly=CommonModule"
+             Language="ru-RU"
+             >
+    <UserControl.Resources>
+        <conv:Null2BoolConverter x:Key="Null2Bool"/>
+        <conv:EnumToDescriptionConverter x:Key="Enum2Descr"/>
+        <Style x:Key="SRightAlignStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="TextAlignment" Value="Right" />
+        </Style>
+        <Style x:Key="SWrapStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>       
+        <!--DataGridOldRowBackgroundBrush-->
+        <LinearGradientBrush x:Key="DataGridOldRowBackgroundBrush" StartPoint="0,1" EndPoint="0,0">
+            <GradientStop Color="LightGoldenrodYellow" Offset="0"/>
+            <GradientStop Color="White" Offset="1"/>
+        </LinearGradientBrush>
+        <!--Стиль таблицы приёма перечней-->
+        <Style x:Key="NewRwListsDataGridStyle" TargetType="DataGrid">
+            <!-- Make the border and grid lines a little less imposing -->
+            <Setter Property="BorderBrush" Value="#DDDDDD" />
+            <Setter Property="HorizontalGridLinesBrush" Value="#DDDDDD" />
+            <Setter Property="VerticalGridLinesBrush" Value="#DDDDDD" />
+            <Setter Property="ColumnHeaderStyle" Value="{DynamicResource DatagridColumnHeaderCustomTemplateStyle}"/>
+            <Setter Property="RowStyle">
+                <Setter.Value>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="FontSize" Value="12"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <Setter Property="Background" Value="White"/>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="CellStyle">
+                <Setter.Value>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                        <Setter Property="Padding" Value="5,2" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="DataGridCell">
+                                    <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}">
+                                        <ContentPresenter Focusable="False"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <!-- Highlight selected rows -->                            
+                            <DataTrigger Binding="{Binding Value.IsNew}" Value="False">
+                                <Setter Property="Foreground" Value="Brown"/>
+                                <Setter Property="Background" Value="{StaticResource DataGridOldRowBackgroundBrush}" />
+                                <Setter Property="ToolTip" Value="Повторно принимаемый ЖД перечень"/>
+                            </DataTrigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="BorderBrush" Value="RoyalBlue"/>
+                                <Setter Property="Foreground" Value="Black" />
+                                <Setter Property="Background" Value="{StaticResource DataGridSelectedRowBackgroundBrush}" />
+                            </Trigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="True"/>
+                                    <Condition Binding="{Binding Value.IsNew}" Value="False"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Foreground" Value="Firebrick"/>
+                            </MultiDataTrigger>
+                        </Style.Triggers>                                               
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid IsEnabled="{Binding IsEnabled}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0">
+            <DockPanel DockPanel.Dock="Top" LastChildFill="False">
+                <Button Margin="3"
+                        Command="{Binding AcceptRwListsCommand}"
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Принять новые перечни">
+                    <Image Source="/RwModule;component/Resources/apply.png" />
+                </Button>
+                <Button Margin="3"
+                        Command="{Binding RwListCheckReportCommand}"
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Протокол по перечню">
+                    <Image Source="/RwModule;component/Resources/file_apply.png" />
+                </Button>                
+            </DockPanel>
+            <cviews:PoupAndDateRangeTitleView DockPanel.Dock="Top"/>
+        </DockPanel>
+        <DataGrid  Name="GetNewRwListGrid" Grid.Row="1"
+                   ItemsSource="{Binding RwListCollection}" AutoGenerateColumns="False" 
+                   CanUserAddRows="False" CanUserDeleteRows="False"
+                   IsSynchronizedWithCurrentItem="False" SelectionUnit="FullRow"
+                   VirtualizingStackPanel.IsVirtualizing="True"
+                   SelectionMode="Single"
+                   SelectedItem="{Binding SelectedRwList}"
+                   Style="{StaticResource NewRwListsDataGridStyle}">
+            <i:Interaction.Behaviors>
+                <beh:DataGridSaveOrderingsBehavior/>
+                <beh:DataGridSaveColumnsBehavior/>
+            </i:Interaction.Behaviors>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn CanUserReorder="False" CanUserResize="True" CanUserSort="False">
+                    <DataGridTemplateColumn.Header>
+                        <CheckBox DataContext="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext}" 
+                                  Focusable="False" Margin="0"
+                                  IsChecked="{Binding IsCheckAll, UpdateSourceTrigger=PropertyChanged}" ToolTip="Отметить все / снять все"/>
+                    </DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox Focusable="False" BorderBrush="Khaki"
+                                      IsChecked="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}"/>
+                                <Button Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.MarkRwListReceivedCommand}" 
+                                        CommandParameter="{Binding}"
+                                        Background="Red" Foreground="Firebrick"
+                                        Width="13" Height="13"
+                                        Margin="5,0,0,0" Cursor="Hand" ToolTip="Отменить приём. Оставить данные принятого ранее перечня.">                                    
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Grid x:Name="root">
+                                                            <Border x:Name="bg" 
+                                                                    Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" 
+                                                                    CornerRadius="1" Background ="{TemplateBinding Background}" Visibility="Collapsed"/>
+                                                            <Path x:Name="cross" Stroke="{TemplateBinding Foreground}" StrokeThickness="1.3"
+                                                                  HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                                  Data="M0,0L7,7M7,0L0,7"/>
+                                                        </Grid>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="true">
+                                                                <Setter TargetName="bg" Property="Visibility" Value="Visible"/>
+                                                                <Setter TargetName="cross" Property="Stroke" Value="White"/>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsEnabled" Value="false">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!--<DataGridCheckBoxColumn Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}">
+                    <DataGridCheckBoxColumn.ElementStyle>
+                        <Style TargetType="CheckBox">
+                            <Setter Property="Focusable" Value="False"/>
+                            <Setter Property="BorderBrush" Value="Khaki"/>
+                        </Style>
+                    </DataGridCheckBoxColumn.ElementStyle>
+                    <DataGridCheckBoxColumn.Header>
+                        <CheckBox DataContext="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext}" 
+                                  Focusable="False"
+                                  IsChecked="{Binding IsCheckAll, UpdateSourceTrigger=PropertyChanged}" ToolTip="Отметить все / снять все"/>
+                    </DataGridCheckBoxColumn.Header>
+                </DataGridCheckBoxColumn>-->
+                <DataGridTextColumn Binding="{Binding Value.Num_rwlist}" Header="№ пер." Width="70" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Value.Bgn_date, StringFormat=dd.MM.yyyy}" Header="Док. с" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Value.End_date, StringFormat=dd.MM.yyyy}" Header="Док. по" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Value.Num_inv}" Header="№ счёта" Width="70" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Value.Dat_inv, StringFormat=dd.MM.yyyy}" Header="Дата сч." IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Value.Sum_inv, StringFormat='#,0.##'}" 
+                                            ElementStyle="{StaticResource SRightAlignStyle}" 
+                                            Header="Сумма" Width="100" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Value.Sum_invnds, StringFormat='#,0.##'}" 
+                                            ElementStyle="{StaticResource SRightAlignStyle}" 
+                                            Header="Сумма НДС" Width="100" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Value.RwlType, Converter={StaticResource Enum2Descr}}" Header="Тип перечня" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

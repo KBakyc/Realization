@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="OtgrModule.Views.OtgrTableView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:oviews="clr-namespace:OtgrModule.Views"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:beh="clr-namespace:CommonModule.Behaviours;assembly=CommonModule"
+    >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resources/Resources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <DataGrid ItemsSource="{Binding OtgrRows}"
+                          Name="DgOtrgRows"
+                          IsReadOnly="True"
+                          Style="{StaticResource OtgrArcDataGridStyle}"
+                          AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="True"
+                          SelectedItem="{Binding SelectedOtgr}" SelectionMode="Extended">
+            <i:Interaction.Behaviors>
+                <beh:DataGridSaveOrderingsBehavior/>
+                <beh:DataGridSaveColumnsBehavior/>
+            </i:Interaction.Behaviors>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn IsReadOnly="True" CanUserSort="False" CanUserResize="False" CanUserReorder="False" Width="10">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Rectangle x:Name="rect" ToolTip="Возврат"/>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding IsVozvrat}" Value="True">
+                                    <Setter TargetName="rect" Property="Fill" Value="Red"/>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding DocName}" Header="Тип" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding DocumentNumber}" Header="№ док." IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding RwBillNumber}" Header="ЖД накл." IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Nv, StringFormat=#}" Header="Вагон" IsReadOnly="True"/>
+                <DataGridTemplateColumn Header="Покупатель" IsReadOnly="True" SortMemberPath="Pokupatel.Kgr" Width="300">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel DataContext="{Binding Pokupatel}">
+                                <!--<ContentControl Content="{Binding}" Focusable="False"/>-->
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Kgr}" Margin="2,0" Width="40"/>
+                                    <Rectangle Width="1" Stroke="Gray"/>
+                                    <TextBlock Text="{Binding Name}" Margin="2,0"/>
+                                </StackPanel>
+                                <TextBlock FontStyle="Italic" FontSize="11" HorizontalAlignment="Right">
+                                    <Run Text="{Binding Country}"/>, <Run Text="{Binding City}"/>
+                                </TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding DestinationCountry.ShortName}" Header="Страна" IsReadOnly="True"/>
+                <DataGridTemplateColumn Header="ВР" IsReadOnly="True" SortMemberPath="Poup.SortBy"> 
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Poup.ShortTitle}" ToolTip="{Binding Poup.Title}" Padding="1"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="КФ" IsReadOnly="True" SortMemberPath="Kodf.Kodf">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Kodf.Kodf}" ToolTip="{Binding Kodf.Name}" Padding="1"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding Datgr, StringFormat=dd/MM/yyyy}" Header="Дата" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Product.Name}" Header="Продукт/услуга" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Kolf}" Header="Количество" IsReadOnly="True"/>
+            </DataGrid.Columns>            
+        </DataGrid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="ServiceModule.Views.DumbView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:glob="clr-namespace:System.Globalization;assembly=mscorlib"
+             xmlns:loc="clr-namespace:ServiceModule.Views"
+             xmlns:loc2="clr-namespace:ServiceModule.ViewModels"
+             xmlns:beh="clr-namespace:CommonModule.Behaviours;assembly=CommonModule"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity">
+    <UserControl.Resources>
+        <loc2:DataGridOrdinalComparer x:Key="DgOrdinalComparer"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>        
+        <DataGrid ItemsSource="{Binding Products}" AutoGenerateColumns="False"
+                  IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"  
+                  ColumnHeaderHeight="30" CanUserSortColumns="True"
+                  IsSynchronizedWithCurrentItem="True"
+                  SelectionMode="Single"
+                  RowDetailsVisibilityMode="Collapsed"
+                  Style="{DynamicResource DefaultDataGridStyle}"
+                        x:Name="ServiceModule_Views_DumbView_DumbGrid"
+                  >
+            <i:Interaction.Behaviors>
+                <beh:DataGridSaveOrderingsBehavior/>
+                <loc2:DataGridSortBehavior ItemComparer="{StaticResource DgOrdinalComparer}"/>
+            </i:Interaction.Behaviors>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Kpr" Binding="{Binding Kpr}" CanUserSort="True"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" CanUserSort="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <!--<DataGrid ItemsSource="{Binding Cultures}" AutoGenerateColumns="True"
+                  IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"  
+                  ColumnHeaderHeight="30" CanUserSortColumns="True"
+                  IsSynchronizedWithCurrentItem="True"
+                  SelectionMode="Single"
+                  RowDetailsVisibilityMode="Collapsed"                  
+                  Style="{DynamicResource DefaultDataGridStyle}"
+                  Grid.Row="1">
+        </DataGrid>-->
+    </Grid>
+</UserControl>

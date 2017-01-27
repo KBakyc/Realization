@@ -1,0 +1,195 @@
+﻿<UserControl x:Class="PredoplModule.Views.PredoplsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:cview="clr-namespace:CommonModule.Views;assembly=CommonModule"
+             xmlns:cdv="clr-namespace:CommonModule.DataViews;assembly=CommonModule"
+             xmlns:conv="clr-namespace:CommonModule.Converters;assembly=CommonModule"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:beh="clr-namespace:CommonModule.Behaviours;assembly=CommonModule">
+    <UserControl.Resources>
+        <conv:Bool2VisibilityConverter x:Key="Bool2Visibility"/>
+        <Style x:Key="RightAlignStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="TextAlignment" Value="Right" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="320"/>
+        </Grid.ColumnDefinitions>
+        <DockPanel>
+            <DockPanel.Resources>
+                <DataTemplate x:Key="ItogItemTemplate">
+                    <Border Style="{DynamicResource ItogsItemBorderStyle}">
+                        <StackPanel Orientation="Horizontal" TextBlock.Foreground="Navy">
+                            <TextBlock Text="{Binding Value[0], StringFormat='#,###.##;0;0', ConverterCulture=ru-RU}" FontWeight="Bold" Foreground="Green"/>
+                            <TextBlock Text=" / "/>
+                            <TextBlock Text="{Binding Value[1], StringFormat='### ### ### ### ###.##;0;0'}" FontWeight="Bold" Foreground="Red"/>
+                            <TextBlock Text="{Binding Key}" Margin="2,0,0,0" FontWeight="Bold" FontStyle="Italic"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </DockPanel.Resources>
+            <Border DockPanel.Dock="Bottom"
+                    Style="{DynamicResource ItogsBorderStyle}"                     
+                    ToolTip="Принято / Остаток"
+                    Visibility="{Binding IsShowVozvrItogs, Converter={StaticResource Bool2Visibility}, ConverterParameter=Collapse}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Возвраты:" VerticalAlignment="Bottom" Foreground="Navy" FontWeight="Bold"/>
+                    <ItemsControl ItemsSource="{Binding VozvrItogs}" VerticalAlignment="Bottom"
+                                  ItemTemplate="{StaticResource ItogItemTemplate}" Focusable="False">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>                        
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+            <Border DockPanel.Dock="Bottom"
+                    Style="{DynamicResource ItogsBorderStyle}"
+                    ToolTip="Принято / Остаток"
+                    Visibility="{Binding IsShowPredoplItogs, Converter={StaticResource Bool2Visibility}, ConverterParameter=Collapse}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Предоплаты:" VerticalAlignment="Bottom" Foreground="Navy" FontWeight="Bold"/>
+                    <ItemsControl ItemsSource="{Binding PredoplsItogs}" VerticalAlignment="Bottom"
+                                  ItemTemplate="{StaticResource ItogItemTemplate}" Focusable="False">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>                        
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+            <DataGrid ItemsSource="{Binding Predopls}" AutoGenerateColumns="False" 
+                     CanUserAddRows="False" CanUserDeleteRows="False" ColumnHeaderHeight="40" 
+                     IsSynchronizedWithCurrentItem="False" CanUserSortColumns="True"
+                     SelectionMode="Single" SelectionUnit="FullRow"
+                     SelectedItem="{Binding SelectedPredopl}"
+                     RowDetailsVisibilityMode="Collapsed"
+                     Name="DgPredopls"
+                     Style="{DynamicResource DefaultDataGridStyle}">
+                <i:Interaction.Behaviors>
+                    <beh:DataGridSaveOrderingsBehavior/>
+                    <beh:DataGridSaveColumnsBehavior/>
+                </i:Interaction.Behaviors>
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Width="20" SortMemberPath="IsVozvrat">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DataTemplate.Resources>
+                                    <RotateTransform Angle="180" x:Key="rTrans" CenterX="5" CenterY="5"/>
+                                </DataTemplate.Resources>
+                                <Path x:Name="pDir" Data="M5,0L5,10M0,7L5,10L10,7" Stroke="Green" StrokeThickness="2" 
+                                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding IsVozvrat}" Value="true">
+                                        <Setter TargetName="pDir" Property="Stroke" Value="Red"/>
+                                        <Setter TargetName="pDir" Property="RenderTransform" Value="{StaticResource rTrans}"/>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn IsReadOnly="True" SortMemberPath="PoupVmRef.SortBy">
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="ПО"/>
+                                    <TextBlock Text="УП" Margin="0,-3,0,0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding PoupVmRef.ShortTitle}" Background="Transparent"
+                                       ToolTip="{Binding PoupVmRef.Title}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Плательщик" IsReadOnly="True" SortMemberPath="Platelschik.Kgr">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Platelschik.Kgr}" FontWeight="Bold" HorizontalAlignment="Left"/>
+                                    <TextBlock Text="{Binding Platelschik.Name}" FontStyle="Italic" HorizontalAlignment="Left"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="№ док." Binding="{Binding NomDok}" IsReadOnly="True" Width="70"/>
+                    <!--<DataGridTextColumn Header="Дата пост." Binding="{Binding DatPost, StringFormat=dd.MM.yyyy}" IsReadOnly="True"/>-->
+                    <DataGridTemplateColumn IsReadOnly="True" SortMemberPath="DatPost" Header="Дата док.">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding DatDok, StringFormat=dd.MM.yyyy}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Договор" IsReadOnly="True" MaxWidth="200" SortMemberPath="PredoplRef.IdAgree">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <cview:AgreementView DataContext="{Binding Agreement}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn IsReadOnly="True" SortMemberPath="SumPropl" Header="Сумма поступлений">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding SumPropl, StringFormat='#,##0.##', ConverterCulture=ru-RU}" HorizontalAlignment="Right"/>
+                                    <TextBlock HorizontalAlignment="Right" FontSize="10" Margin="0,5,0,0"
+                                           Foreground="Gray" x:Name="kurstxt" ToolTip="Курс валюты предоплаты на дату поступления">
+                                        <Run Text="Курс: "/>
+                                        <Run Text="{Binding PredoplRef.KursVal, Mode=OneWay, StringFormat='#,##0.0000##', ConverterCulture=ru-RU}"/>
+                                    </TextBlock>
+                                </StackPanel>
+                                <DataTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding ValPropl.Kodval}" Value="RB">
+                                        <Setter TargetName="kurstxt" Property="Visibility" Value="Collapsed"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsKursChanged}" Value="true">
+                                        <Setter TargetName="kurstxt" Property="Foreground" Value="Red"/>
+                                        <Setter TargetName="kurstxt" Property="ToolTip">
+                                            <Setter.Value>
+                                                <ToolTip Content="{Binding PredoplRef.DatKurs}">
+                                                    <ToolTip.ContentTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock Text="Курс валюты на дату "/>
+                                                                <TextBlock Text="{Binding ., StringFormat='dd.MM.yyyy'}"/>
+                                                            </StackPanel>
+                                                        </DataTemplate>
+                                                    </ToolTip.ContentTemplate>
+                                                </ToolTip>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </DataTemplate.Triggers>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <!--<DataGridTextColumn Header="Сумма поcтуплений" Binding="{Binding SumPropl, StringFormat='#,##0.##', ConverterCulture=ru-RU}" 
+                                       ElementStyle="{StaticResource RightAlignStyle}"
+                                       IsReadOnly="True"/>-->
+                    <DataGridTextColumn Binding="{Binding ValPropl.Kodval}" IsReadOnly="True">
+                        <DataGridTextColumn.Header>
+                            <TextBlock Text="$" TextWrapping="Wrap" TextAlignment="Center"/>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Сумма погашено" Binding="{Binding SumOtgr, StringFormat='#,##0.##', ConverterCulture=ru-RU}" 
+                                       ElementStyle="{StaticResource RightAlignStyle}"
+                                       IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Остаток" Binding="{Binding Ostatok, StringFormat='#,##0.##', ConverterCulture=ru-RU}" 
+                                       ElementStyle="{StaticResource RightAlignStyle}"
+                                       IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+        
+        <cdv:PredoplDetailsView Grid.Column="1" DataContext="{Binding ElementName=DgPredopls, Path=SelectedItem}"/>
+    </Grid>
+</UserControl>

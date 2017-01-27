@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="CommonModule.Views.AgreementSelectionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:cctrl="clr-namespace:CommonModule.Controls"
+             xmlns:cviews="clr-namespace:CommonModule.Views"
+             mc:Ignorable="d" 
+             >
+    <UserControl.Resources>
+        <!--SelectedItemBorderBrush-->
+        <LinearGradientBrush x:Key="SelectedItemBorderBrush" StartPoint="0,1" EndPoint="0,0">
+            <GradientStop Offset="0" Color="#FF87CEFA"/>
+            <GradientStop Offset="0.2" Color="#2A87CEFA"/>
+            <GradientStop Offset="0.8" Color="#2A87CEFA"/>
+            <GradientStop Offset="1" Color="#0087CEFA"/>
+        </LinearGradientBrush>
+    </UserControl.Resources>
+    <Grid>
+        <cctrl:ComboBoxEx SelectedItem="{Binding SelectedAgreement}"
+                          ItemsSource="{Binding AvailableAgreements}" 
+                          Focusable="False" IsEditable="False">
+            <cctrl:ComboBoxEx.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
+                </ItemsPanelTemplate>
+            </cctrl:ComboBoxEx.ItemsPanel>
+            <cctrl:ComboBoxEx.SelectionBoxTemplate>
+                <DataTemplate>
+                    <cviews:AgreementView DataContext="{Binding}"/>
+                </DataTemplate>
+            </cctrl:ComboBoxEx.SelectionBoxTemplate>
+            <cctrl:ComboBoxEx.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="180"/>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="95"/>
+                            <ColumnDefinition Width="250"/>
+                        </Grid.ColumnDefinitions>
+                        <Border BorderThickness="2,0,2,2" Padding="2" BorderBrush="White">
+                            <TextBlock Text="{Binding PrimaryDocName, StringFormat='№ {0} '}" TextWrapping="Wrap"/>
+                        </Border>
+                        <Border BorderThickness="0,0,2,2" Padding="2" BorderBrush="White" Grid.Column="1">
+                            <TextBlock Text="{Binding DopDocName}" TextWrapping="Wrap"/>
+                        </Border>
+                        <Border BorderThickness="0,0,2,2" Padding="2" BorderBrush="White" Grid.Column="2">
+                            <TextBlock Text="{Binding DateOfDocument, StringFormat=' от {0:dd.MM.yyyy}'}"/>
+                        </Border>
+                        <Border BorderThickness="0,0,0,2" Padding="2" BorderBrush="White" Grid.Column="3">
+                            <TextBlock Text="{Binding Contents}" TextWrapping="Wrap"/>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </cctrl:ComboBoxEx.ItemTemplate>
+            <cctrl:ComboBoxEx.ItemContainerStyle>
+                <Style TargetType="ComboBoxItem">
+                    <Setter Property="Foreground" Value="RoyalBlue"/>
+                    <Setter Property="Background" Value="AliceBlue"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ComboBoxItem">
+                                <Grid Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                    <Border x:Name="HighLighter"
+                                            CornerRadius="3" BorderBrush="RoyalBlue" BorderThickness="2"
+                                            Background="{StaticResource SelectedItemBorderBrush}"
+                                            Visibility="Collapsed"/>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsHighlighted" Value="true">
+                                        <Setter TargetName="HighLighter" Property="Visibility" Value="Visible"/>
+                                        <Setter Property="Foreground" Value="DarkBlue"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </cctrl:ComboBoxEx.ItemContainerStyle>
+        </cctrl:ComboBoxEx>
+    </Grid>
+</UserControl>

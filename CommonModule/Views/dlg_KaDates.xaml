@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="CommonModule.Views.dlg_KaDates"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:views="clr-namespace:CommonModule.Views"
+    xmlns:Commands="clr-namespace:CommonModule.Commands"
+    xmlns:conv="clr-namespace:CommonModule.Converters">
+    <UserControl.Resources>
+        <Commands:CommandReference Command="{Binding KaSelection.SeekCommand}" x:Key="SeekCommand"/>
+        <conv:Bool2VisibilityConverter x:Key="Bool2Visibility"/>
+    </UserControl.Resources>
+    <Grid Background="White" SnapsToDevicePixels="True">
+        <DockPanel LastChildFill="True" Background="White" Grid.Row="1">
+            <GroupBox Header="{Binding KaTitle}" DockPanel.Dock="Top">
+                <StackPanel Background="{DynamicResource DialogDataBackground}">
+                    <DockPanel Grid.Column="1" Margin="5">
+                        <TextBox Width="40" Margin="0,0,2,0" Text="{Binding KaSelection.SeekKod, UpdateSourceTrigger=PropertyChanged, StringFormat=#}"
+                                 Style="{DynamicResource FocusableTextBox}">
+                            <TextBox.InputBindings>
+                                <KeyBinding Key="Enter" Command="{StaticResource SeekCommand}"/>
+                            </TextBox.InputBindings>
+                        </TextBox>
+                        <ComboBox ItemsSource="{Binding KaSelection.KaList}" SelectedItem="{Binding KaSelection.SelectedKA}"
+                      Padding="2" Focusable="False">
+                            <ComboBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
+                                </ItemsPanelTemplate>
+                            </ComboBox.ItemsPanel>
+                        </ComboBox>
+                    </DockPanel>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="0,5" Visibility="{Binding IsKaTypeSelection, Converter={StaticResource Bool2Visibility}, ConverterParameter=Collapsed}">
+                        <CheckBox IsChecked="{Binding IsKpok}" Content="Плательщик"/>
+                        <CheckBox IsChecked="{Binding IsKgr}" Content="Получатель" Margin="5,0"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <views:dlg_Dates DataContext="{Binding DatesSelection}"/>
+        </DockPanel>
+    </Grid>
+ </UserControl>

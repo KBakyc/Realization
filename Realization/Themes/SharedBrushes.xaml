@@ -1,0 +1,54 @@
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:PresentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    >
+    
+    <SolidColorBrush x:Key="DialogDataBackground" Color="AliceBlue"/>
+    
+    
+  <LinearGradientBrush x:Key="NormalBackgroundBrush" StartPoint="0,0" EndPoint="0,1" PresentationOptions:Freeze="True">
+    <LinearGradientBrush.GradientStops>
+      <GradientStop Offset="0" Color="#E1EAF5"/>
+      <GradientStop Offset="0.2" Color="#D1DFF0"/>
+      <GradientStop Offset="0.2" Color="#C7D8ED"/>
+      <GradientStop Offset="1.0" Color="#E7F2FF"/>
+    </LinearGradientBrush.GradientStops>
+  </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="PressedBackgroundBrush" StartPoint="0,0" EndPoint="0,1" PresentationOptions:Freeze="True">
+    <LinearGradientBrush.GradientStops>
+      <GradientStop Offset="0" Color="#FED8AA"/>
+      <GradientStop Offset="0.4" Color="#FBB565"/>
+      <GradientStop Offset="0.4" Color="#FA9D34"/>
+      <GradientStop Offset="1.0" Color="#FDEEAA"/>
+    </LinearGradientBrush.GradientStops>
+  </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="HighlightBackgroundBrush" StartPoint="0,0" EndPoint="0,1" PresentationOptions:Freeze="True">
+    <LinearGradientBrush.GradientStops>
+      <GradientStop Offset="0" Color="#FFFEE3"/>
+      <GradientStop Offset="0.4" Color="#FFE797"/>
+      <GradientStop Offset="0.4" Color="#FFD750"/>
+      <GradientStop Offset="1.0" Color="#FFE796"/>
+    </LinearGradientBrush.GradientStops>
+  </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="NormalForegroundBrush" Color="#15428B" PresentationOptions:Freeze="True"/>
+    <SolidColorBrush x:Key="NormalBorderBrush" Color="#8DB2E3" PresentationOptions:Freeze="True"/>
+    <SolidColorBrush x:Key="PressedBorderBrush" Color="#ABA18C" PresentationOptions:Freeze="True"/>
+
+    <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888" PresentationOptions:Freeze="True"/>
+    <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#EEE" PresentationOptions:Freeze="True"/>
+    <SolidColorBrush x:Key="DisabledBorderBrush" Color="#AAA" PresentationOptions:Freeze="True"/>
+
+    <LinearGradientBrush x:Key="ToolTipBackgroundBrush" StartPoint="0,0" EndPoint="0,1" PresentationOptions:Freeze="True">
+    <LinearGradientBrush.GradientStops>
+      <GradientStop Offset="0" Color="#FFFFFF"/>
+      <GradientStop Offset="0.2" Color="#FCFDFE"/>
+      <GradientStop Offset="0.6" Color="#E6EDF7"/>
+      <GradientStop Offset="1" Color="#CBDAEF"/>
+    </LinearGradientBrush.GradientStops>
+  </LinearGradientBrush>
+
+</ResourceDictionary>

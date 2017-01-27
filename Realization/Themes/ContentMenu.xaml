@@ -1,0 +1,156 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <ControlTemplate x:Key="TopLevelHeaderTemplate" TargetType="{x:Type MenuItem}">
+        <Grid x:Name="root">
+            <Border Name="border" CornerRadius="3" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        Background="{TemplateBinding Background}">
+                <ContentPresenter  Margin="{TemplateBinding Padding}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                       ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                       RecognizesAccessKey="True"
+                                       Content="{TemplateBinding Header}"/>
+            </Border>
+            <Border Name="disborder" CornerRadius="3" 
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        BorderBrush="{DynamicResource DisabledBorderBrush}" 
+                        Background="{DynamicResource DisabledBackgroundBrush}"
+                        Visibility="Hidden"
+                        Opacity=".7"/>
+            <Popup x:Name="PART_Popup"
+                       AllowsTransparency="true"
+                       Placement="Bottom"
+                       HorizontalOffset="0" VerticalOffset="0"                   
+                       IsOpen="{Binding Path=IsSubmenuOpen,RelativeSource={RelativeSource TemplatedParent}}"
+                       Focusable="false"
+                       PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}">
+                <Border Background="GreenYellow"
+                            CornerRadius="0,0,2,2" Padding="0,2,0,3">
+                    <ItemsPresenter Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Cycle"
+                                        KeyboardNavigation.TabNavigation="Cycle" 
+                                        Grid.IsSharedSizeScope="true"/>
+                </Border>
+            </Popup>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsHighlighted" Value="true">
+                <Setter Property="Background" TargetName="border" Value="{DynamicResource HighlightBackgroundBrush}"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource PressedBorderBrush}"/>
+            </Trigger>
+            <Trigger Property="IsSuspendingPopupAnimation" Value="true">
+                <Setter TargetName="PART_Popup" Property="PopupAnimation" Value="None"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter TargetName="border" Property="Background" Value="{x:Null}" />
+                <Setter TargetName="border" Property="BorderBrush" Value="{x:Null}" />
+                <Setter TargetName="disborder" Property="Visibility" Value="Visible"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    
+    <ControlTemplate x:Key="SubmenuItemTemplate" TargetType="{x:Type MenuItem}">
+        <Grid x:Name="root">
+            <Border Name="border" CornerRadius="3" 
+                        BorderThickness="{TemplateBinding BorderThickness}" 
+                        BorderBrush="{TemplateBinding BorderBrush}" 
+                        Background="{TemplateBinding Background}">
+                <ContentPresenter  Margin="{TemplateBinding Padding}" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                       ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                       RecognizesAccessKey="True"
+                                       Content="{TemplateBinding Header}"/>
+            </Border>
+            <Border Name="disborder" CornerRadius="3" 
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        BorderBrush="WhiteSmoke" 
+                                        Background="WhiteSmoke"
+                                        Visibility="Hidden"
+                                        Opacity=".7"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsHighlighted" Value="true">
+                <Setter Property="Background" TargetName="border" Value="{DynamicResource HighlightBackgroundBrush}"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource PressedBorderBrush}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+                <!--<Setter TargetName="border" Property="Background" Value="{x:Null}" />-->
+                <Setter TargetName="border" Property="BorderBrush" Value="{x:Null}" />
+                <Setter TargetName="disborder" Property="Visibility" Value="Visible"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    
+    <Style TargetType="{x:Type MenuItem}" x:Key="RibbonMenuHeader">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="UIElement.SnapsToDevicePixels" Value="True"/>
+        <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True"/>
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource NormalForegroundBrush}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Background" Value="{DynamicResource NormalBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource NormalBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+       
+        <Setter Property="Template" Value="{StaticResource TopLevelHeaderTemplate}"/>
+        <Setter Property="HeaderTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Grid>
+                        <ContentControl Content="{Binding .}" Focusable="False"/>
+                        <Rectangle Fill="Lime" Height="5" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+                            <Rectangle.OpacityMask>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                    <LinearGradientBrush.GradientStops>
+                                        <GradientStop Offset="1" Color="Black"/>
+                                        <GradientStop Offset="0" Color="Transparent"/>
+                                    </LinearGradientBrush.GradientStops>
+                                </LinearGradientBrush>
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                    </Grid>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="HasItems" Value="False">
+                <Setter Property="IsEnabled" Value="False"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style TargetType="{x:Type MenuItem}" x:Key="RibbonMenuItem">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="UIElement.SnapsToDevicePixels" Value="True"/>
+        <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True"/>
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource NormalForegroundBrush}"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Background" Value="{DynamicResource NormalBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource NormalBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="3"/>
+        <Setter Property="Template" Value="{StaticResource SubmenuItemTemplate}"/>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Visibility" Value="Collapsed"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <Style TargetType="{x:Type MenuItem}" x:Key="BindableRibbonMenuItem" BasedOn="{StaticResource RibbonMenuItem}">
+        <Setter Property="Command" Value="{Binding Command}"/>
+        <Setter Property="Header" Value="{Binding .}"/>
+        <Setter Property="HeaderTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <Image Source="/RwModule;component/Resources/print preview.png" Width="35" Height="35" VerticalAlignment="Top"/>
+                        <StackPanel VerticalAlignment="Top">
+                            <TextBlock Text="{Binding Label}" Margin="10,0,0,0"/>
+                            <TextBlock Text="{Binding Description}" Margin="10,0,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>

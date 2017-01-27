@@ -1,0 +1,165 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <SolidColorBrush x:Key="NormalCommandBackground" Color="RoyalBlue"/>
+    <SolidColorBrush x:Key="HoverCommandBackground" Color="DarkOrange"/>
+    <SolidColorBrush x:Key="NormalCommandForeground" Color="White"/>
+    <SolidColorBrush x:Key="HoverCommandForeground" Color="GhostWhite"/>
+    <SolidColorBrush x:Key="PopupBackground" Color="Cornsilk"/>
+    
+    <Style x:Key="TopCommandLabelStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource NormalCommandForeground}"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Margin" Value="5"/>
+    </Style>
+    
+    <Style x:Key="SubCommandLabelStyle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource NormalCommandForeground}"/>
+        <Setter Property="TextAlignment" Value="Left"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Margin" Value="5"/>
+    </Style>
+    
+    <DataTemplate x:Key="IconBoxTemplate">
+        <Viewbox Width="50" Height="50">
+            <ContentControl Focusable="False" Content="{Binding}"/>
+        </Viewbox>
+    </DataTemplate>
+
+    <ControlTemplate x:Key="{ComponentResourceKey TypeInTargetAssembly={x:Type MenuItem}, ResourceId=TopLevelHeaderTemplateKey}" TargetType="{x:Type MenuItem}">
+        <Grid>
+            <Border x:Name="Bd" CornerRadius="2" Margin="2"
+                    ToolTip="{Binding Label}" ToolTipService.Placement="Bottom" ToolTipService.InitialShowDelay="0"
+                    Background="{StaticResource NormalCommandBackground}"/>
+            <StackPanel>
+                <ContentControl x:Name="Icon" Content="{Binding Command}" Margin="5" Focusable="False" ContentTemplate="{StaticResource IconBoxTemplate}"/>
+                <Border Width="110" MaxHeight="100"
+                                                IsEnabled="{Binding Parent.ShellModel.IsShowCommandLabels}"
+                                                x:Name="lblContainer">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="true">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <TextBlock x:Name="lbl" Text="{Binding Label}" Style="{StaticResource TopCommandLabelStyle}"/>
+                </Border>
+            </StackPanel>
+            <Border x:Name="overlay" Background="White" Opacity=".5" Visibility="Hidden"/>
+            <Popup x:Name="PART_Popup"
+                                           AllowsTransparency="true"
+                                           Placement="Bottom"
+                                           HorizontalOffset="-2"
+                                           IsOpen="{Binding Path=IsSubmenuOpen,RelativeSource={RelativeSource TemplatedParent}}"
+                                           Focusable="false"
+                                           PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}">
+                <Border Background="{StaticResource PopupBackground}"
+                                                BorderBrush="{StaticResource NormalCommandBackground}" BorderThickness="1" CornerRadius="2">
+                    <ItemsPresenter Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Cycle"
+                                                                        KeyboardNavigation.TabNavigation="Cycle" 
+                                                                        Grid.IsSharedSizeScope="true"/>
+                </Border>
+            </Popup>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsHighlighted" Value="true">
+                <Setter TargetName="Bd" Property="Background" Value="{StaticResource HoverCommandBackground}"/>
+                <Setter TargetName="lbl" Property="Foreground" Value="{StaticResource HoverCommandForeground}"/>
+            </Trigger>
+            <Trigger Property="IsSuspendingPopupAnimation" Value="true">
+                <Setter TargetName="PART_Popup" Property="PopupAnimation" Value="None"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter TargetName="overlay" Property="Visibility" Value="Visible"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    
+    <ControlTemplate x:Key="{ComponentResourceKey TypeInTargetAssembly={x:Type MenuItem}, ResourceId=TopLevelItemTemplateKey}" TargetType="{x:Type MenuItem}">
+        <Grid Background="Transparent" ToolTip="{Binding Label}" ToolTipService.Placement="Bottom" ToolTipService.InitialShowDelay="0">
+            <Border x:Name="Bd" CornerRadius="2" Margin="2"
+                                                        Background="{StaticResource NormalCommandBackground}"/>
+            <StackPanel>
+                <ContentControl x:Name="Icon" Content="{Binding Command}" Margin="5" Focusable="False" ContentTemplate="{StaticResource IconBoxTemplate}"/>
+                <Border Width="110" MaxHeight="100"
+                                                IsEnabled="{Binding Parent.ShellModel.IsShowCommandLabels}"
+                                                x:Name="lblContainer">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="true">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    <TextBlock x:Name="lbl" Text="{Binding Label}" Style="{StaticResource TopCommandLabelStyle}"/>
+                </Border>
+            </StackPanel>
+            <Border x:Name="overlay" Background="White" Opacity=".5" Visibility="Hidden"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsHighlighted" Value="true">
+                <Setter TargetName="Bd" Property="Background" Value="{StaticResource HoverCommandBackground}"/>
+                <Setter TargetName="lbl" Property="Foreground" Value="{StaticResource HoverCommandForeground}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter TargetName="overlay" Property="Visibility" Value="Visible"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="{ComponentResourceKey TypeInTargetAssembly={x:Type MenuItem}, ResourceId=SubmenuItemTemplateKey}" TargetType="{x:Type MenuItem}">
+        <Grid>
+            <Border Name="Bd" CornerRadius="2" Margin="2" Background="{StaticResource NormalCommandBackground}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemColumnGroup"/>
+                    </Grid.ColumnDefinitions>
+                    <ContentControl Content="{Binding Command}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <TextBlock x:Name="lbl" Text="{Binding Label}" Style="{StaticResource SubCommandLabelStyle}"
+                                                   Grid.Column="1"/>
+                </Grid>
+            </Border>
+            <Border x:Name="overlay" Background="White" Opacity=".5" Visibility="Hidden"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsHighlighted" Value="true">
+                <Setter TargetName="Bd" Property="Background" Value="{StaticResource HoverCommandBackground}"/>
+                <Setter TargetName="lbl" Property="Foreground" Value="{StaticResource HoverCommandForeground}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter TargetName="overlay" Property="Visibility" Value="Visible"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="{x:Type MenuItem}" TargetType="{x:Type MenuItem}">
+        <Setter Property="IsEnabled" Value="{Binding IsEnabled}"/>
+        <Setter Property="HorizontalContentAlignment" Value="{Binding Path=HorizontalContentAlignment,RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="VerticalContentAlignment" Value="{Binding Path=VerticalContentAlignment,RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template" Value="{DynamicResource {ComponentResourceKey TypeInTargetAssembly={x:Type MenuItem}, ResourceId=SubmenuItemTemplateKey}}"/>
+        <Style.Triggers>
+            <Trigger Property="Role" Value="TopLevelHeader">
+                <Setter Property="Template" Value="{DynamicResource {ComponentResourceKey TypeInTargetAssembly={x:Type MenuItem}, ResourceId=TopLevelHeaderTemplateKey}}"/>
+            </Trigger>
+            <Trigger Property="Role" Value="TopLevelItem">
+                <Setter Property="Template" Value="{DynamicResource {ComponentResourceKey TypeInTargetAssembly={x:Type MenuItem}, ResourceId=TopLevelItemTemplateKey}}"/>
+            </Trigger>
+            <Trigger Property="Role" Value="SubmenuHeader">
+                <Setter Property="Template" Value="{DynamicResource {ComponentResourceKey TypeInTargetAssembly={x:Type MenuItem}, ResourceId=SubmenuHeaderTemplateKey}}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+</ResourceDictionary>

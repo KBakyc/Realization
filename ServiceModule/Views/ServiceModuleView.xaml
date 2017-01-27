@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="ServiceModule.Views.ServiceModuleView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Conv="clr-namespace:CommonModule.Converters;assembly=CommonModule"
+    xmlns:Controls="clr-namespace:CommonModule.Controls;assembly=CommonModule"
+    xmlns:vw="clr-namespace:CommonModule.Views;assembly=CommonModule"
+    xmlns:Commands="clr-namespace:CommonModule.Commands;assembly=CommonModule"
+    >
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Commands:CommandReference Command="{Binding TopDialog.CloseCommand}" x:Key="CloseDlgCommand"/>
+            <Conv:Null2VisibilityConverter x:Key="Null2Visibility"/>
+            <Conv:Null2BoolConverter x:Key="Null2True" NullValue="True"/>
+            <Conv:Int2BoolConverter x:Key="Int2Bool"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <UserControl.InputBindings>
+        <KeyBinding Key="Escape" Command="{StaticResource CloseDlgCommand}"/>
+    </UserControl.InputBindings>
+    <Grid Background="{DynamicResource ModuleBackground}" 
+          IsEnabled="{Binding AccessLevel, Converter={StaticResource Int2Bool}}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <!-- Панель управления -->
+            <Grid>
+                <Rectangle Fill="{DynamicResource ModuleTitleBackground}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="5">
+                    <!--<Rectangle.LayoutTransform>
+                        <RotateTransform Angle="45" />
+                    </Rectangle.LayoutTransform>-->
+                </Rectangle>
+                <Border Background="{DynamicResource ModuleToolbarBackground}" 
+                        BorderBrush="CornflowerBlue"
+                        Margin="0,2,0,0"
+                        BorderThickness="3,0,3,3" CornerRadius="0,0,10,10">
+
+                    <!--Комманды модуля-->                                     
+                    <Menu ItemsSource="{Binding MenuItems}" 
+                          Background="Transparent" VerticalAlignment="Center" HorizontalAlignment="Center"
+                          ItemContainerStyle="{DynamicResource ModuleMenuItemStyle}">
+                        <Menu.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Commands}">
+                                <ContentControl Content="{Binding Command}"/>
+                            </HierarchicalDataTemplate>
+                        </Menu.ItemTemplate>
+                    </Menu>
+                    
+                    <!--<ItemsControl ItemsSource="{Binding ModuleCommands}" 
+                                   VerticalAlignment="Center" HorizontalAlignment="Center"
+                                  ItemTemplate="{StaticResource ModuleCommandFullDataTemplate}"
+                                  Background="Transparent">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>-->
+                    <!--</StackPanel>-->
+                </Border>
+            </Grid>
+
+            <!-- Рабочая область модуля -->
+            <Border BorderBrush="CornflowerBlue" BorderThickness="1,5" CornerRadius="5" Padding="3" Grid.Row="1">
+                <Controls:TabControlEx ItemsSource="{Binding Pages}" SelectedItem="{Binding SelectedPage}"
+                            ItemContainerStyle="{DynamicResource ClosableTabItem}"
+                            Style="{DynamicResource PagesModuleTabControlStyle}"
+                            IsEnabled="True" IsSynchronizedWithCurrentItem="False"
+                            ItemTemplate="{DynamicResource ModuleContentTabItemTemplate}">                    
+                </Controls:TabControlEx>
+            </Border>
+        </Grid>
+
+        <vw:ModuleDialogAdorner Focusable="False"/>
+    </Grid>
+</UserControl>

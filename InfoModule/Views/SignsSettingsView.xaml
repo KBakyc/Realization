@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="InfoModule.Views.SignsSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:do="clr-namespace:DataObjects;assembly=DataObjects"
+             xmlns:conv="clr-namespace:CommonModule.Converters;assembly=CommonModule"
+             mc:Ignorable="d" 
+             >
+    <UserControl.Resources>
+        <conv:EnumToBooleanConverter x:Key="EnumToBoolean"/>
+        <conv:Null2BoolConverter x:Key="NullToBoolean"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="RoyalBlue" CornerRadius="5" Margin="5" Background="AliceBlue" BorderThickness="1" Grid.RowSpan="2">
+            <DockPanel Margin="5" LastChildFill="True">
+                <TextBlock Text="Направление реализации:" Foreground="RoyalBlue" FontWeight="Bold" DockPanel.Dock="Top"/>
+                <ListBox ItemsSource="{Binding PoupList}" SelectedItem="{Binding SelPoup}"/>
+            </DockPanel>
+        </Border>
+        <Border BorderBrush="RoyalBlue" CornerRadius="5" Margin="5" Background="AliceBlue" 
+                BorderThickness="1" Grid.Column="1"
+                IsEnabled="{Binding SelPoup, Converter={StaticResource NullToBoolean}}">
+            <StackPanel Margin="5">
+                <TextBlock Text="Руководитель:" Foreground="RoyalBlue" FontWeight="Bold"/>
+                <ComboBox ItemsSource="{Binding Bosses}" SelectedItem="{Binding SelBoss}" DisplayMemberPath="Fio"
+                          Margin="0,0,0,10">
+                </ComboBox>
+                <TextBlock Text="Главный бухгалтер:" Foreground="RoyalBlue" FontWeight="Bold"/>
+                <ComboBox ItemsSource="{Binding GlBuhs}" SelectedItem="{Binding SelGlBuh}" DisplayMemberPath="Fio">
+                </ComboBox>
+            </StackPanel>
+        </Border>
+        <Border BorderBrush="RoyalBlue" CornerRadius="5" Margin="5" Background="AliceBlue" 
+                BorderThickness="1" Grid.Column="1" Grid.Row="1"
+                IsEnabled="{Binding SelPoup, Converter={StaticResource NullToBoolean}}">
+            <StackPanel Margin="5">
+                <TextBlock Text="Ставить подписи на счетах:" Foreground="RoyalBlue" FontWeight="Bold"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="3">
+                    <RadioButton Content="Да" Foreground="DarkBlue"
+                                 IsChecked="{Binding NeedSignsForPoupMode, Converter={StaticResource EnumToBoolean}, ConverterParameter={x:Static do:ApplyFeature.Yes}}"/>
+                    <RadioButton Content="Нет" Foreground="DarkBlue" Margin="5,0,0,0"
+                                 IsChecked="{Binding NeedSignsForPoupMode, Converter={StaticResource EnumToBoolean}, ConverterParameter={x:Static do:ApplyFeature.No}}"/>
+                    <RadioButton Content="Спросить" Foreground="DarkBlue" Margin="5,0,0,0"
+                                 IsChecked="{Binding NeedSignsForPoupMode, Converter={StaticResource EnumToBoolean}, ConverterParameter={x:Static do:ApplyFeature.Ask}}"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

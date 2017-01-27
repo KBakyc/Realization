@@ -1,0 +1,269 @@
+﻿<UserControl x:Class="InfoModule.Views.SalesJournalTypeDlgView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dto="clr-namespace:DataObjects;assembly=DataObjects"
+             mc:Ignorable="d"
+             >
+    <Grid>
+        <DockPanel>
+            <Border DockPanel.Dock="Top">
+                <DockPanel LastChildFill="False">
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                        <Button Command="{Binding AddJrnCommand}" Margin="3" Focusable="False"
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Добавить строку">
+                            <Image Source="/InfoModule;component/Resources/add.png" />
+                        </Button>
+                        <Button Command="{Binding DeleteJrnCommand}" Margin="3" Focusable="False"
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Удалить строку">
+                            <Image Source="/InfoModule;component/Resources/delete.png" />
+                        </Button>
+                        <Button Command="{Binding SaveChangesCommand}" Margin="3" Focusable="False"
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Сохранить изменения">
+                            <Image Source="/InfoModule;component/Resources/apply.png" />
+                        </Button>
+                    </StackPanel>
+                    <GroupBox DockPanel.Dock="Right" Header="Направление реализации" 
+                              Padding="3" Margin="3"
+                              VerticalAlignment="Bottom">
+                        <ComboBox ItemsSource="{Binding Poups}" SelectedItem="{Binding SelectedPoup}" Focusable="False" SelectionChanged="ComboBox_SelectionChanged"/>
+                    </GroupBox>
+                </DockPanel>
+            </Border>
+            <DataGrid ItemsSource="{Binding SaleJrns}" AutoGenerateColumns="False"
+                     CanUserAddRows="False" CanUserDeleteRows="False" ColumnHeaderHeight="40"
+                     IsSynchronizedWithCurrentItem="True" CanUserSortColumns="True"
+                     SelectionMode="Single" SelectionUnit="FullRow" SelectedIndex="{Binding SelIndex}"
+                     RowDetailsVisibilityMode="Collapsed"
+                     Name="DgJrns" Focusable="True"
+                     Style="{DynamicResource DefaultDataGridStyle}"
+                     SelectionChanged="DgJrns_SelectionChanged" EnableRowVirtualization="True">
+                <DataGrid.Resources>
+                    <Style x:Key="errorStyle" TargetType="{x:Type TextBlock}">
+                        <Style.Triggers>
+                            <Trigger Property="Validation.HasError" Value="True">
+                                <Setter Property="Foreground" Value="Red"/>
+                                <Setter Property="ToolTip" 
+                                        Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.RowValidationRules>
+                    <DataErrorValidationRule/>
+                </DataGrid.RowValidationRules>
+                <DataGrid.RowHeaderTemplate>
+                    <DataTemplate>
+                        <ContentControl Content="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=DataContext}">
+                            <ContentControl.ContentTemplate>
+                                <DataTemplate>
+                                    <Grid x:Name="root" ToolTip="{Binding Error}" 
+                                          Background="Transparent" Margin="-5,-10,-15,-10" Visibility="Hidden">
+                                        <Path Data="M0,0L1,1M1,0L0,1" Stroke="Red" StrokeThickness="3" Stretch="Uniform" 
+                                              Width="15" Height="15" 
+                                              HorizontalAlignment="Left" VerticalAlignment="Top">
+                                            <Path.Effect>
+                                                <DropShadowEffect BlurRadius="2" ShadowDepth="2" />
+                                            </Path.Effect>
+                                        </Path>
+                                    </Grid>
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding IsValid}" Value="False">
+                                            <Setter TargetName="root" Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </ContentControl.ContentTemplate>
+                        </ContentControl>
+                    </DataTemplate>
+                </DataGrid.RowHeaderTemplate>
+                <DataGrid.RowValidationErrorTemplate>
+                    <ControlTemplate>
+                        <Grid/>
+                    </ControlTemplate>
+                </DataGrid.RowValidationErrorTemplate>
+                <DataGrid.RowStyle>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="BorderThickness" Value="5,1,1,1"/>
+                        <Setter Property="FontSize" Value="12"/>
+                        <Setter Property="Background" Value="White"/>
+                        <Style.Triggers>                            
+                            <DataTrigger Binding="{Binding TrackingState}" Value="{x:Static dto:TrackingInfo.Updated}">
+                                <Setter Property="Background" Value="YellowGreen" />
+                                <Setter Property="BorderBrush" Value="Green"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding TrackingState}" Value="{x:Static dto:TrackingInfo.Created}">
+                                <Setter Property="Background" Value="GreenYellow" />
+                                <Setter Property="BorderBrush" Value="DarkGreen"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding TrackingState}" Value="{x:Static dto:TrackingInfo.Deleted}">
+                                <Setter Property="Background" Value="Tomato" />
+                                <Setter Property="BorderBrush" Value="Firebrick"/>
+                            </DataTrigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="{StaticResource DataGridSelectedRowBackgroundBrush}" />
+                            </Trigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="True"/>
+                                    <Condition Binding="{Binding TrackingState}" Value="{x:Static dto:TrackingInfo.Unchanged}"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="BorderBrush" Value="RoyalBlue"/>
+                            </MultiDataTrigger>
+                            <DataTrigger Binding="{Binding IsValid}" Value="False">
+                                <Setter Property="BorderBrush" Value="Red"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.RowStyle>
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Style.Triggers>
+                            <!-- Highlight selected rows -->
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Foreground" Value="Black" />
+                            </Trigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="True"/>
+                                    <Condition Binding="{Binding TrackingState}" Value="{x:Static dto:TrackingInfo.Deleted}"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Foreground" Value="Firebrick" />
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                        <!-- Add some padding around the contents of a cell -->
+                        <Setter Property="Padding" Value="5,2" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="DataGridCell">
+                                    <Border Padding="{TemplateBinding Padding}"
+                                            Background="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=Background}">
+                                        <ContentPresenter />
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Вид" Binding="{Binding JournalType, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource errorStyle}"/>
+                    <DataGridTextColumn Header="Наименование" Binding="{Binding JournalName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource errorStyle}"/>
+                    <DataGridTemplateColumn Header="Напр." SortMemberPath="Poup">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Poup, ValidatesOnDataErrors=True}" Style="{StaticResource errorStyle}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <ComboBox ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.Poups}"
+                                      SelectedValuePath="Kod" SelectedValue="{Binding Poup, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                      Width="50"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Усл." SortMemberPath="Pkod">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Pkod, ValidatesOnDataErrors=True}" Style="{StaticResource errorStyle}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <ComboBox ItemsSource="{Binding AvailablePkods}"
+                                      SelectedValuePath="Pkod" SelectedValue="{Binding Pkod, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                      Width="50"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Вал" SortMemberPath="Kodval">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Kodval, ValidatesOnDataErrors=True}" Style="{StaticResource errorStyle}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <ComboBox ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.Vals}"
+                                      SelectedValuePath="Kodval" SelectedValue="{Binding Kodval, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                      Width="40"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="НДС" SortMemberPath="Nds">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Nds, ValidatesOnDataErrors=True, StringFormat=0;-;0}" Style="{StaticResource errorStyle}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <ComboBox ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.NdsTypes}"
+                                      SelectedValuePath="Key" SelectedValue="{Binding Nds, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                      DisplayMemberPath="Value"
+                                      Width="40"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Страна" SortMemberPath="Kstr">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Kstr}" Style="{StaticResource errorStyle}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <ComboBox ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.Countries}"
+                                      SelectedValuePath="Kstr" SelectedValue="{Binding Kstr, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                      Width="40">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" Margin="2,1">
+                                                <TextBlock Text="{Binding Kstr}" Width="30"/>
+                                                <TextBlock Text="{Binding Name}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Бал.сч." Binding="{Binding BalSchet, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource errorStyle}"/>                    
+                    <DataGridTextColumn Header="Цех" Binding="{Binding Ceh, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource errorStyle}"/>
+                    <DataGridTextColumn Header="Исп." Binding="{Binding TabIsp, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource errorStyle}"/>
+                    <DataGridTextColumn Header="Нач." Binding="{Binding TabNach, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" ElementStyle="{StaticResource errorStyle}"/>
+
+                    <DataGridTemplateColumn Header="Страны" SortMemberPath="Prsng">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Prsng, StringFormat=#}" Style="{StaticResource errorStyle}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <ComboBox ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.UnionRecTypes}"
+                                      SelectedValuePath="Key" SelectedValue="{Binding Prsng, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                      Width="40">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal" Margin="2,1">
+                                                <TextBlock Text="{Binding Key}" Width="30"/>
+                                                <TextBlock Text="{Binding Value}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>                        
+                    </DataGridTemplateColumn>
+                    <DataGridCheckBoxColumn Header="Возмещ." Binding="{Binding IsVozm, UpdateSourceTrigger=PropertyChanged}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+    </Grid>
+</UserControl>

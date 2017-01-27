@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="CommonModule.Views.dlg_PoupValDates"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:DTO="clr-namespace:DataObjects;assembly=DataObjects"
+    xmlns:Views="clr-namespace:CommonModule.Views"
+    >
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type DTO:Valuta}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Kodval}" Margin="3,0" Width="25"/>
+                <Rectangle Width="1" Stroke="Black"/>
+                <TextBlock Text="{Binding NameVal}" Margin="3,0"/>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+        <Grid Background="White" SnapsToDevicePixels="True">
+        <DockPanel>
+            <Views:dlg_PoupAndDates DockPanel.Dock="Top"/>
+            <Grid DockPanel.Dock="Top" DataContext="{Binding ValSelection}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Валюта"/>
+                <ComboBox ItemsSource="{Binding ValList}" SelectedItem="{Binding SelVal}" 
+                          Grid.Column="1" Focusable="False"/>
+            </Grid>
+        </DockPanel>
+    </Grid>
+          
+</UserControl>

@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="PredoplModule.Views.dlg_GetPredoplsFrom"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cviews="clr-namespace:CommonModule.Views;assembly=CommonModule"
+    xmlns:DTO="clr-namespace:DataObjects;assembly=DataObjects"
+    MinWidth="400"
+    >
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type DTO:Valuta}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Kodval}" Margin="3,0" Width="25"/>
+                <Rectangle Width="1" Stroke="Black"/>
+                <TextBlock Text="{Binding NameVal}" Margin="3,0"/>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid Background="White">
+        <DockPanel>
+            <cviews:dlg_PoupAndDates DockPanel.Dock="Top" DataContext="{Binding PoupDatesSelection}"/>
+            <Grid DockPanel.Dock="Top" Margin="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <!--<RowDefinition/>-->
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <!--<TextBlock Text="Вид реализации" Margin="5"/>
+                <ComboBox SelectedItem="{Binding SelPoup}" ItemsSource="{Binding Poups}" Grid.Column="1" Margin="0,2" Padding="2"/>-->
+                <TextBlock Text="Валюта по банку" Grid.Row="0" Margin="0,5"/>
+                <ComboBox ItemsSource="{Binding ValList}" SelectedItem="{Binding BankVal}" Grid.Column="1" Grid.Row="0" Margin="0,2" Padding="2"/>
+                <TextBlock Text="Валюта предоплаты" Grid.Row="1" Margin="0,5"/>
+                <ComboBox ItemsSource="{Binding ValList}" SelectedItem="{Binding PredoplVal}" Grid.Column="1" Grid.Row="1" Margin="0,2" Padding="2"/>
+                <TextBlock Text="Банк" Grid.Row="2" Margin="0,5"/>
+                <ComboBox ItemsSource="{Binding BanksList}" 
+                          SelectedItem="{Binding SelectedBank}"
+                          Grid.Column="1" Grid.Row="2" Margin="0,2" Padding="2"
+                          >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding BankName}" Margin="1"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,93 @@
+﻿<UserControl x:Class="OtgrModule.Views.OtgrArcView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:conv="clr-namespace:CommonModule.Converters;assembly=CommonModule"
+    xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
+    xmlns:Views="clr-namespace:OtgrModule.Views"
+    xmlns:cviews="clr-namespace:CommonModule.Views;assembly=CommonModule"
+    >
+    <UserControl.Resources>
+        <conv:Null2VisibilityConverter x:Key="Null2Visibility"/>
+    </UserControl.Resources>
+    <Grid>
+        <DockPanel>
+            <DockPanel DockPanel.Dock="Top" LastChildFill="False" >
+                <!--<Button Content="Сформировать" Command="{Binding LoadNewCmd}" Margin="3"
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Принять выбранные, удалить остальные"/>-->
+                
+                <Button Command="{Binding EditCommand}" Margin="3"
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Изменить выбранную отгрузку">
+                    <Image Source="/OtgrModule;component/Resources/edit.png" />
+                </Button>
+                <Button Command="{Binding CopyRealCommand}" Margin="3"
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Ввести дополнительные данные по реализации данной отгрузки/услуги">
+                    <Image Source="/OtgrModule;component/Resources/export.png" />
+                </Button>
+                <Button Command="{Binding DeleteCommand}" Margin="3"
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Удалить выбранную отгрузку">
+                    <Image Source="/OtgrModule;component/Resources/delete.png" />
+                </Button>
+                <Button Command="{Binding ShowSfsCommand}" Margin="3"
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Показать счета-фактуры">
+                    <Image Source="/OtgrModule;component/Resources/paste.png" />
+                </Button>                
+                <Button Command="{Binding VozvratCommand}" Margin="3"
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Оформить возврат отгрузки">
+                    <Image Source="/OtgrModule;component/Resources/Yellow arrow.png" />
+                </Button>
+                <Button Margin="3" 
+                        Command="{Binding ShowHistoryCommand}" 
+                        Style="{DynamicResource CommandButton}"
+                        ToolTip="Посмотреть историю">
+                    <Image Source="/OtgrModule;component/Resources/file_temp.png" />
+                </Button>
+                <ItemsControl Margin="15,3" ItemsSource="{Binding Reports}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" IsItemsHost="True"/>
+                        </ItemsPanelTemplate>                        
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Margin="3,0,0,0"
+                                    Style="{DynamicResource CommandButton}"
+                                    Command="{Binding Command}">            
+                                <Image Source="/OtgrModule;component/Resources/report.png" />
+                                <Button.ToolTip>
+                                    <ToolTip Content="{Binding}">
+                                        <ToolTip.ContentTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <TextBlock FontWeight="Bold" Text="{Binding Title}"/>
+                                                    <TextBlock Text="{Binding Description}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ToolTip.ContentTemplate>
+                                    </ToolTip>
+                                </Button.ToolTip>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </DockPanel>
+            <cviews:PoupAndDateRangeTitleView DockPanel.Dock="Top"/>            
+            <Views:OtgrDetailsView Width="500" DataContext="{Binding SelectedOtgr}" DockPanel.Dock="Right"/>
+            <Border DockPanel.Dock="Bottom"
+                    Visibility="{Binding TotalKolf, Converter={StaticResource Null2Visibility}, ConverterParameter={x:Static Visibility.Collapsed}}"
+                    Style="{DynamicResource ItogsBorderStyle}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Всего в количестве: "/>
+                    <TextBlock Text="{Binding TotalKolf.Value}" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding TotalKolf.Key}" Margin="5,0,0,0"/>
+                </StackPanel>
+            </Border>
+            <Views:OtgrTableView/>
+        </DockPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,231 @@
+﻿<Window x:Class="Realization.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Converters="clr-namespace:CommonModule.Converters;assembly=CommonModule"
+        xmlns:Commands="clr-namespace:CommonModule.Commands;assembly=CommonModule"
+        xmlns:Views="clr-namespace:Realization.Views"
+        xmlns:CViews="clr-namespace:CommonModule.Views;assembly=CommonModule"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
+        Title="Реализация" IsEnabled="True" WindowState="Maximized"
+        Closing="Window_Closing" Closed="Window_Closed"
+        Loaded="Window_Loaded"
+        UseLayoutRounding="True"
+        >
+    <Window.Resources>
+        <ResourceDictionary>
+            <!--<ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Menus\MenusDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>-->
+            <Converters:Null2VisibilityConverter x:Key="Null2Visibility"/>
+            <Commands:CommandReference x:Key="GoBackCommand" Command="{Binding GoBackCommand}"/>
+            <Commands:CommandReference x:Key="ScreenshotCommand" Command="{Binding MakeScreenshotCmd}"/>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Gesture="Ctrl+BackSpace" Command="{StaticResource GoBackCommand}"/>
+    </Window.InputBindings>
+    <!--<Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Close" Executed="CloseCommandHandler"/>
+    </Window.CommandBindings>-->
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <tb:TaskbarIcon IconSource="/Resources/repka.ico"
+                            ToolTipText="АРМ РеПКа (Реализация продукции и услуг контрагентам)"
+                            PopupActivation="DoubleClick"
+                            x:Name="tbIcon">
+                <tb:TaskbarIcon.ContextMenu>
+                    <ContextMenu>
+                        <ContextMenu.CommandBindings>
+                            <CommandBinding Command="ApplicationCommands.Close" Executed="CloseCommandHandler"/>
+                        </ContextMenu.CommandBindings>
+                        <ContextMenu.Resources>
+                            <Style TargetType="MenuItem" x:Key="TrayMenuItemStyle">
+                                <Setter Property="Background" Value="Honeydew"/>
+                                <Setter Property="Foreground" Value="RoyalBlue"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsHighlighted" Value="true">
+                                        <Setter Property="Foreground" Value="Snow"/>
+                                        <Setter Property="Background" Value="CornflowerBlue"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ContextMenu.Resources>
+                        <MenuItem Header="Снимок экрана / Отправить отчёт"    
+                                  Style="{StaticResource TrayMenuItemStyle}"
+                                  Command="{StaticResource ScreenshotCommand}">
+                            <MenuItem.Icon>
+                                <Image Source="/Resources/camera_error.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator/>
+                        <MenuItem Header="Закончить работу"
+                                  Style="{StaticResource TrayMenuItemStyle}"
+                                  Command="ApplicationCommands.Close">
+                            <MenuItem.Icon>
+                                <Image Source="/Resources/door_in.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </ContextMenu>
+                </tb:TaskbarIcon.ContextMenu>
+            </tb:TaskbarIcon>
+
+            <!--Рабочая область оболочки-->
+            <!--<ContentControl Content="{Binding WorkSpace}" Grid.Row="1" Focusable="False"/>-->
+            <Grid Grid.Row="1" Name="wsPlaceholder"/>
+
+            <DockPanel Visibility="{Binding WorkSpace, Converter={StaticResource Null2Visibility}}">
+                <!--Заголовок активного модуля-->
+                <DockPanel DockPanel.Dock="Right" Background="{DynamicResource ModuleTitleBackground}">
+                    <Button Content="X" DockPanel.Dock="Right" Focusable="False"
+                            HorizontalAlignment="Right" VerticalAlignment="Top" 
+                            Command="{Binding CloseWorkSpaceCmd}"
+                            Style="{DynamicResource CloseModuleBtnStyle}"/>
+                    <TextBlock Text="{Binding WorkSpace.Info.Description}" DockPanel.Dock="Right" Padding="10,0"
+                               FontWeight="Bold" Foreground="White" FontSize="12"
+                               VerticalAlignment="Center" Margin="5,2"/>                    
+                </DockPanel>
+                <CheckBox Margin="0,0,30,0" DockPanel.Dock="Right" Content="Подписи команд"
+                              VerticalAlignment="Center" Foreground="RoyalBlue" Background="Transparent" 
+                              BorderBrush="Olive" Cursor="Hand" Focusable="False" IsChecked="{Binding IsShowCommandLabels, UpdateSourceTrigger=PropertyChanged}"/>                
+
+                <!--Кнопка Пуск-->
+                <DockPanel DockPanel.Dock="Left" Background="{DynamicResource ModuleTitleBackground}">
+                    <Grid Margin="0,0,0,-50" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Ellipse Stroke="{DynamicResource ModuleTitleBackground}" StrokeThickness="3" Fill="White"/>
+                        <Button Command="{Binding ShowStartCommand}"                                
+                                Style="{DynamicResource RoundButton}"
+                                Margin="5" ToolTip="Стартовая страница"
+                                Focusable="False">                            
+                            <Viewbox Width="28" Height="28">
+                                <Grid>
+                                    <Path StrokeThickness="4.76863" StrokeMiterLimit="2.75" Stroke="#FFC73E00" Fill="#FFFFC800" Data="M 120.863,100C 134.731,100 146,111.635 146,125.99C 146,140.365 134.731,152 120.863,152C 106.975,152 95.7259,140.365 95.7259,125.99C 95.7259,111.635 106.975,100 120.863,100 Z "/>
+                                    <Path StrokeThickness="4.76863" StrokeMiterLimit="2.75" Stroke="#FFC73E00" Fill="#FFFFC800" Data="M 102.982,89C 118.44,89 131,101.968 131,117.968C 131,133.991 118.44,146.959 102.982,146.959C 87.5024,146.959 74.9646,133.991 74.9646,117.968C 74.9646,101.968 87.5024,89 102.982,89 Z "/>
+                                    <Path StrokeThickness="4.76863" StrokeMiterLimit="2.75" Stroke="#FF00C800" Data="M 61.6641,37.9343C 59.256,36.313 57.1578,33.9287 55.3696,30.8052C 53.5575,27.658 52.3892,24.1054 51.8169,20.1235C 51.2924,16.1418 51.3878,12.3508 52.1984,8.7981C 52.9853,5.24542 54.2966,2.28888 56.1325,0C 58.5407,1.62134 60.6627,4.02948 62.451,7.15289C 64.263,10.2764 65.4313,13.8528 66.0274,17.8585C 66.6235,21.8641 66.5043,25.6552 65.7175,29.2316C 64.9306,32.7842 63.5716,35.6931 61.6641,37.9343 Z ">
+                                        <Path.Fill>
+                                            <LinearGradientBrush StartPoint="-0.652861,0.499998" EndPoint="1.6543,0.499998">
+                                                <LinearGradientBrush.GradientStops>
+                                                    <GradientStop Color="#FF1B6400" Offset="0.101382"/>
+                                                    <GradientStop Color="#FF8DB17F" Offset="0.995859"/>
+                                                    <GradientStop Color="#FFFFFFFF" Offset="1"/>
+                                                </LinearGradientBrush.GradientStops>
+                                            </LinearGradientBrush>
+                                        </Path.Fill>
+                                    </Path>
+                                    <Path StrokeThickness="4.76863" StrokeMiterLimit="2.75" Stroke="#FFFFC800" Data="M 64.573,144.203C 52.9137,154.765 35.699,157.078 25.5657,153.216C -7.59999,140.555 -8.64908,54.8391 23.1814,41.1293C 30.835,37.8389 38.4887,37.8389 46.1423,41.1055C 50.2433,42.846 53.6767,48.0676 56.2756,51.7156C 57.73,53.7422 59.1606,55.0537 60.615,55.6736C 62.1887,56.3412 64.1677,56.5081 66.5758,56.1028C 78.2828,54.2668 83.3137,54.5768 92.0879,63.9471C 94.1146,66.093 95.8551,68.4058 97.3334,70.8855C 76.5184,64.0901 50.2671,77.4185 46.9768,101.166C 43.7103,124.556 56.1087,136.907 64.573,144.203 Z ">
+                                        <Path.Fill>
+                                            <LinearGradientBrush StartPoint="-0.036368,0.851108" EndPoint="1.16615,0.851108">
+                                                <LinearGradientBrush.RelativeTransform>
+                                                    <TransformGroup>
+                                                        <SkewTransform CenterX="-0.036368" CenterY="0.851108" AngleX="9.99108" AngleY="0"/>
+                                                        <RotateTransform CenterX="-0.036368" CenterY="0.851108" Angle="-35.081"/>
+                                                    </TransformGroup>
+                                                </LinearGradientBrush.RelativeTransform>
+                                                <LinearGradientBrush.GradientStops>
+                                                    <GradientStop Color="#FFC73E00" Offset="0.262673"/>
+                                                    <GradientStop Color="#FFE39E7F" Offset="0.926267"/>
+                                                    <GradientStop Color="#FFFFFFFF" Offset="1"/>
+                                                </LinearGradientBrush.GradientStops>
+                                            </LinearGradientBrush>
+                                        </Path.Fill>
+                                    </Path>
+                                    <Path StrokeThickness="4.76863" StrokeMiterLimit="2.75" Stroke="#FF00C800" Data="M 69.8662,41.3916C 111.83,-44.4673 181.857,29.78 144.209,67.4998C 137.819,73.9136 149.073,4.84015 69.8662,41.3916 Z ">
+                                        <Path.Fill>
+                                            <LinearGradientBrush StartPoint="-0.112076,0.19773" EndPoint="1.42812,0.19773">
+                                                <LinearGradientBrush.GradientStops>
+                                                    <GradientStop Color="#FF1B6400" Offset="0.101382"/>
+                                                    <GradientStop Color="#FF8DB17F" Offset="0.995859"/>
+                                                    <GradientStop Color="#FFFFFFFF" Offset="1"/>
+                                                </LinearGradientBrush.GradientStops>
+                                            </LinearGradientBrush>
+                                        </Path.Fill>
+                                    </Path>
+                                    <Path StrokeThickness="4.76863" StrokeMiterLimit="2.75" Stroke="#FFC73E00" Fill="#FFFFC800" Data="M 87.7961,78.5153C 104.081,78.5153 117.314,92.1773 117.314,109.034C 117.314,125.915 104.081,139.577 87.7961,139.577C 71.4875,139.577 58.2784,125.915 58.2784,109.034C 58.2784,92.1773 71.4875,78.5153 87.7961,78.5153 Z "/>
+                                    <Path StrokeThickness="4.76863" StrokeMiterLimit="2.75" Stroke="#FF00C800" Data="M 117.266,83.6415C 125.85,90.7706 145.353,34.6678 83.3613,47.0424C 108.969,50.6665 109.66,67.309 117.266,83.6415 Z ">
+                                        <Path.Fill>
+                                            <LinearGradientBrush StartPoint="-0.218207,0.447659" EndPoint="1.63655,0.447659">
+                                                <LinearGradientBrush.GradientStops>
+                                                    <GradientStop Color="#FF1B6400" Offset="0.101382"/>
+                                                    <GradientStop Color="#FF8DB17F" Offset="0.995859"/>
+                                                    <GradientStop Color="#FFFFFFFF" Offset="1"/>
+                                                </LinearGradientBrush.GradientStops>
+                                            </LinearGradientBrush>
+                                        </Path.Fill>
+                                    </Path>
+                                    <Path StrokeThickness="1.19216" StrokeMiterLimit="2.75" Stroke="#FFC73E00" Fill="#FFC73E00" Data="F1 M 85.3403,124.938C 85.698,124.985 86.0318,125.009 86.2702,125.033C 86.5325,125.057 86.7709,125.057 86.9855,125.057C 87.4385,125.057 87.9154,125.033 88.3922,124.985C 88.8691,124.938 89.3698,124.866 89.9659,124.771L 89.9659,110.227C 89.1552,110.036 88.3684,109.821 87.6054,109.559C 86.8424,109.32 86.0794,109.058 85.3403,108.748L 85.3403,124.938 Z M 91.3964,124.389C 93.1608,123.817 94.5914,122.863 95.6405,121.528C 96.6896,120.193 97.2141,118.691 97.2141,117.022C 97.2141,115.4 96.7373,114.089 95.8074,113.064C 94.8537,112.015 93.3754,111.204 91.3964,110.632L 91.3964,124.389 Z M 83.9097,91.4621C 82.5745,91.9627 81.5493,92.7496 80.8101,93.8225C 80.0471,94.8954 79.6895,96.1829 79.6895,97.6374C 79.6895,98.7819 80.0471,99.8071 80.7624,100.689C 81.4777,101.595 82.5268,102.311 83.9097,102.883L 83.9097,91.4621 Z M 85.3403,103.288C 86.4132,103.646 87.3908,103.932 88.2015,104.17C 89.036,104.385 89.6321,104.528 89.9659,104.6L 89.9659,90.6514C 89.8228,90.6514 89.6797,90.6275 89.5128,90.6037C 89.3459,90.6037 89.0837,90.6037 88.7022,90.6037C 88.1299,90.6037 87.5577,90.6275 86.9855,90.6752C 86.4371,90.7468 85.8887,90.8183 85.3403,90.9375L 85.3403,103.288 Z M 83.9097,126.273C 81.5493,125.915 79.6418,124.985 78.1874,123.531C 76.7091,122.053 75.97,120.384 75.97,118.5C 75.97,117.403 76.2561,116.545 76.8283,115.901C 77.3767,115.281 78.1635,114.947 79.1649,114.947C 79.8802,114.947 80.4763,115.21 80.9055,115.687C 81.3347,116.187 81.5731,116.831 81.5731,117.618C 81.5731,118.762 81.0724,119.597 80.071,120.169C 79.0934,120.741 78.5927,121.099 78.5927,121.29C 78.5927,121.814 79.1173,122.434 80.1425,123.149C 81.1916,123.865 82.4314,124.413 83.9097,124.771L 83.9097,108.2C 81.8354,107.508 80.214,106.388 79.0696,104.814C 77.9251,103.241 77.329,101.381 77.329,99.2587C 77.329,97.1367 77.9013,95.2769 79.0457,93.6794C 80.1902,92.082 81.8115,90.866 83.9097,90.0314L 83.9097,86.4073L 85.3403,86.4073L 85.3403,89.4116C 85.7933,89.3162 86.2702,89.2446 86.7709,89.197C 87.2954,89.1492 87.8438,89.1254 88.4161,89.1254C 88.8452,89.1254 89.179,89.1254 89.3936,89.1492C 89.6082,89.1492 89.799,89.1731 89.9659,89.197L 89.9659,86.4073L 91.3964,86.4073L 91.3964,89.2685C 93.7569,89.7454 95.5928,90.6275 96.928,91.915C 98.2633,93.1787 98.9309,94.6808 98.9309,96.4453C 98.9309,97.4466 98.6447,98.2335 98.0964,98.8773C 97.548,99.4971 96.8327,99.831 95.9505,99.831C 95.2352,99.831 94.6629,99.6164 94.1622,99.1633C 93.6854,98.7342 93.447,98.1858 93.447,97.5181C 93.447,96.6121 93.9238,95.8491 94.8775,95.3008C 95.8313,94.7524 96.3081,94.3471 96.3081,94.1086C 96.3081,93.5602 95.8074,92.9402 94.8299,92.2488C 93.8523,91.5574 92.7078,91.1282 91.3964,90.9375L 91.3964,105.029C 94.1384,105.839 96.1889,107.079 97.5718,108.701C 98.9309,110.322 99.6223,112.372 99.6223,114.876C 99.6223,117.666 98.9309,120.002 97.548,121.862C 96.1412,123.722 94.1146,125.081 91.3964,125.963L 91.3964,131.685L 89.9659,131.685L 89.9659,126.273C 89.5844,126.368 89.1552,126.44 88.6783,126.464C 88.2015,126.511 87.6531,126.535 87.057,126.535C 86.5801,126.535 86.2225,126.535 85.9841,126.511C 85.7456,126.511 85.531,126.511 85.3403,126.487L 85.3403,131.685L 83.9097,131.685L 83.9097,126.273 Z "/>
+                                </Grid>
+                            </Viewbox>
+                        </Button>
+                        <!--Открытые модули-->
+                        <ItemsControl ItemsSource="{Binding OpenedModules}" Grid.Column="1" VerticalAlignment="Top" Focusable="False">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button MaxWidth="150" Command="{Binding StartModule}" 
+                                            Foreground="{DynamicResource ModuleTitleForeground}"
+                                            Style="{DynamicResource RibbonButton}"
+                                            Padding="0">
+                                        <TextBlock Text="{Binding Info.Header}" FontSize="12" FontFamily="Arial" FontWeight="Bold" Padding="5,4"/>
+                                        <Button.Triggers>
+                                            <EventTrigger RoutedEvent="MouseEnter">
+                                                <BeginStoryboard Name="tored">
+                                                    <Storyboard>
+                                                        <ColorAnimation Duration="0:0:0:.2" AccelerationRatio=".1"
+                                                                        To="Red"
+                                                                        Storyboard.TargetProperty="Foreground.(SolidColorBrush.Color)"/>                                                        
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="MouseLeave">
+                                                <StopStoryboard BeginStoryboardName="tored"/>
+                                            </EventTrigger>
+                                        </Button.Triggers>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </DockPanel>
+
+                <Path Stretch="Fill" Fill="{DynamicResource ModuleTitleBackground}" 
+                      Margin="-1, 0, 0, -1"
+                      Data="M 0,4 L 0,0 C 0.5,4 4,4 10,4 Z"/>
+            </DockPanel>
+
+            <!--Стартовая страница-->
+            <Views:StartView Grid.RowSpan="2" Focusable="False">
+                <Views:StartView.Style>
+                    <Style TargetType="{x:Type UserControl}">
+                        <Setter Property="Visibility" Value="Hidden"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding WorkSpace}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Views:StartView.Style>
+            </Views:StartView>         
+
+        </Grid>
+
+        <!--Диалог-->
+        <Grid Visibility="{Binding Dialog, Converter={StaticResource Null2Visibility}}" >
+            <Rectangle Fill="Black" Opacity="0.3"/>
+            <ContentControl Content="{Binding Dialog}" Focusable="False"
+                            KeyboardNavigation.TabNavigation="Cycle" KeyboardNavigation.DirectionalNavigation="Cycle" KeyboardNavigation.ControlTabNavigation="Cycle"
+                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+    </Grid>
+</Window>

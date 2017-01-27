@@ -1,0 +1,125 @@
+﻿<UserControl x:Class="RwModule.Views.VatInvoiceDlgView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:CommonModule.Converters;assembly=CommonModule"
+             >
+    <UserControl.Resources>
+        <!--<Style x:Key="SRightAlignStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="TextAlignment" Value="Right" />
+        </Style>-->
+        <conv:EnumToDescriptionConverter x:Key="EnumToDescription"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Номер" Margin="2" Foreground="DarkOliveGreen"/>
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding NumberString, Mode=OneTime}" Margin="2" FontWeight="Bold"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Тип" Margin="2" Foreground="DarkOliveGreen"/>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding InvoiceType, Mode=OneTime, Converter={StaticResource EnumToDescription}}" Margin="2" FontWeight="Bold"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Дата счёта" Margin="2" Foreground="DarkOliveGreen"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding DateIssuance, Mode=OneTime, StringFormat=dd.MM.yy}" Margin="2" FontWeight="Bold"/>
+        <!--<TextBlock Grid.Row="3" Grid.Column="0" Text="Итого по счёту" Margin="2" Foreground="DarkOliveGreen"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding RosterTotalCostVat, Mode=OneTime, StringFormat=f2}" Margin="2" FontWeight="Bold"/>-->
+        <DockPanel Grid.Row="4" Grid.ColumnSpan="2">
+            <TextBlock DockPanel.Dock="Top" Text="Документы" Margin="2" Padding="2,1" Background="OliveDrab" Foreground="White"/>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" TextElement.Foreground="DarkOliveGreen" Margin="2,0">
+                <Border BorderBrush="DarkOliveGreen" Width="80" BorderThickness="1,1,0,1" Padding="1">
+                    <TextBlock Text="Номер"/>
+                </Border>
+                <Border BorderBrush="DarkOliveGreen" Width="50" BorderThickness="1" Padding="1">
+                    <TextBlock Text="Серия"/>
+                </Border>
+                <Border BorderBrush="DarkOliveGreen" Width="80" BorderThickness="1" Padding="1">
+                    <TextBlock Text="Дата"/>
+                </Border>
+            </StackPanel>
+            <ItemsControl ItemsSource="{Binding Documents, Mode=OneTime}" Margin="2,0">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" TextElement.FontWeight="Bold">
+                            <Border BorderBrush="DarkOliveGreen" Width="80" BorderThickness="1,1,0,1" Padding="1">
+                                <TextBlock Text="{Binding Number, Mode=OneTime}"/>
+                            </Border>
+                            <Border BorderBrush="DarkOliveGreen" Width="50" BorderThickness="1" Padding="1">
+                                <TextBlock Text="{Binding Seria, Mode=OneTime}"/>
+                            </Border>
+                            <Border BorderBrush="DarkOliveGreen" Width="80" BorderThickness="1" Padding="1">
+                                <TextBlock Text="{Binding Date, Mode=OneTime, StringFormat=dd.MM.yy}"/>
+                            </Border>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </DockPanel>
+        <DockPanel Grid.Row="5" Grid.ColumnSpan="2">
+            <TextBlock DockPanel.Dock="Top" Text="Продукты / услуги" Margin="2" Padding="2,1" Background="OliveDrab" Foreground="White"/>
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" TextElement.Foreground="DarkOliveGreen" Margin="2,0">
+                <Border BorderBrush="DarkOliveGreen" Width="200" BorderThickness="1,1,0,1" Padding="1">
+                    <TextBlock Text="Название"/>
+                </Border>
+                <Border BorderBrush="DarkOliveGreen" Width="100" BorderThickness="1" Padding="1">
+                    <TextBlock Text="Сумма"/>
+                </Border>
+                <Border BorderBrush="DarkOliveGreen" Width="50" BorderThickness="1" Padding="1">
+                    <TextBlock Text="НДС,%"/>
+                </Border>
+                <Border BorderBrush="DarkOliveGreen" Width="80" BorderThickness="1" Padding="1">
+                    <TextBlock Text="Сумма НДС"/>
+                </Border>
+                <Border BorderBrush="DarkOliveGreen" Width="100" BorderThickness="1" Padding="1">
+                    <TextBlock Text="Итого"/>
+                </Border>
+            </StackPanel>
+            <ItemsControl ItemsSource="{Binding Roster, Mode=OneTime}" Margin="2,0">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" TextElement.FontWeight="Bold">
+                            <Border BorderBrush="DarkOliveGreen" Width="200" BorderThickness="1,1,0,1" Padding="1">
+                                <TextBlock Text="{Binding Name, Mode=OneTime}"/>
+                            </Border>
+                            <Border BorderBrush="DarkOliveGreen" Width="100" BorderThickness="1" Padding="1">
+                                <TextBlock Text="{Binding Cost, Mode=OneTime, StringFormat=f2}"/>
+                            </Border>
+                            <Border BorderBrush="DarkOliveGreen" Width="50" BorderThickness="1" Padding="1">
+                                <TextBlock Text="{Binding VatRate, Mode=OneTime, StringFormat=f2}"/>
+                            </Border>
+                            <Border BorderBrush="DarkOliveGreen" Width="80" BorderThickness="1" Padding="1">
+                                <TextBlock Text="{Binding SummaVat, Mode=OneTime, StringFormat=f2}"/>
+                            </Border>
+                            <Border BorderBrush="DarkOliveGreen" Width="100" BorderThickness="1" Padding="1">
+                                <TextBlock Text="{Binding CostVat, Mode=OneTime, StringFormat=f2}"/>
+                            </Border>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </DockPanel>
+        <DockPanel Grid.Row="6" Grid.ColumnSpan="2">
+            <TextBlock DockPanel.Dock="Top" Text="Итого по электронному счёту-фактуре" Margin="2" Padding="2,1" Background="OliveDrab" Foreground="White"/>
+            <StackPanel Orientation="Horizontal" TextElement.FontWeight="Bold" Margin="2,0">
+                <Border BorderBrush="DarkOliveGreen" Width="200" BorderThickness="1,1,0,1" Padding="1"/>
+                <Border BorderBrush="DarkOliveGreen" Width="100" BorderThickness="1" Padding="1">
+                    <TextBlock Text="{Binding RosterTotalCost, Mode=OneTime, StringFormat=f2}"/>
+                </Border>
+                <Border BorderBrush="DarkOliveGreen" Width="50" BorderThickness="1" Padding="1"/>
+                <Border BorderBrush="DarkOliveGreen" Width="80" BorderThickness="1" Padding="1">
+                    <TextBlock Text="{Binding RosterTotalVat, Mode=OneTime, StringFormat=f2}"/>
+                </Border>
+                <Border BorderBrush="DarkOliveGreen" Width="100" BorderThickness="1" Padding="1">
+                    <TextBlock Text="{Binding RosterTotalCostVat, Mode=OneTime, StringFormat=f2}"/>
+                </Border>
+            </StackPanel>
+        </DockPanel>
+    </Grid>    
+</UserControl>

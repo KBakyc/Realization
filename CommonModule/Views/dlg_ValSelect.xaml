@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="CommonModule.Views.dlg_ValSelect"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DockPanel Margin="0,2">
+        <ContentControl Content="{Binding ValSelectionTitle}" Focusable="False">
+            <ContentControl.ContentTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" Width="150" x:Name="title"/>
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding}" Value="{x:Null}">
+                            <Setter TargetName="title" Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ContentControl.ContentTemplate>
+        </ContentControl>
+        <ComboBox ItemsSource="{Binding ValList}" SelectedItem="{Binding SelVal}" Grid.Column="1"/>
+    </DockPanel>
+</UserControl>

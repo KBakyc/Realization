@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="SfModule.Views.dlg_FormSfs"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cviews="clr-namespace:CommonModule.Views;assembly=CommonModule">
+    <DockPanel>
+        <Expander DockPanel.Dock="Bottom" ExpandDirection="Down" Header="Дополнительные настройки" IsExpanded="False">
+            <Border BorderBrush="RoyalBlue" BorderThickness="1" CornerRadius="3" Padding="3" Background="AliceBlue">
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center" Margin="3">
+                        <RadioButton Content="Все" IsChecked="{Binding IsAllMode}" Margin="3,0"/>
+                        <RadioButton Content="Мои" IsChecked="{Binding IsMyMode}" Margin="3,0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Margin="3" HorizontalAlignment="Center">
+                        <CheckBox Content="Прежние номера" IsChecked="{Binding IsUseOldNumSf}" Margin="3,0" VerticalAlignment="Center"/>
+                        <GroupBox Header="По времени приёмки" HorizontalAlignment="Center"
+                              >
+                            <StackPanel Orientation="Horizontal" Margin="5,2,0,2">
+                                <CheckBox Content="Разделить" IsChecked="{Binding IsUseAcceptTime}" Margin="3,0"/>
+                                <CheckBox Content="Последние" IsChecked="{Binding IsOnlyLastAccepted}" Margin="3,0"/>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="Дата счетов-фактур: " VerticalAlignment="Center"/>
+                        <DatePicker SelectedDate="{Binding DateSf}" SelectedDateFormat="Short"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+        </Expander>
+        <cviews:dlg_PoupAndDates DataContext="{Binding PoupDatesSelection}"/>
+    </DockPanel>
+ </UserControl>

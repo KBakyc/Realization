@@ -1,0 +1,120 @@
+﻿<UserControl x:Class="SfModule.Views.CorrSfOtgrDocsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:conv="clr-namespace:CommonModule.Converters;assembly=CommonModule"
+             xmlns:glob="clr-namespace:System.Globalization;assembly=mscorlib"
+             xmlns:cctrl="clr-namespace:CommonModule.Controls;assembly=CommonModule"
+             mc:Ignorable="d"
+             KeyUp="dlgRoot_KeyUp">
+    <UserControl.Resources>
+        <conv:BoolNotConverter x:Key="BoolNot"/>
+        <conv:Bool2VisibilityConverter x:Key="Bool2Visibility"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <DockPanel>
+            <Border  BorderBrush="RoyalBlue" BorderThickness="1" DockPanel.Dock="Top" CornerRadius="5" Background="AliceBlue">
+                <StackPanel Margin="5">
+                    <TextBlock Text="Прежний договор:" FontWeight="Bold" Foreground="RoyalBlue"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Номер:" MinWidth="100"/>
+                        <TextBlock Text="{Binding InPDogInfo.TextOsn}" FontWeight="Bold"/>
+                        <TextBlock Text="от:" Margin="10,0"/>
+                        <TextBlock Text="{Binding InPDogInfo.PDogDate, StringFormat='dd.MM.yyyy'}" FontWeight="Bold"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                        <TextBlock Text="Вид цены:" MinWidth="100"/>
+                        <TextBlock Text="{Binding InPDogInfo.ModelRef.Vidcen}" Width="40" FontWeight="Bold"/>
+                        <TextBlock Text=" Цена:" Margin="10,0"/>
+                        <TextBlock Text="{Binding InPDogInfo.ModelRef.Cenaprod, StringFormat=N}" Width="120" FontWeight="Bold"/>
+                        <TextBlock Text="{Binding InPDogInfo.ModelRef.Kodvalcen}" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="RoyalBlue" BorderThickness="1" DockPanel.Dock="Top" CornerRadius="5" Background="AliceBlue">
+                <StackPanel Margin="5">
+                    <TextBlock Text="Новый договор:" FontWeight="Bold" Foreground="RoyalBlue"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Номер:" MinWidth="100"/>
+                        <TextBlock Text="{Binding OutPDogInfo.TextOsn}" FontWeight="Bold"/>
+                        <TextBlock Text="от:" Margin="10,0"/>
+                        <TextBlock Text="{Binding OutPDogInfo.PDogDate, StringFormat='dd.MM.yyyy'}" FontWeight="Bold"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                        <TextBlock Text="Вид цены:" MinWidth="100"/>
+                        <TextBlock Text="{Binding OutPDogInfo.ModelRef.Vidcen}" Width="40" FontWeight="Bold"/>
+                        <TextBlock Text=" Новая цена:" Margin="10,0" Foreground="Firebrick"/>
+                        <cctrl:ClickSelectTextBox Text="{Binding NewCenaProd, StringFormat=#.######, ConverterCulture={x:Static glob:CultureInfo.CurrentCulture}, Converter={conv:EmptyStringConverter}, ConverterParameter=0}" 
+                                                  Width="120" FontWeight="Bold" Style="{DynamicResource FocusableTextBox}"/>
+                        <TextBlock Text="{Binding OutPDogInfo.ModelRef.Kodvalcen}" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="RoyalBlue" BorderThickness="1" DockPanel.Dock="Bottom" CornerRadius="5" Background="AliceBlue">
+                <StackPanel Margin="5,2" Orientation="Horizontal">
+                    <TextBlock Text="ИТОГО выбрано:" FontWeight="Bold" Foreground="RoyalBlue"/>
+                    <TextBlock Text="Документов:" Margin="5,0"/>
+                    <TextBlock Text="{Binding Count}" FontWeight="Bold" Foreground="Navy" Margin="5,0"/>
+                    <TextBlock Text="Количество:" Margin="5,0"/>
+                    <TextBlock Text="{Binding Kolf}" FontWeight="Bold" Foreground="Navy" Margin="5,0"/>
+                </StackPanel>
+            </Border>
+            <Border CornerRadius="2" BorderBrush="RoyalBlue" BorderThickness="1" Background="AliceBlue" DockPanel.Dock="Top">
+                <Expander IsExpanded="False" Style="{DynamicResource SimpleExpanderStyle}" Focusable="False">
+                    <Expander.Header>
+                        <TextBlock Text="Изменение выбранного документа" Foreground="Firebrick"/>
+                    </Expander.Header>
+                    <StackPanel Orientation="Horizontal" Margin="2">
+                        <TextBlock Text="Отделить кол-во: "/>
+                        <TextBox Text="{Binding NewKolf, StringFormat=#.######, ConverterCulture={x:Static glob:CultureInfo.CurrentCulture}, UpdateSourceTrigger=PropertyChanged, Converter={conv:EmptyStringConverter}, ConverterParameter=0}" Width="100"/>
+                        <TextBlock Text=" прежняя цена: "/>
+                        <TextBox Text="{Binding PartOldCenProd, StringFormat=#.######, ConverterCulture={x:Static glob:CultureInfo.CurrentCulture}, UpdateSourceTrigger=PropertyChanged, Converter={conv:EmptyStringConverter}, ConverterParameter=0}" Width="100"/>
+                        <TextBlock Text=" новая цена: "/>
+                        <TextBox Text="{Binding PartNewCenProd, StringFormat=#.######, ConverterCulture={x:Static glob:CultureInfo.CurrentCulture}, UpdateSourceTrigger=PropertyChanged, Converter={conv:EmptyStringConverter}, ConverterParameter=0}" Width="100"/>
+                        <Button ToolTip="Изменить выделенный документ"
+                                Width="20" Height="20" Margin="2,0" Background="Orange"
+                                Command="{Binding SplitOtgrCommand}"
+                                Content="%" FontWeight="Bold" Foreground="White" FontFamily="Arial"
+                                Visibility="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsEnabled, Converter={StaticResource Bool2Visibility}, ConverterParameter=Collapsed}"/>
+                    </StackPanel>
+                </Expander>
+            </Border>
+            <DataGrid ItemsSource="{Binding OtgrDocs}" AutoGenerateColumns="False" CanUserAddRows="False" 
+                              Name="DgOtgrRows"
+                              CanUserDeleteRows="False"
+                              Style="{DynamicResource DefaultDataGridStyle}"
+                              RowDetailsVisibilityMode="Collapsed"
+                              SelectedItem="{Binding SelectedOtgr}"
+                              MouseDoubleClick="DataGrid_MouseDoubleClick"
+                              KeyUp="DataGrid_KeyUp">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Value.DocName}" Header="Документ" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Value.ModelRef.DocumentNumber}" Header="Номер" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Value.ModelRef.Datgr, StringFormat=dd.MM.yyyy}" Header="Дата" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Value.Product.Name}" Header="Продукт" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Value.Kolf, StringFormat='# ### ###.###'}" Header="Количество" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Value.Cenprod, StringFormat='# ### ###.######'}" Header="Цена" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Value.Sumprod, UpdateSourceTrigger=PropertyChanged}" Header="Выставить"/>
+                    <DataGridTextColumn Binding="{Binding Value.ModelRef.KodCenprod}" Header="$" IsReadOnly="True"/>
+                    <DataGridTextColumn Binding="{Binding Value.ModelRef.NdsStake, StringFormat='##'}" Header="НДС" IsReadOnly="True"/>
+                    <DataGridTemplateColumn Header="">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                              <!--IsEnabled="{Binding Value.HasCorrSf, Converter={StaticResource BoolNot}}"/>-->
+                                    <Ellipse Width="10" Height="10" Fill="Red" Margin="2,1"
+                                             ToolTip="На этот документ уже имеется сформированный корректировочный счёт"
+                                             Visibility="{Binding Value.HasCorrSf, Converter={StaticResource Bool2Visibility}}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+        
+    </Grid>
+</UserControl>

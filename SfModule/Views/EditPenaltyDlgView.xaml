@@ -1,0 +1,199 @@
+﻿<UserControl x:Class="SfModule.Views.EditPenaltyDlgView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Commands="clr-namespace:CommonModule.Commands;assembly=CommonModule"
+             xmlns:conv="clr-namespace:CommonModule.Converters;assembly=CommonModule"
+             xmlns:cctrl="clr-namespace:CommonModule.Controls;assembly=CommonModule"
+             xmlns:cv="clr-namespace:CommonModule.Views;assembly=CommonModule">
+    <UserControl.Resources>
+        <conv:Bool2VisibilityConverter x:Key="False2Collapse"/>
+        <conv:Bool2VisibilityConverter x:Key="True2Collapse" HiddenState="True"/>
+        <Commands:CommandReference Command="{Binding PlatVM.SeekCommand}" x:Key="SeekPlatCommand"/>
+        <Commands:CommandReference Command="{Binding GrpolVM.SeekCommand}" x:Key="SeekGrpolCommand"/>
+        <LinearGradientBrush x:Key="SelectedItemBorderBrush" StartPoint="0,1" EndPoint="0,0">
+            <GradientStop Offset="0" Color="#FF87CEFA"/>
+            <GradientStop Offset="0.2" Color="#2A87CEFA"/>
+            <GradientStop Offset="0.8" Color="#2A87CEFA"/>
+            <GradientStop Offset="1" Color="#0087CEFA"/>
+        </LinearGradientBrush>
+        <Style TargetType="ComboBoxItem" x:Key="MyComboBoxItemStyle">
+            <Setter Property="Foreground" Value="RoyalBlue"/>
+            <Setter Property="Background" Value="AliceBlue"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBoxItem">
+                        <Grid Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            <Border x:Name="HighLighter"
+                                            CornerRadius="3" BorderBrush="RoyalBlue" BorderThickness="2"
+                                            Background="{StaticResource SelectedItemBorderBrush}"
+                                            Visibility="Collapsed"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsHighlighted" Value="true">
+                                <Setter TargetName="HighLighter" Property="Visibility" Value="Visible"/>
+                                <Setter Property="Foreground" Value="DarkBlue"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="{DynamicResource DialogDataBackground}" Name="dlgRoot" TextElement.Foreground="RoyalBlue">
+        <StackPanel>
+            <GroupBox Header="Период хранения">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="по" VerticalAlignment="Center"/>
+                    <DatePicker SelectedDate="{Binding Datgr}" SelectedDateFormat="Short" Margin="3,0,0,0" Width="90"  TabIndex="1"
+                                        VerticalAlignment="Center"
+                                        DateValidationError="DatePicker_DateValidationError"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Документ">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="№ дела в КРО" VerticalAlignment="Center"/>
+                        <cctrl:ClickSelectTextBox Text="{Binding Nomkro, UpdateSourceTrigger=PropertyChanged}"                                                  
+                                                  Margin="3,0,0,0" Width="80" Height="22" TabIndex="2"
+                                                  VerticalAlignment="Center" Style="{DynamicResource FocusableTextBox}"/>
+                        <TextBlock Text="От" VerticalAlignment="Center" Margin="3,0,0,0"/>
+                        <DatePicker SelectedDate="{Binding Datkro}" SelectedDateFormat="Short" Margin="3,0,0,0" Width="90" TabIndex="3" 
+                                            DateValidationError="DatePicker_DateValidationError"
+                                            VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <DockPanel Margin="0,2,0,0">
+                        <TextBlock Text="№ исх." VerticalAlignment="Center" Margin="3,0,0,0"/>
+                        <cctrl:ClickSelectTextBox Text="{Binding Nomish, UpdateSourceTrigger=PropertyChanged}"
+                                                  Height="22"
+                                                  VerticalAlignment="Center"
+                                                  Margin="3,0,0,0" TabIndex="4" Style="{DynamicResource FocusableTextBox}"/>
+                    </DockPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Плательщик">
+                <DockPanel Margin="3" DataContext="{Binding PlatVM}">
+                    <TextBox Width="40" Margin="0,0,2,0" Text="{Binding SeekAny, UpdateSourceTrigger=PropertyChanged, StringFormat=#}" TabIndex="5"
+                             Style="{DynamicResource FocusableTextBox}">
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Enter" Command="{StaticResource SeekPlatCommand}"/>
+                        </TextBox.InputBindings>
+                    </TextBox>
+                    <cctrl:ComboBoxEx SelectedItem="{Binding SelectedKA}"
+                                      ItemsSource="{Binding KaList}" 
+                                      Padding="2" Focusable="False"
+                                      ItemContainerStyle="{StaticResource MyComboBoxItemStyle}">
+                        <cctrl:ComboBoxEx.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
+                            </ItemsPanelTemplate>
+                        </cctrl:ComboBoxEx.ItemsPanel>
+                        <cctrl:ComboBoxEx.SelectionBoxTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Kgr}" FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding Name}" Margin="5,0,0,0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </cctrl:ComboBoxEx.SelectionBoxTemplate>
+                        <cctrl:ComboBoxEx.ItemTemplate>
+                            <DataTemplate>
+                                <DockPanel Width="{Binding RelativeSource={RelativeSource AncestorType=ComboBoxItem}, Path=ActualWidth}">
+                                    <Border BorderThickness="2,0,2,2" Padding="2" BorderBrush="White" Width="80">
+                                        <TextBlock Text="{Binding Kgr}"/>
+                                    </Border>
+                                    <Border BorderThickness="0,0,2,2" Padding="2" BorderBrush="White" Grid.Column="1">
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </Border>
+                                </DockPanel>
+                            </DataTemplate>
+                        </cctrl:ComboBoxEx.ItemTemplate>
+                    </cctrl:ComboBoxEx>
+                </DockPanel>
+            </GroupBox>
+            <GroupBox Header="Договор" DataContext="{Binding DogVM}">
+                <cctrl:ComboBoxEx SelectedItem="{Binding SelPDogInfo}"
+                                  ItemsSource="{Binding PDogInfos}" 
+                                  Focusable="False" IsEditable="False"
+                                  Padding="2"
+                                  ItemContainerStyle="{StaticResource MyComboBoxItemStyle}">
+                    <cctrl:ComboBoxEx.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
+                        </ItemsPanelTemplate>
+                    </cctrl:ComboBoxEx.ItemsPanel>
+                    <cctrl:ComboBoxEx.SelectionBoxTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding TextOsn}"/>
+                        </DataTemplate>
+                    </cctrl:ComboBoxEx.SelectionBoxTemplate>
+                    <cctrl:ComboBoxEx.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="250"/>
+                                    <ColumnDefinition Width="80"/>
+                                </Grid.ColumnDefinitions>
+                                <Border BorderThickness="2,0,2,2" Padding="2" BorderBrush="White">
+                                    <TextBlock Text="{Binding TextOsn}" TextWrapping="Wrap"/>
+                                </Border>
+                                <Border BorderThickness="0,0,2,2" Padding="2" BorderBrush="White" Grid.Column="1">
+                                    <TextBlock Text="{Binding PDogDate, StringFormat=' от {0:dd.MM.yyyy}'}" TextWrapping="Wrap"/>
+                                </Border>
+                                <Border BorderThickness="0,0,2,2" Padding="2" BorderBrush="White" Grid.Column="2">
+                                    <StackPanel DataContext="{Binding Product}" Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Kpr}"/>
+                                        <TextBlock Text="{Binding Name}" Margin="3,0,0,0"/>
+                                    </StackPanel>                                    
+                                </Border>
+                                <Border BorderThickness="0,0,2,2" Padding="2" BorderBrush="White" Grid.Column="3">
+                                    <TextBlock Text="{Binding KfondStr}" TextWrapping="Wrap"/>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </cctrl:ComboBoxEx.ItemTemplate>
+                </cctrl:ComboBoxEx>
+            </GroupBox>
+            <GroupBox Header="Сумма">
+                <StackPanel Orientation="Horizontal">
+                    <cctrl:ClickSelectTextBox Text="{Binding Sumpenalty, UpdateSourceTrigger=PropertyChanged}" Width="150" Height="22"
+                                              TabIndex="6" Language="ru-RU" Style="{DynamicResource FocusableTextBox}"/>
+                    <cctrl:ComboBoxEx DataContext="{Binding ValVM}"
+                                      SelectedItem="{Binding SelVal}"
+                                      ItemsSource="{Binding ValList}"
+                                      Focusable="False" IsEditable="False"
+                                      Padding="2"
+                                      IsEnabled="False"
+                                      ItemContainerStyle="{StaticResource MyComboBoxItemStyle}">
+                            <cctrl:ComboBoxEx.SelectionBoxTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding ShortName}"/>
+                                </DataTemplate>
+                            </cctrl:ComboBoxEx.SelectionBoxTemplate>
+                            <cctrl:ComboBoxEx.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border BorderThickness="2,0,2,2" Padding="2" BorderBrush="White">
+                                            <TextBlock Text="{Binding Kodval}"/>
+                                        </Border>
+                                        <Border BorderThickness="0,0,2,2" Padding="2" BorderBrush="White" Grid.Column="1">
+                                            <TextBlock Text="{Binding NameVal}"/>
+                                        </Border>
+                                    </Grid>
+                                </DataTemplate>
+                            </cctrl:ComboBoxEx.ItemTemplate>
+                        </cctrl:ComboBoxEx>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
+</UserControl>

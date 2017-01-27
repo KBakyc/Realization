@@ -1,0 +1,691 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{061430C9-595F-4E30-8CF3-009E0C4E7E98}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CommonModule</RootNamespace>
+    <AssemblyName>CommonModule</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.11.0.3366.16\lib\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.11.0.3366.16\lib\Microsoft.ReportViewer.DataVisualization.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.ReportViewer.11.0.3366.16\lib\Microsoft.ReportViewer.Design.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.11.0.3366.16\lib\Microsoft.ReportViewer.ProcessingObjectModel.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.11.0.3366.16\lib\Microsoft.ReportViewer.WinForms.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.SqlServer.Types.11.0.1\lib\net20\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationUI, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\WINDOWS\Microsoft.NET\Framework\v3.0\WPF\PresentationUI.dll</HintPath>
+    </Reference>
+    <Reference Include="ReachFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Behaviours\DataGridSaveColumnsBehavior.cs" />
+    <Compile Include="Behaviours\DataGridFixSelectionBehavior.cs" />
+    <Compile Include="Behaviours\GridSaveLayoutBehavior.cs" />
+    <Compile Include="Behaviours\ListBoxScrollToViewBehavior.cs" />
+    <Compile Include="Behaviours\ReleaseMouseCaptureBehavior.cs" />
+    <Compile Include="Behaviours\TextBoxRegExpValidatorBehavior.cs" />
+    <Compile Include="Behaviours\DataGridSaveOrderingsBehavior.cs" />
+    <Compile Include="Behaviours\TextCase.cs" />
+    <Compile Include="Commands\AttachedCommand.cs" />
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\CommandReference.cs" />
+    <Compile Include="Commands\ModuleCommand.cs" />
+    <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Commands\LabelCommand.cs" />
+    <Compile Include="Composition\ExportNamedComponentAttribute.cs" />
+    <Compile Include="Composition\ExportModuleCommandAttribute.cs" />
+    <Compile Include="Composition\ExportModuleAttribute.cs" />
+    <Compile Include="Composition\IDisplayOrderMetaData.cs" />
+    <Compile Include="Composition\IComponentNameMetaData.cs" />
+    <Compile Include="Controls\ClickSelectTextBox.cs" />
+    <Compile Include="Controls\ComboBoxEx.cs" />
+    <Compile Include="Controls\Dialog.cs" />
+    <Compile Include="Controls\ScrollableTabPanel.cs" />
+    <Compile Include="Controls\TabControlEx.cs" />
+    <Compile Include="Converters\ConvertersInftastructure.cs" />
+    <Compile Include="Converters\InlineConverter.cs" />
+    <Compile Include="Converters\IsHolydayConverter.cs" />
+    <Compile Include="Converters\SwitchConverter.cs" />
+    <Compile Include="Converters\EnumToIntConverter.cs" />
+    <Compile Include="Converters\Null2UnsetConverter.cs" />
+    <Compile Include="Converters\Bool2VisibilityConverter.cs" />
+    <Compile Include="Converters\BoolNotConverter.cs" />
+    <Compile Include="Converters\AddConverter.cs" />
+    <Compile Include="Converters\EmptyStringConverter.cs" />
+    <Compile Include="Converters\EnumToDescriptionConverter.cs" />
+    <Compile Include="Converters\Int2VisibilityConverter.cs" />
+    <Compile Include="Converters\EnumToBooleanConverter.cs" />
+    <Compile Include="Converters\Int2BoolExConverter.cs" />
+    <Compile Include="Converters\DebugConverter.cs" />
+    <Compile Include="Converters\Int2BoolConverter.cs" />
+    <Compile Include="Converters\StatusToBrushConverter.cs" />
+    <Compile Include="Converters\Null2BoolConverter.cs" />
+    <Compile Include="Converters\Null2VisibilityConverter.cs" />
+    <Compile Include="DataViewModels\EsfnDataViewModel.cs" />
+    <Compile Include="DataViewModels\PoupViewModel.cs" />
+    <Compile Include="DataViewModels\PredoplViewModel.cs" />
+    <Compile Include="DataViewModels\ReportDataViewModel.cs" />
+    <Compile Include="DataViewModels\SfInListViewModel.cs" />
+    <Compile Include="DataViewModels\PenaltyViewModel.cs" />
+    <Compile Include="DataViewModels\SfLineViewModel.cs" />
+    <Compile Include="DataViewModels\SfPeriodViewModel.cs" />
+    <Compile Include="DataViewModels\SfProductPayViewModel.cs" />
+    <Compile Include="DataViewModels\SfTableLineViewModel.cs" />
+    <Compile Include="DataViewModels\SfViewModel.cs" />
+    <Compile Include="DataViews\PredoplDetailsView.xaml.cs">
+      <DependentUpon>PredoplDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataViews\SfDetailsView.xaml.cs">
+      <DependentUpon>SfDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ExportedViews.xaml.cs">
+      <DependentUpon>ExportedViews.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\Acceptable.cs" />
+    <Compile Include="Helpers\AttachedHasError.cs" />
+    <Compile Include="Helpers\BaseReportParametersGetter.cs" />
+    <Compile Include="Helpers\BasicNotifier.cs" />
+    <Compile Include="Helpers\BusinessLogicHelper.cs" />
+    <Compile Include="Helpers\DataGridHelper.cs" />
+    <Compile Include="Helpers\DeepCopy.cs" />
+    <Compile Include="Helpers\DialogContainer.cs" />
+    <Compile Include="Helpers\Enumerations.cs" />
+    <Compile Include="Helpers\FileSystemHelper.cs" />
+    <Compile Include="Helpers\FirstFocusedElementExtension.cs" />
+    <Compile Include="Helpers\GenericReportParametersGetter.cs" />
+    <Compile Include="Helpers\ISelectable.cs" />
+    <Compile Include="Helpers\Logger.cs" />
+    <Compile Include="Helpers\MEFCompositionExtensions.cs" />
+    <Compile Include="Helpers\PanelsHelper.cs" />
+    <Compile Include="Helpers\ExpressionsHelper.cs" />
+    <Compile Include="Helpers\ReportHelper.cs" />
+    <Compile Include="Helpers\ReportViewerMessages.cs" />
+    <Compile Include="Helpers\WorkFlowHelper.cs" />
+    <Compile Include="Interfaces\IAppService.cs" />
+    <Compile Include="Interfaces\ICancelViewModel.cs" />
+    <Compile Include="Interfaces\ICompSettings.cs" />
+    <Compile Include="Interfaces\ICommandInterface.cs" />
+    <Compile Include="Interfaces\IPersister.cs" />
+    <Compile Include="Interfaces\IRepkaService.cs" />
+    <Compile Include="Interfaces\IReportParametersGetter.cs" />
+    <Compile Include="Helpers\Parser.cs" />
+    <Compile Include="Helpers\PrintHelper.cs" />
+    <Compile Include="Helpers\Remember.cs" />
+    <Compile Include="Helpers\ReportPrintDocument.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Helpers\ReportService.cs" />
+    <Compile Include="Helpers\Selectable.cs" />
+    <Compile Include="Helpers\Sumprop.cs" />
+    <Compile Include="Helpers\ViewExtensions.cs" />
+    <Compile Include="Interfaces\ILoaded.cs" />
+    <Compile Include="Interfaces\IModuleCommands.cs" />
+    <Compile Include="Interfaces\IPagesModule.cs" />
+    <Compile Include="Interfaces\IContentModule.cs" />
+    <Compile Include="Interfaces\ICloseViewModel.cs" />
+    <Compile Include="Interfaces\ICommandCollection.cs" />
+    <Compile Include="Interfaces\IContentViewModel.cs" />
+    <Compile Include="Interfaces\IDialogViewModel.cs" />
+    <Compile Include="Interfaces\IModule.cs" />
+    <Compile Include="Interfaces\IModuleContent.cs" />
+    <Compile Include="Interfaces\IModuleLoader.cs" />
+    <Compile Include="Interfaces\IOtgruzModule.cs" />
+    <Compile Include="Interfaces\IPredoplModule.cs" />
+    <Compile Include="Interfaces\ISfModule.cs" />
+    <Compile Include="Interfaces\IShellModel.cs" />
+    <Compile Include="Interfaces\ISubmitViewModel.cs" />
+    <Compile Include="ModuleDescription.cs" />
+    <Compile Include="ModuleServices\BaseModuleService.cs" />
+    <Compile Include="ModuleServices\IModuleService.cs" />
+    <Compile Include="ModuleServices\IPredoplServices.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="CommonSettings.cs" />
+    <Compile Include="ViewModels\AgreementViewModel.cs" />
+    <Compile Include="ViewModels\CompositeDlgViewModel.cs" />
+    <Compile Include="ViewModels\BaseDlgViewModel.cs" />
+    <Compile Include="ViewModels\BaseReportModuleCommand.cs" />
+    <Compile Include="ViewModels\BasicModuleContent.cs" />
+    <Compile Include="ViewModels\BasicModuleViewModel.cs" />
+    <Compile Include="ViewModels\BasicViewModel.cs" />
+    <Compile Include="ViewModels\ChoicesDlgViewModel.cs" />
+    <Compile Include="ViewModels\CountrySelectionViewModel.cs" />
+    <Compile Include="ViewModels\DlgViewModelContainer.cs" />
+    <Compile Include="ViewModels\GroupDlgViewModel.cs" />
+    <Compile Include="ViewModels\HidableDlgViewModelContainer.cs" />
+    <Compile Include="ViewModels\HtmlPageViewModel.cs" />
+    <Compile Include="ViewModels\ModuleMenuItemViewModel.cs" />
+    <Compile Include="ViewModels\DogListViewModel.cs" />
+    <Compile Include="ViewModels\DogSelectViewModel.cs" />
+    <Compile Include="ViewModels\DogInfoViewModel.cs" />
+    <Compile Include="ViewModels\HistoryDlgViewModel.cs" />
+    <Compile Include="ViewModels\MenuItemViewModel.cs" />
+    <Compile Include="ViewModels\SelectableDlgViewModelContainer.cs" />
+    <Compile Include="ViewModels\KursesListViewModel.cs" />
+    <Compile Include="ViewModels\SelectPaysForUndoDlgViewModel.cs" />
+    <Compile Include="ViewModels\TxtDlgViewModel.cs" />
+    <Compile Include="ViewModels\ProductSelectionViewModel.cs" />
+    <Compile Include="ViewModels\MultiPoupSelectionViewModel.cs" />
+    <Compile Include="ViewModels\OtgrDocsDlgViewModel.cs" />
+    <Compile Include="ViewModels\SelectedCompositeDlgViewModel.cs" />
+    <Compile Include="ViewModels\ChoiceViewModel.cs" />
+    <Compile Include="ViewModels\BaseCompositeDlgViewModel.cs" />
+    <Compile Include="ViewModels\ContentModuleViewModel.cs" />
+    <Compile Include="ViewModels\GetReportParametersDlgViewModel.cs" />
+    <Compile Include="ViewModels\PoupDatesKpokDlgViewModel.cs" />
+    <Compile Include="ViewModels\KpokDatesDlgViewModel.cs" />
+    <Compile Include="ViewModels\ReportParameterViewModel.cs" />
+    <Compile Include="ViewModels\ReportViewModel.cs" />
+    <Compile Include="ViewModels\DateDlgViewModel.cs" />
+    <Compile Include="ViewModels\PDogSelectViewModel.cs" />
+    <Compile Include="ViewModels\OtgrDocViewModel.cs" />
+    <Compile Include="ViewModels\PDogListViewModel.cs" />
+    <Compile Include="ViewModels\DumbModuleContent.cs" />
+    <Compile Include="ViewModels\OtgrDocListViewModel.cs" />
+    <Compile Include="ViewModels\PDogInfoViewModel.cs" />
+    <Compile Include="ViewModels\ReportSelectionViewModel.cs" />
+    <Compile Include="ViewModels\PagesModuleViewModel.cs" />
+    <Compile Include="ViewModels\KaSelectionViewModel.cs" />
+    <Compile Include="ViewModels\ValSelectionViewModel.cs" />
+    <Compile Include="ViewModels\PoupSelectionViewModel.cs" />
+    <Compile Include="ViewModels\PoupValDatesDlgViewModel.cs" />
+    <Compile Include="ViewModels\AgreeSelectionViewModel.cs" />
+    <Compile Include="ViewModels\InvoiceTypeSelectionViewModel.cs" />
+    <Compile Include="ViewModels\WaitDlgViewModel.cs" />
+    <Compile Include="ViewModels\MsgDlgViewModel.cs" />
+    <Compile Include="ViewModels\DateRangeDlgViewModel.cs" />
+    <Compile Include="ViewModels\PoupAndDatesDlgViewModel.cs" />
+    <Compile Include="ViewModels\NumDlgViewModel.cs" />
+    <Compile Include="ViewModels\PoupValDateDlgViewModel.cs" />
+    <Compile Include="ViewModels\ProgressDlgViewModel.cs" />
+    <Compile Include="Views\AgreementSelectionView.xaml.cs">
+      <DependentUpon>AgreementSelectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AgreementView.xaml.cs">
+      <DependentUpon>AgreementView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CircularProgressBar.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>CircularProgressBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChoicesDlgView.xaml.cs">
+      <DependentUpon>ChoicesDlgView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CompositeDlgView.xaml.cs">
+      <DependentUpon>CompositeDlgView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\dlg_InvoiceTypeSelect.xaml.cs">
+      <DependentUpon>dlg_InvoiceTypeSelect.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DogListView.xaml.cs">
+      <DependentUpon>DogListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DogSelect.xaml.cs">
+      <DependentUpon>DogSelect.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HistoryDlgView.xaml.cs">
+      <DependentUpon>HistoryDlgView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HtmlPageView.xaml.cs">
+      <DependentUpon>HtmlPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProgressDlgView.xaml.cs">
+      <DependentUpon>ProgressDlgView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DialogContent.xaml.cs">
+      <DependentUpon>DialogContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectPaysForUndoDlgView.xaml.cs">
+      <DependentUpon>SelectPaysForUndoDlgView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TxtDlgView.xaml.cs">
+      <DependentUpon>TxtDlgView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\dlg_ProductSelect.xaml.cs">
+      <DependentUpon>dlg_ProductSelect.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\KursesListView.xaml.cs">
+      <DependentUpon>KursesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\dlg_MultiPoupSelect.xaml.cs">
+      <DependentUpon>dlg_MultiPoupSelect.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\dlg_KaDates.xaml.cs">
+      <DependentUpon>dlg_KaDates.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\dlg_PoupDatesKa.xaml.cs">
+      <DependentUpon>dlg_PoupDatesKa.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\dlg_PoupSelect.xaml.cs">
+      <DependentUpon>dlg_PoupSelect.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\dlg_SelectDate.xaml.cs">
+      <DependentUpon>dlg_SelectDate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\dlg_ValSelect.xaml.cs">
+      <DependentUpon>dlg_ValSelect.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PDogListView.xaml.cs">
+      <DependentUpon>PDogListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\dlg_PDogSelect.xaml.cs">
+      <DependentUpon>dlg_PDogSelect.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DumbModuleContentView.xaml.cs">
+      <DependentUpon>DumbModuleContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\dlg_ReportSelection.xaml.cs">
+      <DependentUpon>dlg_ReportSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\dlg_Dates.xaml.cs">
+      <DependentUpon>dlg_Dates.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\dlg_PoupValDates.xaml.cs">
+      <DependentUpon>dlg_PoupValDates.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContentModuleView.xaml.cs">
+      <DependentUpon>ContentModuleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\GetReportParametersDlgView.xaml.cs">
+      <DependentUpon>GetReportParametersDlgView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModuleDialogAdorner.xaml.cs">
+      <DependentUpon>ModuleDialogAdorner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PoupAndDateRangeTitleView.xaml.cs">
+      <DependentUpon>PoupAndDateRangeTitleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportView.xaml.cs">
+      <DependentUpon>ReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectKaDlgView.xaml.cs">
+      <DependentUpon>SelectKaDlgView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PagesModuleView.xaml.cs">
+      <DependentUpon>PagesModuleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WaitDlgView.xaml.cs">
+      <DependentUpon>WaitDlgView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\dlg_PoupValDate.xaml.cs">
+      <DependentUpon>dlg_PoupValDate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\dlg_PoupAndDates.xaml.cs">
+      <DependentUpon>dlg_PoupAndDates.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MsgDlgView.xaml.cs">
+      <DependentUpon>MsgDlgView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NumDlgView.xaml.cs">
+      <DependentUpon>NumDlgView.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="DataViews\PredoplDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataViews\SfDetailsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ExportedViews.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\Resources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AgreementSelectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AgreementView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CircularProgressBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ChoicesDlgView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CompositeDlgView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\dlg_InvoiceTypeSelect.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DogListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DogSelect.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\HistoryDlgView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\HtmlPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ProgressDlgView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DialogContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SelectPaysForUndoDlgView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\TxtDlgView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\dlg_ProductSelect.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\KursesListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\dlg_MultiPoupSelect.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\dlg_KaDates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\dlg_PoupDatesKa.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\dlg_PoupSelect.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\dlg_SelectDate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\dlg_ValSelect.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PDogListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\dlg_PDogSelect.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DumbModuleContentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\dlg_ReportSelection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\dlg_Dates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\dlg_PoupValDates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ContentModuleView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\GetReportParametersDlgView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ModuleDialogAdorner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PoupAndDateRangeTitleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SelectKaDlgView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PagesModuleView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WaitDlgView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\dlg_PoupValDate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\dlg_PoupAndDates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MsgDlgView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\NumDlgView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{262D9D78-C88E-4B1C-BA14-01B07547FC81}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataObjects\DataObjects.csproj">
+      <Project>{7E6E6835-306F-4046-8FBD-1F9512BDC920}</Project>
+      <Name>DataObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DotNetHelper\DotNetHelper.csproj">
+      <Project>{9D1C618F-9844-45DB-87DF-F624A8A5D275}</Project>
+      <Name>DotNetHelper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>Copy /y $(TargetDir)$(TargetFileName).config $(SolutionDir)Realization\$(OutDir)</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
