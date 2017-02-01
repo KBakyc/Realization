@@ -10,10 +10,6 @@
         <Views:GetJournalParamsDlgView/>
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type ViewModels:GetJournalBuyParamsDlgViewModel}">
-        <Views:GetJournalBuyParamsDlgView/>
-    </DataTemplate>
-
     <DataTemplate DataType="{x:Type ViewModels:WorkCalendarViewModel}">
         <Views:WorkCalendarView/>
     </DataTemplate>    

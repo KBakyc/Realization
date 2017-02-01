@@ -119,7 +119,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ViewModels\GetJournalParamsDlgViewModel.cs" />
-    <Compile Include="ViewModels\GetJournalBuyParamsDlgViewModel.cs" />
     <Compile Include="ViewModels\KaFinHistoryViewModel.cs" />
     <Compile Include="ViewModels\WorkCalendarViewModel.cs" />
     <Compile Include="ViewModels\SalesJournalTypeDlgViewModel.cs" />
@@ -131,9 +130,6 @@
     <Compile Include="ViewModels\PoupSettingsViewModel.cs" />
     <Compile Include="ViewModels\SignsSettingsViewModel.cs" />
     <Compile Include="ViewModels\TableSyncStatusViewModel.cs" />
-    <Compile Include="Views\GetJournalBuyParamsDlgView.xaml.cs">
-      <DependentUpon>GetJournalBuyParamsDlgView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\GetJournalParamsDlgView.xaml.cs">
       <DependentUpon>GetJournalParamsDlgView.xaml</DependentUpon>
     </Compile>
@@ -192,10 +188,6 @@
     <Page Include="ExportedModuleViews.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\GetJournalBuyParamsDlgView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

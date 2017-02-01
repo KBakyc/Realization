@@ -46,11 +46,11 @@ namespace CommonModule.ViewModels
                 && (IsPkodEnabled ? (SelPkods != null) : true );
         }
 
-        private void ExecuteSubmit()
-        {
-            if (OnSubmit != null)
-                OnSubmit(this);
-        }
+        //private void ExecuteSubmit()
+        //{
+        //    if (OnSubmit != null)
+        //        OnSubmit(this);
+        //}
 
         private string poupTitle;
         public string PoupTitle 
