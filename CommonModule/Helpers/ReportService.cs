@@ -14,7 +14,7 @@ namespace CommonModule.Helpers
         Choice A4 = new Choice() { Header = "A4", IsSingleInGroup = true, GroupName = "Формат", IsChecked = true };
         Choice A3 = new Choice() { Header = "A3", IsSingleInGroup = true, GroupName = "Формат" };
         Choice Print = new Choice() { Header = "Печать", IsSingleInGroup = true, GroupName = "Вывод", IsChecked = true };
-        Choice Preview = new Choice() { Header = "Просмотр", IsSingleInGroup = true, GroupName = "Вывод" };
+        Choice Preview = new Choice() { Header = "Просмотр", IsSingleInGroup = true, GroupName = "Вывод", IsChecked = false};
 
         private IModule parent;
         private ReportModel reportModel;
