@@ -567,7 +567,7 @@ namespace OtgrModule.ViewModels
 
         public bool IsVozvrat
         {
-            get { return Otgr.IdVozv > 0; }
+            get { return Otgr.IdVozv.GetValueOrDefault() > 0; }
         }
 
         private Country destinationCountry;

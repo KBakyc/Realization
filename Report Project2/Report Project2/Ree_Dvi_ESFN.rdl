@@ -2895,7 +2895,7 @@ declare @isallpoups bit = case when 0 in (@Poup) then 1 else 0 end
 	         when i.poup in (@Poup) then 1
 			 else 0
 		end
-	and g.datgr &gt;= @dfrom and g.datgr &lt;= @dto
+	and i.datbuch &gt;= @dfrom and g.datgr &lt;= @dto
 	and i.kpok = (case when ISNULL(@kpok,0) = 0 then i.kpok else @kpok end)
 	and 1 = case when @transp = 0 then 1
 	             when @transp = 1 and i.TransportId in (1,6,7) then 1

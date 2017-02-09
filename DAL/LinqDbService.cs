@@ -1044,12 +1044,12 @@ namespace DAL
                             RwBillNumber = d.RwBillNumber,
                             Idrnn = d.Idrnn,
                             Series = d.Series,
-                            Nv = (int)d.Nv,
+                            Nv = (int)(d.Nv ??0),
                             Kpok = (int)d.Kpok,
                             Kgr = (int)d.Kgr,
                             Kdog = (int)d.Kdog,
                             Datgr = d.Datgr,
-                            Datnakl = d.Datnakl,
+                            Datnakl = d.Datnakl ?? d.Datgr,
                             Dataccept = d.Dataccept,
                             Datarrival = d.Datarrival,
                             Datdrain = d.Datdrain,
@@ -1058,27 +1058,27 @@ namespace DAL
                             Poup = d.Poup ?? 0,
                             Pkod = (short)d.Pkod,
                             Kolf = d.Kolf,
-                            Vidcen = (int)d.Vidcen,
-                            Cena = d.Cena,
-                            Prodnds = d.Prodnds,
+                            Vidcen = (int)(d.Vidcen ?? 0),
+                            Cena = d.Cena ?? 0,
+                            Prodnds = d.Prodnds ?? 0,
                             SumNds = d.SumNds,
                             Kodcen = d.Kodcen,
                             Kpr = (int)d.Kpr,
-                            Sper = d.Sper,
-                            Nds = d.Nds,
-                            Ndssper = d.Ndssper,
-                            Dopusl = d.Dopusl,
-                            Ndst_dop = d.Ndst_dop,
-                            Ndsdopusl = d.Ndsdopusl,
-                            Provoz = (short)d.Provoz,
-                            Stgr = (int)d.Stgr,
-                            Stotpr = (int)d.Stotpr,
+                            Sper = d.Sper ?? 0,
+                            Nds = d.Nds ?? 0,
+                            Ndssper = d.Ndssper ?? 0,
+                            Dopusl = d.Dopusl ?? 0,
+                            Ndst_dop = d.Ndst_dop ?? 0,
+                            Ndsdopusl = d.Ndsdopusl ?? 0,
+                            Provoz = (short)(d.Provoz ?? 0),
+                            Stgr = (int)(d.Stgr ?? 0),
+                            Stotpr = (int)(d.Stotpr ?? 0),
                             TransportId = d.TransportId ?? 0,
                             WL_S = d.WL_S,
                             KodDav = d.KodDav,
                             Kstr = (short)d.Kstr,
-                            IdSpackage = (short)d.IdSpackage,
-                            IdProdcen = (int)d.IdProdcen,
+                            IdSpackage = (short)(d.IdSpackage ?? 0),
+                            IdProdcen = (int)(d.IdProdcen ?? 0),
                             PrVzaim = (short)(d.PrVzaim ?? 0),
                             SourceId = (short)d.SourceId,
                             Period = d.Period,
@@ -1094,11 +1094,11 @@ namespace DAL
                             AkcKodVal = d.AkcKodVal,
                             IdSpurpose = (short?)d.IdSpurpose,
                             IdAct = d.IdAct,
-                            IdVozv = (int)d.IdVozv,
-                            Maker = (int)d.Maker,
+                            IdVozv = d.IdVozv,
+                            Maker = (int)(d.Maker ?? 0),
                             KodRaznar = (int)(d.KodRaznar ?? 0),
                             MeasureUnitId = d.MeasureUnitId,
-                            Density = d.Density,
+                            Density = d.Density ?? 0M,
                             TrackingState = TrackingInfo.Unchanged
                         }).ToArray();
                 }
@@ -5230,10 +5230,11 @@ namespace DAL
                                               IsCena = p.iscena ?? false,
                                               IsGood = p.isgood ?? false,
                                               IsService = p.isService,
-                                              IsActive = p.active ?? false,
+                                              IsActive = p.active,
                                               IdAkcGroup = p.idakcgroup ?? 0,
                                               IsInReal = p.inrealiz != 0,
-                                              MeasureUnitId = p.measureUnitId ?? 0
+                                              MeasureUnitId = p.measureUnitId ?? 0,
+                                              IdProdType = p.IdProdType
                                           }).ToArray();
                     //var logstr = tw.ToString();
                     //tw.Close();
@@ -6423,11 +6424,11 @@ namespace DAL
                 return false;
             }
 
-            if (_vozv == null || _vozv.IdVozv == 0 || _vozv.Kolf >= 0) return false; //проверка на возвратную накладную
+            if (_vozv == null || !_vozv.IdVozv.HasValue || _vozv.IdVozv == 0 || _vozv.Kolf >= 0) return false; //проверка на возвратную накладную
 
             bool res = true;
-            OtgrLine otgr = GetOtgrLine(_vozv.IdVozv, true);
-            if (otgr == null) otgr = GetOtgrLine(_vozv.IdVozv, false);
+            OtgrLine otgr = GetOtgrLine(_vozv.IdVozv.Value, true);
+            if (otgr == null) otgr = GetOtgrLine(_vozv.IdVozv.Value, false);
             if (otgr != null && otgr.IdVozv == _vozv.Idrnn)
             {
                 otgr.IdVozv = 0;

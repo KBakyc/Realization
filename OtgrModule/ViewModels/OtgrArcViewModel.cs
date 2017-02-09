@@ -459,7 +459,7 @@ namespace OtgrModule.ViewModels
             else
             {
                 string dlgTitle = null;
-                var vozvrats = selOtgr.Where(o => o.Otgr.IdVozv > 0 && o.Otgr.SourceId == 1 && o.Kolf < 0);
+                var vozvrats = selOtgr.Where(o => o.Otgr.IdVozv.GetValueOrDefault() > 0 && o.Otgr.SourceId == 1 && o.Kolf < 0);
                 if (vozvrats.Any())
                 {
                     if (vozvrats.Count() > 1)
@@ -491,7 +491,7 @@ namespace OtgrModule.ViewModels
         private bool DeleteSingleOtgr(OtgrLine _ol)
         {
             bool res = true;
-            if (_ol.IdVozv > 0 && _ol.SourceId == 1 && _ol.Kolf < 0)
+            if (_ol.IdVozv.GetValueOrDefault() > 0 && _ol.SourceId == 1 && _ol.Kolf < 0)
                 res = Parent.Repository.UnDoOtgrVozvrat(_ol);
             else
                 res = Parent.Repository.DeleteOtgruz(_ol);
@@ -562,7 +562,7 @@ namespace OtgrModule.ViewModels
 
             if (IsReadOnly || selectedOtgr == null) return false;
             var otgr = selectedOtgr.Otgr;
-            return otgr != null && otgr.IdVozv == 0 && otgr.TransportId > 0;
+            return otgr != null && otgr.IdVozv.GetValueOrDefault() == 0 && otgr.TransportId > 0;
         }
         private void ExecVozvratCommand()
         {

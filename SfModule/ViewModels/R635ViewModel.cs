@@ -873,7 +873,8 @@ namespace SfModule.ViewModels
 
             bool isVozv = sfview.SfType.SfTypeId == 0 && sfview.SumPltr < 0; // для возвратов формируем дополнительные ЭСФН
             
-            bool isVozmUsl = sfview.SfProductLines.Any(p => p.ProdRef.IsService && !p.ProdRef.IsInReal);            
+            bool isVozmUsl = sfview.SfProductLines.Any(p => p.ProdRef.IsService && !p.ProdRef.IsInReal 
+                                                         && p.ProdRef.IdProdType.GetValueOrDefault() != 11);    // энергоносители, вода и т.п.  
             if (!isVozmUsl)
             {
                 short[] rwpays = { 5, 6, 7, 8 };

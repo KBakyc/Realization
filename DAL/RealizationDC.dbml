@@ -278,76 +278,6 @@
       <Column Name="JFileName" Type="System.String" DbType="Char(8) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
-  <Table Name="dbo.uv_Product" Member="uv_Products">
-    <Type Name="uv_Product">
-      <Column Name="kpres" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
-      <Column Name="kpr" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
-      <Column Name="kodgrup" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
-      <Column Name="gost" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Column Name="pres" Type="System.String" DbType="VarChar(35)" CanBeNull="true" />
-      <Column Name="cenf" Type="System.Decimal" DbType="Decimal(11,2)" CanBeNull="true" />
-      <Column Name="cens" Type="System.Decimal" DbType="Decimal(11,2)" CanBeNull="true" />
-      <Column Name="cenobl" Type="System.Decimal" DbType="Decimal(11,2)" CanBeNull="true" />
-      <Column Name="cenukr" Type="System.Decimal" DbType="Decimal(11,2)" CanBeNull="true" />
-      <Column Name="procent" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
-      <Column Name="nei" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Column Name="neistat" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
-      <Column Name="grup" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
-      <Column Name="pos" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
-      <Column Name="kontr" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
-      <Column Name="ngruz1" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
-      <Column Name="ngruz2" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
-      <Column Name="kgrupgruz" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
-      <Column Name="kvag" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
-      <Column Name="statnagr" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
-      <Column Name="shem" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
-      <Column Name="shems" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
-      <Column Name="kuo1" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="kuo2" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="kuo3" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="byte" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="w_es" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
-      <Column Name="mnt" Type="System.Decimal" DbType="Decimal(8,5)" CanBeNull="true" />
-      <Column Name="prtar" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
-      <Column Name="formula" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
-      <Column Name="pik" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
-      <Column Name="prksp" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
-      <Column Name="prvyb" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
-      <Column Name="sort" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
-      <Column Name="kodstat" Type="System.String" DbType="VarChar(9)" CanBeNull="true" />
-      <Column Name="pr_eko" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
-      <Column Name="iscena" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="iskol" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="kodvtf" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
-      <Column Name="kodgru8" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
-      <Column Name="kodgrstat" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
-      <Column Name="pkod" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
-      <Column Name="knp" Type="System.Decimal" DbType="Decimal(5,0)" CanBeNull="true" />
-      <Column Name="isfuel" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="isdelivery" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="gng" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
-      <Column Name="idspackage" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
-      <Column Name="certificat" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Column Name="density" Type="System.Decimal" DbType="Decimal(6,5)" CanBeNull="true" />
-      <Column Name="isgood" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="idplatform" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
-      <Column Name="active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="kodtnved" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="inrealiz" Type="System.Decimal" DbType="Decimal(1,0) NOT NULL" CanBeNull="false" />
-      <Column Name="kod_oon" Type="System.Decimal" DbType="Decimal(5,0)" CanBeNull="true" />
-      <Column Name="tank_nb" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
-      <Column Name="class" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="n_hyg_cert" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Column Name="dend_hyg_c" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="npass" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
-      <Column Name="oilptype" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
-      <Column Name="name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="idakcgroup" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="GTIN" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="isService" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="measureUnitId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.SfTypes" Member="SfTypes">
     <Type Name="SfType">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -976,6 +906,79 @@
       <Column Name="SumNdsSper" Type="System.Decimal" DbType="Decimal(15,2) NOT NULL" CanBeNull="false" />
       <Column Name="IdPrilSf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.uv_Product" Member="uv_Products">
+    <Type Name="uv_Product">
+      <Column Name="kpres" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
+      <Column Name="kpr" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="kodgrup" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
+      <Column Name="gost" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="pres" Type="System.String" DbType="VarChar(35)" CanBeNull="true" />
+      <Column Name="cenf" Type="System.Decimal" DbType="Decimal(11,2)" CanBeNull="true" />
+      <Column Name="cens" Type="System.Decimal" DbType="Decimal(11,2)" CanBeNull="true" />
+      <Column Name="cenobl" Type="System.Decimal" DbType="Decimal(11,2)" CanBeNull="true" />
+      <Column Name="cenukr" Type="System.Decimal" DbType="Decimal(11,2)" CanBeNull="true" />
+      <Column Name="procent" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="nei" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="neistat" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="grup" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="pos" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="kontr" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+      <Column Name="ngruz1" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="ngruz2" Type="System.String" DbType="VarChar(12)" CanBeNull="true" />
+      <Column Name="kgrupgruz" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="kvag" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="statnagr" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="shem" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="shems" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="kuo1" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="kuo2" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="kuo3" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="byte" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="w_es" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+      <Column Name="mnt" Type="System.Decimal" DbType="Decimal(8,5)" CanBeNull="true" />
+      <Column Name="prtar" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+      <Column Name="formula" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+      <Column Name="pik" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+      <Column Name="prksp" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+      <Column Name="prvyb" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+      <Column Name="sort" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+      <Column Name="kodstat" Type="System.String" DbType="VarChar(9)" CanBeNull="true" />
+      <Column Name="pr_eko" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="iscena" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="iskol" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="kodvtf" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
+      <Column Name="kodgru8" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
+      <Column Name="kodgrstat" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
+      <Column Name="pkod" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="knp" Type="System.Decimal" DbType="Decimal(5,0)" CanBeNull="true" />
+      <Column Name="isfuel" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="isdelivery" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="gng" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
+      <Column Name="idspackage" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="certificat" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="density" Type="System.Decimal" DbType="Decimal(6,5)" CanBeNull="true" />
+      <Column Name="isgood" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="idplatform" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="kodtnved" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="inrealiz" Type="System.Decimal" DbType="Decimal(1,0) NOT NULL" CanBeNull="false" />
+      <Column Name="kod_oon" Type="System.Decimal" DbType="Decimal(5,0)" CanBeNull="true" />
+      <Column Name="tank_nb" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="class" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="n_hyg_cert" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="dend_hyg_c" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="npass" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
+      <Column Name="oilptype" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="idakcgroup" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="GTIN" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="isService" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="measureUnitId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ShortName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="EconomicActivityType" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="IdProdType" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.uf_GetTransportName" Method="uf_GetTransportName" IsComposable="true">
@@ -2391,81 +2394,6 @@
       <Column Name="position" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.usp_GetOtgruzNotInRealiz" Method="usp_GetOtgruzNotInRealiz">
-    <Parameter Name="id" Type="System.Int64" DbType="BigInt" />
-    <Parameter Name="DocumentNumber" Parameter="documentNumber" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="RwBillNumber" Parameter="rwBillNumber" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="nv" Type="System.Int32" DbType="Int" />
-    <Parameter Name="dfrom" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="dto" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="poup" Type="System.Int32" DbType="Int" />
-    <Parameter Name="pkod" Type="System.Int32" DbType="Int" />
-    <Parameter Name="kdog" Type="System.Int32" DbType="Int" />
-    <Parameter Name="kpok" Type="System.Int32" DbType="Int" />
-    <Parameter Name="kgr" Type="System.Int32" DbType="Int" />
-    <ElementType Name="usp_GetOtgruzNotInRealizResult">
-      <Column Name="IdInvoiceType" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="DocumentNumber" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
-      <Column Name="RwBillNumber" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="Idrnn" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Series" Type="System.String" DbType="Char(2)" CanBeNull="true" />
-      <Column Name="Nv" Type="System.Decimal" DbType="Decimal(8,0) NOT NULL" CanBeNull="false" />
-      <Column Name="Kpok" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" CanBeNull="false" />
-      <Column Name="Kgr" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" CanBeNull="false" />
-      <Column Name="Kdog" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
-      <Column Name="Datgr" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="Datnakl" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="Dataccept" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Datarrival" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Datdrain" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Kodf" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
-      <Column Name="Poup" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Pkod" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
-      <Column Name="Kolf" Type="System.Decimal" DbType="Decimal(14,6) NOT NULL" CanBeNull="false" />
-      <Column Name="Vidcen" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" CanBeNull="false" />
-      <Column Name="Cena" Type="System.Decimal" DbType="Decimal(17,6) NOT NULL" CanBeNull="false" />
-      <Column Name="Prodnds" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" CanBeNull="false" />
-      <Column Name="SumNds" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
-      <Column Name="Kodcen" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
-      <Column Name="Kpr" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
-      <Column Name="Sper" Type="System.Decimal" DbType="Decimal(14,2) NOT NULL" CanBeNull="false" />
-      <Column Name="Nds" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" CanBeNull="false" />
-      <Column Name="Ndssper" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
-      <Column Name="Dopusl" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
-      <Column Name="Ndst_dop" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" CanBeNull="false" />
-      <Column Name="Ndsdopusl" Type="System.Decimal" DbType="Decimal(13,2) NOT NULL" CanBeNull="false" />
-      <Column Name="Provoz" Type="System.Decimal" DbType="Decimal(1,0) NOT NULL" CanBeNull="false" />
-      <Column Name="Stgr" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
-      <Column Name="Stotpr" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
-      <Column Name="TransportId" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
-      <Column Name="WL_S" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
-      <Column Name="KodDav" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
-      <Column Name="Kstr" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" CanBeNull="false" />
-      <Column Name="IdSpackage" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
-      <Column Name="IdSpurpose" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
-      <Column Name="Maker" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" CanBeNull="false" />
-      <Column Name="KodRaznar" Type="System.Decimal" DbType="Decimal(7,0)" CanBeNull="true" />
-      <Column Name="IdProdcen" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
-      <Column Name="IdAct" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="IdVozv" Type="System.Decimal" DbType="Decimal(7,0) NOT NULL" CanBeNull="false" />
-      <Column Name="PrVzaim" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
-      <Column Name="SourceId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Period" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Nomavt" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Gnprc" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
-      <Column Name="Marshrut" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
-      <Column Name="Ndov" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="Fdov" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="DatDov" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="Bought" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="VidAkc" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="AkcStake" Type="System.Decimal" DbType="Decimal(11,2) NOT NULL" CanBeNull="false" />
-      <Column Name="AkcKodVal" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
-      <Column Name="MeasureUnitId" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Density" Type="System.Decimal" DbType="Decimal(6,5) NOT NULL" CanBeNull="false" />
-      <Column Name="DeliveryDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.usp_ESFN_Get_Income" Method="usp_ESFN_Get_Income">
     <Parameter Name="idsf" Type="System.Int32" DbType="Int" />
     <ElementType Name="usp_ESFN_Get_IncomeResult">
@@ -2566,5 +2494,80 @@
     <Parameter Name="debkred" Type="System.Byte" DbType="TinyInt" />
     <Parameter Name="isupload" Type="System.Boolean" DbType="Bit" />
     <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.usp_GetOtgruzNotInRealiz" Method="usp_GetOtgruzNotInRealiz">
+    <Parameter Name="id" Type="System.Int64" DbType="BigInt" />
+    <Parameter Name="DocumentNumber" Parameter="documentNumber" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="RwBillNumber" Parameter="rwBillNumber" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="nv" Type="System.Int32" DbType="Int" />
+    <Parameter Name="dfrom" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="dto" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="poup" Type="System.Int32" DbType="Int" />
+    <Parameter Name="pkod" Type="System.Int32" DbType="Int" />
+    <Parameter Name="kdog" Type="System.Int32" DbType="Int" />
+    <Parameter Name="kpok" Type="System.Int32" DbType="Int" />
+    <Parameter Name="kgr" Type="System.Int32" DbType="Int" />
+    <ElementType Name="usp_GetOtgruzNotInRealizResult">
+      <Column Name="IdInvoiceType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DocumentNumber" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="RwBillNumber" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Idrnn" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Series" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="Nv" Type="System.Decimal" DbType="Decimal(8,0)" CanBeNull="true" />
+      <Column Name="Kpok" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Kgr" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Kdog" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Datgr" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Datnakl" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Dataccept" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Datarrival" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Datdrain" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Kodf" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Poup" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Pkod" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Kolf" Type="System.Decimal" DbType="Decimal(14,6) NOT NULL" CanBeNull="false" />
+      <Column Name="Vidcen" Type="System.Decimal" DbType="Decimal(3,0)" CanBeNull="true" />
+      <Column Name="Cena" Type="System.Decimal" DbType="Decimal(17,6)" CanBeNull="true" />
+      <Column Name="Prodnds" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="SumNds" Type="System.Decimal" DbType="Decimal(18,2)" CanBeNull="true" />
+      <Column Name="Kodcen" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="Kpr" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Sper" Type="System.Decimal" DbType="Decimal(14,2)" CanBeNull="true" />
+      <Column Name="Nds" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="Ndssper" Type="System.Decimal" DbType="Decimal(13,2)" CanBeNull="true" />
+      <Column Name="Dopusl" Type="System.Decimal" DbType="Decimal(13,2)" CanBeNull="true" />
+      <Column Name="Ndst_dop" Type="System.Decimal" DbType="Decimal(4,2)" CanBeNull="true" />
+      <Column Name="Ndsdopusl" Type="System.Decimal" DbType="Decimal(13,2)" CanBeNull="true" />
+      <Column Name="Provoz" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+      <Column Name="Stgr" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
+      <Column Name="Stotpr" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
+      <Column Name="TransportId" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="WL_S" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="KodDav" Type="System.String" DbType="Char(2)" CanBeNull="true" />
+      <Column Name="Kstr" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" CanBeNull="false" />
+      <Column Name="IdSpackage" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="IdSpurpose" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="Maker" Type="System.Decimal" DbType="Decimal(5,0)" CanBeNull="true" />
+      <Column Name="KodRaznar" Type="System.Decimal" DbType="Decimal(7,0)" CanBeNull="true" />
+      <Column Name="IdProdcen" Type="System.Decimal" DbType="Decimal(6,0)" CanBeNull="true" />
+      <Column Name="IdAct" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IdVozv" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PrVzaim" Type="System.Decimal" DbType="Decimal(2,0)" CanBeNull="true" />
+      <Column Name="SourceId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Period" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Nomavt" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Gnprc" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="Marshrut" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="Ndov" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="Fdov" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="DatDov" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Bought" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="VidAkc" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AkcStake" Type="System.Decimal" DbType="Decimal(11,2) NOT NULL" CanBeNull="false" />
+      <Column Name="AkcKodVal" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" />
+      <Column Name="MeasureUnitId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Density" Type="System.Decimal" DbType="Decimal(6,5)" CanBeNull="true" />
+      <Column Name="DeliveryDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
   </Function>
 </Database>

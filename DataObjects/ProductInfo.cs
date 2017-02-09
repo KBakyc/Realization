@@ -41,5 +41,7 @@ namespace DataObjects
         public bool IsInReal { get; set; }
 
         public int IdAkcGroup { get; set; }
+
+        public int? IdProdType { get; set; }
     }
 }

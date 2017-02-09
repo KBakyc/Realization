@@ -33,7 +33,7 @@ namespace DataObjects
         public int Maker { get; set; }
         public int IdProdcen { get; set; }
         public int? IdAct { get; set; }
-        public int IdVozv { get; set; }
+        public int? IdVozv { get; set; }
         public short PrVzaim { get; set; }
         public short SourceId { get; set; }
         public int Period { get; set; }
