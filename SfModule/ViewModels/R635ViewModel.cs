@@ -838,16 +838,7 @@ namespace SfModule.ViewModels
                         isEsnfPossible = false;
                         resultMsg += "\nВЫСТАВЛЕН КОРРЕКТИРОВОЧНЫЙ СЧЁТ-ФАКТУРА";
                     }
-                }
-                        //var otgrs = Parent.Repository.GetOtgrArc(selectedSf.SfRef.IdSf);
-                        //if (otgrs != null)
-                        //{
-                        //    var isCorSfsExists = otgrs.SelectMany(o => Parent.Repository.GetSfsByOtgruz(o.Idp623)).Any(s => s.SfType > 0 && s.Status != LifetimeStatuses.Deleted);
-                        //    if (!isCorSfsExists)
-                        //    {
-                        //        isEsnfPossible = true;
-                        //        isNeedFixed = true;
-                        //    }                                                             
+                }                                                                                 
             }
             if (isEsnfPossible == false)
                 resultMsg += "\nФОРМИРОВАНИЕ НЕВОЗМОЖНО!";
@@ -871,15 +862,22 @@ namespace SfModule.ViewModels
                 return;
             }
 
-            bool isVozv = sfview.SfType.SfTypeId == 0 && sfview.SumPltr < 0; // для возвратов формируем дополнительные ЭСФН
-            
-            bool isVozmUsl = sfview.SfProductLines.Any(p => p.ProdRef.IsService && !p.ProdRef.IsInReal 
-                                                         && p.ProdRef.IdProdType.GetValueOrDefault() != 11);    // энергоносители, вода и т.п.  
-            if (!isVozmUsl)
+            var options = Parent.Repository.GetESFNCreateOptions(sfview.SfRef.IdSf);
+            if (options == null)
             {
-                short[] rwpays = { 5, 6, 7, 8 };
-                isVozmUsl = Parent.Repository.GetSfPays(sfview.SfRef.IdSf).Any(p => p.Isaddtosum && rwpays.Contains(p.PayType));
+                Parent.Services.ShowMsg("Внимание", "Ошибка при получении настроек режима формирования.", true);
+                return;
             }
+
+            bool isVozv = options.IsVozvrat; //sfview.SfType.SfTypeId == 0 && sfview.SumPltr < 0; // для возвратов формируем дополнительные ЭСФН
+
+            bool isVozmUsl = options.IsVozmUsl; //sfview.SfProductLines.Any(p => p.ProdRef.IsService && !p.ProdRef.IsInReal 
+                               //                          && p.ProdRef.IdProdType.GetValueOrDefault() != 11);    // энергоносители, вода и т.п.  
+            //if (!isVozmUsl)
+            //{
+            //    short[] rwpays = { 5, 6, 7, 8 };
+            //    isVozmUsl = Parent.Repository.GetSfPays(sfview.SfRef.IdSf).Any(p => p.Isaddtosum && rwpays.Contains(p.PayType));
+            //}
 
             Action askAndCreate = () =>
             {

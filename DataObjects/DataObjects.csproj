@@ -74,6 +74,7 @@
     <Compile Include="BankInfo.cs" />
     <Compile Include="Choice.cs" />
     <Compile Include="Collections\ChangeTrackingCollection.cs" />
+    <Compile Include="ESFNCreateOptions.cs" />
     <Compile Include="ESFN\Enums.cs" />
     <Compile Include="ESFN\EsfnData.cs" />
     <Compile Include="Events\ErrorEventArgs.cs" />

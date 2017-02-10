@@ -18,8 +18,7 @@ namespace DAL
     //[Export("Repository")]
     public class LinqDbService : IDbService
     {
-        private static LinqDbService instance = new LinqDbService();
-        
+        private static LinqDbService instance = new LinqDbService();        
 
         private LinqDbService()
         {}
@@ -7041,6 +7040,28 @@ namespace DAL
                 {
                     OnCrash(e.GetType().ToString(), e.Message);
                     res = false;
+                }
+            }
+            return res;
+        }
+
+        public ESFNCreateOptions GetESFNCreateOptions(int _idsf)
+        {
+            ESFNCreateOptions res = null;
+            using (var l_dc = new RealizationDCDataContext())
+            {
+                try
+                {
+                    res = l_dc.usp_GetESFNCreateOptions(_idsf)
+                        .Select(d => new ESFNCreateOptions
+                        {
+                            IsVozvrat = d.isvozv ?? false,
+                            IsVozmUsl = d.isvozm ?? false,
+                        }).FirstOrDefault();
+                }
+                catch (Exception e)
+                {
+                    OnCrash(e.GetType().ToString(), e.Message);
                 }
             }
             return res;

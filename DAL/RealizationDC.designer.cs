@@ -1620,6 +1620,13 @@ namespace DAL
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id, documentNumber, rwBillNumber, nv, dfrom, dto, poup, pkod, kdog, kpok, kgr);
 			return ((ISingleResult<usp_GetOtgruzNotInRealizResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.usp_GetESFNCreateOptions")]
+		public ISingleResult<usp_GetESFNCreateOptionsResult> usp_GetESFNCreateOptions([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idsf)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idsf);
+			return ((ISingleResult<usp_GetESFNCreateOptionsResult>)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SfHeader")]
@@ -32315,6 +32322,50 @@ namespace DAL
 				if ((this._DeliveryDate != value))
 				{
 					this._DeliveryDate = value;
+				}
+			}
+		}
+	}
+	
+	public partial class usp_GetESFNCreateOptionsResult
+	{
+		
+		private System.Nullable<bool> _isvozv;
+		
+		private System.Nullable<bool> _isvozm;
+		
+		public usp_GetESFNCreateOptionsResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isvozv", DbType="Bit")]
+		public System.Nullable<bool> isvozv
+		{
+			get
+			{
+				return this._isvozv;
+			}
+			set
+			{
+				if ((this._isvozv != value))
+				{
+					this._isvozv = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isvozm", DbType="Bit")]
+		public System.Nullable<bool> isvozm
+		{
+			get
+			{
+				return this._isvozm;
+			}
+			set
+			{
+				if ((this._isvozm != value))
+				{
+					this._isvozm = value;
 				}
 			}
 		}

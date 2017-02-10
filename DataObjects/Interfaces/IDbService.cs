@@ -209,5 +209,6 @@ namespace DataObjects.Interfaces
         bool Set_Primary_ESFN(int _idsf, int _primaryIdsf);
         Tuple<int, string, DateTime?, string, string, decimal?, string>[] Get_ESFNs_ToLink(int _idsf);
         bool Set_ESFN_Link(int _idsf, int? _idsfprim, int? _invoiceId);
+        ESFNCreateOptions GetESFNCreateOptions(int _idsf);
     }    
 }
