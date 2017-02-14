@@ -83,6 +83,7 @@ namespace Realization
 
         private void ExitApp()
         {
+            tbIcon.Visibility = Visibility.Collapsed;
             tbIcon.Dispose();
             var loadedModules = shellModel.Modules.Where(m => m.IsContentLoaded).ToArray();
             Array.ForEach(loadedModules, m => m.StopModule.Execute(null));
