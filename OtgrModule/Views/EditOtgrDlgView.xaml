@@ -73,7 +73,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="Документ: " VerticalAlignment="Center"/>
                                 <cv:dlg_InvoiceTypeSelect DataContext="{Binding InvoiceTypesVM, Mode=OneTime}"
-                                                          IsEnabled="{Binding IsInvoiceTypeEdEnabled}"
+                                                          IsEnabled="{Binding ElementName=dlgRoot, Path=DataContext.IsInvoiceTypeEdEnabled}"
                                                           Foreground="DimGray"/>
                             </StackPanel>
                         </GroupBox.Header>

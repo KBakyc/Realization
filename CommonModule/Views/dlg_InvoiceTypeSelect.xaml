@@ -2,7 +2,11 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:cctrl="clr-namespace:CommonModule.Controls"
+             xmlns:conv="clr-namespace:CommonModule.Converters"
              Foreground="DarkSlateGray">
+    <UserControl.Resources>
+        <conv:EmptyStringConverter x:Key="EmptyString"/>
+    </UserControl.Resources>
     <DockPanel Margin="0,2">
         <ContentControl Content="{Binding SelectionTitle}" Focusable="False">
             <ContentControl.ContentTemplate>
@@ -20,11 +24,20 @@
                            ItemsSource="{Binding InvoiceTypesList}"
                            Focusable="False" IsEditable="False"
                            Margin="0,2" Padding="1" Cursor="Hand"
-                           ToolTip="Тип документа"
                            ItemContainerStyle="{DynamicResource MyComboBoxItemStyle}">
+            <cctrl:ComboBoxEx.Style>
+                <Style TargetType="cctrl:ComboBoxEx">
+                    <Setter Property="ToolTip" Value="{Binding SelInvoiceType.NameOfInvoiceType}"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding SelInvoiceType}" Value="{x:Null}">
+                            <Setter Property="ToolTip" Value="Тип документа"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </cctrl:ComboBoxEx.Style>
             <cctrl:ComboBoxEx.SelectionBoxTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Notation}" ToolTip="{Binding NameOfInvoiceType}" Foreground="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Foreground}"/>
+                    <TextBlock Text="{Binding Notation, Converter={StaticResource EmptyString}, ConverterParameter=---}" Foreground="{Binding RelativeSource={RelativeSource AncestorType=UserControl}, Path=Foreground}"/>
                 </DataTemplate>
             </cctrl:ComboBoxEx.SelectionBoxTemplate>
             <cctrl:ComboBoxEx.ItemTemplate>
