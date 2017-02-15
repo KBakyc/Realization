@@ -42,7 +42,11 @@ namespace CommonModule.Helpers
                     var par = CreateReportParameter(rp.Key, values);
                     if (rp.Key == CONSTR_PARAM_NAME)
                         newconnstr = par;
-                    actualReport.SetParameters(par);
+                    try
+                    {
+                        actualReport.SetParameters(par);
+                    }
+                    catch { }
                 }
 
             GetParamInfos();
