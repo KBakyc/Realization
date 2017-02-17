@@ -22,12 +22,13 @@ namespace InfoModule.ViewModels
         public override bool IsValid()
         {
             return base.IsValid()
-                && DateRangeSelection.IsValid() 
-                && DateRangeSelection.DateFrom.Year == DateRangeSelection.DateTo.Year 
-                && DateRangeSelection.DateFrom.Month == DateRangeSelection.DateTo.Month
-                && SelectedJournalType != null
-                && (!IsPerev || PerevDateRangeSelection.IsValid())
-                && SelectedPodvid != -1
+                && dateRangeSelection.IsValid() 
+                && dateRangeSelection.DateFrom.Year == dateRangeSelection.DateTo.Year 
+                && dateRangeSelection.DateFrom.Month == dateRangeSelection.DateTo.Month
+                && selectedJournalType != null
+                && (!IsSfInterval || sfDateRangeSelection.IsValid())
+                && selectedPodvid != -1
+                && selectedSfType != -1
                 ;
         }
 
@@ -44,6 +45,20 @@ namespace InfoModule.ViewModels
             set { SetAndNotifyProperty("SelectedPodvid", ref selectedPodvid, value); }
         }
 
+        private string[] sftypes = new string[] { "Все с/ф", "Первичные", "Корректировочные" };
+        public string[] SfTypes
+        {
+            get { return sftypes; }
+        }
+
+        private int selectedSfType = 0;
+        public int SelectedSfType
+        {
+            get { return selectedSfType; }
+            set { SetAndNotifyProperty("SelectedSfType", ref selectedSfType, value); }
+        }
+
+
         private JournalTypeModel[] journals;
         public JournalTypeModel[] Journals
         {
@@ -57,45 +72,34 @@ namespace InfoModule.ViewModels
             set { SetAndNotifyProperty("SelectedJournalType", ref selectedJournalType, value); }
         }
 
-        private DateRangeDlgViewModel dateRangeSelection;
+        private DateRangeDlgViewModel dateRangeSelection; // интервал бухучёта
         public DateRangeDlgViewModel DateRangeSelection
         {
             get { return dateRangeSelection; }
         }
 
-        public bool IsInterval
+        private bool isSfInterval;
+        public bool IsSfInterval
         {
-            get
+            get { return isSfInterval; }
+            set
             {
-                bool res = false;
-                if (DateRangeSelection != null && DateRangeSelection.IsValid())
-                {
-                    res = DateRangeSelection.DateFrom.Day != 1 || DateRangeSelection.DateTo.AddDays(1).Month == DateRangeSelection.DateTo.Month;
-                }
-                return res;
+                SetAndNotifyProperty("IsSfInterval", ref isSfInterval, value);
+                if (value && sfDateRangeSelection == null)
+                    SfDateRangeSelection = new DateRangeDlgViewModel(false)
+                    {
+                        DateFrom = dateRangeSelection.DateFrom,
+                        DateTo = dateRangeSelection.DateTo
+                    };
             }
         }
 
-        private bool isPerev;
-        public bool IsPerev
+        private DateRangeDlgViewModel sfDateRangeSelection; // интервал выставления с/ф
+        public DateRangeDlgViewModel SfDateRangeSelection
         {
-            get { return isPerev; }
-            set { SetAndNotifyProperty("IsPerev", ref isPerev, value); }
+            get { return sfDateRangeSelection; }
+            set { SetAndNotifyProperty("SfDateRangeSelection", ref sfDateRangeSelection, value); }
         }
-
-        private bool isWithCorrSfs;
-        public bool IsWithCorrSfs
-        {
-            get { return isWithCorrSfs; }
-            set { SetAndNotifyProperty("IsWithCorrSfs", ref isWithCorrSfs, value); }
-        }
-
-        private DateRangeDlgViewModel perevDateRangeSelection;
-        public DateRangeDlgViewModel PerevDateRangeSelection
-        {
-            get { return perevDateRangeSelection; }
-        }
-
 
         private void LoadData()
         {
@@ -110,13 +114,7 @@ namespace InfoModule.ViewModels
                 DatesLabel = "Журнал за период",
                 DateFrom = dfrom,
                 DateTo = dto
-            };
-
-            perevDateRangeSelection = new DateRangeDlgViewModel(false)
-            {
-                DateFrom = dfrom,
-                DateTo = dto
-            };
+            };            
         }
 
     }

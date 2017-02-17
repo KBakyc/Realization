@@ -33,6 +33,7 @@ namespace InfoModule.Commands
         }
 
         private DateTime dto;
+        private string jTitle;
 
         private void OnSubmitDlg(object _dlg)
         {
@@ -42,23 +43,27 @@ namespace InfoModule.Commands
             if (dlg == null) return;
 
             string vid = dlg.SelectedJournalType.JournalType;
+            jTitle = dlg.SelectedJournalType.JournalName;
             var dFrom = dlg.DateRangeSelection.DateFrom;
             dto = dlg.DateRangeSelection.DateTo;
-            var isinterval = dlg.IsInterval;
-            var podvid = dlg.SelectedPodvid;
-            var isperev = dlg.IsPerev;
-            var perevFrom = dlg.PerevDateRangeSelection.DateFrom;
-            var perevTo = dlg.PerevDateRangeSelection.DateTo;
-            var iswcorrsfs = dlg.IsWithCorrSfs;
+            var podvid = (byte)dlg.SelectedPodvid;
+            var issfint = dlg.IsSfInterval;
+            DateTime? sfFrom = null, sfTo = null;
+            if (issfint)
+            {
+                sfFrom = dlg.SfDateRangeSelection.DateFrom;
+                sfTo = dlg.SfDateRangeSelection.DateTo;
+            }
+            var sftypes = (byte)dlg.SelectedSfType;
 
-            MakeJFileName(vid, dFrom.Month, isinterval, (byte)podvid, isperev);
-            bool exists = Parent.Repository.IfSalesJournalExists(jFileName);
+            jName = MakeJName(vid, podvid, dFrom, dto, issfint, sfFrom, sfTo, sftypes);
+            bool exists = Parent.Repository.IfSalesJournalExists(jName);
 
             if (exists)
                 AskForAction(() => ShowJournal(),
-                             () => MakeAndShowJournal(vid, dFrom, dto, isinterval, (byte)podvid, isperev, perevFrom, perevTo, iswcorrsfs));
+                             () => MakeAndShowJournal(vid, dFrom, dto, podvid, sftypes, issfint, sfFrom, sfTo));
             else
-                MakeAndShowJournal(vid, dFrom, dto, isinterval, (byte)podvid, isperev, perevFrom, perevTo, iswcorrsfs);
+                MakeAndShowJournal(vid, dFrom, dto, podvid, sftypes, issfint, sfFrom, sfTo);
         }
 
         private void AskForAction(Action _showAction, Action _makeAction)
@@ -83,25 +88,16 @@ namespace InfoModule.Commands
             Parent.OpenDialog(askDlg);
         }
 
-        private void MakeAndShowJournal(string _vid, DateTime _dFrom, DateTime _dto, bool _isinterval, byte _podvid, bool _isperev, DateTime _perevFrom, DateTime _perevTo, bool _iswcorrsfs)
+        private void MakeAndShowJournal(string _vid, DateTime _dFrom, DateTime _dto, byte _podvid, byte _sftypes, bool _issfint, DateTime? _sfFrom, DateTime? _sfTo)
         {
             Action work = () =>
             {
-                bool res;
-                if (res = MakeJournal(_vid, _dFrom, _dto, _isinterval, (byte)_podvid, _isperev, _perevFrom, _perevTo, _iswcorrsfs))
-                    ShowJournal();
-                else
-                    ReportError("Формирование журнала");
+                Parent.Repository.MakeSalesJournal(_vid, _dFrom, _dto, _podvid, _sftypes, _issfint, _sfFrom, _sfTo, jName);
+                ShowJournal();
             };
 
             Parent.Services.DoWaitAction(work, "Подождите", "Формирование журнала продаж");
-        }
-
-        private bool MakeJournal(string _vid, DateTime _dFrom, DateTime _dto, bool _isinterval, byte _podvid, bool _isperev, DateTime _perevFrom, DateTime _perevTo, bool _iswcorrsfs)
-        {
-            Parent.Repository.MakeSalesJournal(_vid, _dFrom, _dto, _isinterval, (byte)_podvid, _isperev, _perevFrom, _perevTo, _iswcorrsfs, jFileName);            
-            return true;
-        }        
+        }               
 
         private string error = null;
 
@@ -126,25 +122,38 @@ namespace InfoModule.Commands
 
             var jRep = new ReportModel()
             {
-                Title = String.Format("Журнал {0}", jFileName),
+                Title = String.Format("Журнал {0}", jTitle),
                 Path = @"/real/Reports/" + jrepname,
                 Parameters = new Dictionary<string, string> { 
-                                 { "JviName", jFileName }, 
+                                 { "JviName", jName }, 
                                  { "ConnString", Parent.Repository.ConnectionString }
                 }
             };
             (new ReportViewModel(Parent, jRep)).TryOpen();
         }
 
-        private string jFileName;
+        private string jName;
 
-        private void MakeJFileName(string _vid, int _month, bool _isinterval, byte _podvid, bool _isperev )
+        private string MakeJName(string _vid, byte _podvid, DateTime _dfrom, DateTime _dto, bool _issfint, DateTime? _sffrom, DateTime? _sfto, int _sftypes )
         {
-            var crmonth = _month.ToString("00");
-            jFileName = String.Format("JV{0}{1}{2}{3}", (_podvid > 0 ? _podvid.ToString() : "I"), 
-                                                        _vid.PadRight(2,'_'), 
-                                                        (_isperev ? "2" : (_isinterval ? "1" : "0")),
-                                                        crmonth);
+            var jparamcombo = _vid.Trim()
+                            + "&" + _podvid.ToString()
+                            + "&" + _dfrom.ToString("yyyyMMdd")
+                            + "&" + _dto.ToString("yyyyMMdd")
+                            + "&" + _sftypes.ToString()
+                            + "&" + (_issfint ? "1&" + _sffrom.Value.ToString("yyyyMMdd") + "&" + _sfto.Value.ToString("yyyyMMdd")
+                                              : "0&&");
+            return "J?" + jparamcombo;
+                
+                //"JV" 
+                // + (_podvid > 0 ? _podvid.ToString() : "I") 
+                // + _vid.PadRight(2,'_') 
+                // + jparamcombo.GetHashCode().ToString("X8");
+            //var crmonth = _month.ToString("00");
+            //jFileName = String.Format("JV{0}{1}{2}{3}", (_podvid > 0 ? _podvid.ToString() : "I"), 
+            //                                            _vid.PadRight(2,'_'), 
+            //                                            (_isperev ? "2" : (_isinterval ? "1" : "0")),
+            //                                            crmonth);
         }
     }
 }

@@ -57,20 +57,28 @@
                 </StackPanel>
             </Border>
             <Border DockPanel.Dock="Top" Style="{StaticResource DlgElementBorder}">
-                <StackPanel HorizontalAlignment="Stretch">
-                    <CheckBox x:Name="cbPerev" Content="Перевыставленные" VerticalAlignment="Center" Margin="0,0,5,0"
-                              IsChecked="{Binding IsPerev}"/>
-                    <cv:dlg_Dates Background="Transparent" 
-                                  DataContext="{Binding PerevDateRangeSelection}"
-                                  Visibility="{Binding ElementName=cbPerev, Path=IsChecked, Converter={StaticResource Bool2Visibility}, ConverterParameter='Collapse'}"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock Text="Типы счетов-фактур:" Margin="0,0,5,0"/>
+                    <ComboBox VerticalAlignment="Center" 
+                              IsEditable="False" Focusable="False" IsReadOnly="True" IsTextSearchEnabled="False" Padding="1"
+                              ItemsSource="{Binding SfTypes}" SelectedIndex="{Binding SelectedSfType}"/>
                 </StackPanel>
             </Border>
             <Border DockPanel.Dock="Top" Style="{StaticResource DlgElementBorder}">
+                <StackPanel HorizontalAlignment="Stretch">
+                    <CheckBox x:Name="cbSfInt" Content="Интервал выставления с/ф" VerticalAlignment="Center" Margin="0,0,5,0"
+                              IsChecked="{Binding IsSfInterval}"/>
+                    <cv:dlg_Dates Background="Transparent" 
+                                  DataContext="{Binding SfDateRangeSelection}"
+                                  Visibility="{Binding ElementName=cbSfInt, Path=IsChecked, Converter={StaticResource Bool2Visibility}, ConverterParameter='Collapse'}"/>
+                </StackPanel>
+            </Border>
+            <!--<Border DockPanel.Dock="Top" Style="{StaticResource DlgElementBorder}">
                 <StackPanel HorizontalAlignment="Center">
                     <CheckBox Content="С учётом корректировочных с/ф" VerticalAlignment="Center"
                               IsChecked="{Binding IsWithCorrSfs}"/>
                 </StackPanel>
-            </Border>
+            </Border>-->
         </DockPanel>
     </Grid>
 </UserControl>

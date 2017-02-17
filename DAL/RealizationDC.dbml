@@ -467,42 +467,6 @@
       <Column Name="recTypeName" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.JournalsArc" Member="JournalsArcs">
-    <Type Name="JournalsArc">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="JFileName" Type="System.String" DbType="Char(8) NOT NULL" CanBeNull="false" />
-      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CreationTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="id_jyr" Type="System.Decimal" DbType="Decimal(9,0) NOT NULL" CanBeNull="false" />
-      <Column Name="dat_j" Type="System.String" DbType="Char(6) NOT NULL" CanBeNull="false" />
-      <Column Name="date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="dated" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="ndok" Type="System.String" DbType="Char(9) NOT NULL" CanBeNull="false" />
-      <Column Name="nstr" Type="System.String" DbType="Char(30) NOT NULL" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="Char(30) NOT NULL" CanBeNull="false" />
-      <Column Name="inf" Type="System.String" DbType="Char(15) NOT NULL" CanBeNull="false" />
-      <Column Name="kgr" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
-      <Column Name="naim" Type="System.String" DbType="Char(30) NOT NULL" CanBeNull="false" />
-      <Column Name="ed" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
-      <Column Name="kol" Type="System.Decimal" DbType="Decimal(10,3) NOT NULL" CanBeNull="false" />
-      <Column Name="cena" Type="System.Decimal" DbType="Decimal(19,2) NOT NULL" CanBeNull="false" />
-      <Column Name="stav" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
-      <Column Name="symn" Type="System.Decimal" DbType="Decimal(19,2) NOT NULL" CanBeNull="false" />
-      <Column Name="sym" Type="System.Decimal" DbType="Decimal(19,2) NOT NULL" CanBeNull="false" />
-      <Column Name="com" Type="System.String" DbType="Char(30) NOT NULL" CanBeNull="false" />
-      <Column Name="zex" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
-      <Column Name="tab" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
-      <Column Name="vid" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
-      <Column Name="npdok" Type="System.String" DbType="Char(8) NOT NULL" CanBeNull="false" />
-      <Column Name="dat_ofpd" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="sym1" Type="System.Decimal" DbType="Decimal(15,2) NOT NULL" CanBeNull="false" />
-      <Column Name="sym2" Type="System.Decimal" DbType="Decimal(15,2) NOT NULL" CanBeNull="false" />
-      <Column Name="symn1" Type="System.Decimal" DbType="Decimal(15,2) NOT NULL" CanBeNull="false" />
-      <Column Name="symn2" Type="System.Decimal" DbType="Decimal(15,2) NOT NULL" CanBeNull="false" />
-      <Column Name="kodf" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
-      <Column Name="ndocs" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.uv_Moup" Member="uv_Moups">
     <Type Name="uv_Moup">
       <Column Name="kodpoup" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -981,6 +945,42 @@
       <Column Name="IdProdType" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.JournalsArc" Member="JournalsArcs">
+    <Type Name="JournalsArc">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="JName" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreationTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="id_jyr" Type="System.Decimal" DbType="Decimal(9,0) NOT NULL" CanBeNull="false" />
+      <Column Name="dat_j" Type="System.String" DbType="Char(6) NOT NULL" CanBeNull="false" />
+      <Column Name="date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="dated" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="ndok" Type="System.String" DbType="Char(9) NOT NULL" CanBeNull="false" />
+      <Column Name="nstr" Type="System.String" DbType="Char(30) NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="Char(30) NOT NULL" CanBeNull="false" />
+      <Column Name="inf" Type="System.String" DbType="Char(15) NOT NULL" CanBeNull="false" />
+      <Column Name="kgr" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="naim" Type="System.String" DbType="Char(30) NOT NULL" CanBeNull="false" />
+      <Column Name="ed" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="kol" Type="System.Decimal" DbType="Decimal(10,3) NOT NULL" CanBeNull="false" />
+      <Column Name="cena" Type="System.Decimal" DbType="Decimal(19,2) NOT NULL" CanBeNull="false" />
+      <Column Name="stav" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
+      <Column Name="symn" Type="System.Decimal" DbType="Decimal(19,2) NOT NULL" CanBeNull="false" />
+      <Column Name="sym" Type="System.Decimal" DbType="Decimal(19,2) NOT NULL" CanBeNull="false" />
+      <Column Name="com" Type="System.String" DbType="Char(30) NOT NULL" CanBeNull="false" />
+      <Column Name="zex" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="tab" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="vid" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="npdok" Type="System.String" DbType="Char(8) NOT NULL" CanBeNull="false" />
+      <Column Name="dat_ofpd" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="sym1" Type="System.Decimal" DbType="Decimal(15,2) NOT NULL" CanBeNull="false" />
+      <Column Name="sym2" Type="System.Decimal" DbType="Decimal(15,2) NOT NULL" CanBeNull="false" />
+      <Column Name="symn1" Type="System.Decimal" DbType="Decimal(15,2) NOT NULL" CanBeNull="false" />
+      <Column Name="symn2" Type="System.Decimal" DbType="Decimal(15,2) NOT NULL" CanBeNull="false" />
+      <Column Name="kodf" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="ndocs" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+    </Type>
+  </Table>
   <Function Name="dbo.uf_GetTransportName" Method="uf_GetTransportName" IsComposable="true">
     <Parameter Name="transportid" Type="System.Int16" DbType="SmallInt" />
     <Parameter Name="fs" Type="System.Int16" DbType="SmallInt" />
@@ -1418,19 +1418,6 @@
     <ElementType Name="uf_GetVagonInfoResult">
       <Column Name="prsv" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
-  </Function>
-  <Function Name="dbo.usp_MakeSalesJournal" Method="usp_MakeSalesJournal">
-    <Parameter Name="vid" Type="System.String" DbType="Char(2)" />
-    <Parameter Name="dFrom" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="dto" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="isinterval" Type="System.Boolean" DbType="Bit" />
-    <Parameter Name="podvid" Type="System.Byte" DbType="TinyInt" />
-    <Parameter Name="isperev" Type="System.Boolean" DbType="Bit" />
-    <Parameter Name="perevFrom" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="perevTo" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="iswcorrsfs" Type="System.Boolean" DbType="Bit" />
-    <Parameter Name="jfullname" Type="System.String" DbType="Char(8)" />
-    <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.usp_MakeRWBuyingJournal" Method="usp_MakeRWBuyingJournal">
     <Parameter Name="jbuytype" Type="System.Byte" DbType="TinyInt" />
@@ -2576,5 +2563,17 @@
       <Column Name="isvozv" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="isvozm" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
     </ElementType>
+  </Function>
+  <Function Name="dbo.usp_MakeSalesJournal" Method="usp_MakeSalesJournal">
+    <Parameter Name="vid" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="dFrom" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="dto" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="podvid" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="sftypes" Type="System.Byte" DbType="TinyInt" />
+    <Parameter Name="isSfInterval" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="sfFrom" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="sfTo" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="jname" Type="System.String" DbType="VarChar(100)" />
+    <Return Type="System.Int32" />
   </Function>
 </Database>

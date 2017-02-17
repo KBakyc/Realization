@@ -128,7 +128,7 @@ namespace DataObjects.Interfaces
         HistoryInfo[] GetPredoplHistory(long _idpo);
         DateRange GetSfDateGrRange(int _idsf);
         JournalTypeModel[] GetJournalTypes(JournalKind _jkind);
-        void MakeSalesJournal(string _vid, DateTime _dFrom, DateTime _dto, bool _isinterval, byte _podvid, bool _isperev, DateTime _perevFrom, DateTime _perevTo, bool _iswcorrsfs, string _jfname);
+        void MakeSalesJournal(string _vid, DateTime _dFrom, DateTime _dto, byte _podvid, byte _sftypes, bool _issfinterval, DateTime? _sfFrom, DateTime? _sfTo, string _jname);
         bool IfSalesJournalExists(string _jFileName);
         void MakeF744(DateTime _toDate);
         void MakeFDebCred(int[] _poups, short[] _pkods, DateTime _onDate, DebtTypes _debcred, bool _isupload);

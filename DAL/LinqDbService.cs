@@ -4559,14 +4559,14 @@ namespace DAL
             return res;
         }
 
-        public bool IfSalesJournalExists(string _jFileName)
+        public bool IfSalesJournalExists(string _jName)
         {
             bool res = false;
             using (var l_dc = new RealizationDCDataContext())
             {
                 try
                 {
-                    res = l_dc.JournalsArcs.Any(j => j.JFileName == _jFileName);
+                    res = l_dc.JournalsArcs.Any(j => j.JName == _jName);
                 }
                 catch (Exception e)
                 {
@@ -4629,8 +4629,8 @@ namespace DAL
             return res;
         }
 
-        public void MakeSalesJournal(string _vid, DateTime _dFrom, DateTime _dto, bool _isinterval, 
-                                     byte _podvid, bool _isperev, DateTime _perevFrom, DateTime _perevTo, bool _iswcorrsfs, string _jfname)
+        public void MakeSalesJournal(string _vid, DateTime _dFrom, DateTime _dto, byte _podvid, byte _sftypes, 
+                                     bool _issfinterval, DateTime? _sfFrom, DateTime? _sfTo, string _jname)
         {
             if (isReadOnly)
             {
@@ -4643,7 +4643,7 @@ namespace DAL
                 l_dc.CommandTimeout = 300;
                 try
                 {
-                    l_dc.usp_MakeSalesJournal(_vid, _dFrom, _dto, _isinterval, _podvid, _isperev, _perevFrom, _perevTo, _iswcorrsfs, _jfname);
+                    l_dc.usp_MakeSalesJournal(_vid, _dFrom, _dto, _podvid, _sftypes, _issfinterval, _sfFrom, _sfTo, _jname);
                 }
                 catch (Exception e)
                 {
