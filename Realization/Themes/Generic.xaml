@@ -262,13 +262,14 @@
     <Style TargetType="ComboBoxItem" x:Key="MyComboBoxItemStyle">
         <Setter Property="Foreground" Value="RoyalBlue"/>
         <Setter Property="Background" Value="AliceBlue"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ComboBoxItem">
                     <Grid Background="{TemplateBinding Background}">
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                           Margin="{TemplateBinding Padding}"/>
                         <Border x:Name="HighLighter"
                                             CornerRadius="3" BorderBrush="RoyalBlue" BorderThickness="2"

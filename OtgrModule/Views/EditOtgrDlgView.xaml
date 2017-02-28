@@ -34,7 +34,7 @@
                     <cctrl:ComboBoxEx SelectedItem="{Binding SelKodf}"
                                   ItemsSource="{Binding AllKodfs}" 
                                   Focusable="False" IsEditable="False"
-                                  Padding="2"
+                                  Padding="2,3" Margin="0,2"
                                   ItemContainerStyle="{DynamicResource MyComboBoxItemStyle}">
                         <cctrl:ComboBoxEx.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -43,26 +43,22 @@
                         </cctrl:ComboBoxEx.ItemsPanel>
                         <cctrl:ComboBoxEx.SelectionBoxTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Kodf}"/>
+                                <StackPanel Orientation="Horizontal" Margin="5,0,0,0">
+                                    <TextBlock Text="{Binding Kodf}" Width="30"/>
                                     <TextBlock Text="{Binding Name}" Margin="5,0,0,0"/>
                                 </StackPanel>
                             </DataTemplate>
                         </cctrl:ComboBoxEx.SelectionBoxTemplate>
                         <cctrl:ComboBoxEx.ItemTemplate>
                             <DataTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="80"/>
-                                        <ColumnDefinition Width="220"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Border BorderThickness="2,0,2,2" Padding="2" BorderBrush="White">
-                                        <TextBlock Text="{Binding Kodf}"/>
+                                <DockPanel>
+                                    <Border BorderThickness="0,0,2,2" Padding="2" BorderBrush="White">
+                                        <TextBlock Text="{Binding Kodf}" Width="30"/>
                                     </Border>
-                                    <Border BorderThickness="0,0,2,2" Padding="2" BorderBrush="White" Grid.Column="1">
+                                    <Border BorderThickness="0,0,0,2" Padding="2" BorderBrush="White">
                                         <TextBlock Text="{Binding Name}"/>
                                     </Border>
-                                </Grid>
+                                </DockPanel>
                             </DataTemplate>
                         </cctrl:ComboBoxEx.ItemTemplate>
                     </cctrl:ComboBoxEx>

@@ -32,7 +32,6 @@
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding Value.Pkod, StringFormat=#}" Margin="3,0" MinWidth="25"/>
-                            <Rectangle Width="1" Stroke="Black"/>
                             <TextBlock Text="{Binding Value.Name}" Margin="3,0"/>
                         </StackPanel>
                     </DataTemplate>
@@ -65,7 +64,6 @@
                             <CheckBox IsChecked="{Binding IsSelected}" Margin="3,0">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="{Binding Value.Pkod, StringFormat=#}" Margin="2,3" MinWidth="25"/>
-                                    <Rectangle Width="1" Stroke="Black"/>
                                     <TextBlock Text="{Binding Value.Name}" Margin="2,3"/>
                                 </StackPanel>
                             </CheckBox>
@@ -106,7 +104,6 @@
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding Kod, StringFormat=#}" Margin="3,0" Padding="1" Width="25"/>
-                            <Rectangle Width="1" Stroke="Black"/>
                             <TextBlock Text="{Binding Name}" Margin="3,0" Padding="1"/>
                         </StackPanel>
                     </DataTemplate>
