@@ -19,6 +19,24 @@
         <Commands:CommandReference Command="{Binding PlatVM.SeekCommand}" x:Key="SeekPlatCommand"/>
         <Commands:CommandReference Command="{Binding GrpolVM.SeekCommand}" x:Key="SeekGrpolCommand"/>
         <Commands:CommandReference Command="{Binding ProdVM.FilterProductsCommand}" x:Key="FilterProdCommand"/>
+        <Style TargetType="ComboBox" x:Key="eOtgrComboStyle">
+            <Setter Property="Padding" Value="2,3"/>
+            <Setter Property="Margin" Value="0,2"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="IsEditable" Value="False"/>
+            <Setter Property="ItemContainerStyle" Value="{DynamicResource MyComboBoxItemStyle}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Height" Value="23"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
     <Grid Background="{DynamicResource DialogDataBackground}" Name="dlgRoot">
         <Grid.RowDefinitions>
@@ -33,14 +51,7 @@
                 <GroupBox Header="Форма" IsEnabled="{Binding IsKodfEdEnabled}">
                     <cctrl:ComboBoxEx SelectedItem="{Binding SelKodf}"
                                   ItemsSource="{Binding AllKodfs}" 
-                                  Focusable="False" IsEditable="False"
-                                  Padding="2,3" Margin="0,2"
-                                  ItemContainerStyle="{DynamicResource MyComboBoxItemStyle}">
-                        <cctrl:ComboBoxEx.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
-                            </ItemsPanelTemplate>
-                        </cctrl:ComboBoxEx.ItemsPanel>
+                                  Style="{StaticResource eOtgrComboStyle}">
                         <cctrl:ComboBoxEx.SelectionBoxTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" Margin="5,0,0,0">
@@ -112,7 +123,7 @@
                         </StackPanel>
                     </GroupBox>
                     <GroupBox Header="Период" Margin="3,0,0,0" VerticalAlignment="Center" DockPanel.Dock="Right" IsEnabled="{Binding IsPeriodEdEnabled}">
-                        <ComboBox SelectedIndex="{Binding Period}" Focusable="False">
+                        <ComboBox SelectedIndex="{Binding Period}" Style="{StaticResource eOtgrComboStyle}">
                             <ComboBoxItem Content=""/>
                             <ComboBoxItem Content="За 1-ую декаду"/>
                             <ComboBoxItem Content="За 2-ую декаду"/>
@@ -124,7 +135,7 @@
                     </GroupBox>
                 </DockPanel>
                 <GroupBox Header="{Binding PlatVM.Title}" IsEnabled="{Binding IsPlatEdEnabled}">
-                    <DockPanel Margin="3" DataContext="{Binding PlatVM}">
+                    <DockPanel Margin="3,2,0,0" DataContext="{Binding PlatVM}">
                         <StackPanel Orientation="Horizontal" Margin="0,0,2,0">
                             <ContentControl Focusable="False" ContentTemplate="{DynamicResource SearchIcon}"/>
                             <TextBox Width="50" Text="{Binding SeekAny, UpdateSourceTrigger=PropertyChanged, StringFormat=#}" TabIndex="6" IsEnabled="{Binding IsSearchEnabled}"
@@ -135,14 +146,8 @@
                             </TextBox>
                         </StackPanel>
                         <cctrl:ComboBoxEx SelectedItem="{Binding SelectedKA}"
-                              ItemsSource="{Binding KaList}" 
-                              Padding="2" Focusable="False"
-                              ItemContainerStyle="{DynamicResource MyComboBoxItemStyle}">
-                            <cctrl:ComboBoxEx.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
-                                </ItemsPanelTemplate>
-                            </cctrl:ComboBoxEx.ItemsPanel>
+                                          ItemsSource="{Binding KaList}" 
+                                          Style="{StaticResource eOtgrComboStyle}">
                             <cctrl:ComboBoxEx.SelectionBoxTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -166,8 +171,8 @@
                         </cctrl:ComboBoxEx>
                     </DockPanel>
                 </GroupBox>
-                <GroupBox Header="{Binding GrpolVM.Title}" IsEnabled="{Binding IsGrpolEdEnabled}" Padding="0">
-                    <DockPanel Margin="3,3,3,0" DataContext="{Binding GrpolVM}">
+                <GroupBox Header="{Binding GrpolVM.Title}" IsEnabled="{Binding IsGrpolEdEnabled}">
+                    <DockPanel Margin="3,2,0,0" DataContext="{Binding GrpolVM}">
                         <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" Margin="0"
                                     Visibility="{Binding SelectedKA, Converter={StaticResource Null2Visibility}, ConverterParameter=Collapsed}">
                             <TextBlock Text="Адрес: " FontSize="10" Foreground="Gray"/>
@@ -184,13 +189,7 @@
                         </StackPanel>
                         <cctrl:ComboBoxEx SelectedItem="{Binding SelectedKA}"
                               ItemsSource="{Binding KaList}" 
-                              Padding="2" Focusable="False"
-                              ItemContainerStyle="{DynamicResource MyComboBoxItemStyle}">
-                            <cctrl:ComboBoxEx.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
-                                </ItemsPanelTemplate>
-                            </cctrl:ComboBoxEx.ItemsPanel>
+                              Style="{StaticResource eOtgrComboStyle}">
                             <cctrl:ComboBoxEx.SelectionBoxTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -218,13 +217,7 @@
                     <cctrl:ComboBoxEx DataContext="{Binding CountryVM}"
                                   SelectedItem="{Binding SelCountry}"
                                   ItemsSource="{Binding CountryList}" 
-                                  Padding="2" Focusable="False"
-                                  ItemContainerStyle="{DynamicResource MyComboBoxItemStyle}">
-                        <cctrl:ComboBoxEx.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
-                            </ItemsPanelTemplate>
-                        </cctrl:ComboBoxEx.ItemsPanel>
+                                  Style="{StaticResource eOtgrComboStyle}">
                         <cctrl:ComboBoxEx.SelectionBoxTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -255,14 +248,7 @@
                     <cctrl:ComboBoxEx DataContext="{Binding DogVM}"
                                   SelectedItem="{Binding SelPDogInfo}"
                                   ItemsSource="{Binding PDogInfos}" 
-                                  Focusable="False" IsEditable="False"
-                                  Padding="2"
-                                  ItemContainerStyle="{DynamicResource MyComboBoxItemStyle}">
-                        <cctrl:ComboBoxEx.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
-                            </ItemsPanelTemplate>
-                        </cctrl:ComboBoxEx.ItemsPanel>
+                                  Style="{StaticResource eOtgrComboStyle}">
                         <cctrl:ComboBoxEx.SelectionBoxTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding TextOsn}"/>
@@ -355,15 +341,9 @@
                             </GroupBox>
                             <GroupBox Header="Вид цены" IsEnabled="{Binding IsVidcenEdEnabled}">
                                 <cctrl:ComboBoxEx  SelectedItem="{Binding SelVidcen}"
-                                           ItemsSource="{Binding AllVidcens}"
-                                           Focusable="False" IsEditable="False"
-                                           Padding="2" Width="50" Cursor="Hand"
-                                           ItemContainerStyle="{DynamicResource MyComboBoxItemStyle}">
-                                    <cctrl:ComboBoxEx.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
-                                        </ItemsPanelTemplate>
-                                    </cctrl:ComboBoxEx.ItemsPanel>
+                                                   ItemsSource="{Binding AllVidcens}"
+                                                   Style="{StaticResource eOtgrComboStyle}" 
+                                                   Width="50">
                                     <cctrl:ComboBoxEx.SelectionBoxTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding Kod}"/>
@@ -395,16 +375,9 @@
                             <GroupBox Header="Валюта" IsEnabled="{Binding IsValEdEnabled}">
                                 <cctrl:ComboBoxEx DataContext="{Binding ValVM}"
                                       SelectedItem="{Binding SelVal}"
-                                      ItemsSource="{Binding ValList}"
-                                      Focusable="False" IsEditable="False"
-                                      Padding="2"
+                                      ItemsSource="{Binding ValList}"                                      
                                       IsEnabled="{Binding ElementName=tbCena, Path=IsEnabled}"
-                                      ItemContainerStyle="{DynamicResource MyComboBoxItemStyle}">
-                                    <cctrl:ComboBoxEx.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
-                                        </ItemsPanelTemplate>
-                                    </cctrl:ComboBoxEx.ItemsPanel>
+                                      Style="{StaticResource eOtgrComboStyle}">
                                     <cctrl:ComboBoxEx.SelectionBoxTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding ShortName}"/>
@@ -435,15 +408,8 @@
                             </GroupBox>
                             <GroupBox Header="НДС" IsEnabled="{Binding IsNdsEnabled}">
                                 <cctrl:ComboBoxEx SelectedItem="{Binding SelProdNdsStake}"
-                                              ItemsSource="{Binding ProdNdsStakes}"
-                                              Focusable="False" IsEditable="False"
-                                              Padding="2"
-                                              ItemContainerStyle="{DynamicResource MyComboBoxItemStyle}">
-                                    <cctrl:ComboBoxEx.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <VirtualizingStackPanel IsItemsHost="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
-                                        </ItemsPanelTemplate>
-                                    </cctrl:ComboBoxEx.ItemsPanel>
+                                                  ItemsSource="{Binding ProdNdsStakes}"
+                                                  Style="{StaticResource eOtgrComboStyle}">
                                     <cctrl:ComboBoxEx.SelectionBoxTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding Key}"/>
@@ -487,9 +453,7 @@
                             <GroupBox Header="Вид акциза" IsEnabled="{Binding IsVidAkcEdEnabled}">
                                 <cctrl:ComboBoxEx SelectedItem="{Binding SelectedVidAkc}"
                                                   ItemsSource="{Binding AllVidAkcs}" 
-                                                  Focusable="False" IsEditable="False"
-                                                  Padding="2"
-                                                  ItemContainerStyle="{DynamicResource MyComboBoxItemStyle}">
+                                                  Style="{StaticResource eOtgrComboStyle}">
                                     <cctrl:ComboBoxEx.SelectionBoxTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding Name}"/>
