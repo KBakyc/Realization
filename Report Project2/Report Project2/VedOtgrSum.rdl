@@ -4240,11 +4240,11 @@ where poup in (@Poup)</CommandText>
     </ReportParameter>
     <ReportParameter Name="isAkcProdOnly">
       <DataType>Boolean</DataType>
-      <Prompt>is Akc Prod Only</Prompt>
+      <Prompt>только подакцизные</Prompt>
     </ReportParameter>
     <ReportParameter Name="isWithoutAkcToRB">
       <DataType>Boolean</DataType>
-      <Prompt>is Without Akc To RB</Prompt>
+      <Prompt>без акциза по РБ</Prompt>
     </ReportParameter>
   </ReportParameters>
   <Language>ru-RU</Language>
