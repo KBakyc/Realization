@@ -40,11 +40,12 @@ namespace Loader
                 isStartAfterUpdate = Loader.Properties.Settings.Default.StartAfterUpdate
                                      && !String.IsNullOrEmpty(appExeName);
                 isReqTranslate = Loader.Properties.Settings.Default.ReqTranslate;
-                updater = new Updater(appExeDir, appUpdatesPath, isReqTranslate);
+
                 lWin = new LoaderWindow();
                 lWin.Closed += new EventHandler(lWin_Closed);
                 lWin.Show();
 
+                updater = new Updater(appExeDir, appUpdatesPath, isReqTranslate);
                 bgWorker = new BackgroundWorker();
                 bgWorker.DoWork += new DoWorkEventHandler(bgWorker_DoWork);
                 bgWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bgWorker_RunWorkerCompleted);
@@ -91,7 +92,7 @@ namespace Loader
             MessageBox.Show(ex.Message + Environment.NewLine
                           + ex.InnerException != null ? ex.InnerException.Message + Environment.NewLine : ""
                           + ex.StackTrace);
-            Environment.Exit(0);
+            //Environment.Exit(0);
         }
 
         private void StartApplication()

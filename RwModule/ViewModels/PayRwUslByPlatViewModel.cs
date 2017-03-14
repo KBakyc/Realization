@@ -164,7 +164,7 @@ namespace RwModule.ViewModels
                 VozvratsList.AddRange(allplats.Where(p => p.Direction == RwPlatDirection.In).Select(m => new RwPlatViewModel(m)));
                 SelectedVozvrat = null;
 
-            }, true, false);
+            }, false, false);
         }
 
         /// <summary>
