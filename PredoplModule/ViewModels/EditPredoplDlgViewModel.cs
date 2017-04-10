@@ -394,8 +394,8 @@ namespace PredoplModule.ViewModels
         }
         private bool CanLink()
         {
-            return (newModel.IdRegDoc == 0 || Action == PredoplEditActions.Split)
-                && DatVvod != null 
+            return //(newModel.IdRegDoc == 0 || Action == PredoplEditActions.Split) && 
+                DatVvod != null 
                 && PoupVM.SelPoup != null
                 && PlatVM.SelectedKA != null
                 && Ndok != 0

@@ -65,18 +65,24 @@ namespace Loader
 
         private Resource[] GetNewResources()
         {
+            Logger.Write("GetNewResources started...");
             if (String.IsNullOrEmpty(updatesPath)) return null;
             Resource[] res = null;
             try
             {
+                Logger.Write("GetNewResources try WebFileLoader.GetDirectoryContents from " + updatesPath);
                 res = WebFileLoader.GetDirectoryContents(updatesPath, true)
                     .GetValueList().OfType<Resource>()
                     .ToArray();
             }
             catch (Exception ex)
             {
+                Logger.Write("Error in GetNewResources!");
+                Logger.Write(ex.ToString() + Environment.NewLine + ex.Message);
                 throw;
             }
+
+            Logger.Write("GetNewResources finished.");
             return res;
         }
 
@@ -85,11 +91,14 @@ namespace Loader
             if (String.IsNullOrEmpty(updatesPath)
                 || newResources == null || newResources.Length == 0) return;
 
+            Logger.Write("Checking and updating resources..." + newResources.Length.ToString());
             foreach (var nr in newResources)
             {
+                Logger.Write("Resource = " + nr.Url);
                 try
                 {
                     nr.FilePath = CalculateNewResourceLocalPath(nr.Url);
+                    Logger.Write("ResourceLocalPath = " + nr.FilePath);
                     UpdateResourceIfNeeded(nr);
                 }
                 catch (Exception ex)
@@ -114,13 +123,18 @@ namespace Loader
 
         private void UpdateFileIfNeeded(Resource nr)
         {
+            Logger.Write(String.Format("Resource is a file. Trying to update from {0} to {1}", nr.Url, nr.FilePath));
             WebFileLoader.UpdateFile(nr.Url, nr.FilePath, reqtranslate);
         }
 
         private void UpdateDirIfNeeded(Resource nr)
         {
+            Logger.Write("Resource is a folder.");
             if (!Directory.Exists(nr.FilePath))
+            {
+                Logger.Write(nr.FilePath + " does not exists. Creating...");
                 Directory.CreateDirectory(nr.FilePath);
+            }
         }
 
         private string CalculateNewResourceLocalPath(string _rpath)
@@ -139,7 +153,13 @@ namespace Loader
         public void Update()
         {
             curResources = GetCurrentResources();
+            var curResStr = String.Join("\n", curResources.Select(r => String.Format("{0} | {1:dd.MM.yy hh:mm:ss}", r.FilePath, r.LastModified)).ToArray());
+            Logger.Write("curResources = " + curResStr);
+
             newResources = GetNewResources();
+            var newResStr = String.Join("\n", newResources.Select(r => String.Format("{0} | {1:dd.MM.yy hh:mm:ss}", r.Url, r.LastModified)).ToArray());
+            Logger.Write("newResources = " + newResStr);
+
             UpdateAllIfNeeded();
         }
 

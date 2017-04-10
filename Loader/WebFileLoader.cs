@@ -86,9 +86,7 @@ namespace Loader
             //Request.Headers.Add("Accept-Language: ru");
             //Request.UserAgent = @"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; .NET CLR 2.0.50727; .NET CLR 1.1.4322; .NET CLR 3.0.04506.648; .NET CLR 3.5.21022; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET4.0C; .NET4.0E)";
             //Request.Accept = @"image/gif, image/jpeg, image/pjpeg, image/pjpeg, application/x-shockwave-flash, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, application/x-ms-application, application/x-ms-xbap, application/vnd.ms-xpsdocument, application/xaml+xml, */*";
-            Request.Credentials = CredentialCache.DefaultCredentials;
-            
-            
+            Request.Credentials = CredentialCache.DefaultCredentials;                        
 
             //Set up the last modfied time header
             if (File.Exists(filePath)) 
@@ -111,6 +109,7 @@ namespace Loader
                 //if the file has not been modified
                 if (errorResponse.StatusCode == HttpStatusCode.NotModified)
                 {
+                    Logger.Write("Status = NotModified");
                     e.Response.Close();
                     return;
                 }

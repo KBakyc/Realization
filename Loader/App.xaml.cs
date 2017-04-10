@@ -26,19 +26,37 @@ namespace Loader
         private Updater updater;
         private LoaderWindow lWin;
 
+
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             try
             {
                 args = String.Join(" ", e.Args);
+
+                Logger.Write("Loader started.");
+                
                 var appExeName = Loader.Properties.Settings.Default.AppExeName;
+                Logger.Write("appExeName = " + appExeName);
+
                 var appRelFolder = Loader.Properties.Settings.Default.AppFolderName;
+                Logger.Write("appRelFolder = " + appRelFolder);
+
                 var curAppPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                Logger.Write("curAppPath = " + curAppPath);
+
                 appExeDir = Path.Combine(curAppPath, appRelFolder);
+                Logger.Write("appExeDir = " + appExeDir);
+
                 appExePath = Path.Combine(appExeDir, appExeName);
+                Logger.Write("appExePath = " + appExePath);
+
                 appUpdatesPath = Loader.Properties.Settings.Default.AppUpdatesPath;
+                Logger.Write("appUpdatesPath = " + appUpdatesPath);
+
                 isStartAfterUpdate = Loader.Properties.Settings.Default.StartAfterUpdate
                                      && !String.IsNullOrEmpty(appExeName);
+                Logger.Write("isStartAfterUpdate = " + isStartAfterUpdate.ToString());
+
                 isReqTranslate = Loader.Properties.Settings.Default.ReqTranslate;
 
                 lWin = new LoaderWindow();
@@ -62,6 +80,7 @@ namespace Loader
             if (isStartAfterUpdate)
                 StartApplication();
             Shutdown();
+            Logger.Write("Loader finished.");
         }
 
         void bgWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -71,7 +90,10 @@ namespace Loader
                 lWin.Close();
             }
             else
+            {
                 lWin.DataContext = new { UpdateResult = updater.UpdaterError };
+                Logger.Write("UpdaterError = " + updater.UpdaterError);
+            }
         }
 
         void bgWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -83,16 +105,18 @@ namespace Loader
                 }
                 catch (Exception ex)
                 {
+                    Logger.Write("Ошибка в bgWorker_DoWork!");
                     HandleTerminalError(ex);
                 }
         }
 
         private void HandleTerminalError(Exception ex)  
         {
-            MessageBox.Show(ex.Message + Environment.NewLine
+            var errMsg = ex.Message + Environment.NewLine
                           + ex.InnerException != null ? ex.InnerException.Message + Environment.NewLine : ""
-                          + ex.StackTrace);
-            //Environment.Exit(0);
+                          + ex.StackTrace;
+            Logger.Write(errMsg);
+            MessageBox.Show(errMsg);
         }
 
         private void StartApplication()
