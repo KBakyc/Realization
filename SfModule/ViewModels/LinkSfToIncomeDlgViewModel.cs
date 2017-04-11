@@ -7,6 +7,8 @@ using DataObjects.Interfaces;
 using CommonModule.DataViewModels;
 using DataObjects;
 using DotNetHelper;
+using System.Windows.Input;
+using CommonModule.Commands;
 
 namespace SfModule.ViewModels
 {
@@ -20,6 +22,61 @@ namespace SfModule.ViewModels
             repository = _repository;
             sfv = _sfv;
             LoadData();
+            providerSeekCommand = new DelegateCommand(ExecuteProviderSeek);
+            numberSeekCommand = new DelegateCommand(ExecuteNumberSeek);
+        }
+
+        private void ExecuteNumberSeek()
+        {
+            SeekEsfns();
+        }
+
+        private void SeekEsfns()
+        {
+            var providerIncomeEsfns = IncomeESFNs;
+            var incomeEsfns = String.IsNullOrWhiteSpace(numberSeekPat) ? providerIncomeEsfns : providerIncomeEsfns.Where(s => s.Item2.EndsWith(numberSeekPat));
+
+            var esfns = incomeEsfns.ToArray();
+            selectESFN.LoadData(esfns);
+
+            if (esfns.Length == 1) selectESFN.SelectedESFN = esfns[0];
+        }
+
+        private void ExecuteProviderSeek()
+        {
+            var oldSelectedProvider = selectedProvider;
+            var foundProviders = Providers;            
+            NotifyPropertyChanged(() => Providers);
+            if (foundProviders.Length == 0) return;
+            if (foundProviders.Length == 1) SelectedProvider = foundProviders[0];
+            else
+                if (foundProviders.Contains(oldSelectedProvider)) SelectedProvider = oldSelectedProvider;
+        }
+
+        private string numberSeekPat;
+        public string NumberSeekPat
+        {
+            get { return numberSeekPat; }
+            set { SetAndNotifyProperty("NumberSeekPat", ref numberSeekPat, value); }
+        }
+
+        private string providerSeekPat;
+        public string ProviderSeekPat
+        {
+            get { return providerSeekPat; }
+            set { SetAndNotifyProperty("ProviderSeekPat", ref providerSeekPat, value); }
+        }
+
+        private ICommand providerSeekCommand;
+        public ICommand ProviderSeekCommand
+        {
+            get { return providerSeekCommand; }
+        }
+
+        private ICommand numberSeekCommand;
+        public ICommand NumberSeekCommand
+        {
+            get { return numberSeekCommand; }
         }
 
         private SelectESFNDlgViewModel selectESFN;
@@ -43,15 +100,24 @@ namespace SfModule.ViewModels
             set 
             { 
                 SetAndNotifyProperty("SelectedProvider", ref selectedProvider, value);
-                //NotifyPropertyChanged("IncomeESFNs");
-                selectESFN.LoadData(IncomeESFNs.ToArray());
+                SeekEsfns();
             }
         }
 
         private KeyValueObj<string,string>[] providers;
         public KeyValueObj<string, string>[] Providers
         {
-            get { return providers; }
+            get
+            {
+                var res = providers;
+                if (!String.IsNullOrWhiteSpace(providerSeekPat))
+                {
+                    var pat = providerSeekPat.Trim().ToLowerInvariant();
+                    res = (pat.All(c => char.IsDigit(c))) ? providers.Where(p => p.Key == pat).ToArray()
+                                                          : providers.Where(p => p.Value.ToLowerInvariant().Contains(pat)).ToArray();
+                }
+                return res;
+            }
             set { SetAndNotifyProperty("Providers", ref providers, value); }
         }
 

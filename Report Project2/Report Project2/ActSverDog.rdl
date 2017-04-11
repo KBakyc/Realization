@@ -65,6 +65,7 @@
                         <PaddingTop>1pt</PaddingTop>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -334,6 +335,7 @@
                         <PaddingTop>1pt</PaddingTop>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -901,6 +903,7 @@
                     <GroupExpressions>
                       <GroupExpression>=Fields!datgr.Value</GroupExpression>
                       <GroupExpression>=Fields!docnum.Value</GroupExpression>
+                      <GroupExpression>=IIF(Fields!kolf.Value &lt;&gt; 0, 1, 2)</GroupExpression>
                     </GroupExpressions>
                   </Group>
                   <SortExpressions>
@@ -909,6 +912,9 @@
                     </SortExpression>
                     <SortExpression>
                       <Value>=Fields!docnum.Value</Value>
+                    </SortExpression>
+                    <SortExpression>
+                      <Value>=IIF(Fields!kolf.Value &lt;&gt; 0, 1, 2)</Value>
                     </SortExpression>
                   </SortExpressions>
                   <TablixMembers>
