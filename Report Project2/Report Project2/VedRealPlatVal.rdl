@@ -2313,6 +2313,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
                 <TablixCell>
@@ -5952,6 +5953,9 @@
                           <SortExpressions>
                             <SortExpression>
                               <Value>=Fields!datgr.Value</Value>
+                            </SortExpression>
+                            <SortExpression>
+                              <Value>=IIF(Fields!kolf.Value &lt;&gt; 0, 1, 2)</Value>
                             </SortExpression>
                           </SortExpressions>
                         </TablixMember>

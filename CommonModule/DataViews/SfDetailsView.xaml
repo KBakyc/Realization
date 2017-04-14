@@ -108,7 +108,7 @@
                             </ScrollViewer>
                         </Expander>
                     </Border>-->
-                    <GroupBox Header="Грузополучатель" DockPanel.Dock="Top" Margin="3" Content="{Binding Poluchatel}">
+                    <GroupBox Header="Получатель (груза/услуги)" DockPanel.Dock="Top" Margin="3" Content="{Binding Poluchatel}">
                         <GroupBox.ContentTemplate>
                             <DataTemplate>
                                 <DockPanel LastChildFill="True" MaxWidth="{Binding RelativeSource={RelativeSource AncestorType=GroupBox}, Path=ActualWidth}">
