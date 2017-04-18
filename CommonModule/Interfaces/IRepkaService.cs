@@ -7,12 +7,9 @@ using System.IO;
 
 namespace CommonModule.Interfaces
 {
-    [ServiceContract()]//(CallbackContract=typeof(IMessenger))]
+    [ServiceContract()]
     public interface IRepkaService
     {
-        //[OperationContract(IsOneWay=true)]
-        //void ShowMessage(string _message);
-
         [OperationContract]
         bool IsOnline();
 

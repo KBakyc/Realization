@@ -30,6 +30,7 @@ namespace CommonModule.Helpers
         {
             string etype = _e.GetType().ToString();
             string message = String.IsNullOrEmpty(_mess) ? _e.Message : _mess + "\n" + _e.Message;
+            if (_e.InnerException != null) message += "\n" + _e.InnerException.Message;
             string emess = String.Format("{0} : {1}\n{2}", etype, message, _e.StackTrace);
             if (!_silent)
                 System.Windows.MessageBox.Show(emess, etype);

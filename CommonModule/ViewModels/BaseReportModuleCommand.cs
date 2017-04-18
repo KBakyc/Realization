@@ -117,6 +117,7 @@ namespace CommonModule.ViewModels
                 }
                 catch (Exception _e)
                 {
+                    CommonModule.Helpers.WorkFlowHelper.OnCrash(_e, null, true);
                     var emess = _e.InnerException == null ? _e.Message : _e.Message + Environment.NewLine + _e.InnerException.Message;
                     Parent.Services.ShowMsg("Ошибка инициализации отчёта", emess, true);
                 }
