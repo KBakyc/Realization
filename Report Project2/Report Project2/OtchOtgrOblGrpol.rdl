@@ -859,7 +859,7 @@
                               <Value>=SUM(Fields!sumprodRB.Value + Fields!sumndsRB.Value)</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
-                                <Format>#,0;-#,0;''</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -874,7 +874,7 @@
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0.00;-#,0.00;''</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -913,7 +913,7 @@
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
-                                <Format>#,0</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -928,7 +928,7 @@
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0.00;-#,0.00;''</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -966,7 +966,7 @@
                               <Value>=SUM(Fields!sumsperRB.Value)</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
-                                <Format>#,0</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -981,7 +981,7 @@
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0.00;-#,0.00;''</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1166,7 +1166,7 @@
                               <Value>=Sum(Fields!sumprodRB.Value + Fields!sumndsRB.Value)</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
-                                <Format>#,0;-#,0;''</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1181,7 +1181,7 @@
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0.00;-#,0.00;''</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1222,7 +1222,7 @@
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
-                                <Format>#,0</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1237,7 +1237,7 @@
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0.00;-#,0.00;''</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1277,7 +1277,7 @@
                               <Value>=Sum(Fields!sumsperRB.Value)</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
-                                <Format>#,0</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1292,7 +1292,7 @@
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0.00;-#,0.00;''</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1479,7 +1479,7 @@
                               <Value>=Sum(Fields!sumprodRB.Value + Fields!sumndsRB.Value)</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
-                                <Format>#,0;-#,0;''</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1494,7 +1494,7 @@
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0.00;-#,0.00;''</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1535,7 +1535,7 @@
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
-                                <Format>#,0</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1550,7 +1550,7 @@
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0.00;-#,0.00;''</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1590,7 +1590,7 @@
                               <Value>=Sum(Fields!sumsperRB.Value)</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
-                                <Format>#,0</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1605,7 +1605,7 @@
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0.00;-#,0.00;''</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1792,7 +1792,7 @@
                               <Value>=Sum(Fields!sumprodRB.Value + Fields!sumndsRB.Value)</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
-                                <Format>#,0;-#,0;''</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1807,7 +1807,7 @@
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0.00;-#,0.00;''</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1848,7 +1848,7 @@
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
-                                <Format>#,0</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1863,7 +1863,7 @@
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0.00;-#,0.00;''</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1903,7 +1903,7 @@
                               <Value>=Sum(Fields!sumsperRB.Value)</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
-                                <Format>#,0</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -1918,7 +1918,7 @@
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0.00;-#,0.00;''</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2107,7 +2107,7 @@
                               <Value>=Sum(Fields!sumprodRB.Value + Fields!sumndsRB.Value)</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
-                                <Format>#,0;-#,0;''</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2122,7 +2122,7 @@
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0.00;-#,0.00;''</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2163,7 +2163,7 @@
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
-                                <Format>#,0</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2178,7 +2178,7 @@
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0.00;-#,0.00;''</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2218,7 +2218,7 @@
                               <Value>=Sum(Fields!sumsperRB.Value)</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
-                                <Format>#,0</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2233,7 +2233,7 @@
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0.00;-#,0.00;''</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2414,7 +2414,7 @@
                               <Value>=Sum(Fields!sumprodRB.Value + Fields!sumndsRB.Value)</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
-                                <Format>#,0;-#,0;''</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2429,7 +2429,7 @@
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0.00;-#,0.00;''</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2475,7 +2475,7 @@
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Normal</FontWeight>
-                                <Format>#,0</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2490,7 +2490,7 @@
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0.00;-#,0.00;''</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2535,7 +2535,7 @@
                               <Value>=Sum(Fields!sumsperRB.Value)</Value>
                               <Style>
                                 <FontSize>8pt</FontSize>
-                                <Format>#,0</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>
@@ -2550,7 +2550,7 @@
                               <Style>
                                 <FontSize>8pt</FontSize>
                                 <FontWeight>Bold</FontWeight>
-                                <Format>#,0.00;-#,0.00;''</Format>
+                                <Format>n2</Format>
                               </Style>
                             </TextRun>
                           </TextRuns>

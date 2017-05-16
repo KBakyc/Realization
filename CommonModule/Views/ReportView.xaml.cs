@@ -92,7 +92,7 @@ namespace CommonModule.Views
             InitReportViewer();
 
             if (viewer == null || model == null || !model.IsValid) return;
-            viewer.RefreshReport();
+            //viewer.RefreshReport();
             this.SetLoaded(true);
         }
 
