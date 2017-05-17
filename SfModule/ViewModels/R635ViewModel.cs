@@ -813,32 +813,43 @@ namespace SfModule.ViewModels
             }
         }
 
-        private Result<bool> GetCanMakeESFN(EsfnDataViewModel[] _surESFN)
+        private Result<bool> GetCanMakeESFN(EsfnDataViewModel[] _curESFN)
         {
             string resultMsg = "";
             bool isEsnfPossible = true;
             bool isNeedFixed = false;
-            if (_surESFN != null && _surESFN.Length > 0 && _surESFN.Any(e => e.VatInvoiceId != null))
+            if (_curESFN != null && _curESFN.Length > 0 && _curESFN.Any(e => e.VatInvoiceId != null))
             {
-                Array.ForEach(_surESFN, e => e.GetStatus());
+                Array.ForEach(_curESFN, e => e.GetStatus());
                 resultMsg = "Уже сформирован электронный счёт-фактура по НДС\n№ "
-                           + String.Join("\n№ ", _surESFN.Select(e => e.VatInvoiceNumber
+                           + String.Join("\n№ ", _curESFN.Select(e => e.VatInvoiceNumber
                                                                 + " : Статус: " + e.StatusName
                                                                 + " : Подтверждён: " + (String.IsNullOrWhiteSpace(e.ApprovedByUserFIO) ? "НЕТ" : e.ApprovedByUserFIO))
                                                                 .ToArray());
-                if (_surESFN.Any(e => e.StatusId != InvoiceStatuses.STATUS7 && (e.StatusId > InvoiceStatuses.STATUS2 || !String.IsNullOrWhiteSpace(e.ApprovedByUserFIO)))) // статус 7 - аннулирован
+                bool annul_Exists = false;
+                bool sent_appr_Exists = false;
+                //Dictionary<int, InvoiceStatuses> prilStat = new Dictionary<int, InvoiceStatuses>();
+                foreach(var e in _curESFN)
                 {
-                    if (selectedSf.SfType.SfTypeId == 0)
+                    //prilStat[e.PrimaryIdsf]
+                    if (annul_Exists && sent_appr_Exists) break;
+                    annul_Exists = annul_Exists || e.StatusId == InvoiceStatuses.STATUS7;
+                    sent_appr_Exists = sent_appr_Exists || e.StatusId != InvoiceStatuses.STATUS7 && (e.StatusId > InvoiceStatuses.STATUS2 || !String.IsNullOrWhiteSpace(e.ApprovedByUserFIO));                    
+                }
+                if (selectedSf.SfType.SfTypeId == 0)
+                {
+                    if (sent_appr_Exists)
                     {
                         isEsnfPossible = true;
                         isNeedFixed = true;
                     }
-                    else
-                    {
-                        isEsnfPossible = false;
-                        resultMsg += "\nВЫСТАВЛЕН КОРРЕКТИРОВОЧНЫЙ СЧЁТ-ФАКТУРА";
-                    }
-                }                                                                                 
+                }
+                else
+                {
+                    isEsnfPossible = annul_Exists;
+                    if (isEsnfPossible)
+                        resultMsg += "\nНе по всем первичным документам корректировочного счёта-фактуры" + "\nсформированы дополнительные ЭСФН.";
+                }                                                                                                
             }
             if (isEsnfPossible == false)
                 resultMsg += "\nФОРМИРОВАНИЕ НЕВОЗМОЖНО!";
