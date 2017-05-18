@@ -7,7 +7,10 @@ using DataObjects.Interfaces;
 
 namespace Realization.ViewModels
 {
-    public class SysInfoViewModel:BasicViewModel
+    /// <summary>
+    /// Модель отображения системной информации.
+    /// </summary>
+    public class SysInfoViewModel : BasicViewModel
     {
         private IDbService repository;
         private Dictionary<string,string> parsedConnectionString;

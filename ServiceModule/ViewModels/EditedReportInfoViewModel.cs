@@ -13,6 +13,9 @@ using System.Data.Entity;
 
 namespace ServiceModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения редактируемой информации об отчёте.
+    /// </summary>
     public class EditedReportInfoViewModel : BasicNotifier
     {
         public EditedReportInfoViewModel(ReportInfo _r)

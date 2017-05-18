@@ -8,6 +8,9 @@ using DotNetHelper;
 
 namespace CommonModule.DataViewModels
 {
+    /// <summary>
+    /// Модель отображения приложения счёта.
+    /// </summary>
     public class SfLineViewModel
     {
         private IDbService repository;

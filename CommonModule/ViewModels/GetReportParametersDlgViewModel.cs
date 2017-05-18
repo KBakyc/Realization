@@ -42,6 +42,9 @@ namespace CommonModule.ViewModels
         }
     }
 
+    /// <summary>
+    /// Модель диалога выбора параметров отчёта.
+    /// </summary>
     public class GetReportParametersDlgViewModel : BaseDlgViewModel
     {        
         private ParameterGroup[] parameterGroups;

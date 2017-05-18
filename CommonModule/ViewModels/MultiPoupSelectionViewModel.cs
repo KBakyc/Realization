@@ -12,6 +12,9 @@ using System.Collections.ObjectModel;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора вида реализации. С возможностью множественного выбора.
+    /// </summary>
     public class MultiPoupSelectionViewModel : BaseDlgViewModel
     {
         private IDbService repository;

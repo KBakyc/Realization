@@ -8,6 +8,9 @@ using DataObjects;
 
 namespace PredoplModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения неоплаченного остатка по приложению счёта.
+    /// </summary>
     public class ProductOstViewModel : BasicViewModel
     {
         private SfProductModel sfProductRef;

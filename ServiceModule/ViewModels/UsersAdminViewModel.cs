@@ -28,6 +28,9 @@ using ServiceModule.DAL;
 
 namespace ServiceModule.ViewModels
 {    
+    /// <summary>
+    /// Модель режима управления пользователями.
+    /// </summary>
     public class UsersAdminViewModel : BasicModuleContent
     {
         IDbService dbService;

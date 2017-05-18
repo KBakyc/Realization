@@ -11,6 +11,9 @@ using System.Collections.ObjectModel;
 
 namespace SfModule.ViewModels
 {
+    /// <summary>
+    /// Модель расширенного отображения и проверки списка документов по отгрузке.
+    /// </summary>
     public class OtgrDocsDlgViewModel : BaseDlgViewModel
     {
         protected OtgrDocListViewModel otgrDocsVM;

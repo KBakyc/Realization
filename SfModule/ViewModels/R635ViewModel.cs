@@ -17,9 +17,11 @@ using EsfnHelper.ViewModels;
 
 namespace SfModule.ViewModels
 {
+    /// <summary>
+    /// Модель режима просмотра архива счетов-фактур.
+    /// </summary>
     public class R635ViewModel : BasicModuleContent
     {
-
         private IOtgruzModule otgruzModule;
         private IPredoplModule predoplModule;
         private ISfModule sfModule;

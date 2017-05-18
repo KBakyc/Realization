@@ -4,6 +4,9 @@ using DataObjects.Interfaces;
 
 namespace CommonModule.DataViewModels
 {
+    /// <summary>
+    /// Модель отображения платежа приложения счёта-фактуры.
+    /// </summary>
     public class SfProductPayViewModel : BasicViewModel, ITrackable
     {
         private SfProductPayModel modelRef;

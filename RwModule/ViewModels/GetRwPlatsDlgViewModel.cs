@@ -11,6 +11,9 @@ using DAL;
 
 namespace RwModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога с параметрами приёмки новых ЖД платежей из банка.
+    /// </summary>
     public class GetRwPlatsDlgViewModel : BaseDlgViewModel
     {
         private IDbService repository;

@@ -9,6 +9,9 @@ using System.ComponentModel;
 
 namespace PredoplModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения строки настроек бухгалтерских счетов и направлений.
+    /// </summary>
     public class PredoplSchetViewModel : BasicNotifier, ITrackable, IDataErrorInfo
     {
         private IDbService repository;

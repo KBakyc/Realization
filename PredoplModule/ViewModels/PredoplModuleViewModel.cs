@@ -15,6 +15,9 @@ using PredoplModule.Helpers;
 
 namespace PredoplModule.ViewModels
 {
+    /// <summary>
+    /// Модель модуля обработки предоплат.
+    /// </summary>
     [ExportModule(DisplayOrder = 5f)]
     [Export(typeof(IPredoplModule))]
     [PartCreationPolicy(CreationPolicy.Shared)]

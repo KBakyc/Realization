@@ -8,6 +8,9 @@ using CommonModule.Helpers;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора диапазона дат
+    /// </summary>
     public class DateRangeDlgViewModel : BaseDlgViewModel
     {
         public DateRangeDlgViewModel()

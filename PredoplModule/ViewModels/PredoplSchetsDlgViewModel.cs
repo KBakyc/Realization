@@ -13,6 +13,9 @@ using System.Collections.Generic;
 
 namespace PredoplModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога настроек бухгалтерсих счетов и направлений.
+    /// </summary>
     public class PredoplSchetsDlgViewModel : BaseDlgViewModel
     {
         private PoupModel[] poups;

@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace PredoplModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога запроса параметров принимаемых из финансов предоплат.
+    /// </summary>
     public class GetPredoplsDlgViewModel : BaseDlgViewModel
     {
         private IDbService repository;

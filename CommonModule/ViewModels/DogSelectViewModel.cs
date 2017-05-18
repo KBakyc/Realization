@@ -11,6 +11,9 @@ using System.Collections.Generic;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора договора сбыта.
+    /// </summary>
     public class DogSelectViewModel : BaseDlgViewModel
     {
         private PoupSelectionViewModel poupSelVm;

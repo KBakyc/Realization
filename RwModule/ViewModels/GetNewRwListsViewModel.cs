@@ -14,6 +14,9 @@ using DataObjects;
 
 namespace RwModule.ViewModels
 {
+    /// <summary>
+    /// Модель режима приёмки новых ЖД перечней.
+    /// </summary>
     public class GetNewRwListsViewModel : BasicModuleContent
     {
         public GetNewRwListsViewModel(IModule _parent, IEnumerable<RwListViewModel> _rwlst)

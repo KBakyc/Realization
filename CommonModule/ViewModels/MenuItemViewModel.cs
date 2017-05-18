@@ -10,6 +10,9 @@ using System.Windows.Input;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения элемента меню.
+    /// </summary>
     public class MenuItemViewModel : BasicNotifier
     {
         public MenuItemViewModel(string _lbl, string _descr, params LabelCommand[] _cmds)

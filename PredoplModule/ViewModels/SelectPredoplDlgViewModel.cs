@@ -10,6 +10,9 @@ using System.Windows.Input;
 
 namespace PredoplModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора предоплаты.
+    /// </summary>
     public class SelectPredoplDlgViewModel : BaseDlgViewModel
     {
         private PredoplsListViewModel predoplsLst;

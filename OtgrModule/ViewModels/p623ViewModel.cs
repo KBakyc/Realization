@@ -13,6 +13,9 @@ using CommonModule.Helpers;
 
 namespace OtgrModule.ViewModels
 {
+    /// <summary>
+    /// Модель режима приёмки отгрузки в реализацию из общего хранилища первичных документов.
+    /// </summary>
     public class p623ViewModel : BasicModuleContent
     {
         public p623ViewModel(IModule _parent)

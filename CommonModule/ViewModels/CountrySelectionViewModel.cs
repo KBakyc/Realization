@@ -7,6 +7,9 @@ using DataObjects.Interfaces;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора страны.
+    /// </summary>
     public class CountrySelectionViewModel : BaseDlgViewModel
     {
         private IDbService repository;

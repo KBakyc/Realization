@@ -9,6 +9,9 @@ using System.ComponentModel;
 
 namespace InfoModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения подписанта.
+    /// </summary>
     public class SignerViewModel : BasicNotifier, ITrackable, IDataErrorInfo
     {
         private IDbService repository;

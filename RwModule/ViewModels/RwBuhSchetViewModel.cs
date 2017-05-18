@@ -11,6 +11,9 @@ using DAL;
 
 namespace RwModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения строки настроек бухгалтерских счетов по ЖД услугам.
+    /// </summary>
     public class RwBuhSchetViewModel : BasicNotifier, IDataErrorInfo
     {
         private RwBuhSchet modelRef;

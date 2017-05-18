@@ -17,6 +17,9 @@ using EsfnHelper.ViewModels;
 
 namespace RwModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога привязки документов перечня к входящим ЭСФН.
+    /// </summary>
     public class LinkRwDocsToEsfnDlgViewModel : BaseDlgViewModel
     {
         private RwDocViewModel[] docs;

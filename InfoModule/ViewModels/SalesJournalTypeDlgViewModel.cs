@@ -13,6 +13,9 @@ using System.Collections.Generic;
 
 namespace InfoModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога настроек видов журналов продаж.
+    /// </summary>
     public class SalesJournalTypeDlgViewModel : BaseDlgViewModel
     {
         private PoupModel[] poups;

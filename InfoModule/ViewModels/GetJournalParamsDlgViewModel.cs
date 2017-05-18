@@ -9,6 +9,9 @@ using DataObjects.Interfaces;
 
 namespace InfoModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога по запросу параметров формирования журнала продаж.
+    /// </summary>
     public class GetJournalParamsDlgViewModel : BaseDlgViewModel
     {
         private IDbService repository;

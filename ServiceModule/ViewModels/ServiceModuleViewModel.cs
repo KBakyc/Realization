@@ -14,6 +14,9 @@ using CommonModule.Composition;
 
 namespace ServiceModule.ViewModels
 {
+    /// <summary>
+    /// Модель сервисного модуля.
+    /// </summary>
     [ExportModule(DisplayOrder = 99f)]
     public sealed class ServiceModuleViewModel : PagesModuleViewModel, IPartImportsSatisfiedNotification
     {

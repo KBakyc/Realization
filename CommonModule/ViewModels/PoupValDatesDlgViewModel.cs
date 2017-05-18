@@ -11,10 +11,12 @@ using DataObjects.Interfaces;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора вида реализации, валюты и интервала дат
+    /// </summary>
     public class PoupValDatesDlgViewModel : PoupAndDatesDlgViewModel
     {
         private ValSelectionViewModel valSelVm;
-        //private IRepository repository;
 
         public PoupValDatesDlgViewModel(IDbService _rep, bool _issave)
             :base(_rep,_issave)

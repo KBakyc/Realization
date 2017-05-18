@@ -17,6 +17,9 @@ using CommonModule.ModuleServices;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Базовый класс модуля АРМа.
+    /// </summary>
     public abstract class BasicModuleViewModel : BasicViewModel, IModule, IModuleCommands
     {
 

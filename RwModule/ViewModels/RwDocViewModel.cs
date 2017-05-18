@@ -9,6 +9,9 @@ using DAL;
 
 namespace RwModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения документа перечня.
+    /// </summary>
     public class RwDocViewModel : BasicNotifier
     {
         public RwDocViewModel(RwDoc _model)

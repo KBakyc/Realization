@@ -11,6 +11,9 @@ using CommonModule.Commands;
 
 namespace ServiceModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения режима настройки параметров отчёта.
+    /// </summary>
     public class ReportParametersAdminViewModel : BasicNotifier
     {
         private EditedReportInfoViewModel eReportInfo;

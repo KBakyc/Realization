@@ -8,7 +8,10 @@ using DataObjects;
 using DataObjects.Interfaces;
 
 namespace RwModule.ViewModels
-{        
+{
+    /// <summary>
+    /// Модель диалога изменения данных ЖД перечня.
+    /// </summary>
     public class EditRwListInfoDlgViewModel : BaseDlgViewModel
     {
         private IDbService repository;

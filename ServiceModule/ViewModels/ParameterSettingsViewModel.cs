@@ -29,6 +29,9 @@ namespace ServiceModule.ViewModels
         OtherParamVal
     }
 
+    /// <summary>
+    /// Модель отображения настроек параметра отчёта.
+    /// </summary>
     public class ParameterSettingsViewModel : BasicNotifier
     {
         private ReportParameterInfo parameter;

@@ -11,6 +11,9 @@ using System.Collections.Generic;
 
 namespace ServiceModule.ViewModels
 {
+    /// <summary>
+    /// Класс, отвечающий за сохранение порядка сортировки колонок в таблице.
+    /// </summary>
     public class DataGridSortBehavior : Behavior<DataGrid>
     {
         public IDataGridItemComparer ItemComparer { get; set; }

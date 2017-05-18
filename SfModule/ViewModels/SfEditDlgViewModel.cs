@@ -11,6 +11,9 @@ using CommonModule.DataViewModels;
 
 namespace SfModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога изменения данных по счёту-фактуре.
+    /// </summary>
     public class SfEditDlgViewModel : BaseDlgViewModel
     {
         private IDbService repository;

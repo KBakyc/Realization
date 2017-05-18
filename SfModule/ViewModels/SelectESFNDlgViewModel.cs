@@ -9,6 +9,9 @@ using DataObjects;
 
 namespace SfModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора ЭСФН.
+    /// </summary>
     public class SelectESFNDlgViewModel : BaseDlgViewModel
     {
         public SelectESFNDlgViewModel(Tuple<int, string, DateTime?, string, string, decimal?, string>[] _esfns)

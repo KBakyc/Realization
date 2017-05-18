@@ -8,6 +8,9 @@ using DataObjects.Interfaces;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога отображения истории изменения состояний сущности.
+    /// </summary>
     public class HistoryDlgViewModel : BaseDlgViewModel
     {
         public HistoryDlgViewModel(IEnumerable<HistoryInfo> _infos)

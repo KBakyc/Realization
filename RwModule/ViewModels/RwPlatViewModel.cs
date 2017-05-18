@@ -9,6 +9,9 @@ using DataObjects.Interfaces;
 
 namespace RwModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения банковского платежа по ЖД услугам.
+    /// </summary>
     public class RwPlatViewModel : BasicNotifier
     {
         private RwPlat modelRef;

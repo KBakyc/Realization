@@ -7,6 +7,9 @@ using DataObjects;
 
 namespace CommonModule.DataViewModels
 {
+    /// <summary>
+    /// Модель отображения интервала дат счёта-фактуры.
+    /// </summary>
     public class SfPeriodViewModel : BasicViewModel, ITrackable
     {
         public SfPeriodViewModel(SfPayPeriodModel sfPeriodModel)

@@ -7,6 +7,9 @@ using DataObjects.Interfaces;
 
 namespace InfoModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога настроек подписей документов.
+    /// </summary>
     public class SignsSettingsViewModel : BaseDlgViewModel
     {
         private IDbService repository;

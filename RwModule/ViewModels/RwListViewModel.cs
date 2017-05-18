@@ -13,6 +13,9 @@ using DAL;
 
 namespace RwModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения ЖД перечня.
+    /// </summary>
     public class RwListViewModel : BasicNotifier
     {
         private IDbService repository;

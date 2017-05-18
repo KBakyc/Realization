@@ -10,6 +10,9 @@ using System.Windows.Input;
 
 namespace RwModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора ЖД документов для погашения.
+    /// </summary>
     public class SelectDocsForPayDlgViewModel : BaseDlgViewModel
     {        
         public SelectDocsForPayDlgViewModel(RwPlatViewModel _rwplat, IEnumerable<RwListViewModel> _rwlists)

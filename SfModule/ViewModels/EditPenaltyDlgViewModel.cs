@@ -15,6 +15,9 @@ using CommonModule.Interfaces;
 
 namespace SfModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога изменения штрафной санкции.
+    /// </summary>
     public class EditPenaltyDlgViewModel : BaseDlgViewModel
     {
         private PenaltyModel oldModel;

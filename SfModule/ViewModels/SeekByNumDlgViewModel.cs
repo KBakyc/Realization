@@ -4,6 +4,9 @@ using CommonModule.ViewModels;
 
 namespace SfModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога поиска счёта-фактуры по номеру.
+    /// </summary>
     public class SeekByNumDlgViewModel : BaseDlgViewModel
     {
         public SeekByNumDlgViewModel()

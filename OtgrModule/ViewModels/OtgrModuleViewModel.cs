@@ -18,6 +18,9 @@ using CommonModule.Composition;
 
 namespace OtgrModule.ViewModels
 {
+    /// <summary>
+    /// Модель модуля обработки отгрузки.
+    /// </summary>
     [ExportModule(DisplayOrder = 1f)]
     [Export(typeof(IOtgruzModule))]
     [PartCreationPolicy(CreationPolicy.Shared)]

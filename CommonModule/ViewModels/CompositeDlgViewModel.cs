@@ -6,6 +6,9 @@ using DataObjects;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Базовая модель составного диалога.
+    /// </summary>
     public abstract class CompositeDlgViewModel : BaseDlgViewModel
     {
 

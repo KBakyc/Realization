@@ -11,6 +11,9 @@ using CommonModule.Helpers;
 
 namespace InfoModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога отображения статуса системы синхнонизации.
+    /// </summary>
     public class SyncStatusViewModel : BaseDlgViewModel
     {
         private System.Windows.Threading.DispatcherTimer timer;

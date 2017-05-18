@@ -7,6 +7,9 @@ using CommonModule.Helpers;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения параметра отчёта.
+    /// </summary>
     public class ReportParameterViewModel : BasicViewModel
     {
         private ReportParameterInfo paramInfo;

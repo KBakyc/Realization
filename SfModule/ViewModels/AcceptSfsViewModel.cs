@@ -14,6 +14,9 @@ using CommonModule.DataViewModels;
 
 namespace SfModule.ViewModels
 {
+    /// <summary>
+    /// Модель режима приёмки сформированных счетов-фактур.
+    /// </summary>
     public class AcceptSfsViewModel : BasicModuleContent
     {
         /// <summary>

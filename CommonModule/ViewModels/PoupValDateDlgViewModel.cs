@@ -8,6 +8,9 @@ using DataObjects.Interfaces;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора вида реализации, валюты и даты
+    /// </summary>
     public class PoupValDateDlgViewModel : BaseDlgViewModel
     {
         private PoupSelectionViewModel poupSelVm;

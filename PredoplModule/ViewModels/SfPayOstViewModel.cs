@@ -4,6 +4,9 @@ using DataObjects.Interfaces;
 
 namespace PredoplModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения остатка составляющей приложения счёта.
+    /// </summary>
     public class SfPayOstViewModel : BasicViewModel
     {
         private SfPayOst payOst;

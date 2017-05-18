@@ -10,6 +10,9 @@ using DataObjects.Interfaces;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога отображения списка договоров сбыта.
+    /// </summary>
     public class DogListViewModel : BaseDlgViewModel
     {
         private IDbService repository;

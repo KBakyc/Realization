@@ -9,6 +9,9 @@ using DataObjects.Helpers;
 
 namespace CommonModule.DataViewModels
 {
+    /// <summary>
+    /// Модель отображения штрафной санкции.
+    /// </summary>
     public class PenaltyViewModel : BasicViewModel
     {
         private IDbService repository;

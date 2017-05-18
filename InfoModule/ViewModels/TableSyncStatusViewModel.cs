@@ -7,6 +7,9 @@ using DataObjects;
 
 namespace InfoModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения статса синхнонизации таблицы
+    /// </summary>
     public class TableSyncStatusViewModel : BasicViewModel
     {
         private TableSyncStatus model;

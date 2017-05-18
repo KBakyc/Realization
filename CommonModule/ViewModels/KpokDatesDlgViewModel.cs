@@ -12,6 +12,9 @@ using CommonModule.Helpers;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора интервала дат и контрагента.
+    /// </summary>
     public class KpokDatesDlgViewModel : BaseDlgViewModel
     {
         private DateRangeDlgViewModel datesSelection;

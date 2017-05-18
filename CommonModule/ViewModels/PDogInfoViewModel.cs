@@ -8,6 +8,9 @@ using DataObjects.Interfaces;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения продуктовой спецификации договора сбыта.
+    /// </summary>
     public class PDogInfoViewModel : BasicViewModel
     {
         private IDbService repository;

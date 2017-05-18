@@ -6,6 +6,9 @@ namespace CommonModule.ViewModels
 {
     public enum MsgType { Message, Text, ImagePath, ImageSource }
 
+    /// <summary>
+    /// Модель диалога отображения сообщения.
+    /// </summary>
     public class MsgDlgViewModel : BaseDlgViewModel
     {
         /// <summary>

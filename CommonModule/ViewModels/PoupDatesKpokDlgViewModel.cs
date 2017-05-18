@@ -12,6 +12,9 @@ using CommonModule.Helpers;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора направления реализации, интервала дат и плательщика.
+    /// </summary>
     public class PoupDatesKpokDlgViewModel : BaseDlgViewModel
     {
         private PoupSelectionViewModel poupSelVm;

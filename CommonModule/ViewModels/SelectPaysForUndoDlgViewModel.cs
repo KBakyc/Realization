@@ -9,6 +9,9 @@ using System.Windows.Input;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора погашений платежей на счета-фактуры для отмены.
+    /// </summary>
     public class SelectPaysForUndoDlgViewModel : BaseDlgViewModel
     {
         private IDbService repository;

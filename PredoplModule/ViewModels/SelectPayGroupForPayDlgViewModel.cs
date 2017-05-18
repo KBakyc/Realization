@@ -10,6 +10,9 @@ using System.Windows.Input;
 
 namespace PredoplModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора неоплаченных остатков для погашения.
+    /// </summary>
     public class SelectPayGroupForPayDlgViewModel : BaseDlgViewModel
     {
         private List<SfPayOstViewModel> grouposts;

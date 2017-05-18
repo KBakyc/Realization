@@ -17,6 +17,9 @@ namespace CommonModule.ViewModels
         }
     }
 
+    /// <summary>
+    /// Базовая модель диалога.
+    /// </summary>
     public class BaseDlgViewModel : BasicViewModel, ICloseViewModel, ISubmitViewModel, ICancelViewModel
     {
         private IPersister remember = CommonSettings.Persister;

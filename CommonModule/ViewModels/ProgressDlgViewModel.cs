@@ -3,6 +3,9 @@ using CommonModule.Commands;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога отображения хода выполнения задачи.
+    /// </summary>
     public class ProgressDlgViewModel : WaitDlgViewModel
     {
         public ProgressDlgViewModel()

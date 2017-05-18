@@ -13,6 +13,9 @@ using ServiceModule.DAL;
 
 namespace ServiceModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения режима просмотра статистики по отчёту.
+    /// </summary>
     public class ReportStatAdminViewModel : BasicNotifier
     {
         private EditedReportInfoViewModel eReportInfo;

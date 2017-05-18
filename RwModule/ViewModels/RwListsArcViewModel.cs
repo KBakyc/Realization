@@ -19,6 +19,9 @@ using CommonModule.Composition;
 
 namespace RwModule.ViewModels
 {
+    /// <summary>
+    /// Модель режима просмотра архива принятых ЖД перечней.
+    /// </summary>
     public class RwListsArcViewModel : BasicModuleContent
     {
         public DateTime? DateFrom { get; set; }

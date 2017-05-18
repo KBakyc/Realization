@@ -9,6 +9,9 @@ using CommonModule.Interfaces;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора даты.
+    /// </summary>
     public class DateDlgViewModel : BaseDlgViewModel
     {
         public DateDlgViewModel()

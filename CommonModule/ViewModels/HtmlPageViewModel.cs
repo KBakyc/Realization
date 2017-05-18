@@ -7,6 +7,9 @@ using CommonModule.Helpers;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель режима модуля для отображения HTML страницы.
+    /// </summary>
     public class HtmlPageViewModel : BasicModuleContent
     {
         private string path;

@@ -11,6 +11,9 @@ using System.Text.RegularExpressions;
 
 namespace OtgrModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора принимаемой из внешних источников отгрузки.
+    /// </summary>
     public class SelectOtgrFromExtViewModel : BaseDlgViewModel
     {
         IDbService repository;

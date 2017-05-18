@@ -11,6 +11,9 @@ using CommonModule.Helpers;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора продукта/услуги
+    /// </summary>
     public class ProductSelectionViewModel : BaseDlgViewModel
     {
         private IDbService repository;

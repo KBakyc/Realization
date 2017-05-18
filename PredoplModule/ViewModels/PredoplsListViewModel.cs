@@ -9,6 +9,9 @@ using DotNetHelper;
 
 namespace PredoplModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения списка предоплат.
+    /// </summary>
     public class PredoplsListViewModel : BasicViewModel
     {
         private IDbService repository;

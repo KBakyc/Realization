@@ -10,6 +10,9 @@ using DataObjects.ESFN;
 
 namespace EsfnHelper.ViewModels
 {
+    /// <summary>
+    /// Модель диалога отображения ЭСФН.
+    /// </summary>
     public class VatInvoiceDlgViewModel : BaseDlgViewModel
     {
         private VatInvoiceViewModel vatinvoice;

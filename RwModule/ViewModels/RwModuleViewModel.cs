@@ -14,6 +14,9 @@ using CommonModule.Composition;
 
 namespace RwModule.ViewModels
 {
+    /// <summary>
+    /// Модель модуля обработки ЖД услуг
+    /// </summary>
     [ExportModule(DisplayOrder = 7f)]
     public sealed class RwModuleViewModel : PagesModuleViewModel, IPartImportsSatisfiedNotification
     {

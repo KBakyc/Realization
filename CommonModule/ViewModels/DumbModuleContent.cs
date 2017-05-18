@@ -7,6 +7,9 @@ using System.ComponentModel.Composition;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель тестового режима модуля. (Для различных экспериментов.)
+    /// </summary>
     public class DumbModuleContent : BasicModuleContent
     {
         //[Import(AllowDefault = true)]

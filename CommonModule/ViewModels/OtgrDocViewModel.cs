@@ -9,6 +9,9 @@ using CommonModule.Helpers;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения отгрузочного документа.
+    /// </summary>
     public class OtgrDocViewModel : BasicViewModel
     {
         private IDbService repository;

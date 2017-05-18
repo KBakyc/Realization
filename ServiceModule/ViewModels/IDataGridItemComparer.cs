@@ -8,6 +8,9 @@ using System.ComponentModel;
 
 namespace ServiceModule.ViewModels
 {
+    /// <summary>
+    /// Интерфейс для сравнения ячеек в таблице.
+    /// </summary>
     public interface IDataGridItemComparer : IComparer
     {
         Dictionary<DataGridColumn, ItemPropertyInfo> ColumnProperties { get; set; }

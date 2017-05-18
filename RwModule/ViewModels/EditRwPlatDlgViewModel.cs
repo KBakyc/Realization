@@ -11,6 +11,9 @@ using CommonModule.Helpers;
 
 namespace RwModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога изменения платежа за ЖД услуги.
+    /// </summary>
     public class EditRwPlatDlgViewModel : BaseDlgViewModel
     {
         private IDbService repository;

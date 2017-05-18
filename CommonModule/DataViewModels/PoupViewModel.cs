@@ -8,6 +8,9 @@ using DataObjects.Interfaces;
 
 namespace CommonModule.DataViewModels
 {
+    /// <summary>
+    /// Модель отображения вида реализации.
+    /// </summary>
     public class PoupViewModel : BasicViewModel
     {
         private IDbService repository;

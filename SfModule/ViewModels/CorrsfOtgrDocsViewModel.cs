@@ -10,6 +10,9 @@ using System.Windows.Input;
 
 namespace SfModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора отгрузки для формирования корректировочного счёта-фактуры на продукцию.
+    /// </summary>
     public class CorrsfOtgrDocsViewModel : OtgrDocsDlgViewModel
     {
         public CorrsfOtgrDocsViewModel(IDbService _rep, IEnumerable<OtgrDocModel> _docs)

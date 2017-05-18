@@ -10,6 +10,9 @@ using DataObjects;
 
 namespace PredoplModule.ViewModels
 {
+    /// <summary>
+    /// Модель режима приёмки предоплат из подсистемы "Финансы"
+    /// </summary>
     public class GetPredoplsViewModel : BasicModuleContent
     {
         public GetPredoplsViewModel(IModule _parent)

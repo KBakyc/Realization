@@ -12,6 +12,9 @@ using System.Collections.ObjectModel;
 
 namespace OtgrModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога режима переноса отгрузки на другой договор.
+    /// </summary>
     public class ChangeOtgrForReDoneViewModel : BaseDlgViewModel
     {
         IDbService repository;

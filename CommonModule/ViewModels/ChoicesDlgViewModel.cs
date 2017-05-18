@@ -6,6 +6,9 @@ using DataObjects;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора опций.
+    /// </summary>
     public class ChoicesDlgViewModel : BaseDlgViewModel
     {
         public ChoicesDlgViewModel(params Choice[] _ch)

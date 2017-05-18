@@ -15,7 +15,9 @@ using CommonModule.Composition;
 
 namespace PredoplModule.ViewModels
 {
-
+    /// <summary>
+    /// Модель режима просмотра архива принятых предоплат.
+    /// </summary>
     public class PredoplsArcViewModel : BasicModuleContent
     {
         private LoadMode loadMode;

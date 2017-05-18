@@ -15,6 +15,9 @@ using DotNetHelper;
 
 namespace RwModule.ViewModels
 {
+    /// <summary>
+    /// Модель режима приёмки новых ЖД платежей из банка.
+    /// </summary>
     public class GetRwPlatsViewModel : BasicModuleContent
     {
         public GetRwPlatsViewModel(IModule _parent, RwPlat[] _newPlats)

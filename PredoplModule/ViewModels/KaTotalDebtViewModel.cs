@@ -5,6 +5,9 @@ using DataObjects.Interfaces;
 
 namespace PredoplModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения общей задолженности контрагента.
+    /// </summary>
     public class KaTotalDebtViewModel : BasicViewModel
     {
         private IDbService repository;

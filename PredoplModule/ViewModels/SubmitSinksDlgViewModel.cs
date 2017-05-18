@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace PredoplModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога отображения и подтверждения погашений предоплат.
+    /// </summary>
     public class SubmitSinksDlgViewModel : BaseDlgViewModel
     {
         public SubmitSinksDlgViewModel()

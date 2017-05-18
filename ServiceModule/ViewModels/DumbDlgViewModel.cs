@@ -17,6 +17,9 @@ using System.Globalization;
 
 namespace ServiceModule.ViewModels
 {
+    /// <summary>
+    /// Тестовая модель диалога. Для различных экспериментов.
+    /// </summary>
     public class DumbDlgViewModel : BaseDlgViewModel
     {
         private IDbService repository;

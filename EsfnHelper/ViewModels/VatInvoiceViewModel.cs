@@ -7,6 +7,9 @@ using EsfnHelper.Models;
 
 namespace EsfnHelper.ViewModels
 {
+    /// <summary>
+    /// Модель отображения ЭСФН.
+    /// </summary>
     public class VatInvoiceViewModel : BasicNotifier
     {
         public static VatInvoiceViewModel FromId(int _invoiceid)

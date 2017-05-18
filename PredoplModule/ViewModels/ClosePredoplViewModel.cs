@@ -15,6 +15,9 @@ using DotNetHelper;
 
 namespace PredoplModule.ViewModels
 {
+    /// <summary>
+    /// Модель режима погашения предоплат.
+    /// </summary>
     public class ClosePredoplViewModel : BasicModuleContent
     {
         public ClosePredoplViewModel(IModule _parent, KontrAgent _plat, Valuta _val, PoupModel _poup, DateTime _datzakr, PkodModel _pkod)

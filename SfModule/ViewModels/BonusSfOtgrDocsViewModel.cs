@@ -9,6 +9,9 @@ using DataObjects.Interfaces;
 
 namespace SfModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора отгрузки для формирования акта на предоставление бонуса.
+    /// </summary>
     public class BonusSfOtgrDocsViewModel : OtgrDocsDlgViewModel
     {
         public BonusSfOtgrDocsViewModel(IDbService _rep, IEnumerable<OtgrDocModel> _docs)

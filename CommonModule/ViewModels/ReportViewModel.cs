@@ -8,6 +8,9 @@ using CommonModule.Helpers;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель режима отображения отчёта в модуле.
+    /// </summary>
     public class ReportViewModel : BasicModuleContent
     {
         /// <summary>

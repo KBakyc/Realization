@@ -15,6 +15,9 @@ using DAL;
 
 namespace RwModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога настройки режима приёмки платежей из банка.
+    /// </summary>
     public class RwFromBankSettingsDlgViewModel : BaseDlgViewModel
     {
         private IDbService repository;

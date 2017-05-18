@@ -7,6 +7,9 @@ using DataObjects.Interfaces;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора валюты
+    /// </summary>
     public class ValSelectionViewModel : BaseDlgViewModel
     {
         private IDbService repository;

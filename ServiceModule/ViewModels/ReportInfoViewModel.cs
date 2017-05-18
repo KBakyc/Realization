@@ -11,6 +11,9 @@ using ServiceModule.DAL.Models;
 
 namespace ServiceModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения информации об отчёте
+    /// </summary>
     public class ReportInfoViewModel : BasicNotifier
     {
         private ReportInfo report;

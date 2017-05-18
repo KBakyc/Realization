@@ -11,6 +11,9 @@ using System.Text.RegularExpressions;
 
 namespace InfoModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога настроек видов реализации пользователя.
+    /// </summary>
     public class PoupSettingsViewModel : BaseDlgViewModel
     {
         private IDbService repository;

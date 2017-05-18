@@ -2,10 +2,11 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ViewModels="clr-namespace:SfModule.ViewModels"
+    xmlns:cvm="clr-namespace:CommonModule.DataViewModels;assembly=CommonModule"
     xmlns:conv="clr-namespace:CommonModule.Converters;assembly=CommonModule"
     MinWidth="400">
     <UserControl.Resources>
-        <DataTemplate DataType="{x:Type ViewModels:SfPeriodViewModel}">
+        <DataTemplate DataType="{x:Type cvm:SfPeriodViewModel}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>

@@ -22,6 +22,9 @@ using System.Globalization;
 
 namespace Realization.ViewModels
 {
+    /// <summary>
+    /// Модель приложения (оболочка).
+    /// </summary>
     [Export(typeof(IShellModel))]
     public class MainViewModel : BasicViewModel, IPartImportsSatisfiedNotification, IShellModel
     {

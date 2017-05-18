@@ -13,6 +13,9 @@ using System.Collections.Generic;
 
 namespace InfoModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога управления подписантами документов.
+    /// </summary>
     public class SignersDlgViewModel : BaseDlgViewModel
     {
         private List<PoupModel> poups;

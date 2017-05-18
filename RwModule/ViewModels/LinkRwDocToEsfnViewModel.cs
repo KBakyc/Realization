@@ -13,6 +13,9 @@ using DataObjects.ESFN;
 
 namespace RwModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения привязываемого документа перечня к ЭСФН.
+    /// </summary>
     public class LinkRwDocToEsfnViewModel : BasicViewModel
     {
         private RwDocViewModel doc;        

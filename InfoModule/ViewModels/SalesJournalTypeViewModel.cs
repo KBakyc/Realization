@@ -9,6 +9,9 @@ using System.ComponentModel;
 
 namespace InfoModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения типа журнала продаж.
+    /// </summary>
     public class SalesJournalTypeViewModel : BasicNotifier, ITrackable, IDataErrorInfo
     {
         private IDbService repository;

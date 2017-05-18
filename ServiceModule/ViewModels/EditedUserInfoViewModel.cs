@@ -8,6 +8,9 @@ using DataObjects;
 
 namespace ServiceModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения редактируемой информации о пользователе.
+    /// </summary>
     public class EditedUserInfoViewModel : BasicNotifier
     {
         public EditedUserInfoViewModel(UserInfo _u)

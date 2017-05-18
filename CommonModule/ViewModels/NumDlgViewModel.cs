@@ -3,6 +3,9 @@ using CommonModule.Commands;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога вводы числовых данных.
+    /// </summary>
     public class NumDlgViewModel : BaseDlgViewModel
     {
         public bool IsSelectAll { get; set; }

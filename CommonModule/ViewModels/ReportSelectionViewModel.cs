@@ -12,6 +12,9 @@ using CommonModule.DataViewModels;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора отчёта.
+    /// </summary>
     public class ReportSelectionViewModel : BaseDlgViewModel
     {
         public ReportSelectionViewModel()

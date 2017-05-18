@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace PredoplModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения данных о задолженности по счёту.
+    /// </summary>
     public class OutSfViewModel : BasicViewModel
     {
         private IDbService repository;

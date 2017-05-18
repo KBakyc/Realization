@@ -11,6 +11,9 @@ using DAL;
 
 namespace RwModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения строки настройки режима приёмки платтежей.
+    /// </summary>
     public class RwFromBankSettingViewModel : BasicNotifier, IDataErrorInfo
     {
         private RwFromBankSetting modelRef;

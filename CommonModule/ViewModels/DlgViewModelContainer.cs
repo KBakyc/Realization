@@ -5,6 +5,9 @@ using System.Text;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Контейнер для модели диалога.
+    /// </summary>
     public class DlgViewModelContainer : BasicViewModel
     {
         BaseDlgViewModel innerViewModel;

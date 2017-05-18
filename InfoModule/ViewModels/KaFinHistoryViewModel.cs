@@ -11,6 +11,9 @@ using CommonModule.DataViewModels;
 
 namespace InfoModule.ViewModels
 {
+    /// <summary>
+    /// Модель режима модуля, отображающего финансовое состояние контрагента
+    /// </summary>
     public class KaFinHistoryViewModel : BasicModuleContent
     {
         private KontrAgent kaRef;

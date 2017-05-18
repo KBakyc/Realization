@@ -16,6 +16,9 @@ using CommonModule.DataViewModels;
 
 namespace SfModule.ViewModels
 {
+    /// <summary>
+    /// Модель модуля обработки счетов-фактур.
+    /// </summary>
     [ExportModule(DisplayOrder = 4f)]
     [Export(typeof(ISfModule))]
     [PartCreationPolicy(CreationPolicy.Shared)]

@@ -12,6 +12,9 @@ namespace PredoplModule.ViewModels
 {
     public enum PredoplEditActions {Add, Edit, Split, Copy}
 
+    /// <summary>
+    /// Модель диалога изменения предоплаты.
+    /// </summary>
     public class EditPredoplDlgViewModel : BaseDlgViewModel
     {
         private PredoplModel oldModel;

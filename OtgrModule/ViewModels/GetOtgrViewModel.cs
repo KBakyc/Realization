@@ -13,6 +13,9 @@ using System.Collections.ObjectModel;
 
 namespace OtgrModule.ViewModels
 {
+    /// <summary>
+    /// Модель режима приёмки новой отгрузки в реализацию из внешних источников.
+    /// </summary>
     public class GetOtgrViewModel : BasicModuleContent
     {
         private OtgrLine[] otgrs;

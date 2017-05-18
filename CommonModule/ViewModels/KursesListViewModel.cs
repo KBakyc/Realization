@@ -10,6 +10,9 @@ using DataObjects.Interfaces;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога отображения курсов валют.
+    /// </summary>
     public class KursesListViewModel : BaseDlgViewModel
     {
         private IDbService repository;

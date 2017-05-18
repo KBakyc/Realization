@@ -13,6 +13,9 @@ using System.Collections.ObjectModel;
 
 namespace OtgrModule.ViewModels
 {
+    /// <summary>
+    /// Модель режима ручного добавления отгрузки в реализацию.
+    /// </summary>
     public class AddOtgrViewModel : BasicModuleContent
     {
         public AddOtgrViewModel(IModule _parent)

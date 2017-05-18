@@ -8,6 +8,9 @@ using DataObjects.Interfaces;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора вида реализации
+    /// </summary>
     public class PoupSelectionViewModel : BaseDlgViewModel
     {
         private IDbService repository;

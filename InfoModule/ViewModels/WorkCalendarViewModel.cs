@@ -11,6 +11,9 @@ using System.Text.RegularExpressions;
 
 namespace InfoModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога управления рабочим календарём (Настройка праздничных дней и переносов рабочих/выходных дней).
+    /// </summary>
     public class WorkCalendarViewModel : BaseDlgViewModel
     {
         private IDbService repository;

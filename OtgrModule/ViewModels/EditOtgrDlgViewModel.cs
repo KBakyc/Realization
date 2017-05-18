@@ -12,6 +12,9 @@ using OtgrModule.Helpers;
 
 namespace OtgrModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога изменения отгрузки.
+    /// </summary>
     public class EditOtgrDlgViewModel : BaseDlgViewModel
     {
         private OtgrLine oldModel;

@@ -18,6 +18,9 @@ using CommonModule.Composition;
 
 namespace InfoModule.ViewModels
 {
+    /// <summary>
+    /// Модель информационного модуля
+    /// </summary>
     [ExportModule(DisplayOrder = 6f)]
     public sealed class InfoModuleViewModel : PagesModuleViewModel, IPartImportsSatisfiedNotification
     {

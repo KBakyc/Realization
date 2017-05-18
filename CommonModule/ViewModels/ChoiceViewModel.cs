@@ -7,6 +7,9 @@ using DataObjects;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения опции выбора вы диалоге.
+    /// </summary>
     public class ChoiceViewModel : BasicNotifier
     {
         private Choice choice;

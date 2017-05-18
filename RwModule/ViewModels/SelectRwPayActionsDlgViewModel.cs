@@ -12,6 +12,9 @@ using DAL;
 
 namespace RwModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора погашений банковских платежей на ЖД услуги.
+    /// </summary>
     public class SelectRwPayActionsDlgViewModel : BaseDlgViewModel
     {
         private Selectable<RwPayActionViewModel>[] payActions;

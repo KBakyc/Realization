@@ -10,6 +10,9 @@ using DataObjects.Interfaces;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора контрагента.
+    /// </summary>
     public class KaSelectionViewModel : BaseDlgViewModel
     {
         //private bool isKaPopulatedBySearch;

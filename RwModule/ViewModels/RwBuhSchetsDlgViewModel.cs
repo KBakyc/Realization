@@ -15,6 +15,9 @@ using DAL;
 
 namespace RwModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога настройки бухгалтерских счетов по ЖД услугам.
+    /// </summary>
     public class RwBuhSchetsDlgViewModel : BaseDlgViewModel
     {
         private PoupModel[] poups;

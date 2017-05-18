@@ -9,6 +9,9 @@ using DataObjects.ESFN;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения данных по ЭСФН.
+    /// </summary>
     public class EsfnDataViewModel : BasicViewModel
     {
         private EsfnData esfn;

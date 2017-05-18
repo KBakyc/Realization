@@ -9,6 +9,9 @@ using DataObjects;
 
 namespace SfModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора исходного счёта-фактуры при возврате продукции.
+    /// </summary>
     public class LinkSfToPrimaryDlgViewModel : BaseDlgViewModel
     {
         private IDbService repository;

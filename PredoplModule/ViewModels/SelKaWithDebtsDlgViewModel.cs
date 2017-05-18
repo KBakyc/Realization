@@ -11,6 +11,9 @@ using DataObjects;
 
 namespace PredoplModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора контрагента для погашения неоплаченных остатков.
+    /// </summary>
     public class SelKaWithDebtsDlgViewModel : BaseDlgViewModel
     {
 

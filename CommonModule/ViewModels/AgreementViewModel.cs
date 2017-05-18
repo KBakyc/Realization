@@ -8,6 +8,9 @@ using DataObjects.Interfaces;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения общей информации по договору.
+    /// </summary>
     public class AgreementViewModel : BasicNotifier
     {
         AgreementModel agreement;

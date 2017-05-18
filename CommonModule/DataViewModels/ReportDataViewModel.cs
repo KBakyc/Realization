@@ -8,6 +8,9 @@ using DataObjects;
 
 namespace CommonModule.DataViewModels
 {
+    /// <summary>
+    /// Модель отображения информации об отчёте.
+    /// </summary>
     public class ReportDataViewModel : BasicNotifier
     {
         private IDbService repository;

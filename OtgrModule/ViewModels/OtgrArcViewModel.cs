@@ -19,6 +19,9 @@ using CommonModule.Composition;
 
 namespace OtgrModule.ViewModels
 {
+    /// <summary>
+    /// Модель режима просмотра архива принятой в реализацию отгрузки.
+    /// </summary>
     public class OtgrArcViewModel : BasicModuleContent
     {
         private ISfModule sfModule;

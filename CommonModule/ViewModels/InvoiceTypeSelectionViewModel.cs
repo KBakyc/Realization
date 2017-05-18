@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора типа документа.
+    /// </summary>
     public class InvoiceTypeSelectionViewModel : BaseDlgViewModel
     {
         private IDbService repository;

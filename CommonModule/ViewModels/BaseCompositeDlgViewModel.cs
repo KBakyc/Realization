@@ -7,6 +7,9 @@ using System.Collections.ObjectModel;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель составного диалога.
+    /// </summary>
     public class BaseCompositeDlgViewModel : CompositeDlgViewModel
     {
 

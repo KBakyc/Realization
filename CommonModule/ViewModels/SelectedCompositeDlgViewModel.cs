@@ -6,6 +6,9 @@ using DataObjects;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель составного диалога, поддерживающего выбор отдельной части.
+    /// </summary>
     public class SelectedCompositeDlgViewModel : BaseCompositeDlgViewModel
     {
         protected override bool ItemsCorrect()

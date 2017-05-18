@@ -7,6 +7,9 @@ using CommonModule.DataViewModels;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Базовая команда выбора отчётов модуля.
+    /// </summary>
     public class BaseReportModuleCommand : ModuleCommand
     {
         protected virtual ReportModel[] GetReports(string _moduleName)

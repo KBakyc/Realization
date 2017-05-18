@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace PredoplModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения принимаемой предоплаты.
+    /// </summary>
     public class TmpPredoplViewModel : BasicViewModel, IDataErrorInfo 
     {
         private IDbService repository;

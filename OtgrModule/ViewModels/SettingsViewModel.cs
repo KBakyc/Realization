@@ -11,6 +11,9 @@ using System.Text.RegularExpressions;
 
 namespace OtgrModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога настроек модуля отгрузки.
+    /// </summary>
     public class SettingsViewModel : BaseDlgViewModel
     {
         private IDbService repository;

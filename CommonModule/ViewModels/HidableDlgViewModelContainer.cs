@@ -5,6 +5,9 @@ using System.Text;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Контэйнер диалога с возможностью сокрытия.
+    /// </summary>
     public class HidableDlgViewModelContainer : DlgViewModelContainer
     {
         public HidableDlgViewModelContainer(BaseDlgViewModel _dlgVM)

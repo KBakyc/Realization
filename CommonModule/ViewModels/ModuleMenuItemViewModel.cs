@@ -9,6 +9,9 @@ using CommonModule.Helpers;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения элемента меню модуля.
+    /// </summary>
     public class ModuleMenuItemViewModel : BasicNotifier
     {
         public ModuleMenuItemViewModel(string _lbl, IEnumerable<ModuleCommand> _cmds)

@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace RwModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога подтверждения погашений банковских платежей на ЖД услуги.
+    /// </summary>
     public class SubmitRwSinksDlgViewModel : BaseDlgViewModel
     {
         public SubmitRwSinksDlgViewModel()

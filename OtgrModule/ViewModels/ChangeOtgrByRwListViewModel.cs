@@ -22,6 +22,9 @@ namespace OtgrModule.ViewModels
         public decimal NdsStDop { get; set; }
     }
 
+    /// <summary>
+    /// Модель диалога режима изменения отгрузки согласно ЖД перечню.
+    /// </summary>
     public class ChangeOtgrByRwListViewModel : BaseDlgViewModel
     {
         IDbService repository;

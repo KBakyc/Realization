@@ -14,7 +14,9 @@ using CommonModule.DataViewModels;
 
 namespace SfModule.ViewModels
 {
-    // SfModule.ViewModels.PenaltyArcViewModel
+    /// <summary>
+    /// Модель режима просмотра штрафных санкций.
+    /// </summary>
     public class PenaltyArcViewModel : BasicModuleContent
     {
 

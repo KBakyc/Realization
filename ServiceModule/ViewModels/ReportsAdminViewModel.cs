@@ -25,6 +25,9 @@ using System.Data.Entity;
 
 namespace ServiceModule.ViewModels
 {
+    /// <summary>
+    /// Модель режима управления отчётами.
+    /// </summary>
     public class ReportsAdminViewModel : BasicModuleContent
     {
         IDbService dbService;

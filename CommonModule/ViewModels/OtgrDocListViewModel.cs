@@ -8,6 +8,9 @@ using System.Collections.ObjectModel;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога отображения списка документов по отгрузке.
+    /// </summary>
     public class OtgrDocListViewModel : BaseDlgViewModel
     {
         private IDbService repository;

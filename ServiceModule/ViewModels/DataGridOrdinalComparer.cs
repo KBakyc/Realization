@@ -7,6 +7,9 @@ using System.ComponentModel;
 
 namespace ServiceModule.ViewModels
 {
+    /// <summary>
+    /// Класс, реализующий логику сравнения текстовых ячеек таблицы.
+    /// </summary>
     public class DataGridOrdinalComparer : IDataGridItemComparer
     {
         public Dictionary<DataGridColumn, ItemPropertyInfo> ColumnProperties { get; set; }

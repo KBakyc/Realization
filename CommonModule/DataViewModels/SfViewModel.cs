@@ -15,6 +15,9 @@ using DataObjects.Helpers;
 
 namespace CommonModule.DataViewModels
 {
+    /// <summary>
+    /// Модель отображения счёта-фактуры.
+    /// </summary>
     public class SfViewModel : BasicViewModel, ITrackable
     {
         private IDbService repository;

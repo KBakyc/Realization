@@ -9,6 +9,9 @@ using DataObjects.Interfaces;
 
 namespace SfModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора отгрузки для формирования корректировочного счёта-фактуры по ЖД услугам.
+    /// </summary>
     public class Corrsf2OtgrDocsViewModel : OtgrDocsDlgViewModel
     {
         public Corrsf2OtgrDocsViewModel(IDbService _rep, IEnumerable<OtgrDocModel> _docs)

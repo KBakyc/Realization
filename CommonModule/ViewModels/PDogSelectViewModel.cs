@@ -9,6 +9,9 @@ using System.Collections.Generic;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора продуктовой спецификации договора сбыта.
+    /// </summary>
     public class PDogSelectViewModel : BaseDlgViewModel
     {
         private PoupSelectionViewModel poupSelVm;

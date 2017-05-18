@@ -10,6 +10,9 @@ using DotNetHelper;
 
 namespace RwModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога изменения данных по документу перечня.
+    /// </summary>
     public class EditRwDocInfoDlgViewModel : BaseDlgViewModel
     {
         private IDbService repository;

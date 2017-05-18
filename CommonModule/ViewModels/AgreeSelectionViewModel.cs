@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора договора.
+    /// </summary>
     public class AgreeSelectionViewModel : BaseDlgViewModel
     {
         private IDbService repository;

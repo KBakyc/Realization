@@ -19,7 +19,9 @@ using CommonModule.Composition;
 
 namespace RwModule.ViewModels
 {
-
+    /// <summary>
+    /// Модель режима просмотра архива принятых банковских платежей по ЖД услугам.
+    /// </summary>
     public class RwPlatsArcViewModel : BasicModuleContent
     {        
         public RwPlatsArcViewModel(IModule _parent, IEnumerable<RwPlat> _rwPlats)

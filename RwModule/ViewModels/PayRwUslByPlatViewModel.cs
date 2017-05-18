@@ -18,6 +18,9 @@ using DAL;
 
 namespace RwModule.ViewModels
 {
+    /// <summary>
+    /// Модель режима погашения выставленных ЖД услуг на прошедшие платежи.
+    /// </summary>
     public class PayRwUslByPlatViewModel : BasicModuleContent
     {
         public PayRwUslByPlatViewModel(IModule _parent, DateTime _datzakr, RwUslType _vidusl)

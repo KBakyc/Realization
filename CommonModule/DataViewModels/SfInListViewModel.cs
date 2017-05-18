@@ -10,6 +10,9 @@ using System.Threading;
 
 namespace CommonModule.DataViewModels
 {
+    /// <summary>
+    /// Модель отображения расширенных данных счёта-фактуры в таблицах.
+    /// </summary>
     public class SfInListViewModel : BasicViewModel
     {
         private IDbService repository;

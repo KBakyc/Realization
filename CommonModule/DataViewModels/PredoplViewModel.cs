@@ -7,6 +7,9 @@ using System.Collections.Generic;
 
 namespace CommonModule.DataViewModels
 {
+    /// <summary>
+    /// Модель отображения предоплаты.
+    /// </summary>
     public class PredoplViewModel : BasicViewModel, ITrackable
     {
         private IDbService repository;

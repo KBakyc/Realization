@@ -10,6 +10,9 @@ using CommonModule.Interfaces;
 
 namespace ServiceModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения информации о пользователе.
+    /// </summary>
     public class UserInfoViewModel : BasicNotifier
     {
         private UserInfo user;

@@ -8,6 +8,9 @@ using DataObjects;
 
 namespace ServiceModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения строки из статистики отчёта.
+    /// </summary>
     public class UserReportStatViewModel : BasicNotifier
     {
         private UserReportStat model;

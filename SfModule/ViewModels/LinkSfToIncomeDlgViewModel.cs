@@ -12,6 +12,9 @@ using CommonModule.Commands;
 
 namespace SfModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога привязки счёта-фактуры на возмещение услуг к входящему ЭСФН.
+    /// </summary>
     public class LinkSfToIncomeDlgViewModel : BaseDlgViewModel
     {
         private IDbService repository;

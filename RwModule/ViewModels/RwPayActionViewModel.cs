@@ -11,6 +11,9 @@ using DAL;
 
 namespace RwModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения погашения ЖД услуги на платёж.
+    /// </summary>
     public class RwPayActionViewModel : BasicNotifier
     {
         public RwPayActionViewModel(RwPayActionType _actionType)

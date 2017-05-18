@@ -4,6 +4,9 @@ using System.Windows.Controls;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога запроса текстовой информации.
+    /// </summary>
     public class TxtDlgViewModel : BaseDlgViewModel
     {
         /// <summary>

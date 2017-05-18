@@ -131,7 +131,6 @@
     <Compile Include="ViewModels\SfEditDlgViewModel.cs" />
     <Compile Include="ViewModels\R635ViewModel.cs" />
     <Compile Include="ViewModels\SfModuleViewModel.cs" />
-    <Compile Include="ViewModels\SfPeriodViewModel.cs" />
     <Compile Include="Views\AcceptSfsView.xaml.cs">
       <DependentUpon>AcceptSfsView.xaml</DependentUpon>
     </Compile>

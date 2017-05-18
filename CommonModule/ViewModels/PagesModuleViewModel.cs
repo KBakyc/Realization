@@ -11,6 +11,9 @@ using System.Threading;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Базовая модель модуля, поддерживающего одновременную загрузку нескольких режимов.
+    /// </summary>
     public class PagesModuleViewModel : BasicModuleViewModel, IPagesModule
     {
         public PagesModuleViewModel()

@@ -5,6 +5,9 @@ using System.Text;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Контейнер диалога, поддерживающий выделение.
+    /// </summary>
     public class SelectableDlgViewModelContainer : DlgViewModelContainer
     {
         public SelectableDlgViewModelContainer(BaseDlgViewModel _dlgVM)

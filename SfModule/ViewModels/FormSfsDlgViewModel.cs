@@ -10,6 +10,9 @@ using CommonModule.Helpers;
 
 namespace SfModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога выбора параметров для формирования счетов-фактур.
+    /// </summary>
     public class FormSfsDlgViewModel : BaseDlgViewModel
     {
         private PoupAndDatesDlgViewModel poupdatesVm;

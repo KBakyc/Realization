@@ -10,9 +10,11 @@ using System.Threading;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Модель модуля с одним, замещаемым режимом (содержимым).
+    /// </summary>
     public class ContentModuleViewModel : BasicModuleViewModel, IContentModule
     {
-
         /// <summary>
         /// Рабочая область модуля
         /// </summary>

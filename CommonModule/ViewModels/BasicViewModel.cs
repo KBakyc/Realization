@@ -7,6 +7,9 @@ using CommonModule.Helpers;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Базовая модель отображения.
+    /// </summary>
     public abstract class BasicViewModel : BasicNotifier, IDisposable
     {
 

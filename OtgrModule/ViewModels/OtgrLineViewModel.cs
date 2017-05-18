@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace OtgrModule.ViewModels
 {
+    /// <summary>
+    /// Модель отображения отгрузки.
+    /// </summary>
     public class OtgrLineViewModel : BasicViewModel, ITrackable
     {
         private IDbService repository;

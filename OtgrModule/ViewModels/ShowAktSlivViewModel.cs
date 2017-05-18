@@ -11,6 +11,9 @@ using System.Text.RegularExpressions;
 
 namespace OtgrModule.ViewModels
 {
+    /// <summary>
+    /// Модель диалога отображения отгрузки по акту слива.
+    /// </summary>
     public class ShowAktSlivViewModel : BaseDlgViewModel
     {
         private Dictionary<OtgrLine, decimal> data;

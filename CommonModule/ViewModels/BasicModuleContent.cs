@@ -10,6 +10,9 @@ using System.Linq.Expressions;
 
 namespace CommonModule.ViewModels
 {
+    /// <summary>
+    /// Базовая модель режима модуля.
+    /// </summary>
     public class BasicModuleContent : BasicViewModel, IModuleContent
     {
         private IModule parent;
