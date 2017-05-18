@@ -4,6 +4,9 @@ using InfoModule.ViewModels;
 
 namespace InfoModule.Commands
 {
+    /// <summary>
+    /// Команда модуля для настройки пользовательских видов реализации и кодов форм.
+    /// </summary>
     [ExportModuleCommand("InfoModule.ModuleCommand", DisplayOrder=3f)]
     public class PoupSettingsModuleCommand : ModuleCommand
     {

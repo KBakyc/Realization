@@ -6,7 +6,9 @@ using OtgrModule.ViewModels;
 
 namespace OtgrModule.Commands
 {
-    //[Export("SfModule.ModuleCommand", typeof(ModuleCommand))]
+    /// <summary>
+    /// Команда модуля для запуска режима приёмки отгрузки из внешних источников.
+    /// </summary>
     [ExportModuleCommand("OtgrModule.ModuleCommand", DisplayOrder = 1.6f)]
     public class GetOtgruzFromXModuleCommand : ModuleCommand
     {

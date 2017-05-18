@@ -9,6 +9,9 @@ using DataObjects;
 
 namespace OtgrModule.Commands
 {
+    /// <summary>
+    /// Команда модуля для сверки отгрузки с данными в акте слива.
+    /// </summary>
     [ExportModuleCommand("OtgrModule.ModuleCommand", DisplayOrder = 3.9f)]
     public class SyncOtgrBySlivModuleCommand : ModuleCommand
     {

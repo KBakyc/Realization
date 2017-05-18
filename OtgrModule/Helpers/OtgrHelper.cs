@@ -9,6 +9,9 @@ using DotNetHelper;
 
 namespace OtgrModule.Helpers
 {
+    /// <summary>
+    /// Вспомогательный класс для расчёте данных по отгрузке.
+    /// </summary>
     public static class OtgrHelper
     {
         public static void SetNaklTotals(OtgrLineViewModel _line, IEnumerable<OtgrLineViewModel> _lines)

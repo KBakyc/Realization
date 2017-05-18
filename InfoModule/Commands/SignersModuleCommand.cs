@@ -6,6 +6,9 @@ using System;
 
 namespace InfoModule.Commands
 {
+    /// <summary>
+    /// Команда модуля для управления подписантами документов.
+    /// </summary>
     [ExportModuleCommand("InfoModule.ModuleCommand", DisplayOrder = 2.1f)]
     public class SignersModuleCommand : ModuleCommand
     {

@@ -8,6 +8,9 @@ using System.Collections.Generic;
 
 namespace InfoModule.Commands
 {
+    /// <summary>
+    /// Команда модуля для запуска режима просмотра/формирования журнала продаж.
+    /// </summary>
     [ExportModuleCommand("InfoModule.ModuleCommand", DisplayOrder=98f)]
     public class JournalsModuleCommand : ModuleCommand
     {

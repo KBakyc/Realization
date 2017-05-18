@@ -3,7 +3,9 @@ using CommonModule.ViewModels;
 
 namespace InfoModule.Commands
 {
-    //[Export("SfModule.ModuleCommand", typeof(ModuleCommand))]
+    /// <summary>
+    /// Команда модуля для выбора отчёта.
+    /// </summary>
     [ExportModuleCommand("InfoModule.ModuleCommand", DisplayOrder = 98f)]
     public class ReportsInfoModuleCommand : BaseReportModuleCommand
     {

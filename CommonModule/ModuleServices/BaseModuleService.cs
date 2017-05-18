@@ -8,6 +8,9 @@ using CommonModule.Helpers;
 
 namespace CommonModule.ModuleServices
 {
+    /// <summary>
+    /// Базовый сервис модуля.
+    /// </summary>
     public class BaseModuleService : IModuleService
     {
         private IModule parent;

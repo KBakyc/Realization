@@ -14,6 +14,9 @@ using DAL;
 
 namespace InfoModule.Helpers
 {
+    /// <summary>
+    /// Вспомогательный класс для запроса параметров для ведомости дебиторской/кредиторской задолженности.
+    /// </summary>
     [Export("InfoModule.FDebCredParamsGetter", typeof(IReportParametersGetter))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class FDebCredParamsGetter : BaseReportParametersGetter

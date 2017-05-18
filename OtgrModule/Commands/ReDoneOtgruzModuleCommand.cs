@@ -12,6 +12,9 @@ using DataObjects.SeachDatas;
 
 namespace OtgrModule.Commands
 {
+    /// <summary>
+    /// Команда модуля для перевыставление отгрузки на другой договор
+    /// </summary>
     [ExportModuleCommand("OtgrModule.ModuleCommand", DisplayOrder = 1.9f)]
     public class ReDoneOtgruzModuleCommand : ModuleCommand
     {

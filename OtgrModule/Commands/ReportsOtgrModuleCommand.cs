@@ -4,7 +4,9 @@ using CommonModule.ViewModels;
 
 namespace OtgrModule.Commands
 {
-    //[Export("SfModule.ModuleCommand", typeof(ModuleCommand))]
+    /// <summary>
+    /// Команда модуля для выбора отчёта.
+    /// </summary>
     [ExportModuleCommand("OtgrModule.ModuleCommand", DisplayOrder = 5f)]
     public class ReportsOtgrModuleCommand : BaseReportModuleCommand
     {

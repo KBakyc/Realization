@@ -12,6 +12,9 @@ using DataObjects.SeachDatas;
 
 namespace OtgrModule.Commands
 {
+    /// <summary>
+    /// Команда модуля для изменение провозных платежей на основании ЖД перечня
+    /// </summary>
     [ExportModuleCommand("OtgrModule.ModuleCommand", DisplayOrder = 1.95f)]
     public class CorrSperByPerechModuleCommand : ModuleCommand
     {

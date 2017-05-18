@@ -6,6 +6,9 @@ using InfoModule.ViewModels;
 
 namespace InfoModule.Commands
 {
+    /// <summary>
+    /// Команда модуля для управления производственным календарём.
+    /// </summary>
     [ExportModuleCommand("InfoModule.ModuleCommand", DisplayOrder = 3.1f)]
     public class WorkCalendarModuleCommand : ModuleCommand
     {

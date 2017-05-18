@@ -7,7 +7,9 @@ using OtgrModule.ViewModels;
 
 namespace OtgrModule.Commands
 {
-    //[Export("SfModule.ModuleCommand", typeof(ModuleCommand))]
+    /// <summary>
+    /// Команда модуля для запуска режима приёмки новой отгрузки из общего хранилища первичных документов.
+    /// </summary>
     [ExportModuleCommand("OtgrModule.ModuleCommand", DisplayOrder = 1f)]
     public class GetNewOtgruzModuleCommand : ModuleCommand
     {

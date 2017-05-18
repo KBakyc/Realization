@@ -4,6 +4,9 @@ using InfoModule.ViewModels;
 
 namespace InfoModule.Commands
 {
+    /// <summary>
+    /// Команда модуля для контроля системы подкачки.
+    /// </summary>
     [ExportModuleCommand("InfoModule.ModuleCommand", DisplayOrder=10f)]
     public class SyncStatusModuleCommand : ModuleCommand
     {

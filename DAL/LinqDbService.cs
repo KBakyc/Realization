@@ -15,7 +15,9 @@ namespace DAL
 {
     public enum Rekvisits { Unp, Okpo }
 
-    //[Export("Repository")]
+    /// <summary>
+    /// Предоставляет компонентам приложения доступ к данным и операциям с БД.
+    /// </summary>
     public class LinqDbService : IDbService
     {
         private static LinqDbService instance = new LinqDbService();        

@@ -6,6 +6,9 @@ using System.Data.OleDb;
 
 namespace DAL
 {
+    /// <summary>
+    /// Вспомогательный класс для работы с DBF
+    /// </summary>
     public class DbfHelper : IDisposable
     {
         private const String dataProvider = @"vfpoledb.1"; // Провайдер

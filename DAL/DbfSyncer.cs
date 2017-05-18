@@ -13,6 +13,9 @@ namespace DAL
 {
     public enum SyncAction{Insert, Update}
     
+    /// <summary>
+    /// Реализует задачи синхнонизации данных с DBF
+    /// </summary>
     public class DbfSyncer
     {
         //private string path_744 = String.IsNullOrWhiteSpace(Properties.Settings.Default.Dbf_Path_F744) ? Environment.CurrentDirectory : Properties.Settings.Default.Dbf_Path_F744;

@@ -4,6 +4,9 @@ using OtgrModule.ViewModels;
 
 namespace OtgrModule.Commands
 {
+    /// <summary>
+    /// Команда модуля для изменения персональных настроек.
+    /// </summary>
     [ExportModuleCommand("OtgrModule.ModuleCommand", DisplayOrder=4f)]
     public class SettingsModuleCommand : ModuleCommand
     {

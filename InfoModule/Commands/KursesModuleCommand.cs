@@ -5,6 +5,9 @@ using DataObjects.Interfaces;
 
 namespace InfoModule.Commands
 {
+    /// <summary>
+    /// Команда модуля для просмотра курсов валют.
+    /// </summary>
     [ExportModuleCommand("InfoModule.ModuleCommand", DisplayOrder = 3f)]
     public class KursesModuleCommand : ModuleCommand
     {

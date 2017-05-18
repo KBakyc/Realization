@@ -14,6 +14,9 @@ using DAL;
 
 namespace InfoModule.Helpers
 {
+    /// <summary>
+    /// Вспомогательный класс для запроса параметров отчёта по форме F744.
+    /// </summary>
     [Export("InfoModule.F744ParamsGetter", typeof(IReportParametersGetter))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class F744ParamsGetter : BaseReportParametersGetter

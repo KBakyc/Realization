@@ -5,7 +5,9 @@ using System.Linq;
 
 namespace InfoModule.Commands
 {
-    //[Export("SfModule.ModuleCommand", typeof(ModuleCommand))]
+    /// <summary>
+    /// Команда модуля для отображения помеченных пользователем отчётов.
+    /// </summary>
     [ExportModuleCommand("InfoModule.ModuleCommand", DisplayOrder = 98.1f)]
     public class FavoriteReportsModuleCommand : BaseReportModuleCommand
     {

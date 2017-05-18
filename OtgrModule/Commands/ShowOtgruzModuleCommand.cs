@@ -9,7 +9,9 @@ using DataObjects.SeachDatas;
 
 namespace OtgrModule.Commands
 {
-    //[Export("SfModule.ModuleCommand", typeof(ModuleCommand))]
+    /// <summary>
+    /// Команда модуля для запуска режима просмотра архива принятой в реализацию отгрузки.
+    /// </summary>
     [ExportModuleCommand("OtgrModule.ModuleCommand", DisplayOrder = 3f)]
     public class ShowOtgruzModuleCommand : ModuleCommand
     {

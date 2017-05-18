@@ -10,9 +10,8 @@ using CommonModule.Composition;
 namespace InfoModule.Commands
 {
     /// <summary>
-    /// Комманда принятия предоплат из банка
+    /// Комманда модуля для настройки видов журналов продаж и бухгалтерских счетов.
     /// </summary>
-
     [ExportModuleCommand("InfoModule.ModuleCommand", DisplayOrder = 97f)]
     public class SalesJournalSettingsCommand : ModuleCommand
     {

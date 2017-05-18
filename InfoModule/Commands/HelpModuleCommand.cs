@@ -6,6 +6,9 @@ using System;
 
 namespace InfoModule.Commands
 {
+    /// <summary>
+    /// Команда модуля для открытия пользовательской документации по АРМу.
+    /// </summary>
     [ExportModuleCommand("InfoModule.ModuleCommand", DisplayOrder = 99f)]
     public class HelpModuleCommand : ModuleCommand
     {

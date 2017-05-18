@@ -4,6 +4,9 @@ using InfoModule.ViewModels;
 
 namespace InfoModule.Commands
 {
+    /// <summary>
+    /// Команда модуля для настроек подписей документов.
+    /// </summary>
     [ExportModuleCommand("InfoModule.ModuleCommand", DisplayOrder=2f)]
     public class SignSettingsModuleCommand : ModuleCommand
     {

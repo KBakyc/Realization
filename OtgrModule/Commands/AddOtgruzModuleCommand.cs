@@ -6,7 +6,9 @@ using OtgrModule.ViewModels;
 
 namespace OtgrModule.Commands
 {
-    //[Export("SfModule.ModuleCommand", typeof(ModuleCommand))]
+    /// <summary>
+    /// Команда модуля для запуска режима ручного ввода отгрузки.
+    /// </summary>
     [ExportModuleCommand("OtgrModule.ModuleCommand", DisplayOrder = 1.5f)]
     public class AddOtgruzModuleCommand : ModuleCommand
     {

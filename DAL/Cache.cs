@@ -6,6 +6,11 @@ using System.Collections.Concurrent;
 
 namespace DAL
 {
+    /// <summary>
+    /// Класс для хранения загруженных данных в целях уменьшения нагрузки на БД.
+    /// </summary>
+    /// <typeparam name="TKey"></typeparam>
+    /// <typeparam name="TVal"></typeparam>
     public class Cache<TKey, TVal> where TKey:struct where TVal:class
     {
         private Func<TKey, TVal> getter;

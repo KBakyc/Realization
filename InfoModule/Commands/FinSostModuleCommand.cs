@@ -10,6 +10,9 @@ using CommonModule.Helpers;
 
 namespace InfoModule.Commands
 {
+    /// <summary>
+    /// Команда модуля для открытия режима просмотра финансового состояния.
+    /// </summary>
     [ExportModuleCommand("InfoModule.ModuleCommand", DisplayOrder=1.1f)]
     public class FinSostModuleCommand : ModuleCommand
     {
