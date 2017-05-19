@@ -10,7 +10,7 @@ using PredoplModule.Helpers;
 namespace PredoplModule.Commands
 {
     /// <summary>
-    /// Комманда добавления предоплаты
+    /// Комманда модуля для запуска механизма ручного добавления предоплаты
     /// </summary>
 
     [Export("PredoplModule.ModuleCommand", typeof(ModuleCommand))]

@@ -3,7 +3,9 @@ using CommonModule.ViewModels;
 
 namespace PredoplModule.Commands
 {
-    //[Export("SfModule.ModuleCommand", typeof(ModuleCommand))]
+    /// <summary>
+    /// Команда модуля для выбора отчёта.
+    /// </summary>
     [ExportModuleCommand("PredoplModule.ModuleCommand", DisplayOrder=98f)]
     public class ReportsPredoplModuleCommand : BaseReportModuleCommand
     {

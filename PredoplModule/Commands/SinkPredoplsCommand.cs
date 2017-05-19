@@ -9,9 +9,8 @@ using PredoplModule.ViewModels;
 namespace PredoplModule.Commands
 {
     /// <summary>
-    /// Комманда открытия окна погашения предоплат
+    /// Комманда модуля для запуска режима погашения предоплат на сформированные счета-фактуры.
     /// </summary>
-
     [Export("PredoplModule.ModuleCommand", typeof(ModuleCommand))]
     public class SinkPredoplsCommand : ModuleCommand
     {

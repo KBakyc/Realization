@@ -11,9 +11,8 @@ using DataObjects.SeachDatas;
 namespace PredoplModule.Commands
 {
     /// <summary>
-    /// Комманда открытия окна просмотра предоплат
+    /// Комманда модуля для запуска режима просмотра архива предоплат.
     /// </summary>
-
     [Export("PredoplModule.ModuleCommand", typeof(ModuleCommand))]
     public class ShowPredoplsCommand : ModuleCommand
     {

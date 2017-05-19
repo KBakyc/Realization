@@ -11,7 +11,7 @@ using DataObjects.SeachDatas;
 namespace SfModule.Commands
 {
     /// <summary>
-    /// Команда модуля для поиска счёта-фактуры по номеру.
+    /// Команда модуля для запуска механизма поиска счёта-фактуры по номеру.
     /// </summary>
     [ExportModuleCommand("SfModule.ModuleCommand", DisplayOrder=2f)]
     public class SeekSfModuleCommand : ModuleCommand

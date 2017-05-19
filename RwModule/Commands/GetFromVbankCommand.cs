@@ -12,7 +12,7 @@ using DAL;
 namespace RwModule.Commands
 {
     /// <summary>
-    /// Комманда принятия платежей из банка.
+    /// Комманда модуля для запуска режима приёмки платежей по ЖД услугам из банка.
     /// </summary>   
     [ExportModuleCommand("RwModule.ModuleCommand", DisplayOrder = 10f)]
     public class GetFromVbankCommand : ModuleCommand

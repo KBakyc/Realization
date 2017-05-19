@@ -6,7 +6,7 @@ using System.Linq;
 namespace InfoModule.Commands
 {
     /// <summary>
-    /// Команда модуля для отображения помеченных пользователем отчётов.
+    /// Команда модуля для запуска режима отображения и выбора отображения помеченных пользователем отчётов.
     /// </summary>
     [ExportModuleCommand("InfoModule.ModuleCommand", DisplayOrder = 98.1f)]
     public class FavoriteReportsModuleCommand : BaseReportModuleCommand

@@ -9,9 +9,8 @@ using PredoplModule.ViewModels;
 namespace PredoplModule.Commands
 {
     /// <summary>
-    /// Комманда принятия предоплат из банка
+    /// Комманда модуля для запуска принятия новых (обновления ранее принятых) предоплат (возвратов) из подсистемы «Финансы».
     /// </summary>
-
     [Export("PredoplModule.ModuleCommand", typeof(ModuleCommand))]
     public class GetFromVbankCommand : ModuleCommand
     {

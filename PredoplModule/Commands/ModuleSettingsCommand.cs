@@ -10,10 +10,8 @@ using CommonModule.Composition;
 namespace PredoplModule.Commands
 {
     /// <summary>
-    /// Комманда принятия предоплат из банка
+    /// Комманда модуля для запуска механизма изменения настроек режима приёмки предоплат из подсистемы "Финансы".
     /// </summary>
-
-    //[Export("PredoplModule.ModuleCommand", typeof(ModuleCommand))]
     [ExportModuleCommand("PredoplModule.ModuleCommand", DisplayOrder = 99f)]
     public class ModuleSettingsCommand : ModuleCommand
     {
