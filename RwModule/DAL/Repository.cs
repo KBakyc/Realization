@@ -16,6 +16,11 @@ namespace DAL
         void Save();
     }
 
+    /// <summary>
+    /// Обобщённый репозиторий. Не используется.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="Tkey"></typeparam>
     public class Repository<T, Tkey> : IRepository<T, Tkey> where T : class
     {
         RealContext _entity = new RealContext();

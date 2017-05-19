@@ -16,6 +16,9 @@ using RwModule.Models;
 
 namespace RwModule.Commands
 {
+    /// <summary>
+    /// Команда для загрузки новых ЖД перечней.
+    /// </summary>
     [ExportModuleCommand("RwModule.ModuleCommand", DisplayOrder = .5f)]
     public class GetNewRwListsCommand : ModuleCommand
     {

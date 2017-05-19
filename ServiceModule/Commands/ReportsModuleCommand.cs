@@ -18,6 +18,9 @@ using System.ServiceModel;
 
 namespace ServiceModule.Commands
 {
+    /// <summary>
+    /// Команда модуля для запуска режима управления настройками серверных отчётов.
+    /// </summary>
     [ExportModuleCommand("ServiceModule.ModuleCommand", DisplayOrder = 2f)]
     public class ReportsModuleCommand : ModuleCommand
     {

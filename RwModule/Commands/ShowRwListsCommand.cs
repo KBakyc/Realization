@@ -17,10 +17,12 @@ using RwModule.Models;
 using System.Linq.Expressions;
 using RwModule.Interfaces;
 using RwModule.Helpers;
-//using System.Runtime.InteropServices;
 
 namespace RwModule.Commands
 {
+    /// <summary>
+    /// Команда для запуска режима просмотра архива принятых ЖД перечней.
+    /// </summary>
     [ExportModuleCommand("RwModule.ModuleCommand", DisplayOrder = 1f)]
     public class ShowRwListsCommand : ModuleCommand
     {

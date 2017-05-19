@@ -6,6 +6,10 @@ using RwModule.Interfaces;
 
 namespace RwModule.Helpers
 {
+    /// <summary>
+    /// Обобщённый класс фильтра модели.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class ModelFilter<T> : IModelFilter<T>
     {
         public string Label { get; set; }

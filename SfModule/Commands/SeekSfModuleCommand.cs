@@ -10,7 +10,9 @@ using DataObjects.SeachDatas;
 
 namespace SfModule.Commands
 {
-    //[Export("SfModule.ModuleCommand", typeof(ModuleCommand))]
+    /// <summary>
+    /// Команда модуля для поиска счёта-фактуры по номеру.
+    /// </summary>
     [ExportModuleCommand("SfModule.ModuleCommand", DisplayOrder=2f)]
     public class SeekSfModuleCommand : ModuleCommand
     {

@@ -11,6 +11,9 @@ using DataObjects.Helpers;
 
 namespace SfModule.Commands
 {
+    /// <summary>
+    /// Команда модуля для запуска режима формирования корректировочных счетов по возмещению ЖД услуг.
+    /// </summary>
     [ExportModuleCommand("SfModule.ModuleCommand", DisplayOrder = 1.2f)]
     public class FormCorrSfSperModuleCommand : ModuleCommand
     {

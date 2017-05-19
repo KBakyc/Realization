@@ -11,6 +11,9 @@ using DataObjects.Helpers;
 
 namespace SfModule.Commands
 {
+    /// <summary>
+    /// Команда модуля для запуска режима формирования корректировочных счетов на продукцию.
+    /// </summary>
     [ExportModuleCommand("SfModule.ModuleCommand", DisplayOrder=1.1f)]
     public class FormCorrSfModuleCommand : ModuleCommand
     {

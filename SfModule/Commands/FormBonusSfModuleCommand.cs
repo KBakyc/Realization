@@ -11,6 +11,9 @@ using DataObjects.Helpers;
 
 namespace SfModule.Commands
 {
+    /// <summary>
+    /// Команда модуля для запуска режима формирования актов на предоставление бонуса/скидки.
+    /// </summary>
     [ExportModuleCommand("SfModule.ModuleCommand", DisplayOrder = 1.3f)]
     public class FormBonusSfModuleCommand : ModuleCommand
     {

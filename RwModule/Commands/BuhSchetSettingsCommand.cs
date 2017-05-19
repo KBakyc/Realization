@@ -10,9 +10,8 @@ using CommonModule.Composition;
 namespace RwModule.Commands
 {
     /// <summary>
-    /// Комманда принятия предоплат из банка
+    /// Комманда для настройки бухгалтерских счетов
     /// </summary>
-
     [ExportModuleCommand("RwModule.ModuleCommand", DisplayOrder = 99f)]
     public class BuhSchetSettingsCommand : ModuleCommand
     {

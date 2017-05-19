@@ -20,6 +20,9 @@ using DotNetHelper;
 
 namespace ServiceModule.Commands
 {    
+    /// <summary>
+    /// Тестовая команда модуля
+    /// </summary>
     //[ExportModuleCommand("ServiceModule.ModuleCommand", DisplayOrder = 99f)]
     public class DumbModuleCommand : ModuleCommand
     {

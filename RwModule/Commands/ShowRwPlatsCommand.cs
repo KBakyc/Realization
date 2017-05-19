@@ -20,6 +20,9 @@ using RwModule.Helpers;
 
 namespace RwModule.Commands
 {
+    /// <summary>
+    /// Команда для запуска режима просмотра архива принятых их банка платежей за ЖД услуги.
+    /// </summary>
     [ExportModuleCommand("RwModule.ModuleCommand", DisplayOrder = 20f)]
     public class ShowRwPlatsCommand : ModuleCommand
     {

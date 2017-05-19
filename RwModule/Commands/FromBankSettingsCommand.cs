@@ -10,9 +10,8 @@ using CommonModule.Composition;
 namespace RwModule.Commands
 {
     /// <summary>
-    /// Комманда принятия предоплат из банка
+    /// Комманда для настройки режима приёмки банковских платежей.
     /// </summary>
-
     [ExportModuleCommand("RwModule.ModuleCommand", DisplayOrder = 98f)]
     public class FromBankSettingsCommand : ModuleCommand
     {

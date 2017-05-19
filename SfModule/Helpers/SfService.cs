@@ -12,6 +12,9 @@ using CommonModule.DataViewModels;
 
 namespace SfModule.Helpers
 {
+    /// <summary>
+    /// Класс сервисных- и бизнес- операций модуля.
+    /// </summary>
     public class SfService : BaseModuleService
     {
         public SfService(ISfModule _parent)

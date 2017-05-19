@@ -10,7 +10,9 @@ using DataObjects.Helpers;
 
 namespace SfModule.Commands
 {
-    //[Export("SfModule.ModuleCommand", typeof(ModuleCommand))]
+    /// <summary>
+    /// Команда модуля для запуска режима формирования счетов-фактур.
+    /// </summary>
     [ExportModuleCommand("SfModule.ModuleCommand", DisplayOrder=1f)]
     public class FormSfsModuleCommand : ModuleCommand
     {

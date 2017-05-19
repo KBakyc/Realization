@@ -11,7 +11,9 @@ using CommonModule.DataViewModels;
 
 namespace SfModule.Commands
 {
-    //[Export("SfModule.ModuleCommand", typeof(ModuleCommand))]
+    /// <summary>
+    /// Команда модуля для запуска режима просмотра штрафных санкций.
+    /// </summary>
     [ExportModuleCommand("SfModule.ModuleCommand", DisplayOrder = 4f)]
     public class ShowPenaltyModuleCommand : ModuleCommand
     {

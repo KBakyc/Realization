@@ -11,6 +11,9 @@ using DataObjects;
 
 namespace RwModule.Helpers
 {
+    /// <summary>
+    /// Вспомогательный класс, содержащий операции бизнес-логики, связанной с обработкой ЖД услуг.
+    /// </summary>
     public class BusinessHelper
     {
         private WaitDlgViewModel wd;

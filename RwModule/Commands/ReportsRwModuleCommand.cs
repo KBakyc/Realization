@@ -4,7 +4,9 @@ using CommonModule.ViewModels;
 
 namespace RwModule.Commands
 {
-    //[Export("SfModule.ModuleCommand", typeof(ModuleCommand))]
+    /// <summary>
+    /// Команда для выбора отчёта.
+    /// </summary>
     [ExportModuleCommand("RwModule.ModuleCommand", DisplayOrder = 90f)]
     public class ReportsRwModuleCommand : BaseReportModuleCommand
     {

@@ -16,6 +16,9 @@ using DataObjects;
 
 namespace ServiceModule.Commands
 {
+    /// <summary>
+    /// Тестовая команда модуля
+    /// </summary>
     //[ExportModuleCommand("ServiceModule.ModuleCommand", DisplayOrder = 99f)]
     public class DumbModuleCommand2 : ModuleCommand
     {

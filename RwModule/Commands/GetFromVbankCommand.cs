@@ -12,9 +12,8 @@ using DAL;
 namespace RwModule.Commands
 {
     /// <summary>
-    /// Комманда принятия предоплат из банка
-    /// </summary>
-   
+    /// Комманда принятия платежей из банка.
+    /// </summary>   
     [ExportModuleCommand("RwModule.ModuleCommand", DisplayOrder = 10f)]
     public class GetFromVbankCommand : ModuleCommand
     {

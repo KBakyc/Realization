@@ -13,7 +13,9 @@ using DataObjects.SeachDatas;
 
 namespace SfModule.Commands
 {
-    //[Export("SfModule.ModuleCommand", typeof(ModuleCommand))]
+    /// <summary>
+    /// Команда модуля для запуска режима просмотра архива сформированных счетов-фактур.
+    /// </summary>
     [ExportModuleCommand("SfModule.ModuleCommand", DisplayOrder=3f)]
     public class ShowSfsModuleCommand : ModuleCommand
     {

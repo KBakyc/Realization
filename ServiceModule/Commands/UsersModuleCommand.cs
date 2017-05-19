@@ -18,6 +18,9 @@ using System.ServiceModel;
 
 namespace ServiceModule.Commands
 {
+    /// <summary>
+    /// Команда модуля для управления настройками пользователей АРМа.
+    /// </summary>
     [ExportModuleCommand("ServiceModule.ModuleCommand", DisplayOrder = 1f)]
     public class UsersModuleCommand : ModuleCommand
     {

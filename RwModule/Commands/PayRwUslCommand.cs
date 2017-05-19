@@ -11,9 +11,8 @@ using CommonModule.Composition;
 namespace RwModule.Commands
 {
     /// <summary>
-    /// Комманда принятия предоплат из банка
+    /// Комманда для запуска режима погашения банковских платежей на ЖД услуги.
     /// </summary>
-
     [ExportModuleCommand("RwModule.ModuleCommand", DisplayOrder = 10f)]
     public class PayRwUslCommand : ModuleCommand
     {
