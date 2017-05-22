@@ -37,6 +37,16 @@ namespace RwModule.ViewModels
             get { return modelRef.Numplat; } 
         }
 
+        public int? Idagree
+        { 
+            get { return modelRef.Idagree; } 
+        }
+
+        public int? Idpostes
+        { 
+            get { return modelRef.Idpostes; } 
+        }
+
         public DateTime Datplat 
         { 
             get { return modelRef.Datplat; } 
@@ -72,7 +82,17 @@ namespace RwModule.ViewModels
         {
             get { return modelRef.Datzakr; }
         }
-        
+
+        public string Credit
+        {
+            get { return modelRef.Credit; }
+        }
+
+        public string Debet
+        {
+            get { return modelRef.Debet; }
+        }
+
         public string Whatfor
         {
             get { return modelRef.Whatfor; }

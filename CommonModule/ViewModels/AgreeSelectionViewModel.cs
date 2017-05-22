@@ -22,6 +22,12 @@ namespace CommonModule.ViewModels
             repository = _rep;
         }
 
+        public AgreeSelectionViewModel(IDbService _rep, params int[] _idagrees)
+            :this(_rep)
+        {
+            LoadAvailableAgreements(_idagrees);
+        }
+
         public AgreeSelectionViewModel(IDbService _rep, int _kpok)
             :this(_rep)
         {
@@ -89,6 +95,31 @@ namespace CommonModule.ViewModels
                     LoadAvailableAgreements();
                 return availableAgreements;
             }
+        }
+
+        private void LoadAvailableAgreements(int[] _idagrees)
+        {
+            availableAgreements = new List<AgreementViewModel>();
+            if (_idagrees != null && _idagrees.Length > 0)
+            {
+                var idagrees = _idagrees.Distinct();
+                foreach (var id in idagrees)
+                {
+                    var am = repository.GetAgreementById(id);
+                    if (am != null)
+                        availableAgreements.Add(new AgreementViewModel(am, repository));
+                }
+            }
+
+            var withoutagre = new AgreementModel
+            {
+                IdCounteragent = kpok,
+                NumberOfDocument = "Нет договора",
+                Contents = "Нет договора"
+            };
+
+            var withoutagreeVM = new AgreementViewModel(withoutagre, repository);
+            availableAgreements.Insert(0, withoutagreeVM);
         }
 
         private void LoadAvailableAgreements()

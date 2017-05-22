@@ -73,6 +73,36 @@
                                         IsEnabled="{Binding IsDatZakrEdEnabled}"/>
                         </StackPanel>
                 </GroupBox>
+                <GroupBox Header="Бухгалтерские счета" Padding="0,2">
+                    <StackPanel Orientation="Horizontal" TextElement.Foreground="RoyalBlue">
+                        <TextBlock Text="Дебет" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding Debet, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,0,0" Width="100" IsEnabled="{Binding IsDebetEdEnabled}"
+                                 VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
+                        <TextBlock Text="Кредит" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                        <TextBox Text="{Binding Credit, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,0,0" Width="120" IsEnabled="{Binding IsCreditEdEnabled}"
+                                 VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Договор с ЖД" Padding="0,2">
+                    <GroupBox.Resources>
+                        <DataTemplate x:Key="DogItemTemplate">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding NaiOsn}" Margin="2"/>
+                                <TextBlock Text="{Binding DatOsn, StringFormat=' от {0:dd.MM.yyyy}'}" Margin="2"/>
+                                <TextBlock Text="{Binding DopOsn}" Margin="2"/>
+                                <TextBlock Text="{Binding Srok, StringFormat=' срок оплаты {0}'}" Margin="2"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </GroupBox.Resources>
+                    <cctrl:ComboBoxEx 
+                        SelectedItem="{Binding SelDogovor}"
+                        ItemsSource="{Binding AllDogInfos}" 
+                        Focusable="False" IsEditable="False"
+                        Padding="2"
+                        ItemContainerStyle="{DynamicResource MyComboBoxItemStyle}"
+                        ItemTemplate="{StaticResource DogItemTemplate}" SelectionBoxTemplate="{StaticResource DogItemTemplate}">
+                    </cctrl:ComboBoxEx>
+                </GroupBox>
                 <GroupBox Header="Назначение платежа" Padding="0,2">
                     <TextBox DockPanel.Dock="Bottom" Text="{Binding Whatfor, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsWhatforEdEnabled}"
                              TextWrapping="Wrap" MinHeight="50" AcceptsReturn="True" Margin="0,0,0,0"/>

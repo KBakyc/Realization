@@ -19,16 +19,23 @@ namespace RwModule.ViewModels
         private IDbService repository;
         private RwPlatViewModel rwpViewModel;
 
-        public EditRwPlatDlgViewModel(RwPlatViewModel _rvm)
+        public EditRwPlatDlgViewModel(IDbService _repository, RwPlatViewModel _rvm)
         {
             rwpViewModel = _rvm;
-            repository = CommonModule.CommonSettings.Repository;
+            repository = _repository;
             LoadData();
         }
 
         private void LoadData()
         {
+            rwUslTypes = Enumerations.GetAllValuesAndDescriptions<RwUslType>();
+            directions = Enumerations.GetAllValuesAndDescriptions<RwPlatDirection>();
+            LoadDogInfos();
+
             if (rwpViewModel == null) return;
+            if (allDogInfos != null && allDogInfos.Length > 0 && rwpViewModel.Idagree != null)
+                selDogovor = allDogInfos.FirstOrDefault(d => d.IdAgree == rwpViewModel.Idagree);
+            
             numPlat = rwpViewModel.Numplat;
             datPlat = rwpViewModel.Datplat;
             datBank = rwpViewModel.Datbank;
@@ -38,12 +45,65 @@ namespace RwModule.ViewModels
             whatfor = rwpViewModel.Whatfor;
             direction = rwpViewModel.Direction;
             notes = rwpViewModel.Notes;
+            credit = rwpViewModel.Credit;
+            debet = rwpViewModel.Debet;
             idusltype = rwpViewModel.Idusltype;
-            
-            rwUslTypes = Enumerations.GetAllValuesAndDescriptions<RwUslType>();
-            directions = Enumerations.GetAllValuesAndDescriptions<RwPlatDirection>();
+            Idpostes = rwpViewModel.Idpostes;
+            Idrwplat = rwpViewModel.Idrwplat;
         }
-        
+
+        private void LoadDogInfos()
+        {
+            allDogInfos = repository.GetDogInfos(Properties.Settings.Default.DogIdARM);
+        }
+
+        public RwPlat GetRwPlat()
+        {
+            var res = new RwPlat();
+            res.Credit = credit;
+            res.Debet = debet;
+            res.Datbank = datBank;
+            res.Datplat = datPlat;
+            res.Datzakr = DatZakr;
+            res.Direction = direction;
+            res.Idagree = selDogovor.IdAgree;
+            res.Idpostes = Idpostes;
+            res.Idrwplat = Idrwplat;
+            res.Idusltype = idusltype;
+            res.Notes = notes;
+            res.Numplat = numPlat;
+            res.Ostatok = ostatok;
+            res.Sumplat = sumPlat;
+            res.Whatfor = whatfor;
+
+            return res;
+        }
+
+        private bool isDogEdEnabled = true;
+        public bool IsDogEdEnabled
+        {
+            get { return isDogEdEnabled; }
+            set { SetAndNotifyProperty("IsDogEdEnabled", ref isDogEdEnabled, value); }
+        }
+
+        private DogInfo selDogovor;
+        public DogInfo SelDogovor
+        {
+            get { return selDogovor; }
+            set
+            {
+                selDogovor = value;
+                NotifyPropertyChanged("SelDogovor");
+            }
+        }
+
+        private DogInfo[] allDogInfos;
+        public DogInfo[] AllDogInfos
+        {
+            get { return allDogInfos; }
+            set { allDogInfos = value; }
+        }
+
         Dictionary<RwPlatDirection, string> directions;
         public Dictionary<RwPlatDirection, string> Directions
         {
@@ -59,7 +119,8 @@ namespace RwModule.ViewModels
         public void SwitchAllTo(bool _state)
         {
             isNumPlatEdEnabled = isDatPlatEdEnabled = isDatBankEdEnabled = isSumPlatEdEnabled = isOstatokEdEnabled = isDatZakrEdEnabled
-                = isDirectionEdEnabled = isWhatforEdEnabled = isNotesEdEnabled = isIdusltypeEdEnabled = _state;
+                = isDirectionEdEnabled = isWhatforEdEnabled = isNotesEdEnabled = isIdusltypeEdEnabled = isDogEdEnabled 
+                = isCreditEdEnabled = isDebetEdEnabled = _state;
         }
 
         private bool isNumPlatEdEnabled = true;
@@ -68,6 +129,9 @@ namespace RwModule.ViewModels
             get { return isNumPlatEdEnabled; }
             set { SetAndNotifyProperty("IsNumPlatEdEnabled", ref isNumPlatEdEnabled, value); }
         }
+
+        private int Idrwplat;
+        private int? Idpostes;
 
         private int numPlat;
         public int NumPlat
@@ -153,6 +217,34 @@ namespace RwModule.ViewModels
             set { SetAndNotifyProperty("IsWhatforEdEnabled", ref isWhatforEdEnabled, value); }
         }
 
+        private bool isCreditEdEnabled = true;
+        public bool IsCreditEdEnabled
+        {
+            get { return isCreditEdEnabled; }
+            set { SetAndNotifyProperty("IsCreditEdEnabled", ref isCreditEdEnabled, value); }
+        }
+
+        private string credit;
+        public string Credit
+        {
+            get { return credit; }
+            set { SetAndNotifyProperty("Credit", ref credit, value); }
+        }
+
+        private bool isDebetEdEnabled = true;
+        public bool IsDebetEdEnabled
+        {
+            get { return isDebetEdEnabled; }
+            set { SetAndNotifyProperty("IsDebetEdEnabled", ref isDebetEdEnabled, value); }
+        }
+
+        private string debet;
+        public string Debet
+        {
+            get { return debet; }
+            set { SetAndNotifyProperty("Debet", ref debet, value); }
+        }
+
         private string whatfor;
         public string Whatfor
         {
@@ -213,11 +305,11 @@ namespace RwModule.ViewModels
             bool tres;
             errors.Clear();
 
-            tres = true; // check
+            tres = selDogovor != null; // check
             if (!tres)
             {
                 res = false;
-                errors.Add("текст ошибки");
+                errors.Add("Не выбран договор с ЖД");
             }
 
             NotifyPropertyChanged("IsHasErrors");

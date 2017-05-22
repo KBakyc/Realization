@@ -217,7 +217,7 @@ namespace RwModule.ViewModels
                         RefreshSelectedItemByModel(updSel);
                         if (selectedRwPlat != null)
                         {
-                            var nDlg = new EditRwPlatDlgViewModel(selectedRwPlat.Value)
+                            var nDlg = new EditRwPlatDlgViewModel(Parent.Repository, selectedRwPlat.Value)
                             {
                                 Title = "Изменение данных платежа",
                                 OnSubmit = EditRwPlatSubmit
