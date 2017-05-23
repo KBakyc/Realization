@@ -279,7 +279,7 @@
         <elementListCompartment Id="26140036-39a1-4865-8de4-c487a08c69de" absoluteBounds="7.015, 24.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.03125 : 15.9824039713542); (5.03125 : 24.90625); (7 : 24.90625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.03125 : 15.9824039713542); (5.03125 : 24.90625); (7 : 24.90625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/RealizationDCDataContext/ARM_User/ARM_User_UserReport" />
       <nodes>
         <classShapeMoniker Id="0fdf449f-8203-4c54-962f-679f9e1269ba" />
@@ -329,14 +329,14 @@
         <elementListCompartment Id="99d3dcf0-53f2-4611-98e8-5ee5decaf85c" absoluteBounds="2.64, 25.46, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.75 : 5.15541829427083); (5.75 : 5.4375); (4.6875 : 5.4375); (4.6875 : 26.0777498372396); (4.625 : 26.0777498372396)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.75 : 5.15541829427083); (5.75 : 5.4375); (4.6875 : 5.4375); (4.6875 : 26.0777498372396); (4.625 : 26.0777498372396)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/RealizationDCDataContext/SfHeader/SfHeader_NdsInvoiceData" />
       <nodes>
         <classShapeMoniker Id="467feafb-ff00-4df4-bedd-f061c53055ca" />
         <classShapeMoniker Id="525a4021-0f0d-495c-9505-1fa81e2c6507" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.218748 : 5.15541829427083); (5.218748 : 5.4375); (4.71875 : 5.4375); (4.71875 : 25.5076229186198); (4.625 : 25.5076229186198)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.218748 : 5.15541829427083); (5.218748 : 5.4375); (4.71875 : 5.4375); (4.71875 : 25.5076229186198); (4.625 : 25.5076229186198)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/RealizationDCDataContext/SfHeader/SfHeader_NdsInvoiceData1" />
       <nodes>
         <classShapeMoniker Id="467feafb-ff00-4df4-bedd-f061c53055ca" />

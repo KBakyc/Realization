@@ -30,13 +30,19 @@ namespace RwModule.ViewModels
         {
             rwUslTypes = Enumerations.GetAllValuesAndDescriptions<RwUslType>();
             directions = Enumerations.GetAllValuesAndDescriptions<RwPlatDirection>();
+
             LoadDogInfos();
+            if (allDogInfos != null && allDogInfos.Length > 0)
+            {
+                selDogovor = allDogInfos[0];
+                if (rwpViewModel != null && rwpViewModel.Idagree != null)
+                    selDogovor = allDogInfos.FirstOrDefault(d => d.IdAgree == rwpViewModel.Idagree);
+            }
+
             TypeDocs = repository.GetTypePlatDocs();
 
             if (rwpViewModel == null) return;
-            if (allDogInfos != null && allDogInfos.Length > 0 && rwpViewModel.Idagree != null)
-                selDogovor = allDogInfos.FirstOrDefault(d => d.IdAgree == rwpViewModel.Idagree);
-            
+                        
             numPlat = rwpViewModel.Numplat;
             datPlat = rwpViewModel.Datplat;
             datBank = rwpViewModel.Datbank;
@@ -56,7 +62,7 @@ namespace RwModule.ViewModels
 
         private void LoadDogInfos()
         {
-            allDogInfos = repository.GetDogInfos(Properties.Settings.Default.DogIdARM);
+            allDogInfos = repository.GetDogInfos(Properties.Settings.Default.DogIdARM).OrderByDescending(d => d.DatDop ?? d.DatOsn).ToArray();
         }
 
         public RwPlat GetRwPlat()

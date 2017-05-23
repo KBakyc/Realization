@@ -1571,20 +1571,6 @@
     <Parameter Name="T_Respite" Parameter="t_Respite" Type="System.Int16" DbType="SmallInt" />
     <Return Type="System.DateTime" />
   </Function>
-  <Function Name="dbo.uf_GetDogInfos" Method="uf_GetDogInfos" IsComposable="true">
-    <Parameter Name="idARM" Type="System.Int32" DbType="Int" />
-    <ElementType Name="uf_GetDogInfosResult">
-      <Column Name="OsnTxt" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
-      <Column Name="NaiOsn" Type="System.String" DbType="VarChar(35)" CanBeNull="true" />
-      <Column Name="DatOsn" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
-      <Column Name="DopOsn" Type="System.String" DbType="VarChar(206)" CanBeNull="true" />
-      <Column Name="idporsh" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
-      <Column Name="idagree" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
-      <Column Name="iddog" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
-      <Column Name="srok" Type="System.Decimal" DbType="Decimal(4,0)" CanBeNull="true" />
-      <Column Name="typrespite" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.uf_GetDogInfo" Method="uf_GetDogInfo" IsComposable="true">
     <Parameter Name="iddog" Type="System.Int32" DbType="Int" />
     <ElementType Name="uf_GetDogInfoResult">
@@ -2575,5 +2561,21 @@
     <Parameter Name="sfTo" Type="System.DateTime" DbType="Date" />
     <Parameter Name="jname" Type="System.String" DbType="VarChar(100)" />
     <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.uf_GetDogInfos" Method="uf_GetDogInfos" IsComposable="true">
+    <Parameter Name="idARM" Type="System.Int32" DbType="Int" />
+    <ElementType Name="uf_GetDogInfosResult">
+      <Column Name="OsnTxt" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="NaiOsn" Type="System.String" DbType="VarChar(35)" CanBeNull="true" />
+      <Column Name="DatOsn" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="DatDop" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="DopOsn" Type="System.String" DbType="VarChar(206)" CanBeNull="true" />
+      <Column Name="idporsh" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="idagree" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="iddog" Type="System.Decimal" DbType="Decimal(6,0) NOT NULL" CanBeNull="false" />
+      <Column Name="srok" Type="System.Decimal" DbType="Decimal(4,0)" CanBeNull="true" />
+      <Column Name="typrespite" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+      <Column Name="nonds" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+    </ElementType>
   </Function>
 </Database>

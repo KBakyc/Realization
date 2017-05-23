@@ -1674,6 +1674,7 @@ namespace DAL
                         IdDog = (int)di.iddog, 
                         NaiOsn = di.NaiOsn, 
                         DatOsn = di.DatOsn,
+                        DatDop = di.DatDop,
                         DopOsn = di.DopOsn, 
                         IdAgree = (int)di.idagree, 
                         Srok = (int)(di.srok ?? 0),

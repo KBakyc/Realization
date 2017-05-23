@@ -1053,12 +1053,6 @@ namespace DAL
 			return ((System.Nullable<System.DateTime>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), fstDat, nDays, t_Respite).ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uf_GetDogInfos", IsComposable=true)]
-		public IQueryable<uf_GetDogInfosResult> uf_GetDogInfos([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idARM)
-		{
-			return this.CreateMethodCallQuery<uf_GetDogInfosResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idARM);
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uf_GetDogInfo", IsComposable=true)]
 		public IQueryable<uf_GetDogInfoResult> uf_GetDogInfo([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> iddog)
 		{
@@ -1626,6 +1620,12 @@ namespace DAL
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), vid, dFrom, dto, podvid, sftypes, isSfInterval, sfFrom, sfTo, jname);
 			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.uf_GetDogInfos", IsComposable=true)]
+		public IQueryable<uf_GetDogInfosResult> uf_GetDogInfos([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> idARM)
+		{
+			return this.CreateMethodCallQuery<uf_GetDogInfosResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), idARM);
 		}
 	}
 	
@@ -23845,176 +23845,6 @@ namespace DAL
 		}
 	}
 	
-	public partial class uf_GetDogInfosResult
-	{
-		
-		private string _OsnTxt;
-		
-		private string _NaiOsn;
-		
-		private System.DateTime _DatOsn;
-		
-		private string _DopOsn;
-		
-		private decimal _idporsh;
-		
-		private decimal _idagree;
-		
-		private decimal _iddog;
-		
-		private System.Nullable<decimal> _srok;
-		
-		private System.Nullable<decimal> _typrespite;
-		
-		public uf_GetDogInfosResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OsnTxt", DbType="VarChar(15)")]
-		public string OsnTxt
-		{
-			get
-			{
-				return this._OsnTxt;
-			}
-			set
-			{
-				if ((this._OsnTxt != value))
-				{
-					this._OsnTxt = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NaiOsn", DbType="VarChar(35)")]
-		public string NaiOsn
-		{
-			get
-			{
-				return this._NaiOsn;
-			}
-			set
-			{
-				if ((this._NaiOsn != value))
-				{
-					this._NaiOsn = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DatOsn", DbType="Date NOT NULL")]
-		public System.DateTime DatOsn
-		{
-			get
-			{
-				return this._DatOsn;
-			}
-			set
-			{
-				if ((this._DatOsn != value))
-				{
-					this._DatOsn = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DopOsn", DbType="VarChar(206)")]
-		public string DopOsn
-		{
-			get
-			{
-				return this._DopOsn;
-			}
-			set
-			{
-				if ((this._DopOsn != value))
-				{
-					this._DopOsn = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idporsh", DbType="Decimal(2,0) NOT NULL")]
-		public decimal idporsh
-		{
-			get
-			{
-				return this._idporsh;
-			}
-			set
-			{
-				if ((this._idporsh != value))
-				{
-					this._idporsh = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idagree", DbType="Decimal(6,0) NOT NULL")]
-		public decimal idagree
-		{
-			get
-			{
-				return this._idagree;
-			}
-			set
-			{
-				if ((this._idagree != value))
-				{
-					this._idagree = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iddog", DbType="Decimal(6,0) NOT NULL")]
-		public decimal iddog
-		{
-			get
-			{
-				return this._iddog;
-			}
-			set
-			{
-				if ((this._iddog != value))
-				{
-					this._iddog = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_srok", DbType="Decimal(4,0)")]
-		public System.Nullable<decimal> srok
-		{
-			get
-			{
-				return this._srok;
-			}
-			set
-			{
-				if ((this._srok != value))
-				{
-					this._srok = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_typrespite", DbType="Decimal(1,0)")]
-		public System.Nullable<decimal> typrespite
-		{
-			get
-			{
-				return this._typrespite;
-			}
-			set
-			{
-				if ((this._typrespite != value))
-				{
-					this._typrespite = value;
-				}
-			}
-		}
-	}
-	
 	public partial class uf_GetDogInfoResult
 	{
 		
@@ -32366,6 +32196,212 @@ namespace DAL
 				if ((this._isvozm != value))
 				{
 					this._isvozm = value;
+				}
+			}
+		}
+	}
+	
+	public partial class uf_GetDogInfosResult
+	{
+		
+		private string _OsnTxt;
+		
+		private string _NaiOsn;
+		
+		private System.DateTime _DatOsn;
+		
+		private System.Nullable<System.DateTime> _DatDop;
+		
+		private string _DopOsn;
+		
+		private decimal _idporsh;
+		
+		private decimal _idagree;
+		
+		private decimal _iddog;
+		
+		private System.Nullable<decimal> _srok;
+		
+		private System.Nullable<decimal> _typrespite;
+		
+		private System.Nullable<decimal> _nonds;
+		
+		public uf_GetDogInfosResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OsnTxt", DbType="VarChar(15)")]
+		public string OsnTxt
+		{
+			get
+			{
+				return this._OsnTxt;
+			}
+			set
+			{
+				if ((this._OsnTxt != value))
+				{
+					this._OsnTxt = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NaiOsn", DbType="VarChar(35)")]
+		public string NaiOsn
+		{
+			get
+			{
+				return this._NaiOsn;
+			}
+			set
+			{
+				if ((this._NaiOsn != value))
+				{
+					this._NaiOsn = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DatOsn", DbType="Date NOT NULL")]
+		public System.DateTime DatOsn
+		{
+			get
+			{
+				return this._DatOsn;
+			}
+			set
+			{
+				if ((this._DatOsn != value))
+				{
+					this._DatOsn = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DatDop", DbType="Date")]
+		public System.Nullable<System.DateTime> DatDop
+		{
+			get
+			{
+				return this._DatDop;
+			}
+			set
+			{
+				if ((this._DatDop != value))
+				{
+					this._DatDop = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DopOsn", DbType="VarChar(206)")]
+		public string DopOsn
+		{
+			get
+			{
+				return this._DopOsn;
+			}
+			set
+			{
+				if ((this._DopOsn != value))
+				{
+					this._DopOsn = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idporsh", DbType="Decimal(2,0) NOT NULL")]
+		public decimal idporsh
+		{
+			get
+			{
+				return this._idporsh;
+			}
+			set
+			{
+				if ((this._idporsh != value))
+				{
+					this._idporsh = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idagree", DbType="Decimal(6,0) NOT NULL")]
+		public decimal idagree
+		{
+			get
+			{
+				return this._idagree;
+			}
+			set
+			{
+				if ((this._idagree != value))
+				{
+					this._idagree = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_iddog", DbType="Decimal(6,0) NOT NULL")]
+		public decimal iddog
+		{
+			get
+			{
+				return this._iddog;
+			}
+			set
+			{
+				if ((this._iddog != value))
+				{
+					this._iddog = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_srok", DbType="Decimal(4,0)")]
+		public System.Nullable<decimal> srok
+		{
+			get
+			{
+				return this._srok;
+			}
+			set
+			{
+				if ((this._srok != value))
+				{
+					this._srok = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_typrespite", DbType="Decimal(1,0)")]
+		public System.Nullable<decimal> typrespite
+		{
+			get
+			{
+				return this._typrespite;
+			}
+			set
+			{
+				if ((this._typrespite != value))
+				{
+					this._typrespite = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nonds", DbType="Decimal(1,0)")]
+		public System.Nullable<decimal> nonds
+		{
+			get
+			{
+				return this._nonds;
+			}
+			set
+			{
+				if ((this._nonds != value))
+				{
+					this._nonds = value;
 				}
 			}
 		}
