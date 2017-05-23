@@ -41,7 +41,10 @@ namespace RwModule.Commands
                 {
                     Title = "Ввод нового платежа",
                     DatPlat = today,
-                    DatBank = today, 
+                    IsDatBankEdEnabled = false,
+                    IsDatZakrEdEnabled = false,
+                    IsOstatokEdEnabled = false,
+                    Direction = RwPlatDirection.Out,
                     OnSubmit = DoSubmitAddRwPlat
                 });
         }
