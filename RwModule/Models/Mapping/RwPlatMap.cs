@@ -27,6 +27,7 @@ namespace RwModule.Models.Mapping
             this.Property(t => t.Idusltype).HasColumnName("idusltype").HasColumnType("tinyint");
             this.Property(t => t.Debet).HasColumnName("debet").IsFixedLength().HasMaxLength(8);
             this.Property(t => t.Credit).HasColumnName("credit").IsFixedLength().HasMaxLength(8);
+            this.Property(t => t.Idtypedoc).HasColumnName("idtypedoc").HasColumnType("tinyint");;
         }
     }
 }

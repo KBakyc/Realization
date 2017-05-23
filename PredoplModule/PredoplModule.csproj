@@ -300,9 +300,7 @@
   <ItemGroup>
     <Resource Include="Resources\newCancel.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\credit_card.png" />
   </ItemGroup>

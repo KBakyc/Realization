@@ -1150,13 +1150,12 @@ namespace ServiceModule.ViewModels
         private void RefreshUserFilter()
         {
             var view = CollectionViewSource.GetDefaultView(users);
-            if (String.IsNullOrWhiteSpace(userFilterString) && filterOnlineMode == OnlineMode.All && filterEnabledMode == EnabledMode.All)
-                view.Filter = null;
-            else
+            view.Filter = null;
+            HashSet<int> userids = null;
+            HashSet<string> names = null;
+            string stringToParse = null;
+            if (!String.IsNullOrWhiteSpace(userFilterString) || filterOnlineMode != OnlineMode.All || filterEnabledMode != EnabledMode.All)                
             {
-                HashSet<int> userids = null;
-                HashSet<string> names = null;
-                string stringToParse = null;
                 if (!String.IsNullOrWhiteSpace(userFilterString))
                 {
                     stringToParse = userFilterString.Trim().ToUpperInvariant();

@@ -54,7 +54,8 @@ namespace ServiceModule.ViewModels
             if (_eltype == CiElements.Execute)
             {
                 LoadSaved();
-                ParseSaved(_eltype, savedData.Where(s => s.Name == _eltype.ToString()).ToArray());
+                if (savedData != null)
+                    ParseSaved(_eltype, savedData.Where(s => s.Name == _eltype.ToString()).ToArray());
             }
             parseSavedElementCommand = new DelegateCommand<XElement>(ExecParseSavedElement);
         }

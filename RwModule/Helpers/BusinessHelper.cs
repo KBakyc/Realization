@@ -25,6 +25,21 @@ namespace RwModule.Helpers
             wd = _wd;
         }
 
+        public RwPlat AddRwPlat(RwPlat _model)
+        {
+            RwPlat res = null;
+            if (_model != null)
+            {
+                using (var db = new RealContext())
+                {
+                    db.Entry(_model).State = System.Data.Entity.EntityState.Added;
+                    if (db.SaveChanges() == 1)
+                        res = _model;
+                }
+            }
+            return res;
+        }
+
         public bool SubmitSinksAction(RwPayActionViewModel[] _payactions, DateTime _datzakr)
         {
             if (_payactions == null || _payactions.Length == 0) return false;

@@ -22,5 +22,6 @@ namespace RwModule.Models
         public RwUslType Idusltype { get; set; }
         public string Debet { get; set; }
         public string Credit { get; set; }
+        public byte Idtypedoc { get; set; }
     }
 }

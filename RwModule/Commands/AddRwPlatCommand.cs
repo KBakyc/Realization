@@ -6,6 +6,8 @@ using RwModule.ViewModels;
 using DataObjects;
 using System.Linq;
 using RwModule.Helpers;
+using CommonModule.Composition;
+using RwModule.Models;
 
 namespace RwModule.Commands
 {
@@ -13,7 +15,7 @@ namespace RwModule.Commands
     /// Комманда модуля для запуска механизма ручного добавления платежа за услуги БелЖД
     /// </summary>
 
-    [Export("RwModule.ModuleCommand", typeof(ModuleCommand))]
+    [ExportModuleCommand("RwModule.ModuleCommand", DisplayOrder = 19f)]
     public class AddRwPlatCommand : ModuleCommand
     {
         public AddRwPlatCommand()
@@ -32,9 +34,14 @@ namespace RwModule.Commands
 
             if (Parent == null) return;
 
+            var today = DateTime.Today;
+
             Parent.OpenDialog(
                 new EditRwPlatDlgViewModel(Parent.Repository, null)
                 {
+                    Title = "Ввод нового платежа",
+                    DatPlat = today,
+                    DatBank = today, 
                     OnSubmit = DoSubmitAddRwPlat
                 });
         }
@@ -42,18 +49,41 @@ namespace RwModule.Commands
         private void DoSubmitAddRwPlat(object _dlg)
         {
             Parent.CloseDialog(_dlg);
-            //var dlg = _dlg as EditPredoplDlgViewModel;
-            //if (dlg == null || dlg.NewModel == null) return;
-            //dlg.NewModel.DatPropl = dlg.NewModel.DatVvod;
+            var dlg = _dlg as EditRwPlatDlgViewModel;
+            if (dlg == null || !dlg.IsValid()) return;
 
-            //Action work = () =>
-            //{
-            //    var predoplsService = Parent.Services as PredoplService;
-            //    if (predoplsService != null)
-            //        predoplsService.DoAddPredopl(dlg.NewModel, PredoplAddKind.New);
-            //};
+            var newModel = dlg.GetRwPlat();
 
-            //Parent.Services.DoWaitAction(work, "Подождите", "Добавление предоплаты ... ");
-        }        
+            Action work = () =>
+            {
+                var rwHelper = new BusinessHelper(Parent.Repository, null);
+                RwPlat res = null;
+
+                try
+                {
+                    res = rwHelper.AddRwPlat(newModel);
+                }
+                catch (Exception e)
+                {
+                    Parent.Services.ShowMsg("Ошибка (" + e.GetType().ToString() + ")", e.Message, true);
+                    CommonModule.Helpers.WorkFlowHelper.OnCrash(e, null, true);
+                }
+
+                if (res != null)
+                {
+                    var newContent = new RwPlatsArcViewModel(Parent, Enumerable.Repeat(res, 1))
+                    {
+                        Title = "Новый платёж"
+                    };
+                    newContent.TryOpen();
+                }
+                else
+                    Parent.Services.ShowMsg("Ошибка", "Не удалось сохранить введённый платёж", true);
+            };
+
+            Parent.Services.DoWaitAction(work, "Подождите", "Добавление платежа ... ");
+        }    
+        
+        
     }
 }

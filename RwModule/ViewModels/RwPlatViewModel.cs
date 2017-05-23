@@ -32,6 +32,11 @@ namespace RwModule.ViewModels
             get { return modelRef.Idrwplat; } 
         }
 
+        public byte Idtypedoc
+        { 
+            get { return modelRef.Idtypedoc; } 
+        }
+
         public int Numplat 
         { 
             get { return modelRef.Numplat; } 

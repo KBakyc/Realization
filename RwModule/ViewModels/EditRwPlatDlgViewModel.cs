@@ -31,6 +31,7 @@ namespace RwModule.ViewModels
             rwUslTypes = Enumerations.GetAllValuesAndDescriptions<RwUslType>();
             directions = Enumerations.GetAllValuesAndDescriptions<RwPlatDirection>();
             LoadDogInfos();
+            TypeDocs = repository.GetTypePlatDocs();
 
             if (rwpViewModel == null) return;
             if (allDogInfos != null && allDogInfos.Length > 0 && rwpViewModel.Idagree != null)
@@ -48,8 +49,9 @@ namespace RwModule.ViewModels
             credit = rwpViewModel.Credit;
             debet = rwpViewModel.Debet;
             idusltype = rwpViewModel.Idusltype;
-            Idpostes = rwpViewModel.Idpostes;
-            Idrwplat = rwpViewModel.Idrwplat;
+            idpostes = rwpViewModel.Idpostes;
+            idrwplat = rwpViewModel.Idrwplat;
+            IdTypeDoc = rwpViewModel.Idtypedoc;
         }
 
         private void LoadDogInfos()
@@ -62,19 +64,20 @@ namespace RwModule.ViewModels
             var res = new RwPlat();
             res.Credit = credit;
             res.Debet = debet;
-            res.Datbank = datBank;
+            res.Datbank = datBank ?? datPlat;
             res.Datplat = datPlat;
             res.Datzakr = DatZakr;
             res.Direction = direction;
             res.Idagree = selDogovor.IdAgree;
-            res.Idpostes = Idpostes;
-            res.Idrwplat = Idrwplat;
+            res.Idpostes = idpostes;
+            res.Idrwplat = idrwplat;
             res.Idusltype = idusltype;
             res.Notes = notes;
             res.Numplat = numPlat;
             res.Ostatok = ostatok;
             res.Sumplat = sumPlat;
             res.Whatfor = whatfor;
+            res.Idtypedoc = idTypeDoc;
 
             return res;
         }
@@ -120,7 +123,7 @@ namespace RwModule.ViewModels
         {
             isNumPlatEdEnabled = isDatPlatEdEnabled = isDatBankEdEnabled = isSumPlatEdEnabled = isOstatokEdEnabled = isDatZakrEdEnabled
                 = isDirectionEdEnabled = isWhatforEdEnabled = isNotesEdEnabled = isIdusltypeEdEnabled = isDogEdEnabled 
-                = isCreditEdEnabled = isDebetEdEnabled = _state;
+                = isCreditEdEnabled = isDebetEdEnabled = isTypeDocEdEnabled = _state;
         }
 
         private bool isNumPlatEdEnabled = true;
@@ -130,8 +133,24 @@ namespace RwModule.ViewModels
             set { SetAndNotifyProperty("IsNumPlatEdEnabled", ref isNumPlatEdEnabled, value); }
         }
 
-        private int Idrwplat;
-        private int? Idpostes;
+        private int idrwplat;
+        private int? idpostes;
+
+        private bool isTypeDocEdEnabled = true;
+        public bool IsTypeDocEdEnabled
+        {
+            get { return isTypeDocEdEnabled; }
+            set { SetAndNotifyProperty("IsTypeDocEdEnabled", ref isTypeDocEdEnabled, value); }
+        }
+
+        public TypePlatDoc[] TypeDocs { get; set; }
+
+        private byte idTypeDoc;
+        public byte IdTypeDoc
+        {
+            get { return idTypeDoc; }
+            set { SetAndNotifyProperty("IdTypeDoc", ref idTypeDoc, value); }
+        }
 
         private int numPlat;
         public int NumPlat
@@ -161,8 +180,8 @@ namespace RwModule.ViewModels
             set { SetAndNotifyProperty("IsDatBankEdEnabled", ref isDatBankEdEnabled, value); }
         }
 
-        private DateTime datBank;
-        public DateTime DatBank
+        private DateTime? datBank;
+        public DateTime? DatBank
         {
             get { return datBank; }
             set { SetAndNotifyProperty("DatBank", ref datBank, value); }
@@ -179,7 +198,12 @@ namespace RwModule.ViewModels
         public decimal SumPlat
         {
             get { return sumPlat; }
-            set { SetAndNotifyProperty("SumPlat", ref sumPlat, value); }
+            set
+            {
+                var diffsum = value - sumPlat;
+                SetAndNotifyProperty("SumPlat", ref sumPlat, value);
+                SetAndNotifyProperty("Ostatok", ref ostatok, ostatok + diffsum);
+            }
         }
 
         private bool isOstatokEdEnabled = true;
@@ -305,13 +329,33 @@ namespace RwModule.ViewModels
             bool tres;
             errors.Clear();
 
-            tres = selDogovor != null; // check
+            tres = selDogovor != null;
             if (!tres)
             {
                 res = false;
                 errors.Add("Не выбран договор с ЖД");
             }
 
+            tres = numPlat > 0;
+            if (!tres)
+            {
+                res = false;
+                errors.Add("Номер документа должен быть больше ноля");
+            }
+
+            tres = sumPlat != 0;
+            if (!tres)
+            {
+                res = false;
+                errors.Add("Отсутствует сумма по документу");
+            }
+
+            tres = !(ostatok == 0 && datZakr == null);
+            if (!tres)
+            {
+                res = false;
+                errors.Add("Платёж полностью погашен. Укажите дату закрытия");
+            }
             NotifyPropertyChanged("IsHasErrors");
             return res;
         }

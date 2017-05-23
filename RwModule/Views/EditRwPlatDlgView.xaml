@@ -24,7 +24,10 @@
             <StackPanel>
                 <GroupBox Header="Платёжный документ" Padding="0,2">
                     <StackPanel Orientation="Horizontal" TextElement.Foreground="RoyalBlue">
-                        <TextBlock Text="№" VerticalAlignment="Center"/>
+                        <ComboBox ItemsSource="{Binding TypeDocs}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding IdTypeDoc}"
+                                  IsEditable="False" IsEnabled="{Binding IsTypeDocEdEnabled}"
+                                  Margin="2,0,0,0"/>
+                        <TextBlock Text="№" VerticalAlignment="Center" Margin="5,0,0,0"/>
                         <TextBox Text="{Binding NumPlat, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,0,0" Width="80" IsEnabled="{Binding IsNumPlatEdEnabled}"
                                  VerticalAlignment="Center" VerticalContentAlignment="Center"/>
                         <TextBlock Text="от" VerticalAlignment="Center" Margin="5,0,0,0"/>
@@ -98,6 +101,7 @@
                         SelectedItem="{Binding SelDogovor}"
                         ItemsSource="{Binding AllDogInfos}" 
                         Focusable="False" IsEditable="False"
+                        IsEnabled="{Binding IsDogEdEnabled}"
                         Padding="2"
                         ItemContainerStyle="{DynamicResource MyComboBoxItemStyle}"
                         ItemTemplate="{StaticResource DogItemTemplate}" SelectionBoxTemplate="{StaticResource DogItemTemplate}">
