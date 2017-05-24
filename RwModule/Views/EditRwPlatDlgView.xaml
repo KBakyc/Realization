@@ -79,11 +79,21 @@
                 <GroupBox Header="Бухгалтерские счета" Padding="0,2">
                     <StackPanel Orientation="Horizontal" TextElement.Foreground="RoyalBlue">
                         <TextBlock Text="Дебет" VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding Debet, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,0,0" Width="100" IsEnabled="{Binding IsDebetEdEnabled}"
-                                 VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
+                        <ComboBox ItemsSource="{Binding Debets, Mode=OneWay}" 
+                                  Text="{Binding Debet, UpdateSourceTrigger=PropertyChanged}"
+                                  IsEnabled="{Binding IsDebetEdEnabled}"
+                                  Margin="5,0,0,0"
+                                  Focusable="False" IsEditable="True" IsReadOnly="False"/>
+                        <!--<TextBox Text="{Binding Debet, UpdateSourceTrigger=PropertyChanged}" Width="100" IsEnabled="{Binding IsDebetEdEnabled}"
+                                 VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>-->
                         <TextBlock Text="Кредит" VerticalAlignment="Center" Margin="5,0,0,0"/>
-                        <TextBox Text="{Binding Credit, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,0,0" Width="120" IsEnabled="{Binding IsCreditEdEnabled}"
-                                 VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
+                        <ComboBox ItemsSource="{Binding Credits, Mode=OneWay}" 
+                                  Text="{Binding Credit, UpdateSourceTrigger=PropertyChanged}"
+                                  IsEnabled="{Binding IsCreditEdEnabled}"
+                                  Margin="5,0,0,0"
+                                  Focusable="False" IsEditable="True" IsReadOnly="False"/>
+                        <!--<TextBox Text="{Binding Credit, UpdateSourceTrigger=PropertyChanged}" Margin="5,0,0,0" Width="120" IsEnabled="{Binding IsCreditEdEnabled}"
+                                 VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>-->
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Header="Договор с ЖД" Padding="0,2">

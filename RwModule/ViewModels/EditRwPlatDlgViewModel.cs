@@ -8,6 +8,7 @@ using DataObjects;
 using DataObjects.Interfaces;
 using RwModule.Models;
 using CommonModule.Helpers;
+using DAL;
 
 namespace RwModule.ViewModels
 {
@@ -40,6 +41,7 @@ namespace RwModule.ViewModels
             }
 
             TypeDocs = repository.GetTypePlatDocs();
+            LoadDebetCredit();
 
             if (rwpViewModel == null) return;
                         
@@ -58,6 +60,35 @@ namespace RwModule.ViewModels
             idpostes = rwpViewModel.Idpostes;
             idrwplat = rwpViewModel.Idrwplat;
             IdTypeDoc = rwpViewModel.Idtypedoc;
+        }
+
+        private HashSet<string> debets;
+        public HashSet<string> Debets
+        {
+            get { return debets; }
+        }
+
+        private HashSet<string> credits;
+        public HashSet<string> Credits
+        {
+            get { return credits; }
+        }
+        
+        private void LoadDebetCredit()
+        {
+            RwFromBankSetting[] dcSettings = null;
+            
+            using (var db = new RealContext())
+            {
+                dcSettings = db.RwFromBankSettings.ToArray();
+            }
+
+            if (dcSettings != null && dcSettings.Length > 0)
+            {
+                debets = new HashSet<string>();
+                credits = new HashSet<string>();
+                Array.ForEach(dcSettings, s => { debets.Add(s.Debet); credits.Add(s.Credit); });
+            }
         }
 
         private void LoadDogInfos()
@@ -354,6 +385,20 @@ namespace RwModule.ViewModels
             {
                 res = false;
                 errors.Add("Отсутствует сумма по документу");
+            }
+
+            tres = !String.IsNullOrWhiteSpace(debet);
+            if (!tres)
+            {
+                res = false;
+                errors.Add("Не указан дебет-счёт");
+            }
+
+            tres = !String.IsNullOrWhiteSpace(credit);
+            if (!tres)
+            {
+                res = false;
+                errors.Add("Не указан кредит-счёт");
             }
 
             tres = !(ostatok == 0 && datZakr == null);

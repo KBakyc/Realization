@@ -36,17 +36,21 @@ namespace RwModule.Commands
 
             var today = DateTime.Today;
 
-            Parent.OpenDialog(
-                new EditRwPlatDlgViewModel(Parent.Repository, null)
-                {
-                    Title = "Ввод нового платежа",
-                    DatPlat = today,
-                    IsDatBankEdEnabled = false,
-                    IsDatZakrEdEnabled = false,
-                    IsOstatokEdEnabled = false,
-                    Direction = RwPlatDirection.Out,
-                    OnSubmit = DoSubmitAddRwPlat
-                });
+            Action prepare = () =>
+            {
+                Parent.OpenDialog(
+                    new EditRwPlatDlgViewModel(Parent.Repository, null)
+                    {
+                        Title = "Ввод нового платежа",
+                        DatPlat = today,
+                        IsDatBankEdEnabled = false,
+                        IsDatZakrEdEnabled = false,
+                        IsOstatokEdEnabled = false,
+                        Direction = RwPlatDirection.Out,
+                        OnSubmit = DoSubmitAddRwPlat
+                    });
+            };
+            Parent.Services.DoWaitAction(prepare);
         }
 
         private void DoSubmitAddRwPlat(object _dlg)
